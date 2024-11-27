@@ -1,0 +1,1180 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap');
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+
+*{
+    font-size: 16px;
+    font-family: lora;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: black;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header Section */
+
+.header-container{
+    width:90%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center; 
+    justify-content: space-between; 
+    position: relative; 
+    z-index: 10; 
+}
+
+.header-container img{
+    width:2.6rem;
+    height:3.6rem;
+    margin-top: 6px;
+}
+
+.logo-name {
+    font-size: 2rem;
+    margin-top: 1rem;
+    margin-left: 1rem;
+    font-family: "Playfair Display", serif;
+    font-weight: bold;
+    white-space: nowrap;
+    color: white;
+    text-decoration: none; 
+}
+
+.header-line {
+    width: 100%;
+    border: 1px solid #F5C51B;
+    position: relative;
+    margin-top: 20px;
+    max-width: 100%; 
+}
+
+
+/* Navigation Bar of the Header */
+.header-container .nav {
+    display: flex;
+    font-size:1.25rem;
+    width:50%;
+    align-items:center;
+    justify-content: space-evenly;
+    margin:0 10%;
+    padding-top: 1.25rem;
+    
+}
+
+.header-container .nav a {
+    font-size: inherit; 
+    text-decoration: none; 
+    color: white; 
+}
+
+.header-container .nav a:hover {
+    font-size: inherit; 
+    text-decoration: none; 
+    color: #F5C51B;
+}
+
+.header-container .nav span{
+    font-size: inherit;
+    border-bottom: 1px solid white;
+    padding:5px 10px;
+}
+
+
+/* Buy Tickets Button */
+.but-buytickets {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none; 
+    background-color: #F5C51B; 
+    color: black; 
+    font-size: 1.25rem; 
+    font-weight: bold; 
+    border-radius: 10px; 
+    width: 9%; 
+    height: 30px; 
+    padding: 0 10px; 
+    margin-right: 1rem;
+    margin-top: 1rem;
+    cursor: pointer; 
+    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease; 
+}
+
+.but-buytickets:hover {
+    transform: scale(1.1); 
+    background-color: #DAAE12;
+    color: black; 
+}
+
+/* Login Button */
+.but-login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    border-radius: 10px;
+    border: 1px solid #F5C51B; 
+    background-color: transparent; 
+    color: #F5C51B; 
+    font-size: 1.25rem; 
+    font-weight: bold; 
+    width: 9%; 
+    height: 30px; 
+    padding: 0 10px; 
+    margin-top: 1rem;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease; /* Smooth animation */
+}
+
+.but-login:hover {
+    transform: scale(1.1); 
+}
+
+
+
+
+
+
+/* Movie Detail Page */
+
+/* Movie detail bannner */
+
+.Movie-detail-container{
+    display: flex;
+    width:100%;
+    position: relative;
+    margin-top: 20px;
+}
+
+.Movie-detail-container img{
+    width:100%;
+    height:500px;
+}
+
+.Movie-detail-container .gradient{
+    width: 100%;
+    height: 500px;
+    background: rgba(0, 0, 0, 0.42);
+    position:absolute;
+}
+
+.Movie-detail-container .vertical-banner-detail{
+    width:375px;
+    height:500px;
+    position:absolute;
+    margin-top: 50px;
+    margin-left: 5%;
+}
+
+.Movie-detail-container .detail-selection-container{
+    display: flex;
+    background-color: white;
+    position: absolute;
+    margin-top: 400px;
+    width:100%;
+    height: 200px;
+}
+
+.Movie-detail-container .content-container{
+    display: flex;
+    position:absolute;
+    margin-top: 20px;
+    display: flex;
+    margin-left: 10px;
+    width:50%;
+    border:1px solid black;
+    z-index: 15;
+
+}
+
+.movie-detail-container h1{
+    color: white;
+    font-size:2.2rem ;
+    position:absolute;
+    margin-left:35%;
+    margin-top: 100px;
+    font-family:sans-serif;
+} 
+
+.movie-detail-container p{
+    color: white;
+    font-size:1rem ;
+    position:absolute;
+    margin-left:35%;
+    margin-top: 215px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    width:35%;
+    line-height: 160%;
+}
+
+.movie-detail-container ul{
+    position: absolute;
+    margin-top:165px;
+    margin-left:33%;
+    display:flex;
+    color: #f4f4f4;;
+    font-size: 0.75rem;
+    justify-content: space-between;
+    width:25%
+}
+
+
+/* Watch Trailer Button */
+.but-trailer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    border-radius: 10px;
+    border: 2px solid #F5C51B; 
+    background-color: transparent; 
+    color: #F5C51B; 
+    font-size: 1.25rem; 
+    font-weight: bold; 
+    width: 150px; 
+    height: 35px; 
+    padding: 0 10px; 
+    margin-top: 1rem;
+    cursor: pointer;
+    position: absolute;
+    margin-left: 35%;
+    margin-top: 400px;
+    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease; /* Smooth animation */
+}
+
+.but-trailer:hover {
+    transform: scale(1.1); 
+}
+
+
+.bi-stopwatch
+{
+    font-size: 1rem;
+    position: absolute;
+    margin-left: 35%;
+    margin-top:350px;
+    color:white;
+}
+
+.bi-stopwatch span{
+    margin-left: 10px;
+    
+}
+
+/* Date and Time Selection Container */
+.selection-container{
+    position: relative;
+    margin-top: 60px;
+    width:90%;
+    height: 200px;
+    display: flex;
+    margin-left: 5%;
+}
+
+.date-selection span{
+    position: absolute;
+    margin-top:3rem;
+    margin-left: 0;
+    font-size: 1.5rem;
+    color:white;
+}
+
+.date-selection ul{
+    list-style: none;
+    position:absolute;
+    margin-top: 110px;
+    margin-left: 6px;
+    color: #f4f4f4;
+    font-size: 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    width:270px;
+    padding: 0; 
+}
+
+.date-buttons-form {
+    display: flex;
+    justify-content: center;
+    gap: 15px; 
+    position: absolute;
+    margin-top: 140px;
+}
+
+.date-button {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%; 
+    background-color: white; 
+    color: black; 
+    font-size: 1.25rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease; 
+}
+
+.date-button:hover {
+    background-color: #F5C51B; 
+    color: white; 
+}
+
+.date-button.active {
+    background-color: #F5C51B; 
+    color: white; 
+}
+
+.time-selection span{
+    position: absolute;
+    margin-top:3rem;
+    margin-left: 35%;
+    font-size: 1.5rem;
+    color:white;
+}
+
+/* Styling for the time button container */
+.time-buttons-form {
+    display: flex;
+    justify-content: center;
+    gap: 15px; 
+    position: absolute;
+    margin-top: 140px;
+    margin-left: 35%;
+}
+
+.time-button {
+    width: 100px; 
+    height: 40px; 
+    border-radius: 10px; 
+    background-color: white; 
+    color: black;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease; 
+    text-align: center;
+    
+}
+
+.time-button:hover {
+    background-color: #F5C51B; 
+    color: white; 
+}
+
+.time-button.active {
+    background-color: #F5C51B; 
+    color: white;
+}
+
+.time-selection .span-2{
+    position:absolute;
+    margin-top: 110px;
+    margin-left: 35%;
+    color: white;
+    font-size: 1rem;
+    display: flex;
+    width:250px;
+}
+
+.book-now-button {
+    position: absolute;
+    margin-top: 140px;
+    margin-left: 72%;
+    display: flex;
+    height: 40px;
+    width: 180px;
+    border: 2px solid #F5C51B; 
+    color: #F5C51B; 
+    background-color: transparent;
+    font-size: 1.2rem;
+    border-radius: 10px; 
+    padding: 10px 10px; 
+    cursor: pointer;
+    transition: all 0.3s ease;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease; 
+}
+
+.book-now-button span{
+    position: absolute;
+    font-size: 1.5rem;
+}
+
+.book-now-button:hover {
+    background-color: #F5C51B; 
+    color: black;
+    transform: scale(1.1); 
+}
+
+.topic-2{
+    color:white;
+    font-size: 2rem;
+    position: relative;
+    margin-left: 5%;
+    margin-top:50px;
+}
+
+/* Movie cards container */
+.movie-cards-container {
+    position: relative;
+    margin-top: 50px;
+    margin-left: 5%;
+    width:90%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* Individual movie card */
+.movie-card {
+    margin-left: 0;
+    width: 310px;
+    color: white;
+    display: block; 
+}
+
+.movie-card img {
+    width: 100%;
+    height: 410px;
+    object-fit: cover;
+}
+
+.movie-card h3 {
+    font-size: 1.5rem;
+    margin-left: 0;
+    margin: 10px 0;
+    margin-top: 30px;
+    position: relative;
+}
+
+.movie-genre {
+    position: relative;
+    margin-top: 12px;
+    font-size: 1rem;
+    color: #B1AFAF;
+}
+
+.movie-info {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    font-size: 1rem;
+    margin-left:0px;
+    margin-top: 12px;
+    color: #B1AFAF;
+    width: 50%;
+}
+
+.card-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    position: relative;
+    margin-top: 20px;
+}
+
+.card-buttons button {
+    flex: 1;
+    padding: 10px;
+    font-size: 1.1rem;
+    cursor: pointer;   
+}
+
+.get-tickets-button {
+    background-color: #F5C51B;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    width: 110px;
+    height: 35px;
+}
+
+.view-details-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border: 1px solid #F4F4F4;
+    color: #F4F4F4;
+    width: 110px;
+    height: 35px;
+}
+
+/* Movie Detail Page styling end */
+
+
+
+
+/* Progress Bar styling */
+.progress-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 60%; 
+    margin: 30px auto; 
+    position: relative;
+}
+
+.step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    text-align: center;
+    flex: 1;
+}
+
+.circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid white; 
+    background-color: white;
+    position: relative;
+    z-index: 2; 
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.step.active .circle {
+    background-color: black; 
+    border-color: white;
+}
+
+.step.active .circle::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    background-color: white; 
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.step.completed .circle {
+    background-color: #F5C51B; 
+    border-color: #F5C51B;
+}
+
+.line {
+    width: 100%;
+    height: 2px;
+    background-color: white;
+    position: absolute;
+    top: 80%;
+    left: 0%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+.step.completed + .line,
+.step.active + .line {
+    background-color: #F5C51B; 
+}
+
+.step span {
+    margin-top: 0px;
+    margin-bottom: 15px;
+    font-size: 0.8rem;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: white; 
+    width: 100px; 
+    text-align: center;
+}
+
+.step.completed span {
+    color: #F5C51B; 
+}
+
+
+
+/* Selected Movie Details Container Styling */
+.selected-movie-name{
+    font-size: 2rem;
+    position: relative;
+    margin-left: 5%;
+    margin-top: 60px;
+    color: white;
+}
+
+.selected-container{
+    position: relative;
+    margin-top: 40px;
+    width:90%;
+    height: 120px;
+    display: flex;
+    margin-left: 5%;
+}
+
+.date-selected{
+    width:285px;
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+}
+
+.date-selected ul{
+    list-style: none;
+    position:absolute;
+    margin-top: 20px;
+    margin-left: 6px;
+    color: #f4f4f4;
+    font-size: 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    width:270px;
+    padding: 0; 
+}
+
+.dateselected-buttons-form {
+    display: flex;
+    justify-content: center;
+    gap: 15px; 
+    position: absolute;
+    margin-top: 50px;
+}
+
+.datesel-button {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%; 
+    background-color: white; 
+    color: black; 
+    font-size: 1.25rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease; 
+}
+
+.datesel-button:hover {
+    background-color: #F5C51B; 
+    color: white; 
+}
+
+.datesel-button.active {
+    background-color: #F5C51B; 
+    color: white; 
+}
+
+.time-selected {
+    position: relative;
+    margin-left: 10%;
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+    display: flex;
+    width: 330px;
+}
+
+.time-selected .span-2{
+    margin-top: 20px;
+    color: white;
+    font-size: 1rem;
+    display: flex;
+    width:250px;
+}
+
+.timeselected-buttons-form {
+    display: flex;
+    justify-content: center;
+    gap: 15px; 
+    position: absolute;
+    margin-top: 50px;
+}
+
+.timesel-button {
+    width: 100px; 
+    height: 40px; 
+    border-radius: 10px; 
+    background-color: white; 
+    color: black;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease; 
+    text-align: center;
+    
+}
+
+.timesel-button:hover {
+    background-color: #F5C51B; 
+    color: white; 
+}
+
+.timesel-button.active {
+    background-color: #F5C51B; 
+    color: white;
+}
+
+
+
+/* Seat reservation Section Styling in seat reservation webpage*/
+
+.seat-reserve-container
+{
+    position: absolute;
+    margin-left: 5%;
+    width:60%;
+    margin-top: 50px;
+    height: auto;
+}
+
+.seat-reserve-container h2{
+    margin-top: 5px;
+    position: relative;
+    color:white;
+    font-size: 1.25rem;
+} 
+
+.seat-reserve-container img{
+    position: relative;
+    width: 100%;
+}
+
+.seat {
+    width: 40px;
+    height: 40px;
+    background-image: url('images/seat.svg');
+    background-size: cover;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.seat-row-A-L {
+    display: flex;
+    justify-content: flex-start;
+    margin-left:15%;
+    margin-top: 30px;
+    width:25%;
+    gap:10px;
+    justify-content: space-between;
+    position: absolute;
+}
+
+.seat-row-A-R {
+    display: flex;
+    justify-content: flex-start;
+    margin-left:60%;
+    margin-top: 30px;
+    width:25%;
+    gap:15px;
+    justify-content: space-between;
+    position: absolute;
+}
+
+.seat-row-B-L {
+    display: flex;
+    justify-content: flex-start;
+    margin-left:15%;
+    margin-top: 100px;
+    width:25%;
+    gap:15px;
+    justify-content: space-between;
+    position: absolute;
+}
+
+.seat-row-B-R {
+    display: flex;
+    justify-content: flex-start;
+    margin-left:60%;
+    margin-top: 100px;
+    width:25%;
+    gap:15px;
+    justify-content: space-between;
+    position: absolute;
+}
+
+.seat-row-C-L {
+    display: flex;
+    justify-content: flex-start;
+    margin-left:5%;
+    margin-top: 170px;
+    width:35%;
+    gap:15px;
+    justify-content: space-between;
+    position: absolute;
+}
+
+.seat-row-C-R {
+    display: flex;
+    justify-content: flex-start;
+    margin-left:60%;
+    margin-top: 170px;
+    width:35%;
+    gap:15px;
+    justify-content: space-between;
+    position: absolute;
+}
+
+.seat-row-D-L {
+    display: flex;
+    justify-content: flex-start;
+    margin-left:5%;
+    margin-top: 240px;
+    width:35%;
+    gap:15px;
+    justify-content: space-between;
+    position: absolute;
+}
+
+.seat-row-D-R {
+    display: flex;
+    justify-content: flex-start;
+    margin-left:60%;
+    margin-top: 240px;
+    width:35%;
+    gap:15px;
+    justify-content: space-between;
+    position: absolute;
+}
+
+.seat-row-E-L {
+    display: flex;
+    justify-content: flex-start;
+    margin-left:5%;
+    margin-top: 340px;
+    width:35%;
+    gap:15px;
+    justify-content: space-between;
+    position: absolute;
+}
+
+.seat-row-E-R {
+    display: flex;
+    justify-content: flex-start;
+    margin-left:60%;
+    margin-top: 340px;
+    width:35%;
+    gap:15px;
+    justify-content: space-between;
+    position: absolute;
+}
+
+.seat-row-F-L {
+    display: flex;
+    justify-content: flex-start;
+    margin-left:5%;
+    margin-top: 410px;
+    width:35%;
+    gap:15px;
+    justify-content: space-between;
+    position: absolute;
+}
+
+.seat-row-F-R {
+    display: flex;
+    justify-content: flex-start;
+    margin-left:60%;
+    margin-top: 410px;
+    width:35%;
+    gap:15px;
+    justify-content: space-between;
+    position: absolute;
+}
+
+.seat-label {
+    color: white;
+    font-size: 1.5rem;
+    position: absolute;
+    margin-left: 0px;
+    margin-top: 40px;
+}
+
+.seat.available {
+    fill:white;
+}
+
+.seat.available:hover {
+    filter: brightness(0) saturate(100%) invert(89%) sepia(22%) saturate(2000%) hue-rotate(343deg) brightness(99%) contrast(94%);}
+
+.seat.reserved {
+    filter: invert(62%) brightness(100%);
+    pointer-events: none; 
+}
+
+.seat.selected {
+    filter: brightness(0) saturate(100%) invert(89%) sepia(22%) saturate(2000%) hue-rotate(343deg) brightness(99%) contrast(94%);}
+
+/* Seat Legend */
+.seat-legend {
+    margin-top: 530px;
+    display: flex;
+    position: absolute;
+    width: 30%;
+    margin-left: 30%;
+    justify-content: space-between;
+}
+
+.seat-legend-box{
+    width:20px;
+    height: 20px;
+    background-color: white;
+}
+
+.seat-legend-label{
+    color:white;
+    font-size: 1rem;
+    margin-left: 30px;
+    position: relative;
+}
+
+
+
+
+
+/* Booking Summary in seat reservation Page */
+.booking-summary-container
+{
+    border: 2px solid #F5C51B; 
+    position: absolute;
+    margin-left: 70%;
+    width:25%;
+    margin-top: 50px;
+    color:white;
+    height: 760px;
+    margin-top:50px;
+}
+
+.booking-summary-container img{
+    position: relative;
+    width:80%;
+    margin-left: 10%;
+    margin-top: 40px;
+}
+
+.ticket-pricing {
+    position: relative;
+    margin-top: 20px;
+    margin-left: 10%;
+    width:80%;
+}
+
+.ticket-type {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.ticket-type span{
+    font-size: 1.25rem;
+}
+
+.ticket-type p{
+    position: absolute;
+    margin-top: 60px;
+    margin-left: 0%;
+    color: #B1AFAF;
+}
+
+.quantity-control {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-top: 10px;
+}
+
+.quantity-decrement,
+.quantity-increment,
+.quantity {
+    background-color: transparent;
+    color: white;
+    border: 1px solid white;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.quantity {
+    font-size: 1.2rem;
+    color: black;
+    background-color: white;
+}
+
+.total-price {
+    margin-top: 50px;
+    margin-left: 10%;
+    width: 80%;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    color: #F5C51B;
+}
+
+.total-price span{
+    font-size: 1.5rem;
+}
+
+.total-price .span-3{
+    color: white;
+    font-size: 1.5rem; 
+}
+
+.continue-button {
+    background-color: #F5C51B;
+    color: black;
+    border: none;
+    font-size: 1.1rem;
+    font-weight: bold;
+    padding: 10px 20px;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 80%;
+    margin-left: 10%;
+}
+
+.continue-button:hover {
+    background-color: #DAAE12; 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Footer container */
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    background-color: #191919; 
+    color: white;
+    font-family: 'Lora', serif;
+    position: relative;
+    margin-top: 80px;
+    width: 100%;
+    height: 280px;
+}
+
+.footer-column {
+    flex: 1;
+    margin-left: 5%;
+}
+
+.footer-column h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.footer-column h3 {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+    margin-top: 38px;
+    margin-left: 48px;
+    font-weight: none;
+}
+
+.footer-column p {
+    font-size: 1rem;
+    line-height: 160%;
+    width:410px;
+}
+
+/* Quick Links */
+.quick-links-container {
+    display: flex; 
+    justify-content: space-between;
+    gap: 20px;
+    margin-left: 50px;
+    margin-top: 22px;
+    line-height: 150%;
+}
+
+.quick-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 1rem;
+    flex: 1; 
+}
+
+.quick-links li {
+    margin-bottom: 8px;
+}
+
+.quick-links li a {
+    text-decoration: none;
+    color: white;
+}
+
+.quick-links li a:hover {
+    color: #F5C51B; 
+}
+
+/* Social Icons */
+.social-icons {
+    display: flex;
+    gap: 30px;
+    width:60%;
+    justify-content: space-between;
+    font-size: 4rem;
+    margin-top: 30px;
+}
+
+/* Newsletter Subscription */
+.newsletter-form {
+    display: flex;
+    align-items: center;
+    margin-top: 25px;
+    margin-left: 3px;
+    width:350px;
+}
+
+.newsletter-form input {
+    flex: 1;
+    padding: 7px;
+    font-size: 1rem;
+    border: 1px solid #F5C51B;
+    border-top-left-radius: 5px; 
+    border-bottom-left-radius: 5px;    
+    background-color: transparent;
+    color: white;
+    outline: none;
+    transition: all 0.3s ease;  
+}
+
+.newsletter-form input::placeholder {
+    color: #B1AFAF;
+}
+
+.newsletter-form input:focus {
+    border-color: white;
+}
+
+.newsletter-form button {
+    padding: 8px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: black;
+    background-color: #F5C51B;
+    border: none;
+    border-top-right-radius: 5px; 
+    border-bottom-right-radius: 5px;    cursor: pointer;
+}
+
+
+
+
+
+
+
