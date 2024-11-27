@@ -44,14 +44,14 @@
             <img src="images/pic1.png">
             <div class="gradient"></div>
             <img src="images/pic2.png" class="vertical-banner-detail">
-                <h1>Pirates of the Caribbean : Dead Men Tell No Tales</h1>
-                <ul>
+            <div class="movie-name">Pirates of the Caribbean : Dead Men Tell No Tales</div>
+            <ul class="movie-detail-genre">
                     <li>Action</li>
                     <li>Adventure</li>
                     <li>Horror</li>
                     <li>Comedy</li>
                 </ul>
-                <p>Embark on the final adventure with Captain Jack Sparrow as he faces the vengeful Captain Salazar, who has escaped from the Devil’s Triangle with a deadly ghost crew. With the legendary Trident of Poseidon as the key to survival.</p>
+                <p class="movie-desc">Embark on the final adventure with Captain Jack Sparrow as he faces the vengeful Captain Salazar, who has escaped from the Devil’s Triangle with a deadly ghost crew. With the legendary Trident of Poseidon as the key to survival.</p>
                 <div class="bi-stopwatch">
                     <span>2h 30m</span>
                 </div>
