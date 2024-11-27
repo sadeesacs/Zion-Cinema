@@ -646,18 +646,12 @@ body{
     color: black; 
     font-size: 1.25rem;
     font-weight: bold;
-    cursor: pointer;
     transition: all 0.3s ease; 
-}
-
-.datesel-button:hover {
-    background-color: #F5C51B; 
-    color: white; 
 }
 
 .datesel-button.active {
     background-color: #F5C51B; 
-    color: white; 
+    color: black; 
 }
 
 .time-selected {
@@ -693,21 +687,53 @@ body{
     color: black;
     font-size: 1rem;
     font-weight: bold;
-    cursor: pointer;
     transition: all 0.3s ease; 
     text-align: center;
-    
-}
-
-.timesel-button:hover {
-    background-color: #F5C51B; 
-    color: white; 
 }
 
 .timesel-button.active {
     background-color: #F5C51B; 
-    color: white;
+    color: black;
 }
+
+.seat-selected {
+    position: relative;
+    margin-left: 10%;
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+    display: flex;
+    width: 200px;
+}
+
+.seat-selected .span-3{
+    margin-top: 20px;
+    color: white;
+    font-size: 1rem;
+    display: flex;
+    width:100px;
+}
+
+.seatselected-buttons-form {
+    display: flex;
+    justify-content: center;
+    gap: 15px; 
+    position: absolute;
+    margin-top: 50px;
+    width: auto;
+}
+
+.seatsel-button {
+    width: 40px; 
+    height: 40px; 
+    border-radius: 10px; 
+    background-color: #F5C51B; 
+    color: black;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: all 0.3s ease; 
+    text-align: center; 
+}
+
 
 
 
@@ -934,7 +960,7 @@ body{
     width:25%;
     margin-top: 50px;
     color:white;
-    height: 760px;
+    height: 780px;
     margin-top:50px;
 }
 
@@ -1031,6 +1057,7 @@ body{
     transition: background-color 0.3s ease;
     width: 80%;
     margin-left: 10%;
+    
 }
 
 .continue-button:hover {
@@ -1170,5 +1197,321 @@ body{
     border: none;
     border-top-right-radius: 5px; 
     border-bottom-right-radius: 5px;    cursor: pointer;
+}
+
+
+
+
+
+/* Styling for the food menu in food pre-order page */
+.food-menu-container{
+    position: absolute;
+    margin-top: 60px;
+    margin-left:5%;
+    width:55%;
+    height: 750px;
+    background-color: rgba(177, 175, 175, 0.29);
+}
+
+.food-menu-title{
+    font-size: 2rem;
+    color: white;
+    position: absolute;
+    margin-left: 5%;
+    margin-top: 30px;
+}
+
+.food-nav {
+    display: flex;
+    position: absolute;
+    display: flex;
+    margin-left: 5%;
+    margin-top: 90px;
+    width:90% ;
+}
+
+.food-nav button {
+    background-color: transparent;
+    color: white;
+    width:20%;
+    height: 40px;
+    border: 1px solid #F5C51B;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.food-nav button.active {
+    background-color: #F5C51B;
+    color:black;
+}
+
+.food-slides {
+    position: relative;
+    width: 90%;
+    height: 800px;
+    margin-left: 5%;
+    margin-top: 130px;
+    overflow: hidden;
+}
+
+.food-slide {
+    position: absolute;
+    top: 0;
+    left: 100%; 
+    width: 100%;
+    height: 100%;
+}
+
+.food-slide.active {
+    left: 0; 
+}
+
+.food-cards-container {
+    display: flex;
+    flex-direction: column; 
+    width: 100%; 
+}
+
+.food-card {
+    display: flex; 
+    width: 100%;
+    background-color: #333;
+    color: white;
+    border-bottom: 1px solid #F5C51B;
+    padding: 5px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.food-card img {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.food-info {
+    flex: 1;
+    margin-left: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.food-info .food-name {
+    position: absolute;
+    margin-left: 20px;
+    margin-top: 24px;
+    font-size: 1.2rem;
+    font-weight:none;
+    margin-bottom: 5px;
+}
+
+.food-info p {
+    position: absolute;
+    margin-left: 290px;
+    margin-top: 24px;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: white;
+    font-weight: none;
+}
+
+.food-quantity-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: absolute;
+    margin-left: 415px;
+    margin-top: 20px;
+}
+
+.food-quantity-decrement,
+.food-quantity-increment {
+    background-color: transparent;
+    color: #D9D9D9;
+    border: 1px solid #D9D9D9;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.food-quantity-decrement:hover,
+.food-quantity-increment:hover {
+    background-color: #DAAE12;
+}
+
+.food-quantity {
+    font-size: 1rem;
+    font-weight: bold;
+    color: black;
+    border: 1px solid #D9D9D9;
+    width: 30px;
+    height: 30px;
+    background-color: #D9D9D9;
+    border-radius:50%;
+    align-items:center;
+}
+
+.add-to-cart {
+    position: absolute;
+    margin-left: 580px;
+    margin-top: 20px;
+    background-color: #F5C51B;
+    color: black;
+    font-size: 1rem;
+    font-weight: bold;
+    width:80px;
+    height: 30px;
+    cursor: pointer;
+    border: none;
+}
+
+.add-to-cart:hover {
+    background-color: #DAAE12;
+}
+
+
+
+/* Styling for the purchase sumamary in food pre-order page */
+.purchase-summary-container{
+    position: absolute;
+    margin-top: 60px;
+    border:1px solid #F5C51B;
+    margin-left:70%;
+    width:25%;
+    height: auto;
+}
+
+.purchase-summary {
+    width:85%;
+    margin-left: 10%;
+    position: relative;
+    color: white;
+    font-family: 'Lora', serif;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.purchase-summary h2 {
+    font-size: 2rem;
+    color: white;
+    font-weight: bold;
+    position: relative;
+    margin-left:0%;
+    margin-top: 50px;
+}
+
+.summary-section {
+    margin-bottom: 10px;
+}
+
+.summary-section h3 {
+    font-size: 1.2rem;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.ticket-item {
+    display: flex;
+    font-size: 1.25rem;
+    margin-bottom: 15px;
+    margin-left: 0px;
+    color: #B1AFAF;
+}
+
+.ticket-pro-name{
+    margin-left: 0px;
+    width:60%;
+}
+
+.ticket-pro-quantity{
+    margin-left: 0px;
+    width:30%; 
+}
+
+.ticket-pro-price{
+    margin-left: 0px;
+    width:30%;   
+}
+
+.summary-item {
+    display: flex;
+    font-size: 1.25rem;
+    margin-bottom: 15px;
+    margin-left: 0px;
+    color: #B1AFAF;
+}
+
+.sum-pro-name{
+    margin-left: 0px;
+    width:65%;
+}
+
+.sum-pro-quantity{
+    margin-left: 0px;
+    width:30%;  
+}
+
+.sum-pro-price{
+    margin-left: 0px;
+    width:30%;
+}
+
+a.delete-icon {
+    text-decoration: none; 
+    color: inherit;       
+}
+
+a.delete-icon:hover, a.delete-icon:focus {
+    text-decoration: none; 
+    color: inherit;       
+}
+
+.new-total-price {
+    font-weight: bold;
+    font-size: 2rem;
+    justify-content: space-between;
+    color: #F5C51B;
+    position: relative;
+    margin-top: 20px;
+    width:100%;
+    margin-left: 0px;
+    border:1px solid white;
+    display:flex;
+}
+
+.sum-total-heading{
+    width:50%;
+    font-size:2rem;
+    color:white;
+}
+
+.sum-total-price{
+    width:50%;
+    margin-left:50%;
+    color:#F5C51B;
+    font-size: 2rem;
+}
+
+.continue-button {
+    background-color: #F5C51B;
+    color: black;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    cursor: pointer;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.continue-button:hover {
+    background-color: #DAAE12;
 }
 
