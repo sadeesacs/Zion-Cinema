@@ -44,10 +44,10 @@
             <img src="images/pic1.png">
             <div class="gradient"></div>
             <img src="images/pic2.png" class="vertical-banner-detail">
-                <h1>Pirates of the caribbean : Dead Men Tell No Tales</h1>
+                <h1>Pirates of the Caribbean : Dead Men Tell No Tales</h1>
                 <ul>
                     <li>Action</li>
-                    <li>Aventure</li>
+                    <li>Adventure</li>
                     <li>Horror</li>
                     <li>Comedy</li>
                 </ul>
@@ -58,7 +58,7 @@
                 <a href="https://www.youtube.com/" class="but-trailer">
                     <div>Watch Trailer</div>
                 </a>
-        </div>
+        </div>
 
 
         <!-- Date and Time Selection Container -->
