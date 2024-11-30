@@ -773,7 +773,7 @@ body {
     margin-top: -40px;
   }
   
-  .title {
+ .title {
     color: #fff;
     font-size: 2.5rem;
     margin-bottom: 0px;
@@ -781,18 +781,18 @@ body {
   }
   
   
-  .tagline {
+ .tagline {
     margin-bottom: 40px;
     font-size: 1rem;
     margin-left: 0px;
   }
   
-  .form {
+ .form {
     width: 100%;
     max-width: 400px;
   }
   
-  .form-group {
+ .form-group {
     margin-bottom: 30px;
     position: relative; 
 }
@@ -804,7 +804,7 @@ body {
 }
 
   
-  label {
+ label {
     display: block;
     font-size: 0.9rem;
     margin-bottom: 15px;
