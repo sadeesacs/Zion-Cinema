@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
 
-    <link rel="stylesheet" href="StyleSheet3.css" />
+    <link rel="stylesheet" href="StyleSheet7.css" />
 </head>
 
 <body>
@@ -45,7 +45,7 @@
           </div>
         </div>
         <div class="login-right">
-            <div class="title">Welcome to <span style="color: #f3b601; font-size: 40px ">Zion Cinema</span></div>
+            <div class="title">Welcome to <span>Zion Cinema</span></div>
             <div class="tagline">Login to unlock the magic of movies at Zion Cinema!</div>
             <form class="form">
             <div class="form-group">
