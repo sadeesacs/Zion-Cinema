@@ -318,4 +318,46 @@ header .message-icon{
     display: inline-block; 
 }
 
-/* AD-Customers webpage styling end */
+/* Admin Dashboard Customers webpage styling end */
+
+
+
+/*Admin Dashboard customer Inquiry Webpage Styling*/
+.content-container .customer-inq{
+    width:100%;
+    height: 140px;
+    margin-top:0px;
+    border-bottom: 1px solid white;
+    position: relative;
+}
+
+.customer-name {
+    color: white;
+    font-size: 16px;
+    margin-top: 10px; 
+    font-family: Arial, Helvetica, sans-serif;  
+    display: inline-block; 
+    left: 20px;
+    position: absolute;
+}
+
+.customer-mail {
+    color: white;
+    font-size: 16px;
+    position: absolute; 
+    display: inline-block; 
+    margin-top: 10px; 
+    font-family: Arial, Helvetica, sans-serif;
+    left: 240px;
+}
+
+.customer-message {
+    color: white;
+    font-size: 16px;
+    margin-top: 10px;
+    position: absolute;
+    line-height: 20px;; 
+    display: inline-block; 
+    font-family: Arial, Helvetica, sans-serif;
+    left: 490px;
+}
