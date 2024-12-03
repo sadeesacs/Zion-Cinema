@@ -361,3 +361,443 @@ header .message-icon{
     font-family: Arial, Helvetica, sans-serif;
     left: 490px;
 }
+/*Admin Dashboard customer Inquiry Webpage Styling end*/
+
+
+
+/*Admin Dashboard food menu Webpage Styling*/
+
+.product-cat{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    height: 40px;
+    color: white;
+    font-weight: bold;
+    margin-left:40px;
+    margin-top:30px;
+    position: absolute;
+}
+
+.add-item{
+    width:130px;
+    height:35px;
+    margin-left:900px;
+    margin-top: 30px;
+    position: absolute;
+    border:3px solid #F5C51B;
+    border-radius: 7px;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.add-item p{
+    font-size: 18px;
+    color:#F5C51B;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top:20px;
+    margin-left: 30px;
+    position: absolute;
+}
+
+.add-item i{
+    font-size: 20px;
+    color:#F5C51B;
+    font-weight: bold;
+    margin-top:3px;
+    margin-right: 80px;
+    font-weight: bold;
+    position: absolute;
+
+}
+
+.content-container .product{
+    width:100%;
+    height: 40px;
+    margin-top:0px;
+    border-bottom: 1px solid white;
+    position: relative;
+}
+
+
+
+.product-id {
+    color: white;
+    font-size: 16px;
+    margin-top: 10px; 
+    font-family: Arial, Helvetica, sans-serif;
+    left: 10px;
+    position: absolute; 
+    display: inline-block; 
+
+}
+
+.product-name {
+    color: white;
+    font-size: 16px;
+    margin-top: 10px; 
+    font-family: Arial, Helvetica, sans-serif;
+    left: 160px;
+    position: absolute; 
+    display: inline-block; 
+
+}
+
+.product-type{
+    color: white;
+    font-size: 16px;
+    margin-top: 10px; 
+    font-family: Arial, Helvetica, sans-serif;
+    left: 470px;
+    position: absolute; 
+    display: inline-block; 
+}
+
+.product-unitprice{
+    color: white;
+    font-size: 16px;
+    margin-top: 10px; 
+    font-family: Arial, Helvetica, sans-serif;
+    left: 670px;
+    position: absolute; 
+    display: inline-block; 
+}
+
+.product p, .product div {
+    padding: 0 10px; 
+}
+
+.actions {
+    display: flex; 
+    align-items: center;
+    left: 850px; 
+    position: absolute; 
+    top: 50%; 
+    transform: translateY(-50%); 
+}
+
+.delete {
+    color: red;
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+    cursor: pointer;
+    
+}
+
+.edit{
+    color: #F5C51B;
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+    cursor: pointer;
+}
+
+.view{
+    color: white;
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+    cursor: pointer; 
+}
+
+
+
+
+
+
+
+/*Admin Dashboard food menu Webpage Styling end*/
+
+
+
+/* Food item Slider styles */
+
+.slider
+ {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    height: 100%;
+    width: 50%;
+    background-color: black;
+    transition: 0.5s;
+    z-index: 1000;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.slider.active
+{
+    right: 0;
+}
+
+.slider-container {
+    display:flex;
+    max-width: 789px;
+    flex-direction: column;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    padding: 0px 0px;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  .slider-header {
+    display: flex;
+    color: white;
+    justify-content: space-between;
+    flex-direction: column;
+    margin-top: 20px;
+    position: relative;
+  }
+  
+        .Add {
+            font: 700 27px arial, sans-serif;
+            margin-left: 30px;
+
+        }
+
+        .close {
+            width: 40px;
+            height: 40px;
+            margin-top: -7px;
+            margin-left:90%;
+            position: absolute;
+            cursor: pointer;
+        }
+
+.slider-hline{
+    margin-top: 5px;
+    margin-left: 0px;
+    position: relative;
+} 
+
+.slider-form {
+    margin-top: 0px;
+    position: relative;
+  }
+
+.form-label{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    left: 30px;
+    position: absolute;
+}
+
+ .form-pname {
+    border-radius: 5px;
+    border-color: white;
+    color:white;
+    border-style: solid;
+    border-width: 1px;
+    width: 460px;
+    background-color: transparent;
+    height: 35px;
+    left: 35%;
+    top: 30px;
+    position: absolute;
+  }
+
+  .image-select {
+    border-radius: 10px;
+    border-color: white;
+    border-style: dashed;
+    width: 60%;
+    height: 150px;
+    border-width: 1px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-items: center;
+    left: 35%;
+    top: 330px;
+    position: absolute;
+  }
+  
+    .img-3 {
+    aspect-ratio: 1.47;
+    object-fit: auto;
+    object-position: center;
+    width: 60px;
+    margin-top: 20px;
+  }
+  
+  .cat-select select {
+    background-color: transparent; 
+    color: white; 
+    font-weight: 400;
+    width: 100px;
+    position: absolute;
+    left: 35%;
+    top: 130px;
+    border: 1px solid white; 
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+}
+
+.cat-select option {
+    background-color: black;
+    border:1px solid white;
+    color: white; 
+}
+  
+  .form-pprice{
+    border-radius: 5px;
+    border-color:white;
+    border-style: solid;
+    color:white;
+    border-width: 1px;
+    width: 460px;
+    background-color: transparent;
+    height: 35px;
+    left: 35%;
+    top: 220px;
+    position: absolute;
+  }
+  
+  .div-20 {
+    margin-top: 14px;
+    font: 18px ;
+    color:white;
+  }
+  
+  .div-21 {
+    margin-top: 12px;
+    font: 12px;
+    margin-left: 30px;
+    width:400px;
+    color:white;
+  }
+
+ .image-edit{
+    width: 135px;
+    height: 140px;
+    left: 5px;
+    top: 5px;
+    position: absolute;
+  }
+
+  .view-pname {
+    width: 460px;
+    
+    height: 35px;
+    font-size: 16px;
+    color: white;
+    left: 35%;
+    top: 30px;
+    position: absolute;
+  }
+  
+  .pcat-type{
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    color: white;
+    font-weight: 400;
+    font-size: 16px;
+    width:100px;
+    left: 35%;
+    top: 130px;
+    position: absolute;
+  }
+
+  .view-pprice{
+    border-width: 1px;
+    width: 460px;
+    height: 35px;
+    font-size: 16px;
+    color: white;
+    left: 35%;
+    top: 220px;
+    position: absolute;
+  }
+  
+  .image-display{
+    width: 145px;
+    height: 155px;
+    left: 35%;
+    top: 330px;
+    position: absolute;
+  }
+
+  .custom-file-upload input[type="file"] {
+    display: none;
+}
+
+input[type="text"] {
+    color:white;
+}
+
+.sbut-save {
+    border-radius: 5px;
+    background-color: #F5C51B;
+    align-items: center;
+    color: white;
+    justify-content: center;
+    flex-grow: 1;
+    padding: 0px 0px;
+    top:545px;
+    left:53%;
+    width: 43%;
+    height: 35px;
+    font-size: 16px;
+    font-weight: bold;
+    position: absolute;
+    border:none;
+    cursor: pointer;
+  }
+  
+  .sbut-cancel {
+    border-radius: 5px;
+    border-color: #F5C51B;
+    border-style:0.5px solid;
+    border-width: 1px;
+    background-color: transparent;
+    align-items: center;
+    color: #F5C51B;
+    font-weight: bold;
+    font-size: 16px;
+    justify-content: center;
+    flex-grow: 1;
+    width: 43%;
+    padding: 0px 0px;
+    height: 35px;
+    top:545px;
+    left:30px;
+    position: absolute;
+    cursor: pointer;
+  }
+  
+  .slider-endhline{
+    width: 100%; 
+    position: absolute;
+    bottom: 20px;
+    left: 0; 
+    z-index: 10;
+    top:520px; 
+}  
+
+  .sbut-done {
+    border-radius: 5px;
+    background-color: #F5C51B;
+    align-items: center;
+    color: #fff;
+    justify-content: center;
+    flex-grow: 1;
+    padding: 0px 0px;
+    top:545px;
+    left:30px;
+    width: 25%;
+    height: 35px;
+    font-size: 16px;
+    font-weight: bold;
+    position: absolute;
+    border:none;
+    cursor: pointer;
+  }
+  
+
+  
+  
