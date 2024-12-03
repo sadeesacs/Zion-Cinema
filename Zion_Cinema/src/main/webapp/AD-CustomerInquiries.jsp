@@ -1,9 +1,3 @@
-<%-- 
-    Document   : AD-CustomerInquiries
-    Created on : Dec 2, 2024, 12:24:47 PM
-    Author     : Pinee
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
