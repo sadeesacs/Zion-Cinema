@@ -102,7 +102,7 @@
                 <div class="header-top" style="margin-left:870px">Action</div>                
             </div>
                 
-            <div class="content-container" style="margin-top:150px;height: 89%">
+            <div class="content-container" style="margin-top:150px;height: 70%">
                 <div class="product">
                     <p class="product-id">0001</p>
                     <p class="product-name">Pepsi - L</p>
@@ -261,7 +261,7 @@
                     <p class="product-id">0001</p>
                     <p class="product-name">Pepsi - L</p>
                     <p class="product-type">Beverages</p>
-                    <p class="product-unitprice">LKR 550</p>
+                    <p class="product-unitprice">LKR 5500</p>
                     <div class="actions">
                         <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
                         <div class="edit" onclick="showEditSlider()"><i class="bi bi-pencil-fill"></i></div>
