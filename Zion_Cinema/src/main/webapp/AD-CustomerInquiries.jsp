@@ -1,6 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="Db.dbcon" %>
-<%@page import="java.sql.*" %>
+<%@page import="DAO.CustomerInquiriesDAO" %>
+<%@ page import="Modal.CustomerInquiries"%>
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -31,8 +32,7 @@
                 <img src="images/messagesicon.png" class="message-icon">
             </div>
         </header>
-        
-        
+
         <!-- Navigational Panel of the Admin Dashboard -->
         <div class="navigation">
             <ul class="nav-menu">
@@ -90,39 +90,30 @@
                 <span class="header-top" style="margin-left:20px">Customer Name</span>
                 <span class="header-top" style="margin-left:240px">Customer Email</span>
                 <div class="header-top" style="margin-left:490px">Customer Message</div>
-
             </div>
             <div class="content-container">
+
+                <%
+                    // Fetching the list of Customer inquiries
+                    List<CustomerInquiries> inquiries = CustomerInquiriesDAO.getAllInquiries();
+                    //Loop to display data
+                    if (!inquiries.isEmpty()) {
+                        for (CustomerInquiries inquiry : inquiries) {
+                %>
                 <div class="customer-inq">
-                    <p class="customer-name">David Jones</p>
-                    <p class="customer-mail">davidjones@gmail.com</p>
-                    <p class="customer-message">I'm interested in purchasing a Monstera Deliciosa from your website. Could you please provide more details on its care requirements, such as watering and light needs? Additionally, I would like to know about the shipping options available, particularly if you offer express shipping. Thank you!</p>
+                    <p class="customer-name"><%=inquiry.getName() %></p>
+                    <p class="customer-mail"><%=inquiry.getEmail() %></p>
+                    <p class="customer-message"><%=inquiry.getMessage() %></p>
                 </div>
-                <div class="customer-inq">
-                    <p class="customer-name">David Jones</p>
-                    <p class="customer-mail">davidjones@gmail.com</p>
-                    <p class="customer-message">I'm interested in purchasing a Monstera Deliciosa from your website. Could you please provide more details on its care requirements, such as watering and light needs? Additionally, I would like to know about the shipping options available, particularly if you offer express shipping. Thank you!</p>
-                </div>
-                <div class="customer-inq">
-                    <p class="customer-name">David Jones</p>
-                    <p class="customer-mail">davidjones@gmail.com</p>
-                    <p class="customer-message">I'm interested in purchasing a Monstera Deliciosa from your website. Could you please provide more details on its care requirements, such as watering and light needs? Additionally, I would like to know about the shipping options available, particularly if you offer express shipping. Thank you!</p>
-                </div>
-                <div class="customer-inq">
-                    <p class="customer-name">David Jones</p>
-                    <p class="customer-mail">davidjones@gmail.com</p>
-                    <p class="customer-message">I'm interested in purchasing a Monstera Deliciosa from your website. Could you please provide more details on its care requirements, such as watering and light needs? Additionally, I would like to know about the shipping options available, particularly if you offer express shipping. Thank you!</p>
-                </div>
-                <div class="customer-inq">
-                    <p class="customer-name">David Jones</p>
-                    <p class="customer-mail">davidjones@gmail.com</p>
-                    <p class="customer-message">I'm interested in purchasing a Monstera Deliciosa from your website. Could you please provide more details on its care requirements, such as watering and light needs? Additionally, I would like to know about the shipping options available, particularly if you offer express shipping. Thank you!</p>
-                </div>
-                <div class="customer-inq">
-                    <p class="customer-name">David Jones</p>
-                    <p class="customer-mail">davidjones@gmail.com</p>
-                    <p class="customer-message">I'm interested in purchasing a Monstera Deliciosa from your website. Could you please provide more details on its care requirements, such as watering and light needs? Additionally, I would like to know about the shipping options available, particularly if you offer express shipping. Thank you!</p>
-                </div>
+                <%
+                    }
+                } else {
+                %>
+                <p>No customer inquiries found.</p>
+                <%
+                    }
+                %>
+
             </div>
         </div>
         
