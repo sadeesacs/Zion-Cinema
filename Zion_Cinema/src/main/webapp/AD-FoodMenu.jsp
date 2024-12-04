@@ -261,6 +261,39 @@
                     <p class="product-id">0001</p>
                     <p class="product-name">Pepsi - L</p>
                     <p class="product-type">Beverages</p>
+                    <p class="product-unitprice">LKR 550</p>
+                    <div class="actions">
+                        <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
+                        <div class="edit" onclick="showEditSlider()"><i class="bi bi-pencil-fill"></i></div>
+                        <div class="delete"><i class="bi bi-trash3-fill"></i></div>
+                    </div> 
+                </div>
+                <div class="product">
+                    <p class="product-id">0001</p>
+                    <p class="product-name">Pepsi - L</p>
+                    <p class="product-type">Beverages</p>
+                    <p class="product-unitprice">LKR 550</p>
+                    <div class="actions">
+                        <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
+                        <div class="edit" onclick="showEditSlider()"><i class="bi bi-pencil-fill"></i></div>
+                        <div class="delete"><i class="bi bi-trash3-fill"></i></div>
+                    </div> 
+                </div>
+                <div class="product">
+                    <p class="product-id">0001</p>
+                    <p class="product-name">Pepsi - L</p>
+                    <p class="product-type">Beverages</p>
+                    <p class="product-unitprice">LKR 550</p>
+                    <div class="actions">
+                        <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
+                        <div class="edit" onclick="showEditSlider()"><i class="bi bi-pencil-fill"></i></div>
+                        <div class="delete"><i class="bi bi-trash3-fill"></i></div>
+                    </div> 
+                </div>
+                <div class="product">
+                    <p class="product-id">0001</p>
+                    <p class="product-name">Pepsi - L</p>
+                    <p class="product-type">Beverages</p>
                     <p class="product-unitprice">LKR 5500</p>
                     <div class="actions">
                         <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
@@ -375,8 +408,12 @@
                        <label for="product-image">Food Item Image</label>
                    </div>
                    <div class="image-select">
-                        <img class="image-edit" src="images/popcorn.png">
+                        <label class="custom-file-upload">
+                            <img class="image-edit" src="images/popcorn.png" />
+                            <input type="file" id="edit-food-item-image" accept=".jpeg, .webp, .png" style="display: none;" />
+                        </label>
                     </div>
+
 
                     <div class="slider-endhline"  >
                         <hr size="2" color="#F5C51B" >
