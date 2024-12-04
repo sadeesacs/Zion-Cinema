@@ -11,23 +11,11 @@ public class dbcon {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(URL, USER, PASSWORD);
+            Statement st = connection.createStatement();
             System.out.println("Connected to the database!");
         } catch (ClassNotFoundException | SQLException e) {
             System.out.println("Failed to connect to the database!"+ e.getMessage());
         }
         return connection;
     }
-
-    public static void disconnect() {
-        try {
-            if (connection != null && !connection.isClosed()) {
-                connection.close();
-                System.out.println("Disconnected from the database!");
-            }
-        } catch (SQLException e) {
-            System.out.println("Failed to connect to the database!"+ e.getMessage());
-        }
-    }
-
-
 }

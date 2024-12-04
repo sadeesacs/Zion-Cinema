@@ -1,4 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="Db.dbcon" %>
+<%@page import="java.sql.*" %>
 <!DOCTYPE html>
 <html>
     <head>
