@@ -1,4 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="DAO.CustomersDAO" %>
+<%@ page import="Modal.Customers"%>
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -92,125 +95,32 @@
                 <div class="header-top" style="margin-left:850px">Phone Number</div>
             </div>
             <div class="content-container">
+
+                    <%
+                        // Fetching the list of Customer inquiries
+                        List<Customers> customers = CustomersDAO.getAllInquiries();
+                        // Loop to display data
+                        if (!customers.isEmpty()) {
+                            for (Customers user : customers) {
+                    %>
                 <div class="customer">
-                    <p class="customer-fname">Lauran</p>
-                    <p class="customer-lname">Ayala</p>
-                    <p class="customer-email">lauranayal@gmail.com</p>
-                    <p class="customer-phone">0760504002</p>
-                </div>
-                <div class="customer">
-                    <p class="customer-fname">Lauran</p>
-                    <p class="customer-lname">Ayala</p>
-                    <p class="customer-email">lauranayal@gmail.com</p>
-                    <p class="customer-phone">0760504002</p>
-                </div>
-                <div class="customer">
-                    <p class="customer-fname">Lauran</p>
-                    <p class="customer-lname">Ayala</p>
-                    <p class="customer-email">lauranayal@gmail.com</p>
-                    <p class="customer-phone">0760504002</p>
-                </div>
-                <div class="customer">
-                    <p class="customer-fname">Lauran</p>
-                    <p class="customer-lname">Ayala</p>
-                    <p class="customer-email">lauranayal@gmail.com</p>
-                    <p class="customer-phone">0760504002</p>
-                </div>
-                <div class="customer">
-                    <p class="customer-fname">Lauran</p>
-                    <p class="customer-lname">Ayala</p>
-                    <p class="customer-email">lauranayal@gmail.com</p>
-                    <p class="customer-phone">0760504002</p>
-                </div>
-                <div class="customer">
-                    <p class="customer-fname">Lauran</p>
-                    <p class="customer-lname">Ayala</p>
-                    <p class="customer-email">lauranayal@gmail.com</p>
-                    <p class="customer-phone">0760504002</p>
-                </div>
-                <div class="customer">
-                    <p class="customer-fname">Lauran</p>
-                    <p class="customer-lname">Ayala</p>
-                    <p class="customer-email">lauranayal@gmail.com</p>
-                    <p class="customer-phone">0760504002</p>
-                </div>
-                <div class="customer">
-                    <p class="customer-fname">Lauran</p>
-                    <p class="customer-lname">Ayala</p>
-                    <p class="customer-email">lauranayal@gmail.com</p>
-                    <p class="customer-phone">0760504002</p>
-                </div>
-                <div class="customer">
-                    <p class="customer-fname">Lauran</p>
-                    <p class="customer-lname">Ayala</p>
-                    <p class="customer-email">lauranayal@gmail.com</p>
-                    <p class="customer-phone">0760504002</p>
-                </div>
-                <div class="customer">
-                    <p class="customer-fname">Lauran</p>
-                    <p class="customer-lname">Ayala</p>
-                    <p class="customer-email">lauranayal@gmail.com</p>
-                    <p class="customer-phone">0760504002</p>
-                </div>
-                <div class="customer">
-                    <p class="customer-fname">Lauran</p>
-                    <p class="customer-lname">Ayala</p>
-                    <p class="customer-email">lauranayal@gmail.com</p>
-                    <p class="customer-phone">0760504002</p>
-                </div>
-                <div class="customer">
-                    <p class="customer-fname">Lauran</p>
-                    <p class="customer-lname">Ayala</p>
-                    <p class="customer-email">lauranayal@gmail.com</p>
-                    <p class="customer-phone">0760504002</p>
-                </div>
-                <div class="customer">
-                    <p class="customer-fname">Lauran</p>
-                    <p class="customer-lname">Ayala</p>
-                    <p class="customer-email">lauranayal@gmail.com</p>
-                    <p class="customer-phone">0760504002</p>
-                </div>
-                <div class="customer">
-                    <p class="customer-fname">Lauran</p>
-                    <p class="customer-lname">Ayala</p>
-                    <p class="customer-email">lauranayal@gmail.com</p>
-                    <p class="customer-phone">0760504002</p>
-                </div>
-                <div class="customer">
-                    <p class="customer-fname">Lauran</p>
-                    <p class="customer-lname">Ayala</p>
-                    <p class="customer-email">lauranayal@gmail.com</p>
-                    <p class="customer-phone">0760504002</p>
-                </div>
-                <div class="customer">
-                    <p class="customer-fname">Lauran</p>
-                    <p class="customer-lname">Ayala</p>
-                    <p class="customer-email">lauranayal@gmail.com</p>
-                    <p class="customer-phone">0760504002</p>
-                </div>
-                <div class="customer">
-                    <p class="customer-fname">Lauran</p>
-                    <p class="customer-lname">Ayala</p>
-                    <p class="customer-email">lauranayal@gmail.com</p>
-                    <p class="customer-phone">0760504002</p>
-                </div>
-                <div class="customer">
-                    <p class="customer-fname">Lauran</p>
-                    <p class="customer-lname">Ayala</p>
-                    <p class="customer-email">lauranayal@gmail.com</p>
-                    <p class="customer-phone">0760504002</p>
-                </div>
-                <div class="customer">
-                    <p class="customer-fname">Lauran</p>
-                    <p class="customer-lname">Ayala</p>
-                    <p class="customer-email">lauranayal@gmail.com</p>
-                    <p class="customer-phone">0760504002</p>
-                </div>
-                <div class="customer">
-                    <p class="customer-fname">Lauran</p>
-                    <p class="customer-lname">Ayala</p>
-                    <p class="customer-email">lauranayal@gmail.com</p>
-                    <p class="customer-phone">0760504002</p>
+                        <p class="customer-fname"><%=user.getFirstName() %></p>
+                        <p class="customer-lname"><%=user.getLastName() %></p>
+                        <p class="customer-email"><%=user.getEmail() %></p>
+                        <p class="customer-phone"><%=user.getPhoneNumber() %></p>
+                    </div>
+                    <%
+                        }
+                    } else {
+                    %>
+                    <p>
+                        <span class="header-top" style="margin-left:500px"> No customer found</span>
+                    </p>
+                    <%
+                        }
+                    %>
+
+
                 </div>
             </div>
         </div>
