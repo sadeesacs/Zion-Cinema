@@ -291,19 +291,59 @@
                             </div>
                             <div class="movie-form-row">
                                 <label for="movie-genre" class="movie-form-label">Movie Genre 01</label>
-                                <input class="form-m-genre" type="text" id="movie-genre1" />
+                                <div class="genre-select">
+                                    <select>
+                                        <option value="Action">Action</option>
+                                        <option value="Comedy">Comedy</option>
+                                        <option value="Drama">Drama</option>
+                                        <option value="Horror">Horror</option>
+                                        <option value="Romance">Romance</option>
+                                        <option value="Sci-Fi">Sci-Fi</option>
+                                        <option value="Adventure">Adventure</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="movie-form-row">
                                 <label for="movie-genre" class="movie-form-label">Movie Genre 02</label>
-                                <input class="form-m-genre" type="text" id="movie-genre2" />
+                                <div class="genre-select">
+                                    <select>
+                                        <option value="Action">Action</option>
+                                        <option value="Comedy">Comedy</option>
+                                        <option value="Drama">Drama</option>
+                                        <option value="Horror">Horror</option>
+                                        <option value="Romance">Romance</option>
+                                        <option value="Sci-Fi">Sci-Fi</option>
+                                        <option value="Adventure">Adventure</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="movie-form-row">
                                 <label for="movie-genre" class="movie-form-label">Movie Genre 03</label>
-                                <input class="form-m-genre" type="text" id="movie-genre3" />
+                                <div class="genre-select">
+                                    <select>
+                                        <option value="Action">Action</option>
+                                        <option value="Comedy">Comedy</option>
+                                        <option value="Drama">Drama</option>
+                                        <option value="Horror">Horror</option>
+                                        <option value="Romance">Romance</option>
+                                        <option value="Sci-Fi">Sci-Fi</option>
+                                        <option value="Adventure">Adventure</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="movie-form-row">
                                 <label for="movie-genre" class="movie-form-label">Movie Genre 04</label>
-                                <input class="form-m-genre" type="text" id="movie-genre4" />
+                                <div class="genre-select">
+                                    <select>
+                                        <option value="Action">Action</option>
+                                        <option value="Comedy">Comedy</option>
+                                        <option value="Drama">Drama</option>
+                                        <option value="Horror">Horror</option>
+                                        <option value="Romance">Romance</option>
+                                        <option value="Sci-Fi">Sci-Fi</option>
+                                        <option value="Adventure">Adventure</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="movie-form-row">
                                 <label for="movie-status" class="movie-form-label">Show Status</label>
@@ -405,19 +445,59 @@
                             </div>
                             <div class="movie-form-row">
                                 <label for="movie-genre" class="movie-form-label">Movie Genre 01</label>
-                                <input class="form-m-genre" type="text" id="movie-genre1" />
+                                <div class="genre-select">
+                                    <select>
+                                        <option value="Action">Action</option>
+                                        <option value="Comedy">Comedy</option>
+                                        <option value="Drama">Drama</option>
+                                        <option value="Horror">Horror</option>
+                                        <option value="Romance">Romance</option>
+                                        <option value="Sci-Fi">Sci-Fi</option>
+                                        <option value="Adventure">Adventure</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="movie-form-row">
                                 <label for="movie-genre" class="movie-form-label">Movie Genre 02</label>
-                                <input class="form-m-genre" type="text" id="movie-genre2" />
+                                <div class="genre-select">
+                                    <select>
+                                        <option value="Action">Action</option>
+                                        <option value="Comedy">Comedy</option>
+                                        <option value="Drama">Drama</option>
+                                        <option value="Horror">Horror</option>
+                                        <option value="Romance">Romance</option>
+                                        <option value="Sci-Fi">Sci-Fi</option>
+                                        <option value="Adventure">Adventure</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="movie-form-row">
                                 <label for="movie-genre" class="movie-form-label">Movie Genre 03</label>
-                                <input class="form-m-genre" type="text" id="movie-genre3" />
+                                <div class="genre-select">
+                                    <select>
+                                        <option value="Action">Action</option>
+                                        <option value="Comedy">Comedy</option>
+                                        <option value="Drama">Drama</option>
+                                        <option value="Horror">Horror</option>
+                                        <option value="Romance">Romance</option>
+                                        <option value="Sci-Fi">Sci-Fi</option>
+                                        <option value="Adventure">Adventure</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="movie-form-row">
                                 <label for="movie-genre" class="movie-form-label">Movie Genre 04</label>
-                                <input class="form-m-genre" type="text" id="movie-genre4" />
+                                <div class="genre-select">
+                                    <select>
+                                        <option value="Action">Action</option>
+                                        <option value="Comedy">Comedy</option>
+                                        <option value="Drama">Drama</option>
+                                        <option value="Horror">Horror</option>
+                                        <option value="Romance">Romance</option>
+                                        <option value="Sci-Fi">Sci-Fi</option>
+                                        <option value="Adventure">Adventure</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="movie-form-row">
                                 <label for="movie-status" class="movie-form-label">Show Status</label>

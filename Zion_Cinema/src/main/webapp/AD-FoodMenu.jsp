@@ -334,7 +334,7 @@
                            <option value="Beverages">Beverages</option>
                            <option value="Coffee">Coffee</option>
                            <option value="Hot Kitchen">Hot Kitchen</option>
-                           <option value="Snacks">Snacks</option>
+                           <option value="Snacks">Juice</option>
                        </select>
                    </div>
                    
@@ -395,7 +395,7 @@
                            <option value="Beverages">Beverages</option>
                            <option value="Coffee">Coffee</option>
                            <option value="Hot Kitchen">Hot Kitchen</option>
-                           <option value="Snacks">Snacks</option>
+                           <option value="Snacks">Juice</option>
                        </select>
                    </div>
                    
