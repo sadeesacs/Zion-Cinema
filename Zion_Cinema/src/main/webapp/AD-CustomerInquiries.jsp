@@ -88,8 +88,8 @@
         <div class="middle-container">
             <div class="header-container">
                 <span class="header-top" style="margin-left:20px">Customer Name</span>
-                <span class="header-top" style="margin-left:240px">Customer Email</span>
-                <div class="header-top" style="margin-left:490px">Customer Message</div>
+                <span class="header-top" style="margin-left:220px">Customer Email</span>
+                <div class="header-top" style="margin-left:510px">Customer Message</div>
             </div>
             <div class="content-container">
 
