@@ -91,6 +91,7 @@
                 <span class="header-top" style="margin-left:220px">Customer Email</span>
                 <div class="header-top" style="margin-left:510px">Customer Message</div>
             </div>
+
             <div class="content-container">
 
                 <%
@@ -109,7 +110,9 @@
                     }
                 } else {
                 %>
-                <p>No customer inquiries found.</p>
+                <p>
+                    <span class="header-top" style="margin-left:500px"> No customer inquiries found</span>
+                </p>
                 <%
                     }
                 %>
