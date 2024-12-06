@@ -1355,8 +1355,175 @@ input[type="text"] {
     display: inline-block; 
     left: 900px;
     position: absolute;
-    
 }
+
+
+
+
+
+
+/*Styling for Show time selection Dashbaord*/
+
+
+.zion-movie-selection {
+    position:relative;
+    margin-top:30px;
+    width:90%;
+    margin-left:5%;
+    height:100px;
+}
+
+.dashboard-topic{
+    color:#F5C51B;
+    font-weight:bold;
+    font-size:25px;
+}
+
+.zion-movie-selection select {
+    position:absolute;
+    width:100%;
+    margin-top:15px;
+    font-size: 16px;
+    color: white;
+    height:35px;
+    border:1px solid #F5C51B;
+    background-color:#2A2A2A;
+    font-weight: bold;
+    padding: 0px 30px;
+}
+
+.zion-movie-selection select:focus {
+    border: 1px solid #F5C51B; 
+    outline: none; 
+}
+
+.zion-movie-selection option{
+    border:1px solid #F5C51B;
+    background-color:#2A2A2A;
+    color:white;
+}
+
+.zion-weekly-schedule h3 {
+    margin-top: 10px;
+    color:#F5C51B;
+    font-weight:bold;
+    font-size:25px;
+    position: absolute;
+    margin-left: 5%;
+}
+
+.zion-schedule-table {
+    overflow-y: auto; 
+    border: 1px solid #F5C51B;
+    height:200px;
+    position: relative;
+    top:60px;
+    width: 90%;
+    margin-left:5%;
+}
+
+.zion-schedule-table table {
+    width: 100%;
+    border-collapse: collapse;
+    color: white;
+}
+
+.zion-schedule-table th{
+    background-color: #2A2A2A;
+    color:#F5C51B;
+    padding: 10px;
+    border-bottom: 1px solid #F5C51B;
+}
+
+.zion-schedule-table td {
+    text-align: center;
+    padding: 10px;
+}
+
+.zion-schedule-table th {
+    background-color: #333;
+}
+
+.zion-ticket-price {
+    position: relative;
+    margin-top: 120px;
+}
+
+.zion-ticket-price h3 {
+    color:#F5C51B;
+    font-weight:bold;
+    font-size:25px;
+    position: relatuve;
+    margin-top:0px;
+    margin-left: 5%;
+}
+
+.zion-ticket-price label {
+    margin-left: 5%;
+    position: relative;
+    color:white;
+}
+
+.zion-ticket-price input {
+    width: 100px;
+    margin-left: 20px;
+    padding: 5px;
+    border:1px solid #F5C51B;
+    color:white;
+    background-color: transparent;
+}
+
+.zion-ticket-price button {
+    color: black;
+    cursor: pointer;
+    position: relative;
+    background-color: #F5C51B;
+    color:white;
+    font-weight: bold;
+    margin-left:50px;
+    width:100px;
+    height:30px;
+    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease; 
+}
+
+.zion-ticket-price button:hover {
+    transform: scale(1.1); 
+}
+
+.save-showtime{
+    position: absolute;
+    margin-top:85px;
+    margin-left:86%;
+    width:100px;
+    height:30px;
+    background-color: #F5C51B;
+    color:white;
+    font-weight: bold;
+    cursor:pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease; 
+}
+
+.save-showtime:hover{
+    transform: scale(1.1); 
+}
+
+.zion-schedule-table::-webkit-scrollbar {
+    width: 10px; 
+}
+
+.zion-schedule-table::-webkit-scrollbar-thumb {
+    background-color: #333; 
+}
+
+.zion-schedule-table::-webkit-scrollbar-thumb:hover {
+    background-color: #333; 
+}
+
+.zion-schedule-table::-webkit-scrollbar-track {
+    background-color: black;
+}
+
+
 
 
 
