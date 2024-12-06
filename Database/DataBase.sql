@@ -1,439 +1,674 @@
--- MySQL dump 10.13  Distrib 8.0.40, for macos14 (arm64)
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
 --
--- Host: localhost    Database: zion_cinema
--- ------------------------------------------------------
--- Server version	9.1.0
+-- Host: 127.0.0.1
+-- Generation Time: Dec 06, 2024 at 12:52 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
--- Table structure for table `Admin`
+-- Database: `zioncinema`
 --
 
-DROP TABLE IF EXISTS `Admin`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Admin` (
-  `AdminID` int NOT NULL AUTO_INCREMENT,
-  `Username` varchar(100) DEFAULT NULL,
-  `Password` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`AdminID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `Admin`
+-- Table structure for table `admin`
 --
 
-LOCK TABLES `Admin` WRITE;
-/*!40000 ALTER TABLE `Admin` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Admin` ENABLE KEYS */;
-UNLOCK TABLES;
+CREATE TABLE `admin` (
+  `AdminID` int(11) NOT NULL,
+  `Username` varchar(255) DEFAULT NULL,
+  `Password` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `CustomerInquiries`
+-- Table structure for table `customerinquiries`
 --
 
-DROP TABLE IF EXISTS `CustomerInquiries`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `CustomerInquiries` (
-  `InquiryID` int NOT NULL AUTO_INCREMENT,
-  `Name` varchar(100) DEFAULT NULL,
-  `Email` varchar(100) DEFAULT NULL,
-  `Message` text,
-  PRIMARY KEY (`InquiryID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+CREATE TABLE `customerinquiries` (
+  `InquiryID` int(11) NOT NULL,
+  `Name` varchar(255) DEFAULT NULL,
+  `Email` varchar(255) DEFAULT NULL,
+  `Message` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `CustomerInquiries`
+-- Dumping data for table `customerinquiries`
 --
 
-LOCK TABLES `CustomerInquiries` WRITE;
-/*!40000 ALTER TABLE `CustomerInquiries` DISABLE KEYS */;
-/*!40000 ALTER TABLE `CustomerInquiries` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `customerinquiries` (`InquiryID`, `Name`, `Email`, `Message`) VALUES
+(1, 'John Doe', 'johndoe@gmail.com', 'I would like to know the timings of the shows.'),
+(2, 'Jane Smith', 'janesmith@gmail.com', 'Do you have wheelchair accessibility in the hall?'),
+(3, 'Alice Brown', 'alicebrown@gmail.com', 'Can I book tickets for a group event online?'),
+(4, 'Mark Taylor', 'marktaylor@gmail.com', 'Are there any discounts available for students?'),
+(5, 'Emily Clark', 'emilyclark@gmail.com', 'Is outside food allowed in the cinema hall?');
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `FoodItem`
+-- Table structure for table `fooditem`
 --
 
-DROP TABLE IF EXISTS `FoodItem`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `FoodItem` (
-  `FoodID` int NOT NULL AUTO_INCREMENT,
-  `Name` varchar(100) DEFAULT NULL,
-  `Description` text,
-  `FoodImage` varchar(255) DEFAULT NULL,
-  `Price` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`FoodID`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+CREATE TABLE `fooditem` (
+  `FoodID` int(11) NOT NULL,
+  `Name` varchar(255) DEFAULT NULL,
+  `Food_Image` varchar(255) DEFAULT NULL,
+  `Type` varchar(50) DEFAULT NULL,
+  `Price` decimal(10,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `FoodItem`
+-- Dumping data for table `fooditem`
 --
 
-LOCK TABLES `FoodItem` WRITE;
-/*!40000 ALTER TABLE `FoodItem` DISABLE KEYS */;
-INSERT INTO `FoodItem` VALUES (1,'Popcorn','A classic, light, and crunchy snack served with butter or caramel.',NULL,'LKR 300'),(2,'Nachos','Tortilla chips topped with melted cheese and other toppings.',NULL,'LKR 600'),(3,'Candy','A selection of sweet treats like chocolate, gummies, and mints.',NULL,'LKR 400'),(4,'Hot Dogs','A sausage in a bun, served with ketchup, mustard, and relish.',NULL,'LKR 700'),(5,'Soda','Carbonated drinks like cola, lemon-lime, or fruit flavors.',NULL,'LKR 200'),(6,'Ice Cream','A scoop of creamy ice cream in various flavors.',NULL,'LKR 200'),(7,'Pretzels','Soft, salty dough snacks, often served with cheese or mustard.',NULL,'LKR 500'),(8,'Slushies','Frozen, flavored drinks in bright colors and refreshing tastes.',NULL,'LKR 600'),(9,'Pizza','Personal-sized pizza with toppings like cheese, pepperoni, and veggies.',NULL,'LKR 800'),(10,'French Fries','Crispy fried potato sticks, usually served with ketchup.',NULL,'LKR 200'),(11,'Chicken Tenders','Breaded and fried chicken pieces with dipping sauces.',NULL,'LKR 700'),(12,'Cookies','Soft and warm cookies, often in chocolate chip or oatmeal varieties.',NULL,'LKR 100'),(13,'Churros','Fried dough pastries, dusted with cinnamon and sugar.',NULL,'LKR 300'),(14,'Popcorn Chicken','Bite-sized fried chicken, perfect for dipping sauces.',NULL,'LKR 600'),(15,'Vegan Snacks','Plant-based and gluten-free options like veggie chips and dips.',NULL,'LKR 100'),(16,'Smoothies','Blended fruit drinks, often made with fresh berries and bananas.',NULL,'LKR 100'),(17,'Loaded Fries','Fries topped with cheese, bacon, and sour cream.',NULL,'LKR 600'),(18,'Sandwiches','Simple sandwiches with fillings like ham, turkey, or veggies.',NULL,'LKR 300'),(19,'Fruit Cups','Fresh, cut-up fruit in bite-sized pieces for a healthy snack.',NULL,'LKR 200'),(20,'Cheese Sticks','Fried mozzarella sticks served with marinara sauce.',NULL,'LKR 400');
-/*!40000 ALTER TABLE `FoodItem` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `fooditem` (`FoodID`, `Name`, `Food_Image`, `Type`, `Price`) VALUES
+(1, 'Salt Popcorn - Large', 'images/Food/Salt Popcorn - Large.jpg', 'Popcorn', 500.00),
+(2, 'Salt Popcorn - Medium', 'images/Food/Salt Popcorn - Medium.jpg', 'Popcorn', 350.00),
+(3, 'Caramel Popcorn - Large', 'images/Food/Caramel Popcorn - Large.jpg', 'Popcorn', 600.00),
+(4, 'Caramel Popcorn - Medium', 'images/Food/Caramel Popcorn - Medium.jpg', 'Popcorn', 400.00),
+(5, 'Cheese Popcorn - Large', 'images/Food/Cheese Popcorn - Large.jpg', 'Popcorn', 650.00),
+(6, 'Cheese Popcorn - Medium', 'images/Food/Cheese Popcorn - Medium.jpg', 'Popcorn', 450.00),
+(7, 'Butter Salt Popcorn - Large', 'images/Food/Butter Salt Popcorn - Large.jpg', 'Popcorn', 550.00),
+(8, 'CocaCola', 'images/Food/CocaCola.jpg', 'Beverages', 200.00),
+(9, 'Fanta', 'images/Food/Fanta.jpg', 'Beverages', 200.00),
+(10, 'CocaColaZero', 'images/Food/CocaColaZero.jpg', 'Beverages', 220.00),
+(11, 'Sprite', 'images/Food/Sprite.jpg', 'Beverages', 200.00),
+(12, 'Iced Coffee Hazelnut', 'images/Food/Iced Coffee Hazelnut.jpg', 'Beverages', 350.00),
+(13, 'Iced Coffee Fresh Vannila', 'images/Food/Iced Coffee Fresh Vannila.jpg', 'Beverages', 350.00),
+(14, 'Iced Coffee Latte', 'images/Food/Iced Coffee Latte.jpg', 'Beverages', 350.00),
+(15, 'Choco Coffee', 'images/Food/Choco Coffee.jpg', 'Coffee', 300.00),
+(16, 'Espresso', 'images/Food/Espresso.jpg', 'Coffee', 250.00),
+(17, 'Hot Chocolate', 'images/Food/Hot Chocolate.jpg', 'Coffee', 320.00),
+(18, 'Americano', 'images/Food/Americano.jpg', 'Coffee', 250.00),
+(19, 'Cappuccino', 'images/Food/Cappuccino.jpg', 'Coffee', 280.00),
+(20, 'Latte', 'images/Food/Latte.jpg', 'Coffee', 300.00),
+(21, 'Latte Macchiato', 'images/Food/Latte Macchiato.jpg', 'Coffee', 320.00),
+(22, 'Steak Fries', 'images/Food/Steak Fries.jpg', 'Hot Kitchen', 450.00),
+(23, 'Slawdog & Cheese Kievs', 'images/Food/Slawdog & Cheese Kievs.jpg', 'Hot Kitchen', 500.00),
+(24, 'Hashbrown Burger (Veg)', 'images/Food/Hashbrown Burger (Veg).jpg', 'Hot Kitchen', 550.00),
+(25, 'Crispy Beef Wrap', 'images/Food/Crispy Beef Wrap.jpg', 'Hot Kitchen', 600.00),
+(26, 'Grilled Beef Burger', 'images/Food/Grilled Beef Burger.jpg', 'Hot Kitchen', 650.00),
+(27, 'Nachos', 'images/Food/Nachos.png\r\n', 'Hot Kitchen', 500.00),
+(28, 'Thai Beef Salad', 'images/Food/Thai Beef Salad.jpg', 'Hot Kitchen', 550.00),
+(29, 'Fruity Smoothie - Mango', 'images/Food/Fruity Smoothie - Mango.jpg', 'Juice', 400.00),
+(30, 'Fresh Juice - Watermelon', 'images/Food/Fresh Juice - Watermelon.jpg', 'Juice', 350.00),
+(31, 'Strawberry Cheesecake Milkshake', 'images/Food/Strawberry Cheesecake Milkshake.jpg', 'Juice', 500.00),
+(32, 'Salt Caramel with Honeycomb Milkshake', 'images/Food/Salt Caramel with Honeycomb Milkshake.jpg', 'Juice', 520.00),
+(33, 'Rocky Road Milkshake', 'images/Food/Rocky Road Milkshake.jpeg', 'Juice', 520.00),
+(34, 'Cookie Espresso Milkshake', 'images/Food/Cookie Espresso Milkshake.jpg', 'Juice', 550.00);
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `FoodOrder`
+-- Table structure for table `foodorder`
 --
 
-DROP TABLE IF EXISTS `FoodOrder`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `FoodOrder` (
-  `FoodOrderID` int NOT NULL AUTO_INCREMENT,
-  `TransactionID` int DEFAULT NULL,
-  `FoodID` int DEFAULT NULL,
-  `Quantity` int DEFAULT NULL,
-  PRIMARY KEY (`FoodOrderID`),
-  KEY `TransactionID_idx` (`TransactionID`),
-  KEY `FoodID_idx` (`FoodID`),
-  CONSTRAINT `FK_FoodOrder_FoodItem` FOREIGN KEY (`FoodID`) REFERENCES `FoodItem` (`FoodID`),
-  CONSTRAINT `FK_FoodOrder_Transaction` FOREIGN KEY (`TransactionID`) REFERENCES `Transaction` (`TransactionID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+CREATE TABLE `foodorder` (
+  `FoodOrderID` int(11) NOT NULL,
+  `TransactionID` int(11) DEFAULT NULL,
+  `FoodID` int(11) DEFAULT NULL,
+  `Quantity` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `FoodOrder`
+-- Table structure for table `genre`
 --
 
-LOCK TABLES `FoodOrder` WRITE;
-/*!40000 ALTER TABLE `FoodOrder` DISABLE KEYS */;
-/*!40000 ALTER TABLE `FoodOrder` ENABLE KEYS */;
-UNLOCK TABLES;
+CREATE TABLE `genre` (
+  `GenreID` int(11) NOT NULL,
+  `Name` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Table structure for table `Genre`
+-- Dumping data for table `genre`
 --
 
-DROP TABLE IF EXISTS `Genre`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Genre` (
-  `GenreID` int NOT NULL AUTO_INCREMENT,
-  `Name` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`GenreID`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+INSERT INTO `genre` (`GenreID`, `Name`) VALUES
+(1, 'Action'),
+(2, 'Comedy'),
+(3, 'Drama'),
+(4, 'Horror'),
+(5, 'Romance'),
+(6, 'Sci-Fi'),
+(7, 'Adventure');
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `Genre`
+-- Table structure for table `moviegenre`
 --
 
-LOCK TABLES `Genre` WRITE;
-/*!40000 ALTER TABLE `Genre` DISABLE KEYS */;
-INSERT INTO `Genre` VALUES (1,'Action'),(2,'Adventure'),(3,'Animation'),(4,'Comody'),(5,'Drama'),(6,'Fantasy'),(7,'Romance'),(8,'Sci-Fi'),(9,'Thriller'),(10,'Crime'),(11,'Documentary'),(12,'Family'),(13,'Musical'),(14,'Historical'),(15,'Biography'),(16,'WAR'),(17,'Western\n'),(18,'Sporrts'),(19,'Film Noir'),(20,'Rom-Com'),(21,'Superhero'),(22,'Disaster'),(23,'Erotic'),(24,'Experimental');
-/*!40000 ALTER TABLE `Genre` ENABLE KEYS */;
-UNLOCK TABLES;
+CREATE TABLE `moviegenre` (
+  `MovieGenreID` int(11) NOT NULL,
+  `Movie_ID` int(11) DEFAULT NULL,
+  `GenreID` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Table structure for table `MovieGenre`
+-- Dumping data for table `moviegenre`
 --
 
-DROP TABLE IF EXISTS `MovieGenre`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `MovieGenre` (
-  `MovieGenreID` int NOT NULL AUTO_INCREMENT,
-  `MovieID` int DEFAULT NULL,
-  `GenreID` int DEFAULT NULL,
-  PRIMARY KEY (`MovieGenreID`),
-  KEY `MovieID_idx` (`MovieID`),
-  KEY `GenreID_idx` (`GenreID`),
-  CONSTRAINT `FK_MovieGenre_Genre` FOREIGN KEY (`GenreID`) REFERENCES `Genre` (`GenreID`),
-  CONSTRAINT `FK_MovieGenre_Movie` FOREIGN KEY (`MovieID`) REFERENCES `Movies` (`MovieID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+INSERT INTO `moviegenre` (`MovieGenreID`, `Movie_ID`, `GenreID`) VALUES
+(89, 1, 1),
+(90, 1, 7),
+(91, 1, 6),
+(92, 1, 3),
+(93, 2, 1),
+(94, 2, 3),
+(95, 2, 7),
+(96, 3, 1),
+(97, 3, 7),
+(98, 3, 6),
+(99, 3, 3),
+(100, 4, 1),
+(101, 4, 7),
+(102, 4, 3),
+(103, 5, 1),
+(104, 5, 6),
+(105, 5, 3),
+(106, 5, 7),
+(107, 6, 7),
+(108, 6, 2),
+(109, 7, 7),
+(110, 7, 3),
+(111, 8, 7),
+(112, 8, 1),
+(113, 8, 3),
+(114, 9, 7),
+(115, 9, 6),
+(116, 10, 1),
+(117, 10, 7),
+(118, 10, 6),
+(119, 11, 1),
+(120, 11, 6),
+(121, 11, 3),
+(122, 11, 7),
+(123, 12, 1),
+(124, 12, 6),
+(125, 12, 7),
+(126, 13, 1),
+(127, 13, 6),
+(128, 13, 4),
+(129, 13, 3),
+(130, 14, 7),
+(131, 14, 6),
+(132, 14, 3);
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `MovieGenre`
+-- Table structure for table `movies`
 --
 
-LOCK TABLES `MovieGenre` WRITE;
-/*!40000 ALTER TABLE `MovieGenre` DISABLE KEYS */;
-/*!40000 ALTER TABLE `MovieGenre` ENABLE KEYS */;
-UNLOCK TABLES;
+CREATE TABLE `movies` (
+  `Movie_ID` int(11) NOT NULL,
+  `Movie_Name` varchar(255) DEFAULT NULL,
+  `Description` text DEFAULT NULL,
+  `Duration` varchar(12) DEFAULT NULL,
+  `Trailer` varchar(255) DEFAULT NULL,
+  `Year` varchar(4) DEFAULT NULL,
+  `Rating` varchar(5) DEFAULT NULL,
+  `Status` varchar(50) DEFAULT NULL,
+  `Poster` varchar(255) DEFAULT NULL,
+  `Banner` varchar(255) DEFAULT NULL,
+  `Carousal` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Table structure for table `Movies`
+-- Dumping data for table `movies`
 --
 
-DROP TABLE IF EXISTS `Movies`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Movies` (
-  `MovieID` int NOT NULL AUTO_INCREMENT,
-  `MovieName` varchar(100) DEFAULT NULL,
-  `Description` text,
-  `Duration` varchar(45) DEFAULT NULL,
-  `Trailer` text,
-  `Year` year DEFAULT NULL,
-  `Rating` float DEFAULT NULL,
-  `Status` varchar(20) DEFAULT NULL,
-  `Poster` text,
-  `Banner` text,
-  `Carousal` text,
-  `ShowStatus` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`MovieID`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+INSERT INTO `movies` (`Movie_ID`, `Movie_Name`, `Description`, `Duration`, `Trailer`, `Year`, `Rating`, `Status`, `Poster`, `Banner`, `Carousal`) VALUES
+(1, 'Avengers: Endgame', 'After the devastating events of Avengers: Infinity War, the Avengers assemble once more to reverse Thanos\' actions and restore balance to the universe.', '3h 1min', 'https://youtu.be/TcMBFSGVi1c', '2019', 'PG-13', 'Now Showing', 'images/poster/End Game.jpg', 'images/banner/End Game.jpg', 'images/Carousal/End Game.png'),
+(2, 'Gladiator 2', 'The sequel to the Academy Award-winning Gladiator.', '2h 35min', 'https://youtu.be/samplelink1', '2024', 'R', 'Coming Soon', 'images/poster/Gladiator 2.jpg', 'images/banner/Gladiator 2.jpg', NULL),
+(3, 'Avengers: Infinity War', 'The Avengers and their allies must be willing to sacrifice all in an attempt to defeat the powerful Thanos before his blitz of devastation and ruin puts an end to the universe.', '2h 29min', 'https://youtu.be/6ZfuNTqbHE8', '2018', 'PG-13', 'Now Showing', 'images/poster/Infinity War.jpeg', 'images/banner/Infinity War.png', NULL),
+(4, 'Kraven the Hunter', 'Sergei Kravinoff embarks on a mission to prove that he is the greatest hunter in the world, taking on his fiercest challenge yet.', '2h 10min', 'https://youtu.be/samplelink2', '2023', 'R', 'Coming Soon', 'images/poster/Kraven The Hunter.png', 'images/banner/Kraven The Hunter.png', NULL),
+(5, 'Man of Steel', 'Clark Kent, one of the last of an extinguished race disguised as an unremarkable human, is forced to reveal his identity when Earth is invaded by an army of survivors.', '2h 23min', 'https://youtu.be/T6DJcgm3wNY', '2013', 'PG-13', 'Now Showing', 'images/poster/Man of Steel.jpeg', 'images/banner/Man of Steel.jpg', NULL),
+(6, 'Moana 2', 'Moana ventures beyond the reef on another daring journey to save her people from a new mysterious threat.', '1h 55min', 'https://youtu.be/samplelink3', '2024', 'PG', 'Coming Soon', 'images/poster/Moana 2.jpeg', 'images/banner/Moana 2.png', NULL),
+(7, 'Mufasa: The Lion King', 'A prequel to The Lion King, telling the story of how Mufasa rose to royalty in the Pride Lands.', '1h 30min', 'https://youtu.be/samplelink4', '2024', 'PG', 'Coming Soon', 'images/poster/Mufasa The Lion King.png', 'images/banner/Mufasa The Lion King.png', NULL),
+(8, 'Pirates of the Caribbean: Dead Men Tell No Tales', 'Captain Jack Sparrow searches for the legendary Trident of Poseidon while being pursued by an undead sea captain and his crew.', '2h 9min', 'https://youtu.be/1xo3af_6_Jk', '2017', 'PG-13', 'Now Showing', 'images/poster/Pirates of The Caribbean 5.jpeg', 'images/banner/Pirates of The Caribbean 5.png', NULL),
+(9, 'Sonic the Hedgehog 3', 'Sonic and his friends team up once again to face a new enemy threatening their world.', '2h 0min', 'https://youtu.be/samplelink5', '2024', 'PG', 'Coming Soon', 'images/poster/Sonic 3.png', 'images/banner/Sonic 3.jpg', NULL),
+(10, 'Spider-Man: Homecoming', 'Peter Parker balances his life as an ordinary high school student in Queens with his superhero alter-ego Spider-Man and finds himself on the trail of a new menace.', '2h 13min', 'https://youtu.be/U0D3AOldjMU', '2017', 'PG-13', 'Now Showing', 'images/poster/Spider Man Homecoming.jpeg', 'images/banner/Spider Man Homecoming.jpg', 'images/Carousal/Spider Man Homecoming.png'),
+(11, 'Spider-Man: No Way Home', 'With Spider-Man\'s identity now revealed, Peter asks Doctor Strange for help, leading to a dangerous adventure across the multiverse.', '2h 28min', 'https://youtu.be/JfVOs4VSpmA', '2021', 'PG-13', 'Now Showing', 'images/poster/Spider Man No Way Home.png', 'images/banner/Spider Man No Way Home.png', 'images/Carousal/Spider Man No Way Home.jpg'),
+(12, 'Spider-Man: Far From Home', 'Following the events of Avengers: Endgame, Spider-Man must step up to take on new threats in a world that has changed forever.', '2h 9min', 'https://youtu.be/DYYtuKyMtY8', '2019', 'PG-13', 'Now Showing', 'images/poster/Spider Man Far From Home.jpg', 'images/banner/Spider Man Far From Home.jpeg', NULL),
+(13, 'Venom: Let There Be Carnage', 'Eddie Brock attempts to reignite his career while grappling with the alien symbiote Venom, facing a new symbiotic threat, Carnage.', '2h 0min', 'https://youtu.be/samplelink6', '2021', 'PG-13', 'Now Showing', 'images/poster/Venom The Last Dance.png', 'images/banner/Venom The Last Dance.png', NULL),
+(14, 'The Wild Robot', 'A lone robot must adapt to the wilderness and forge unlikely friendships in order to survive and uncover the mystery of its past.', '1h 45min', 'https://youtu.be/samplelink7', '2024', 'PG', 'Coming Soon', 'images/poster/Wild Robot.png', 'images/banner/Wild Robot.png', NULL);
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `Movies`
+-- Table structure for table `payment`
 --
 
-LOCK TABLES `Movies` WRITE;
-/*!40000 ALTER TABLE `Movies` DISABLE KEYS */;
-INSERT INTO `Movies` VALUES (1,'WICKED','Wicked tells the story of Elphaba, the future Wicked Witch of the West and her relationship with Glinda, the Good Witch of the North. Their friendship struggles through their opposing personalities and viewpoints, rivalry over the same love-interest, their reactions to the Wizard\'s corrupt government, and, ultimately, Elphaba\'s public fall from grace. The plot is set mostly before Dorothy\'s arrival from Kansas, and includes several references to well-known scenes and dialogue in the 1939 film The Wizard of Oz as a backstory.','2 hr 40 min','https://youtu.be/6COmYeLsz4c?si=tDFpbK7dUa08N0kK',2024,8.1,NULL,NULL,NULL,NULL,NULL),(2,'BHOOL BHULAIYA 3','In Kolkata, Rooh Baba enters a spooky estate where he confronts a pair of vindictive ghosts, both asserting to be Manjulika.','2 hr 40 min','https://youtu.be/6YMY62tMLUA?si=A-EhLXm1hPd0Z0PS',2024,5.2,NULL,NULL,NULL,NULL,NULL),(3,'SMILE 2','About to embark on a world tour, global pop sensation Skye Riley begins experiencing increasingly terrifying and inexplicable events. Overwhelmed by the escalating horrors and the pressures of fame, Skye is forced to face her past.','2hr 13 min','https://youtu.be/0HY6QFlBzUY?si=UqlWd_rC_lwg-Z05',2024,6.9,NULL,NULL,NULL,NULL,NULL),(4,'ENDGAME','After the devastating events of Avengers: Infinity War (2018), the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to reverse Thanos\' actions and restore balance to the universe.','3h 1min','https://youtu.be/TcMBFSGVi1c?si=F79hbJHAbza5Cjuc',2019,8.4,NULL,NULL,NULL,NULL,NULL),(5,'DEADP00L X W0LVERINE','Deadpool\'s peaceful existence comes crashing down when the Time Variance Authority recruits him to help safeguard the multiverse. He soon unites with his would-be pal, Wolverine, to complete the mission and save his world from an existential threat.','2hr 7min','https://youtu.be/73_1biulkYk?si=nCwflQros-BZnWNN',2024,7.7,NULL,NULL,NULL,NULL,NULL);
-/*!40000 ALTER TABLE `Movies` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `Payment`
---
-
-DROP TABLE IF EXISTS `Payment`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Payment` (
-  `PaymentID` int NOT NULL AUTO_INCREMENT,
-  `TransactionID` int DEFAULT NULL,
+CREATE TABLE `payment` (
+  `PaymentID` int(11) NOT NULL,
+  `BookingID` int(11) DEFAULT NULL,
   `PaymentDate` datetime DEFAULT NULL,
-  `PaymentMethod` varchar(20) DEFAULT NULL,
-  `PaymentAmount` float DEFAULT NULL,
-  PRIMARY KEY (`PaymentID`),
-  KEY `TransactionID_idx` (`TransactionID`),
-  CONSTRAINT `FK_Payment_Transaction` FOREIGN KEY (`TransactionID`) REFERENCES `Transaction` (`TransactionID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `PaymentMethod` varchar(50) DEFAULT NULL,
+  `PaymentAmount` decimal(10,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `Payment`
+-- Table structure for table `seat`
 --
 
-LOCK TABLES `Payment` WRITE;
-/*!40000 ALTER TABLE `Payment` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Payment` ENABLE KEYS */;
-UNLOCK TABLES;
+CREATE TABLE `seat` (
+  `SeatID` int(11) NOT NULL,
+  `SeatNumber` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Table structure for table `Seat`
+-- Dumping data for table `seat`
 --
 
-DROP TABLE IF EXISTS `Seat`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Seat` (
-  `SeatID` int NOT NULL AUTO_INCREMENT,
-  `SeatNumber` int DEFAULT NULL,
-  PRIMARY KEY (`SeatID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+INSERT INTO `seat` (`SeatID`, `SeatNumber`) VALUES
+(1, 'A1'),
+(2, 'A2'),
+(3, 'A3'),
+(4, 'A4'),
+(5, 'A5'),
+(6, 'A6'),
+(7, 'B1'),
+(8, 'B2'),
+(9, 'B3'),
+(10, 'B4'),
+(11, 'B5'),
+(12, 'B6'),
+(13, 'C1'),
+(14, 'C2'),
+(15, 'C3'),
+(16, 'C4'),
+(17, 'C5'),
+(18, 'C6'),
+(19, 'C7'),
+(20, 'C8'),
+(21, 'D1'),
+(22, 'D2'),
+(23, 'D3'),
+(24, 'D4'),
+(25, 'D5'),
+(26, 'D6'),
+(27, 'D7'),
+(28, 'D8'),
+(29, 'E1'),
+(30, 'E2'),
+(31, 'E3'),
+(32, 'E4'),
+(33, 'E5'),
+(34, 'E6'),
+(35, 'E7'),
+(36, 'E8'),
+(37, 'F1'),
+(38, 'F2'),
+(39, 'F3'),
+(40, 'F4'),
+(41, 'F5'),
+(42, 'F6'),
+(43, 'F7'),
+(44, 'F8');
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `Seat`
+-- Table structure for table `seatreservation`
 --
 
-LOCK TABLES `Seat` WRITE;
-/*!40000 ALTER TABLE `Seat` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Seat` ENABLE KEYS */;
-UNLOCK TABLES;
+CREATE TABLE `seatreservation` (
+  `SeatReservationID` int(11) NOT NULL,
+  `ShowtimeID` int(11) DEFAULT NULL,
+  `SeatID` int(11) DEFAULT NULL,
+  `TransactionID` int(11) DEFAULT NULL,
+  `Status` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `SeatReservation`
+-- Table structure for table `showtime`
 --
 
-DROP TABLE IF EXISTS `SeatReservation`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `SeatReservation` (
-  `SeatReservationID` int NOT NULL AUTO_INCREMENT,
-  `ShowtimeID` int DEFAULT NULL,
-  `SeatID` int DEFAULT NULL,
-  `TransactionID` int DEFAULT NULL,
-  `Status` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`SeatReservationID`),
-  KEY `ShowtimeID_idx` (`ShowtimeID`),
-  KEY `SeatID_idx` (`SeatID`),
-  KEY `TransactionID_idx` (`TransactionID`),
-  CONSTRAINT `FK_SeatReservation_Seat` FOREIGN KEY (`SeatID`) REFERENCES `Seat` (`SeatID`),
-  CONSTRAINT `FK_SeatReservation_Showtime` FOREIGN KEY (`ShowtimeID`) REFERENCES `Showtime` (`ShowtimeID`),
-  CONSTRAINT `FK_SeatReservation_Transaction` FOREIGN KEY (`TransactionID`) REFERENCES `Transaction` (`TransactionID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+CREATE TABLE `showtime` (
+  `ShowtimeID` int(11) NOT NULL,
+  `Movie_ID` int(11) DEFAULT NULL,
+  `Date` date DEFAULT NULL,
+  `Show_Time` time DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `SeatReservation`
+-- Table structure for table `ticket`
 --
 
-LOCK TABLES `SeatReservation` WRITE;
-/*!40000 ALTER TABLE `SeatReservation` DISABLE KEYS */;
-/*!40000 ALTER TABLE `SeatReservation` ENABLE KEYS */;
-UNLOCK TABLES;
+CREATE TABLE `ticket` (
+  `TicketID` int(11) NOT NULL,
+  `Transaction_ID` int(11) DEFAULT NULL,
+  `SeatID` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `Showtime`
+-- Table structure for table `ticketprice`
 --
 
-DROP TABLE IF EXISTS `Showtime`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Showtime` (
-  `ShowtimeID` int NOT NULL AUTO_INCREMENT,
-  `MovieID` int DEFAULT NULL,
-  `Date` datetime DEFAULT NULL,
-  `ShowTime` time DEFAULT NULL,
-  PRIMARY KEY (`ShowtimeID`),
-  KEY `MovieID_idx` (`MovieID`),
-  CONSTRAINT `FK_Showtime_Movie` FOREIGN KEY (`MovieID`) REFERENCES `Movies` (`MovieID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+CREATE TABLE `ticketprice` (
+  `TicketPriceID` int(11) NOT NULL,
+  `ShowtimeID` int(11) DEFAULT NULL,
+  `Category` varchar(50) DEFAULT NULL,
+  `Price` decimal(10,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `Showtime`
+-- Table structure for table `transaction`
 --
 
-LOCK TABLES `Showtime` WRITE;
-/*!40000 ALTER TABLE `Showtime` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Showtime` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `Ticket`
---
-
-DROP TABLE IF EXISTS `Ticket`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Ticket` (
-  `TicketID` int NOT NULL AUTO_INCREMENT,
-  `TransactionID` int DEFAULT NULL,
-  `SeatID` int DEFAULT NULL,
-  PRIMARY KEY (`TicketID`),
-  KEY `TransactionID_idx` (`TransactionID`),
-  KEY `SeatID_idx` (`SeatID`),
-  CONSTRAINT `FK_Ticket_Seat` FOREIGN KEY (`SeatID`) REFERENCES `Seat` (`SeatID`),
-  CONSTRAINT `FK_Ticket_Transaction` FOREIGN KEY (`TransactionID`) REFERENCES `Transaction` (`TransactionID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Ticket`
---
-
-LOCK TABLES `Ticket` WRITE;
-/*!40000 ALTER TABLE `Ticket` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Ticket` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `TicketPrice`
---
-
-DROP TABLE IF EXISTS `TicketPrice`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `TicketPrice` (
-  `TicketPriceID` int NOT NULL AUTO_INCREMENT,
-  `Category` varchar(45) DEFAULT NULL,
-  `Price` float DEFAULT NULL,
-  PRIMARY KEY (`TicketPriceID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `TicketPrice`
---
-
-LOCK TABLES `TicketPrice` WRITE;
-/*!40000 ALTER TABLE `TicketPrice` DISABLE KEYS */;
-/*!40000 ALTER TABLE `TicketPrice` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `Transaction`
---
-
-DROP TABLE IF EXISTS `Transaction`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Transaction` (
-  `TransactionID` int NOT NULL AUTO_INCREMENT,
-  `UserID` int DEFAULT NULL,
-  `ShowtimeID` int DEFAULT NULL,
+CREATE TABLE `transaction` (
+  `Transaction_ID` int(11) NOT NULL,
+  `UserID` int(11) DEFAULT NULL,
+  `ShowtimeID` int(11) DEFAULT NULL,
   `TransactionDate` datetime DEFAULT NULL,
-  `TotalAmount` float DEFAULT NULL,
-  `PaymentStatus` varchar(20) DEFAULT NULL,
-  `AdultSeatCount` int DEFAULT NULL,
-  `ChildSeatCount` int DEFAULT NULL,
-  PRIMARY KEY (`TransactionID`),
-  KEY `ShowtimeID_idx` (`ShowtimeID`),
-  KEY `UserID_idx` (`UserID`),
-  CONSTRAINT `FK_Transaction_Showtime` FOREIGN KEY (`ShowtimeID`) REFERENCES `Showtime` (`ShowtimeID`),
-  CONSTRAINT `FK_Transaction_User` FOREIGN KEY (`UserID`) REFERENCES `User` (`UserID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `TotalAmount` decimal(10,2) DEFAULT NULL,
+  `PaymentStatus` varchar(50) DEFAULT NULL,
+  `AdultSeatsCount` int(11) DEFAULT NULL,
+  `ChildSeatsCount` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `Transaction`
+-- Table structure for table `user`
 --
 
-LOCK TABLES `Transaction` WRITE;
-/*!40000 ALTER TABLE `Transaction` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Transaction` ENABLE KEYS */;
-UNLOCK TABLES;
+CREATE TABLE `user` (
+  `UserID` int(11) NOT NULL,
+  `Name` varchar(255) DEFAULT NULL,
+  `Email` varchar(255) DEFAULT NULL,
+  `PhoneNumber` varchar(15) DEFAULT NULL,
+  `Password` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Table structure for table `User`
+-- Indexes for dumped tables
 --
 
-DROP TABLE IF EXISTS `User`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `User` (
-  `UserID` int NOT NULL AUTO_INCREMENT,
-  `Name` varchar(100) DEFAULT NULL,
-  `Email` varchar(100) DEFAULT NULL,
-  `PhoneNumber` varchar(20) DEFAULT NULL,
-  `Password` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`UserID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+--
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`AdminID`);
 
 --
--- Dumping data for table `User`
+-- Indexes for table `customerinquiries`
+--
+ALTER TABLE `customerinquiries`
+  ADD PRIMARY KEY (`InquiryID`);
+
+--
+-- Indexes for table `fooditem`
+--
+ALTER TABLE `fooditem`
+  ADD PRIMARY KEY (`FoodID`);
+
+--
+-- Indexes for table `foodorder`
+--
+ALTER TABLE `foodorder`
+  ADD PRIMARY KEY (`FoodOrderID`),
+  ADD KEY `TransactionID` (`TransactionID`),
+  ADD KEY `FoodID` (`FoodID`);
+
+--
+-- Indexes for table `genre`
+--
+ALTER TABLE `genre`
+  ADD PRIMARY KEY (`GenreID`);
+
+--
+-- Indexes for table `moviegenre`
+--
+ALTER TABLE `moviegenre`
+  ADD PRIMARY KEY (`MovieGenreID`),
+  ADD KEY `Movie_ID` (`Movie_ID`),
+  ADD KEY `GenreID` (`GenreID`);
+
+--
+-- Indexes for table `movies`
+--
+ALTER TABLE `movies`
+  ADD PRIMARY KEY (`Movie_ID`);
+
+--
+-- Indexes for table `payment`
+--
+ALTER TABLE `payment`
+  ADD PRIMARY KEY (`PaymentID`),
+  ADD KEY `BookingID` (`BookingID`);
+
+--
+-- Indexes for table `seat`
+--
+ALTER TABLE `seat`
+  ADD PRIMARY KEY (`SeatID`);
+
+--
+-- Indexes for table `seatreservation`
+--
+ALTER TABLE `seatreservation`
+  ADD PRIMARY KEY (`SeatReservationID`),
+  ADD KEY `ShowtimeID` (`ShowtimeID`),
+  ADD KEY `SeatID` (`SeatID`),
+  ADD KEY `TransactionID` (`TransactionID`);
+
+--
+-- Indexes for table `showtime`
+--
+ALTER TABLE `showtime`
+  ADD PRIMARY KEY (`ShowtimeID`),
+  ADD KEY `Movie_ID` (`Movie_ID`);
+
+--
+-- Indexes for table `ticket`
+--
+ALTER TABLE `ticket`
+  ADD PRIMARY KEY (`TicketID`),
+  ADD KEY `Transaction_ID` (`Transaction_ID`),
+  ADD KEY `SeatID` (`SeatID`);
+
+--
+-- Indexes for table `ticketprice`
+--
+ALTER TABLE `ticketprice`
+  ADD PRIMARY KEY (`TicketPriceID`),
+  ADD KEY `ShowtimeID` (`ShowtimeID`);
+
+--
+-- Indexes for table `transaction`
+--
+ALTER TABLE `transaction`
+  ADD PRIMARY KEY (`Transaction_ID`),
+  ADD KEY `UserID` (`UserID`),
+  ADD KEY `ShowtimeID` (`ShowtimeID`);
+
+--
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`UserID`);
+
+--
+-- AUTO_INCREMENT for dumped tables
 --
 
-LOCK TABLES `User` WRITE;
-/*!40000 ALTER TABLE `User` DISABLE KEYS */;
-/*!40000 ALTER TABLE `User` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+--
+-- AUTO_INCREMENT for table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `AdminID` int(11) NOT NULL AUTO_INCREMENT;
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+--
+-- AUTO_INCREMENT for table `customerinquiries`
+--
+ALTER TABLE `customerinquiries`
+  MODIFY `InquiryID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `fooditem`
+--
+ALTER TABLE `fooditem`
+  MODIFY `FoodID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+
+--
+-- AUTO_INCREMENT for table `foodorder`
+--
+ALTER TABLE `foodorder`
+  MODIFY `FoodOrderID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `genre`
+--
+ALTER TABLE `genre`
+  MODIFY `GenreID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `moviegenre`
+--
+ALTER TABLE `moviegenre`
+  MODIFY `MovieGenreID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=133;
+
+--
+-- AUTO_INCREMENT for table `movies`
+--
+ALTER TABLE `movies`
+  MODIFY `Movie_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `payment`
+--
+ALTER TABLE `payment`
+  MODIFY `PaymentID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `seat`
+--
+ALTER TABLE `seat`
+  MODIFY `SeatID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+
+--
+-- AUTO_INCREMENT for table `seatreservation`
+--
+ALTER TABLE `seatreservation`
+  MODIFY `SeatReservationID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `showtime`
+--
+ALTER TABLE `showtime`
+  MODIFY `ShowtimeID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `ticket`
+--
+ALTER TABLE `ticket`
+  MODIFY `TicketID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `ticketprice`
+--
+ALTER TABLE `ticketprice`
+  MODIFY `TicketPriceID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `transaction`
+--
+ALTER TABLE `transaction`
+  MODIFY `Transaction_ID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `user`
+--
+ALTER TABLE `user`
+  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `foodorder`
+--
+ALTER TABLE `foodorder`
+  ADD CONSTRAINT `foodorder_ibfk_1` FOREIGN KEY (`TransactionID`) REFERENCES `transaction` (`Transaction_ID`),
+  ADD CONSTRAINT `foodorder_ibfk_2` FOREIGN KEY (`FoodID`) REFERENCES `fooditem` (`FoodID`);
+
+--
+-- Constraints for table `moviegenre`
+--
+ALTER TABLE `moviegenre`
+  ADD CONSTRAINT `moviegenre_ibfk_1` FOREIGN KEY (`Movie_ID`) REFERENCES `movies` (`Movie_ID`),
+  ADD CONSTRAINT `moviegenre_ibfk_2` FOREIGN KEY (`GenreID`) REFERENCES `genre` (`GenreID`);
+
+--
+-- Constraints for table `payment`
+--
+ALTER TABLE `payment`
+  ADD CONSTRAINT `payment_ibfk_1` FOREIGN KEY (`BookingID`) REFERENCES `transaction` (`Transaction_ID`);
+
+--
+-- Constraints for table `seatreservation`
+--
+ALTER TABLE `seatreservation`
+  ADD CONSTRAINT `seatreservation_ibfk_1` FOREIGN KEY (`ShowtimeID`) REFERENCES `showtime` (`ShowtimeID`),
+  ADD CONSTRAINT `seatreservation_ibfk_2` FOREIGN KEY (`SeatID`) REFERENCES `seat` (`SeatID`),
+  ADD CONSTRAINT `seatreservation_ibfk_3` FOREIGN KEY (`TransactionID`) REFERENCES `transaction` (`Transaction_ID`);
+
+--
+-- Constraints for table `showtime`
+--
+ALTER TABLE `showtime`
+  ADD CONSTRAINT `showtime_ibfk_1` FOREIGN KEY (`Movie_ID`) REFERENCES `movies` (`Movie_ID`);
+
+--
+-- Constraints for table `ticket`
+--
+ALTER TABLE `ticket`
+  ADD CONSTRAINT `ticket_ibfk_1` FOREIGN KEY (`Transaction_ID`) REFERENCES `transaction` (`Transaction_ID`),
+  ADD CONSTRAINT `ticket_ibfk_2` FOREIGN KEY (`SeatID`) REFERENCES `seat` (`SeatID`);
+
+--
+-- Constraints for table `ticketprice`
+--
+ALTER TABLE `ticketprice`
+  ADD CONSTRAINT `ticketprice_ibfk_1` FOREIGN KEY (`ShowtimeID`) REFERENCES `showtime` (`ShowtimeID`);
+
+--
+-- Constraints for table `transaction`
+--
+ALTER TABLE `transaction`
+  ADD CONSTRAINT `transaction_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`),
+  ADD CONSTRAINT `transaction_ibfk_2` FOREIGN KEY (`ShowtimeID`) REFERENCES `showtime` (`ShowtimeID`);
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2024-12-03 20:15:23
