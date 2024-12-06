@@ -349,7 +349,7 @@ header .message-icon{
     display: inline-block; 
     margin-top: 10px; 
     font-family: Arial, Helvetica, sans-serif;
-    left: 240px;
+    left: 220px;
 }
 
 .customer-message {
@@ -360,7 +360,7 @@ header .message-icon{
     line-height: 20px;; 
     display: inline-block; 
     font-family: Arial, Helvetica, sans-serif;
-    left: 490px;
+    left: 510px;
 }
 /*Admin Dashboard customer Inquiry Webpage Styling end*/
 
