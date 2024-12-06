@@ -111,7 +111,8 @@
                     </div>
                     <%
                         }
-                    } else {
+                    }
+                        else {
                     %>
                     <p>
                         <span class="header-top" style="margin-left:500px"> No customer found</span>

@@ -1,4 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="DAO.FoodMenuDAO" %>
+<%@ page import="model.FoodMenu"%>
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,7 +17,7 @@
         <header>
             <div class="header">
                 <div class="Logo"><img src="images/icons/logo.png" /></div>
-                <div class="zion-cinema"><a href="HomePage.html">Zion Cinema</a></div>
+                <div class="zion-cinema"><a href="HomePage.jsp">Zion Cinema</a></div>
 
                 <div class="search-bar">
                     <span>Search here.....</span>
@@ -101,210 +104,43 @@
                 <div class="header-top" style="margin-left:670px">Unit Price</div>
                 <div class="header-top" style="margin-left:870px">Action</div>                
             </div>
-                
+
+
             <div class="content-container" style="margin-top:150px;height: 70%">
+
+
+                <%
+                    // Fetching the list of Customer inquiries
+                    List<FoodMenu> Food = FoodMenuDAO.getAllInquiries();
+                    //Loop to display data
+                    if (!Food.isEmpty()) {
+                        for (FoodMenu food : Food) {
+                %>
                 <div class="product">
-                    <p class="product-id">0001</p>
-                    <p class="product-name">Pepsi - L</p>
-                    <p class="product-type">Beverages</p>
-                    <p class="product-unitprice">LKR 550</p>
+                    <p class="product-id"><%=food.getFoodID() %></p>
+                    <p class="product-name"><%=food.getName() %></p>
+                    <p class="product-type"><%=food.getType() %></p>
+                    <p class="product-unitprice">LKR <%=food.getPrice()%></p>
                     <div class="actions">
                         <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
                         <div class="edit" onclick="showEditSlider()"><i class="bi bi-pencil-fill"></i></div>
                         <div class="delete"><i class="bi bi-trash3-fill"></i></div>
                     </div> 
                 </div>
-                <div class="product">
-                    <p class="product-id">0001</p>
-                    <p class="product-name">Pepsi - L</p>
-                    <p class="product-type">Beverages</p>
-                    <p class="product-unitprice">LKR 550</p>
-                    <div class="actions">
-                        <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
-                        <div class="edit" onclick="showEditSlider()"><i class="bi bi-pencil-fill"></i></div>
-                        <div class="delete"><i class="bi bi-trash3-fill"></i></div>
-                    </div> 
-                </div>
-                <div class="product">
-                    <p class="product-id">0001</p>
-                    <p class="product-name">Pepsi - L</p>
-                    <p class="product-type">Beverages</p>
-                    <p class="product-unitprice">LKR 550</p>
-                    <div class="actions">
-                        <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
-                        <div class="edit" onclick="showEditSlider()"><i class="bi bi-pencil-fill"></i></div>
-                        <div class="delete"><i class="bi bi-trash3-fill"></i></div>
-                    </div> 
-                </div>
-                <div class="product">
-                    <p class="product-id">0001</p>
-                    <p class="product-name">Pepsi - L</p>
-                    <p class="product-type">Beverages</p>
-                    <p class="product-unitprice">LKR 550</p>
-                    <div class="actions">
-                        <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
-                        <div class="edit" onclick="showEditSlider()"><i class="bi bi-pencil-fill"></i></div>
-                        <div class="delete"><i class="bi bi-trash3-fill"></i></div>
-                    </div> 
-                </div>
-                <div class="product">
-                    <p class="product-id">0001</p>
-                    <p class="product-name">Pepsi - L</p>
-                    <p class="product-type">Beverages</p>
-                    <p class="product-unitprice">LKR 550</p>
-                    <div class="actions">
-                        <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
-                        <div class="edit" onclick="showEditSlider()"><i class="bi bi-pencil-fill"></i></div>
-                        <div class="delete"><i class="bi bi-trash3-fill"></i></div>
-                    </div> 
-                </div>
-                <div class="product">
-                    <p class="product-id">0001</p>
-                    <p class="product-name">Pepsi - L</p>
-                    <p class="product-type">Beverages</p>
-                    <p class="product-unitprice">LKR 550</p>
-                    <div class="actions">
-                        <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
-                        <div class="edit" onclick="showEditSlider()"><i class="bi bi-pencil-fill"></i></div>
-                        <div class="delete"><i class="bi bi-trash3-fill"></i></div>
-                    </div> 
-                </div>
-                <div class="product">
-                    <p class="product-id">0001</p>
-                    <p class="product-name">Pepsi - L</p>
-                    <p class="product-type">Beverages</p>
-                    <p class="product-unitprice">LKR 550</p>
-                    <div class="actions">
-                        <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
-                        <div class="edit" onclick="showEditSlider()"><i class="bi bi-pencil-fill"></i></div>
-                        <div class="delete"><i class="bi bi-trash3-fill"></i></div>
-                    </div> 
-                </div>
-                <div class="product">
-                    <p class="product-id">0001</p>
-                    <p class="product-name">Pepsi - L</p>
-                    <p class="product-type">Beverages</p>
-                    <p class="product-unitprice">LKR 550</p>
-                    <div class="actions">
-                        <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
-                        <div class="edit" onclick="showEditSlider()"><i class="bi bi-pencil-fill"></i></div>
-                        <div class="delete"><i class="bi bi-trash3-fill"></i></div>
-                    </div> 
-                </div>
-                <div class="product">
-                    <p class="product-id">0001</p>
-                    <p class="product-name">Pepsi - L</p>
-                    <p class="product-type">Beverages</p>
-                    <p class="product-unitprice">LKR 550</p>
-                    <div class="actions">
-                        <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
-                        <div class="edit" onclick="showEditSlider()"><i class="bi bi-pencil-fill"></i></div>
-                        <div class="delete"><i class="bi bi-trash3-fill"></i></div>
-                    </div> 
-                </div>
-                <div class="product">
-                    <p class="product-id">0001</p>
-                    <p class="product-name">Pepsi - L</p>
-                    <p class="product-type">Beverages</p>
-                    <p class="product-unitprice">LKR 550</p>
-                    <div class="actions">
-                        <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
-                        <div class="edit" onclick="showEditSlider()"><i class="bi bi-pencil-fill"></i></div>
-                        <div class="delete"><i class="bi bi-trash3-fill"></i></div>
-                    </div> 
-                </div>
-                <div class="product">
-                    <p class="product-id">0001</p>
-                    <p class="product-name">Pepsi - L</p>
-                    <p class="product-type">Beverages</p>
-                    <p class="product-unitprice">LKR 550</p>
-                    <div class="actions">
-                        <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
-                        <div class="edit" onclick="showEditSlider()"><i class="bi bi-pencil-fill"></i></div>
-                        <div class="delete"><i class="bi bi-trash3-fill"></i></div>
-                    </div> 
-                </div>
-                <div class="product">
-                    <p class="product-id">0001</p>
-                    <p class="product-name">Pepsi - L</p>
-                    <p class="product-type">Beverages</p>
-                    <p class="product-unitprice">LKR 550</p>
-                    <div class="actions">
-                        <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
-                        <div class="edit" onclick="showEditSlider()"><i class="bi bi-pencil-fill"></i></div>
-                        <div class="delete"><i class="bi bi-trash3-fill"></i></div>
-                    </div> 
-                </div>
-                <div class="product">
-                    <p class="product-id">0001</p>
-                    <p class="product-name">Pepsi - L</p>
-                    <p class="product-type">Beverages</p>
-                    <p class="product-unitprice">LKR 550</p>
-                    <div class="actions">
-                        <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
-                        <div class="edit" onclick="showEditSlider()"><i class="bi bi-pencil-fill"></i></div>
-                        <div class="delete"><i class="bi bi-trash3-fill"></i></div>
-                    </div> 
-                </div>
-                <div class="product">
-                    <p class="product-id">0001</p>
-                    <p class="product-name">Pepsi - L</p>
-                    <p class="product-type">Beverages</p>
-                    <p class="product-unitprice">LKR 550</p>
-                    <div class="actions">
-                        <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
-                        <div class="edit" onclick="showEditSlider()"><i class="bi bi-pencil-fill"></i></div>
-                        <div class="delete"><i class="bi bi-trash3-fill"></i></div>
-                    </div> 
-                </div>
-                <div class="product">
-                    <p class="product-id">0001</p>
-                    <p class="product-name">Pepsi - L</p>
-                    <p class="product-type">Beverages</p>
-                    <p class="product-unitprice">LKR 550</p>
-                    <div class="actions">
-                        <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
-                        <div class="edit" onclick="showEditSlider()"><i class="bi bi-pencil-fill"></i></div>
-                        <div class="delete"><i class="bi bi-trash3-fill"></i></div>
-                    </div> 
-                </div>
-                <div class="product">
-                    <p class="product-id">0001</p>
-                    <p class="product-name">Pepsi - L</p>
-                    <p class="product-type">Beverages</p>
-                    <p class="product-unitprice">LKR 550</p>
-                    <div class="actions">
-                        <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
-                        <div class="edit" onclick="showEditSlider()"><i class="bi bi-pencil-fill"></i></div>
-                        <div class="delete"><i class="bi bi-trash3-fill"></i></div>
-                    </div> 
-                </div>
-                <div class="product">
-                    <p class="product-id">0001</p>
-                    <p class="product-name">Pepsi - L</p>
-                    <p class="product-type">Beverages</p>
-                    <p class="product-unitprice">LKR 550</p>
-                    <div class="actions">
-                        <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
-                        <div class="edit" onclick="showEditSlider()"><i class="bi bi-pencil-fill"></i></div>
-                        <div class="delete"><i class="bi bi-trash3-fill"></i></div>
-                    </div> 
-                </div>
-                <div class="product">
-                    <p class="product-id">0001</p>
-                    <p class="product-name">Pepsi - L</p>
-                    <p class="product-type">Beverages</p>
-                    <p class="product-unitprice">LKR 5500</p>
-                    <div class="actions">
-                        <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
-                        <div class="edit" onclick="showEditSlider()"><i class="bi bi-pencil-fill"></i></div>
-                        <div class="delete"><i class="bi bi-trash3-fill"></i></div>
-                    </div> 
-                </div>
-            </div>
-        </div>
-        
-        
+                <%
+                    }
+                      }
+                        else{
+                %>
+                <p>
+                    <span class="header-top" style="margin-left:500px"> No Food items found</span>
+                </p>
+
+                <%
+                    }
+                %>
+
+
         
          <!-- Slider Add Item Form -->
         <div class="slider" id="addItemSlider">
