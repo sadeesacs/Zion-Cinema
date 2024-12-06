@@ -1,7 +1,6 @@
 package DAO;
 import Db.dbcon;
-import Modal.CustomerInquiries;
-import Modal.Customers;
+import model.Customers;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

@@ -1,6 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="DAO.CustomersDAO" %>
-<%@ page import="Modal.Customers"%>
+<%@ page import="model.Customers"%>
 <%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html>

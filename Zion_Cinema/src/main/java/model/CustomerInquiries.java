@@ -1,4 +1,4 @@
-package Modal;
+package model;
 
 public class CustomerInquiries {
     private int InquiryID;
