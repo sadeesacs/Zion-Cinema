@@ -41,7 +41,7 @@ public class FoodMenuDAO {
                 food.setFoodID(rs.getInt("FoodID"));
                 food.setName(rs.getString("Name"));
                 food.setType(rs.getString("Type"));
-                food.setPrice(rs.getFloat("Price"));
+                food.setPrice(rs.getDouble("Price"));
 
                Food.add(food);
             }

@@ -4,12 +4,12 @@ public class FoodMenu {
     private int FoodID;
     private String Name;
     private String Type;
-    private float Price;
+    private double Price;
 
     public FoodMenu() {
     }
 
-    public FoodMenu(int FoodID, String Name, String Type, float Price) {
+    public FoodMenu(int FoodID, String Name, String Type, double Price) {
         this.FoodID = FoodID;
         this.Name = Name;
         this.Type = Type;
@@ -33,10 +33,10 @@ public class FoodMenu {
     public void setType(String type) {
         Type = type;
     }
-    public float getPrice() {
+    public double getPrice() {
         return Price;
     }
-    public void setPrice(float price) {
+    public void setPrice(double price) {
         Price = price;
     }
 }
