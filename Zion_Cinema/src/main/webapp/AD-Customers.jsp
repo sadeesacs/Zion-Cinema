@@ -98,7 +98,7 @@
 
                     <%
                         // Fetching the list of Customer inquiries
-                        List<Customers> customers = CustomersDAO.getAllInquiries();
+                        List<Customers> customers = CustomersDAO.getAllCustomers();
                         // Loop to display data
                         if (!customers.isEmpty()) {
                             for (Customers user : customers) {

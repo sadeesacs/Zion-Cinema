@@ -2,6 +2,7 @@
 <%@page import="DAO.FoodMenuDAO" %>
 <%@ page import="model.FoodMenu"%>
 <%@ page import="java.util.List" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -111,7 +112,7 @@
 
                 <%
                     // Fetching the list of Customer inquiries
-                    List<FoodMenu> Food = FoodMenuDAO.getAllInquiries();
+                    List<FoodMenu> Food = FoodMenuDAO.getAllFood();
                     //Loop to display data
                     if (!Food.isEmpty()) {
                         for (FoodMenu food : Food) {
@@ -153,7 +154,7 @@
                    </div>
                </div>
 
-           <form>
+           <form action="AddFood" method="post" enctype="multipart/form-data">
                <div class="slider-form">
                    
                    <div class="form-label" style="margin-top: 30px;">
@@ -185,13 +186,13 @@
                    <div class="image-select">
                        <label class="custom-file-upload">
                            <img src="images/icons/Upload.png" class="img-3" />
-                           <input type="file" accept=".jpeg, .webp, .png" />
+                           <input type="file" accept=".jpeg, .webp, .png" name="image" />
                        </label>
                        <div class="div-20">Drag your images/icons here</div>
                        <div class="div-21">(Only *.jpeg, *.webp and *.png images/icons will be accepted)</div>
                    </div>
 
-                   <div class="slider-endhline"  >
+                   <div class="slider-endhline">
                        <hr size="2" color="#F5C51B" >
                    </div>
 

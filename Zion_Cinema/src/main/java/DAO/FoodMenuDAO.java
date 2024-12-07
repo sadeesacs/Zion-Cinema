@@ -8,7 +8,7 @@ import java.util.List;
 public class FoodMenuDAO {
 
     // Method to retrieve all customer inquiries from the database
-    public static List<FoodMenu> getAllInquiries() {
+    public static List<FoodMenu> getAllFood() {
         List<FoodMenu> Food = new ArrayList<>();
         Connection connection = null;
         PreparedStatement stmt = null;

@@ -7,7 +7,7 @@ import java.util.List;
 
 public class CustomersDAO {
 
-    public static List<Customers> getAllInquiries() {
+    public static List<Customers> getAllCustomers() {
         List<Customers> Customer = new ArrayList<>();
         Connection connection = null;
         PreparedStatement stmt = null;
