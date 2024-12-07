@@ -62,4 +62,52 @@ public class FoodMenuDAO {
 
         return Food;
     }
+
+
+    public boolean addFood(String name,String type, double price, String imageName) {
+        Connection connection = null;
+        PreparedStatement stmt = null;
+
+        try {
+            // Establish database connection
+            connection = dbcon.connect();
+
+            // Check if connection is successful
+            if (connection == null) {
+                System.out.println("Database connection failed");
+                return false;
+            }
+
+            // Prepare SQL insert statement
+            String query = "INSERT INTO fooditem (Name,Type, Price, Food_Image) VALUES (?,?,?,?)";
+            stmt = connection.prepareStatement(query);
+
+            // Set parameters
+            stmt.setString(1,name );
+            stmt.setString(2, type);
+            stmt.setDouble(3, price);
+            stmt.setString(4, imageName);
+
+            // Execute the insert
+            int rowsAffected = stmt.executeUpdate();
+
+            // Return true if at least one row was inserted
+            return rowsAffected > 0;
+
+        } catch (SQLException e) {
+            System.out.println("Error adding food item: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        } finally {
+            // Properly close database resources
+            try {
+                if (stmt != null) stmt.close();
+                if (connection != null) connection.close();
+            } catch (SQLException e) {
+                System.out.println("Error closing database resources: " + e.getMessage());
+            }
+        }
+
+
+    }
 }

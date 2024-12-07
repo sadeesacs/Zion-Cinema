@@ -160,13 +160,13 @@
                    <div class="form-label" style="margin-top: 30px;">
                        <label for="product-name">Food Item Name</label>
                    </div>
-                   <input class="form-pname" type="text"/>
+                   <input class="form-pname" type="text" name="name" placeholder="ADD Food Item Name"/>
                    
                    <div class="form-label" style="margin-top: 130px;">
                        <label for="product-category">Food Type</label>
                    </div>
                    <div class="cat-select">
-                       <select>
+                       <select name="type">
                            <option value="Popcorn">Popcorn</option>
                            <option value="Beverages">Beverages</option>
                            <option value="Coffee">Coffee</option>
@@ -178,7 +178,7 @@
                    <div class="form-label" style="margin-top: 220px;">
                        <label for="product-price">Unit Price</label>
                    </div>
-                   <input class="form-pprice" type="text"/>
+                   <input class="form-pprice" type="text" name="price" placeholder="ADD Food Item Price"/>
                    
                    <div class="form-label" style="margin-top: 330px;">
                        <label for="product-image">Food Item Image</label>
