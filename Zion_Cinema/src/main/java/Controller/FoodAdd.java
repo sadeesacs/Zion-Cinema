@@ -22,6 +22,7 @@ public class FoodAdd extends HttpServlet {
         String priceInput = request.getParameter("price");
 
         if (name == null || name.isEmpty() || type == null || type.isEmpty()) {
+            response.getWriter().println("Error: Name and Type cannot be empty.");
             return;
         }
 
@@ -29,21 +30,26 @@ public class FoodAdd extends HttpServlet {
         try {
             price = Double.parseDouble(priceInput);
             if (price <= 0) {
+                response.getWriter().println("Error: Price must be a positive number.");
                 return;
             }
         } catch (NumberFormatException e) {
+            response.getWriter().println("Error: Price must be a valid number.");
             return;
         }
 
+        //Fetch image by using name attribute of HTML
         Part filePart = request.getPart("image");
+
+
         if (filePart == null || filePart.getSize() == 0) {
             response.getWriter().println("Error: Please upload a valid image.");
             return;
         }
 
+
         //Get image file name
         String imageName = filePart.getSubmittedFileName();
-        String uploadPath = getServletContext().getRealPath("/images/Food/") + imageName;
         System.out.println("Selected image is " + imageName);
 
         //Getting path to Re Upload image into image folder
@@ -58,8 +64,6 @@ public class FoodAdd extends HttpServlet {
             FileOutputStream fos = new FileOutputStream(uploadpath);
             InputStream is = filePart.getInputStream();
 
-        try (FileOutputStream fos = new FileOutputStream(uploadPath);
-             InputStream is = filePart.getInputStream()) {
             byte[] data = new byte[is.available()];
             is.read(data);
             fos.write(data);
@@ -70,11 +74,6 @@ public class FoodAdd extends HttpServlet {
         }
 
 
-        } catch (IOException e) {
-            e.printStackTrace();
-            response.getWriter().println("Error: Failed to upload the image.");
-            return;
-        }
 
         // Save to database
         try {
