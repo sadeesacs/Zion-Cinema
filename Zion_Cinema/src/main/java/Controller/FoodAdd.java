@@ -22,7 +22,6 @@ public class FoodAdd extends HttpServlet {
         String priceInput = request.getParameter("price");
 
         if (name == null || name.isEmpty() || type == null || type.isEmpty()) {
-            response.getWriter().println("Error: Name and Type cannot be empty.");
             return;
         }
 
@@ -30,29 +29,47 @@ public class FoodAdd extends HttpServlet {
         try {
             price = Double.parseDouble(priceInput);
             if (price <= 0) {
-                response.getWriter().println("Error: Price must be a positive number.");
                 return;
             }
         } catch (NumberFormatException e) {
-            response.getWriter().println("Error: Price must be a valid number.");
             return;
         }
 
-        // Handle file upload
         Part filePart = request.getPart("image");
         if (filePart == null || filePart.getSize() == 0) {
             response.getWriter().println("Error: Please upload a valid image.");
             return;
         }
 
+        //Get image file name
         String imageName = filePart.getSubmittedFileName();
         String uploadPath = getServletContext().getRealPath("/images/Food/") + imageName;
+        System.out.println("Selected image is " + imageName);
+
+        //Getting path to Re Upload image into image folder
+        // change file path on yor pc
+        String uploadpath = "/Users/venurakaranasinghe/Library/CloudStorage/OneDrive-NSBM/2 nd year/1st semester/java/Project/JavaProject_Group-U/Zion_Cinema/src/main/webapp/images/Food/"+imageName;
+        System.out.println("file path is"+uploadpath);
+
+
+
+        try {
+            //Uploading image to image folder
+            FileOutputStream fos = new FileOutputStream(uploadpath);
+            InputStream is = filePart.getInputStream();
 
         try (FileOutputStream fos = new FileOutputStream(uploadPath);
              InputStream is = filePart.getInputStream()) {
             byte[] data = new byte[is.available()];
             is.read(data);
             fos.write(data);
+            fos.close();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
         } catch (IOException e) {
             e.printStackTrace();
             response.getWriter().println("Error: Failed to upload the image.");
