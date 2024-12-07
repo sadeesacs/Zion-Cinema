@@ -177,7 +177,7 @@
                    <div class="form-label" style="margin-top: 220px;">
                        <label for="product-price">Unit Price</label>
                    </div>
-                   <input class="form-price" type="text"/>
+                   <input class="form-pprice" type="text"/>
                    
                    <div class="form-label" style="margin-top: 330px;">
                        <label for="product-image">Food Item Image</label>
