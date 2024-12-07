@@ -9,11 +9,10 @@ import jakarta.servlet.http.Part;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import Db.dbcon;
 
 @MultipartConfig
 @WebServlet("/AddFood")
-public class FoodImageAdd extends HttpServlet {
+public class FoodAdd extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("hello venuthum");
 
