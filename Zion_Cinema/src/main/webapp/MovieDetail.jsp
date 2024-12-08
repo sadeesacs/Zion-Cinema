@@ -1,4 +1,17 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="model.MovieDetail" %>
+<%@ page import="model.Showtime" %>
+<%@ page import="java.util.List" %>
+
+<%
+    MovieDetail movieDetail = (MovieDetail) request.getAttribute("movieDetail");
+    List<String> genres = (List<String>) request.getAttribute("genres");
+    List<Showtime> closestDates = (List<Showtime>) request.getAttribute("closestDates");
+    List<String> timesForDate = (List<String>) request.getAttribute("timesForDate");
+    String selectedDate = (String) request.getAttribute("selectedDate");
+    List<MovieDetail> topNowShowing = (List<MovieDetail>) request.getAttribute("topNowShowing");
+%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -8,20 +21,19 @@
 
         <link rel="stylesheet" href="StyleSheet2.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
     </head>
     <body>
         <!-- Header -->
         <div class="header-container">
 
             <!--Zion Cinema logo-->
-            <img src="images/logo.png">
+            <img src="images//icons/logo.png">
             <a href="HomePage.html" class="logo-name">Zion Cinema</a>
 
             <!--Navigation Bar-->
             <div class="nav">
                 <a href="HomePage.html">Home</a>
-                <span><a href="Movie.html">Movies</a></span>
+                <span><a href="MovieListingServlet">Movies</a></span>
                 <a href="About.html">About us</a>
                 <a href="Contact.html">Contact</a>
                 <a href="FAQ.html">FAQ</a>
@@ -36,48 +48,45 @@
             </a>
         </div>
 
-
-
+        
         <!-- Movie Detail Container -->
         <div class="Movie-detail-container">
-            <img src="images/pic1.png">
+            <img src="<%= movieDetail.getBanner() %>" alt="Poster">
             <div class="gradient"></div>
-            <img src="images/pic2.png" class="vertical-banner-detail">
-            <div class="movie-name">Pirates of the Caribbean : Dead Men Tell No Tales</div>
+            <img src="<%= movieDetail.getPoster() %>" alt="Banner" class="vertical-banner-detail">
+            <div class="movie-name"><%= movieDetail.getName() %></div>
             <ul class="movie-detail-genre">
-                    <li>Action</li>
-                    <li>Adventure</li>
-                    <li>Horror</li>
-                    <li>Comedy</li>
-                </ul>
-                <p class="movie-desc">Embark on the final adventure with Captain Jack Sparrow as he faces the vengeful Captain Salazar, who has escaped from the Devil’s Triangle with a deadly ghost crew. With the legendary Trident of Poseidon as the key to survival.</p>
-                <div class="bi-stopwatch">
-                    <span>2h 30m</span>
-                </div>
-                <a href="https://www.youtube.com/" class="but-trailer">
-                    <div>Watch Trailer</div>
-                </a>
+                <% for (String genre : genres) { %>
+                    <li><%= genre %></li>
+                <% } %>
+            </ul>
+            <p class="movie-desc"><%= movieDetail.getDescription() %></p>
+            <div class="bi-stopwatch">
+                <span><%= movieDetail.getDuration() %></span>
+            </div>    
+            <a href="<%= movieDetail.getTrailer() %>" class="but-trailer">
+                <div>Watch Trailer</div>
+            </a>
         </div>
 
-
+                
         <!-- Date and Time Selection Container -->
         <div class="selection-container">
-            
             <div class="date-selection">
                 <span>Date</span>
-                <ul>
-                    <li>Mon</li>
-                    <li>Tue</li>
-                    <li>Wed</li>
-                    <li>Thu</li>
-                    <li>Fri</li>
+                <ul class="date-ul">
+                    <% for (Showtime date : closestDates) { %>
+                        <li class="date-li"><%= new java.text.SimpleDateFormat("EEE").format(java.sql.Date.valueOf(date.getDate())) %></li>
+                    <% } %>
                 </ul>
-                <form class="date-buttons-form">
-                    <button type="button" class="date-button">26</button>
-                    <button type="button" class="date-button">27</button>
-                    <button type="button" class="date-button">28</button>
-                    <button type="button" class="date-button">29</button>
-                    <button type="button" class="date-button">30</button>
+                <form class="date-buttons-form" method="get" action="MovieDetailServlet">
+                    <% for (Showtime date : closestDates) { %>
+                        <button type="submit" name="selectedDate" value="<%= date.getDate() %>"
+                                class="date-button <%= selectedDate != null && selectedDate.equals(date.getDate()) ? "active" : "" %>">
+                            <%= new java.text.SimpleDateFormat("dd").format(java.sql.Date.valueOf(date.getDate())) %>
+                        </button>
+                    <% } %>
+                    <input type="hidden" name="movieId" value="<%= movieDetail.getMovieId() %>" />
                 </form>
             </div>
 
@@ -85,16 +94,20 @@
                 <span>Time</span>
                 <div class="span-2">Zion Cinema</div>
                 <div class="time-buttons-form">
-                    <button type="button" class="time-button">10.00 AM</button>
-                    <button type="button" class="time-button">12.00 AM</button>
-                    <button type="button" class="time-button">01.00 PM</button>
+                    <% if (timesForDate != null) {
+                        for (String time : timesForDate) {
+                            String formattedTime = new java.text.SimpleDateFormat("hh:mm a").format(java.sql.Time.valueOf(time));
+                    %>
+                            <button type="button" class="time-button"><%= formattedTime %></button>
+                    <%  }
+                    } else { %>
+                        <p>No times available for the selected date.</p>
+                    <% } %>
                 </div>
             </div>
-
             <button class="book-now-button">
                 <span>Book Now</span>
             </button>
-
         </div>
 
 
@@ -102,78 +115,28 @@
 
         <!-- Movie Cards -->
         <div class="movie-cards-container">
-            <!-- Card 1 -->
-            <div class="movie-card">
-                <img src="images/venommovie.png" alt="Venom: The Last Dance">
-                <h3>Venom: The Last Dance</h3>
-                <div class="movie-genre">
-                    <span>Genre : </span>
-                    <span>Adventure</span>
-                </div>
-                <div class="movie-info">
-                    <span>2024</span> <span>NR</span> <span>1h 48m</span>
-                </div>
-                <div class="card-buttons">
-                    <button class="get-tickets-button"><i class="bi bi-ticket-star"></i> Get Tickets</button>
-                    <button class="view-details-button">View Details</button>
-                </div>
-            </div>
-        
-            <!-- Card 2 -->
-            <div class="movie-card">
-                <img src="images/gladiatormovie.png" alt="Gladiator II">
-                <h3>Gladiator II</h3>
-                <div class="movie-genre">
-                    <span>Genre : </span>
-                    <span>Action</span>
-                </div>                
-                <div class="movie-info">
-                    <span>2024</span> 
-                    <span>PG</span> 
-                    <span>2h 15m</span>
-                </div>
-                <div class="card-buttons">
-                    <button class="get-tickets-button">Get Tickets</button>
-                    <button class="view-details-button">View Details</button>
-                </div>
-            </div>
-        
-            <!-- Card 3 -->
-            <div class="movie-card">
-                <img src="images/sonicmovie.png" alt="Sonic 3">
-                <h3>Sonic 3</h3>
-                <div class="movie-genre">
-                    <span>Genre : </span>
-                    <span>Adventure</span>
-                </div>                <div class="movie-info">
-                    <span>2024</span> <span>NR</span> <span>1h 30m</span>
-                </div>
-                <div class="card-buttons">
-                    <button class="get-tickets-button"> Get Tickets</button>
-                    <button class="view-details-button">View Details</button>
-                </div>
-            </div>
-        
-            <!-- Card 4 -->
-            <div class="movie-card">
-                <img src="images/robotmovie.png" alt="The Wild Robot">
-                <h3>The Wild Robot</h3>
-                <div class="movie-genre">
-                    <span>Genre : </span>
-                    <span>Adventure</span>
-                </div>                
-                <div class="movie-info">
-                    <span>2024</span> <span>NR</span> <span>1h 55m</span>
-                </div>
-                <div class="card-buttons">
-                    <button class="get-tickets-button"> Get Tickets</button>
-                    <button class="view-details-button">View Details</button>
-                </div>
-            </div>
+            <% if (topNowShowing != null && !topNowShowing.isEmpty()) {
+                for (MovieDetail movie : topNowShowing) { %>
+                    <div class="movie-card">
+                        <img src="<%= movie.getPoster() %>" alt="<%= movie.getName() %>">
+                        <h3><%= movie.getName() %></h3>
+                        <div class="movie-genre">
+                            <span>Genre: </span>
+                            <span><%= movie.getStatus() %></span>
+                        </div>
+                        <div class="movie-info">
+                            <span><%= movie.getDuration() %></span>
+                        </div>
+                        <div class="card-buttons">
+                            <button class="get-tickets-button"><a href="MovieDetailServlet?movieId=<%= movie.getMovieId() %>">Get Tickets</a></button>
+                            <button class="view-details-button"><a href="<%= movie.getTrailer() %>" target="_blank">Watch Trailer</a></button>
+                        </div>
+                    </div>
+            <%  }
+            } else { %>
+                <p>No other movies currently showing.</p>
+            <% } %>
         </div>
-
-
-
 
         <!-- Footer  -->
         <footer class="footer-container">
@@ -184,10 +147,10 @@
                     and comfortable seating. Enjoy the latest blockbusters and timeless classics like never before!
                 </p>
                 <div class="social-icons">
-                    <a href="https://web.facebook.com"><img src="images/fbicon.png"></a>
-                    <a href="https://www.instagram.com/"><img src="images/instaicon.png"></a>
-                    <a href="https://x.com"><img src="images/xicon.png"></a>
-                    <a href="https://www.tiktok.com"><img src="images/tiktokicon.png"></a>
+                    <a href="https://web.facebook.com"><img src="images/icons/fbicon.png"></a>
+                    <a href="https://www.instagram.com/"><img src="images/icons/instaicon.png"></a>
+                    <a href="https://x.com"><img src="images/icons/xicon.png"></a>
+                    <a href="https://www.tiktok.com"><img src="images/icons/tiktokicon.png"></a>
                 </div>
             </div>
         
@@ -220,8 +183,6 @@
             </div>
         </footer>
         
-        
-
         <script>
             // Select all buttons
             const buttons = document.querySelectorAll('.date-button');
@@ -246,6 +207,5 @@
                 });
             });
         </script>
-
     </body>
 </html>
