@@ -9,22 +9,22 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Food Menu</title>
-        <style>.icon-button {
-            background-color: transparent;
-            border: none;
-            padding-left: 10px;
-            margin: 0;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
+        <style>
+            .icon-button {
+                background: none; /* Removes the default background */
+                border: none; /* Removes the default border */
+                padding: 0; /* Removes default padding */
+                margin: 0; /* Adjusts margin if needed */
+                cursor: pointer; /* Makes it look clickable */
+            }
 
-        .icon-button i {
-            font-size: 24px;
-            color: red;
-            transition: color 0.3s;
-        }</style>
+            .icon-button {
+                color: inherit;
+            }
+
+
+
+        </style>
         <link rel="stylesheet" href="StyleSheet10.css" />
     </head>
     <body>
@@ -139,12 +139,14 @@
                     <p class="product-unitprice">LKR <%=food.getPrice()%></p>
                     <div class="actions">
                         <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
+
                         <div class="edit" onclick="showEditSlider()"><i class="bi bi-pencil-fill"></i></div>
+
                         <form action="DeleteFood" method="post">
                             <!-- Hidden input for foodID -->
                             <input type="hidden" name="foodID" value="<%=food.getFoodID() %>" />
-                            <button class="icon-button" type="submit" name="delete">
-                                <i class="bi bi-trash3-fill delete"></i>
+                            <button class="icon-button " type="submit" name="delete">
+                                <div class="delete"><i class="bi bi-trash3-fill"></i></div>
                             </button>
                         </form>
                     </div> 

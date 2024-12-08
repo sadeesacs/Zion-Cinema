@@ -479,14 +479,14 @@ header .message-icon{
     transform: translateY(-50%); 
 }
 
+
 .delete {
     color: red;
     font-size: 18px;
     font-family: Arial, Helvetica, sans-serif;
     cursor: pointer;
-    
-}
 
+}
 .edit{
     color: #F5C51B;
     font-size: 18px;
