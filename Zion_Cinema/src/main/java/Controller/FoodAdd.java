@@ -12,8 +12,8 @@ import java.io.IOException;
 import java.io.InputStream;
 
 @MultipartConfig
-@WebServlet("/AddFood")
-public class Food extends HttpServlet {
+@WebServlet("/FoodServlet")
+public class FoodAdd extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         // Input validation
@@ -72,8 +72,6 @@ public class Food extends HttpServlet {
         catch (Exception e) {
             e.printStackTrace();
         }
-
-
 
         // Save to database
         try {
