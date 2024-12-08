@@ -140,7 +140,9 @@
                     <div class="actions">
                         <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
 
-                        <div class="edit" onclick=" populateAndSubmitForm('<%=food.getFoodID() %>'); showEditSlider();"><i class="bi bi-pencil-fill"></i></div>
+                        <div class="edit" onclick="return populateAndSubmitForm('<%=food.getFoodID() %>');">
+                            <i class="bi bi-pencil-fill"></i>
+                        </div>
 
                         <form action="DeleteFood" method="post">
                             <!-- Hidden input for foodID -->
@@ -359,13 +361,27 @@
             }
 
             function populateAndSubmitForm(foodID) {
-                // Populate hidden form fields
+                // Get references to elements
                 const form = document.getElementById('editForm');
-                form.querySelector('[name="foodID"]').value = foodID;
-                // Submit the form to the server
-                form.submit();
-            }
+                const editSlider = document.getElementById('editItemSlider');
+                const foodIDInput = form.querySelector('[name="foodID"]');
 
+                // Ensure foodID is set in the hidden input
+                if (foodIDInput) {
+                    foodIDInput.value = foodID;
+                }
+
+                // Explicitly show the edit slider
+                if (editSlider) {
+                    editSlider.classList.add('active');
+                    console.log('Edit slider should be open now');
+                } else {
+                    console.error('Edit slider element not found');
+                }
+
+                // Prevent default form submission
+                return false;
+            }
 
         </script>
         
