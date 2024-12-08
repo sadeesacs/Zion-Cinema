@@ -18,6 +18,8 @@ public class FoodEdit  extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         // Input validation
+        String foodID = request.getParameter("foodID");
+        System.out.println("food id is "+foodID);
         String name = request.getParameter("name");
         String type = request.getParameter("type");
         String priceInput = request.getParameter("price");
@@ -77,7 +79,7 @@ public class FoodEdit  extends HttpServlet {
         // Save to database
         try {
             FoodMenuDAO foodMenuDAO = new FoodMenuDAO();
-            boolean success = foodMenuDAO.editFood(name, type, price, imageName);
+            boolean success = foodMenuDAO.editFood(foodID,name, type, price, imageName);
 
             if (success) {
                 response.sendRedirect("AD-FoodMenu.jsp");

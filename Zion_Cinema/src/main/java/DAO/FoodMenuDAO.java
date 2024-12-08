@@ -153,7 +153,7 @@ public class FoodMenuDAO {
     }
 
 
-    public boolean editFood(String name,String type, double price, String imageName) {
+    public boolean editFood(String foodID, String name,String type, double price, String imageName) {
         Connection connection = null;
         PreparedStatement stmt = null;
 
@@ -168,7 +168,7 @@ public class FoodMenuDAO {
             }
 
             // Prepare SQL insert statement
-            String query = " UPDATE fooditem SET Name = ?, Type = ?, Price = ?, Food_Image = ? WHERE Name = ?;";
+            String query = " UPDATE fooditem SET Name = ?, Type = ?, Price = ?, Food_Image = ? WHERE FoodID = ?;";
             stmt = connection.prepareStatement(query);
 
             // Set parameters
@@ -176,6 +176,7 @@ public class FoodMenuDAO {
             stmt.setString(2, type);
             stmt.setDouble(3, price);
             stmt.setString(4, imageName);
+            stmt.setString(5, foodID);
 
             // Execute the insert
             int rowsAffected = stmt.executeUpdate();

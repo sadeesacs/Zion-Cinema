@@ -140,7 +140,7 @@
                     <div class="actions">
                         <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
 
-                        <div class="edit" onclick="showEditSlider()"><i class="bi bi-pencil-fill"></i></div>
+                        <div class="edit" onclick="populateEditForm('<%=food.getFoodID() %>'); showEditSlider();"><i class="bi bi-pencil-fill"></i></div>
 
                         <form action="DeleteFood" method="post">
                             <!-- Hidden input for foodID -->
@@ -238,19 +238,21 @@
                     </div>
                 </div>
 
-            <form>
+            <form action="EditFood" method="post" enctype="multipart/form-data">
                 <div class="slider-form">
-                    
+                    <!-- Hidden input for FoodID -->
+                    <input type="hidden" name="foodID" value="" />
+
                     <div class="form-label" style="margin-top: 30px;">
                        <label for="product-name">Food Item Name</label>
                    </div>
-                   <input class="form-pname" type="text"/>
+                   <input class="form-pname" type="text" name="name" placeholder="ADD Food Item Name"/>
                    
                    <div class="form-label" style="margin-top: 130px;">
                        <label for="product-category">Food Type</label>
                    </div>
                    <div class="cat-select">
-                       <select>
+                       <select name="type">
                            <option value="Popcorn">Popcorn</option>
                            <option value="Beverages">Beverages</option>
                            <option value="Coffee">Coffee</option>
@@ -262,7 +264,7 @@
                    <div class="form-label" style="margin-top: 220px;">
                        <label for="product-price">Unit Price</label>
                    </div>
-                   <input class="form-pprice" type="text"/>
+                   <input class="form-pprice" type="text" name="price" placeholder="ADD Food Item Price"/>
                    
                    <div class="form-label" style="margin-top: 330px;">
                        <label for="product-image">Food Item Image</label>
@@ -271,6 +273,7 @@
                         <label class="custom-file-upload">
                             <img class="image-edit" src="images/icons/popcorn.png" />
                             <input type="file" id="edit-food-item-image" accept=".jpeg, .webp, .png" style="display: none;" />
+                            <input type="file" id="edit-food-item-image" accept=".jpeg, .webp, .png" name="image"  />
                         </label>
                     </div>
 
@@ -279,7 +282,7 @@
                         <hr size="2" color="#F5C51B" >
                     </div>
 
-                    <button class="sbut-cancel">Cancel</button>
+                    <button class="sbut-cancel" onclick="hideEditForm()">Cancel</button>
                     <button class="sbut-save">Save Changes</button>
                 </div>
             </form>
