@@ -125,45 +125,7 @@
                     <div class="actions">
                         <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
                         <div class="edit" onclick="showEditSlider()"><i class="bi bi-pencil-fill"></i></div>
-                        <div class="delete" onclick="deleteFood(<%= food.getFoodID() %>)"><i class="bi bi-trash3-fill"></i></div>
-                        <div class="delete">
-                        <a href="DeleteFood?foodId=<%= food.getFoodID() %>" onclick="return confirm('Are you sure you want to delete this item?');">
-                            <i class="bi bi-trash3-fill"></i>
-                        </a>
-                        </div>
-
-                        <script>
-                            function confirmDelete(foodId) {
-                                if (confirm('Are you sure you want to delete this food item?')) {
-                                    fetch('DeleteFood', {
-                                        method: 'POST',
-                                        headers: {
-                                            'Content-Type': 'application/x-www-form-urlencoded'
-                                        },
-                                        body: 'foodId=' + encodeURIComponent(foodId)
-                                    })
-                                        .then(response => {
-                                            if (!response.ok) {
-                                                throw new Error('Delete failed');
-                                            }
-                                            return response.text();
-                                        })
-                                        .then(data => {
-                                            // Remove the item from the DOM
-                                            const foodItemElement = document.querySelector(`[data-food-id="${foodId}"]`);
-                                            if (foodItemElement) {
-                                                foodItemElement.remove();
-                                            }
-                                            alert('Food item deleted successfully');
-                                        })
-                                        .catch(error => {
-                                            console.error('Error:', error);
-                                            alert('Failed to delete food item');
-                                        });
-                                }
-                            }
-                        </script>
-
+                        <div class="delete"><i class="bi bi-trash3-fill"></i></div>
                     </div> 
                 </div>
                 <%
@@ -192,7 +154,7 @@
                    </div>
                </div>
 
-           <form action="FoodServlet" method="post" enctype="multipart/form-data">
+           <form action="AddFood" method="post" enctype="multipart/form-data">
                <div class="slider-form">
                    
                    <div class="form-label" style="margin-top: 30px;">

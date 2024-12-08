@@ -107,23 +107,7 @@ public class FoodMenuDAO {
                 System.out.println("Error closing database resources: " + e.getMessage());
             }
         }
-    }
 
-    // Method to delete food item
-    public static boolean deleteFood(int foodId) {
-        Connection Connection = null;
-        PreparedStatement stmt = null;
-        try {
-            Connection = dbcon.connect();
-            String sql = "DELETE FROM fooditem WHERE FoodID =?";
-            stmt = Connection.prepareStatement(sql);
-            stmt.setInt(1, foodId);
-            int rowsAffected = stmt.executeUpdate();
-            return rowsAffected > 0;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
 
+    }
 }
