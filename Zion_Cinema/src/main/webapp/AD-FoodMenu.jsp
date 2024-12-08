@@ -272,8 +272,7 @@
                    <div class="image-select">
                         <label class="custom-file-upload">
                             <img class="image-edit" src="images/icons/popcorn.png" />
-                            <input type="file" id="edit-food-item-image" accept=".jpeg, .webp, .png" style="display: none;" />
-                            <input type="file" id="edit-food-item-image" accept=".jpeg, .webp, .png" name="image"  />
+                            <input type="file" id="edit-food-item-image" accept=".jpeg, .webp, .png" style="display: none;" name="image" />
                         </label>
                     </div>
 
@@ -282,7 +281,7 @@
                         <hr size="2" color="#F5C51B" >
                     </div>
 
-                    <button class="sbut-cancel" onclick="hideEditForm()">Cancel</button>
+                    <button class="sbut-cancel">Cancel</button>
                     <button class="sbut-save">Save Changes</button>
                 </div>
             </form>
