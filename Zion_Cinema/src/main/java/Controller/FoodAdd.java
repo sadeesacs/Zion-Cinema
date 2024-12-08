@@ -73,8 +73,6 @@ public class FoodAdd extends HttpServlet {
             e.printStackTrace();
         }
 
-
-
         // Save to database
         try {
             FoodMenuDAO foodMenuDAO = new FoodMenuDAO();
