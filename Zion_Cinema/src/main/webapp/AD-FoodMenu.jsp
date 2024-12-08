@@ -140,7 +140,7 @@
                     <div class="actions">
                         <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
 
-                        <div class="edit" onclick="populateEditForm('<%=food.getFoodID() %>'); showEditSlider();"><i class="bi bi-pencil-fill"></i></div>
+                        <div class="edit" onclick=" populateAndSubmitForm('<%=food.getFoodID() %>'); showEditSlider();"><i class="bi bi-pencil-fill"></i></div>
 
                         <form action="DeleteFood" method="post">
                             <!-- Hidden input for foodID -->
@@ -238,7 +238,7 @@
                     </div>
                 </div>
 
-            <form action="EditFood" method="post" enctype="multipart/form-data">
+            <form  id="editForm" action="EditFood" method="post" enctype="multipart/form-data">
                 <div class="slider-form">
                     <!-- Hidden input for FoodID -->
                     <input type="hidden" name="foodID" value="" />
@@ -357,6 +357,16 @@
             function hideReviewSlider() {
                 document.getElementById('reviewItemsslider').classList.remove('active');
             }
+
+            function populateAndSubmitForm(foodID) {
+                // Populate hidden form fields
+                const form = document.getElementById('editForm');
+                form.querySelector('[name="foodID"]').value = foodID;
+                // Submit the form to the server
+                form.submit();
+            }
+
+
         </script>
         
         
