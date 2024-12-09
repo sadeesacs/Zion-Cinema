@@ -37,7 +37,7 @@
         <!-- Navigational Panel of the Admin Dashboard -->
         <div class="navigation">
             <ul class="nav-menu">
-                <a href="AD-Dashbaord.jsp">
+                <a href="AD-Dashboard.jsp">
                     <li class="nav-item">
                         <img src="images/icons/Dashboardicon.png"></img>
                         <span>Dashboard</span>
