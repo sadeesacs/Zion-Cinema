@@ -199,7 +199,7 @@ public class FoodMenuDAO {
         }
     }
     // View Single Food Item
-    public static FoodMenu viewFood(int foodID) {
+    public FoodMenu viewFood(int foodID) {
         FoodMenu food = null;
         Connection connection = null;
         PreparedStatement stmt = null;
