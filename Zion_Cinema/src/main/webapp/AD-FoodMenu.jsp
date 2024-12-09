@@ -283,7 +283,7 @@
                         <hr size="2" color="#F5C51B" >
                     </div>
 
-                    <button class="sbut-cancel">Cancel</button>
+                    <button class="sbut-cancel" type="button" onclick="hideEditSlider()">Cancel</button>
                     <button class="sbut-save">Save Changes</button>
                 </div>
             </form>
