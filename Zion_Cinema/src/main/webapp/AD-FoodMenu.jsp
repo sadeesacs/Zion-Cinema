@@ -331,33 +331,39 @@
                         if (food != null) {
                     %>
                     <div class="form-label" style="margin-top: 30px;">
-                    <label for="product-name">Food Item Name</label>
-                </div>
-                <div class="view-pname"><%= food.getName() %></div>
+                        <label for="product-name">Food Item Name</label>
+                    </div>
+                    <div class="view-pname"><%= food.getName() %></div>
 
-                <div class="form-label" style="margin-top: 130px;">
-                    <label for="product-category">Food Type</label>
-                </div>
-                <div class="pcat-type"><%= food.getType() %></div>
+                    <div class="form-label" style="margin-top: 130px;">
+                        <label for="product-category">Food Type</label>
+                    </div>
+                    <div class="pcat-type"><%= food.getType() %></div>
 
-                <div class="form-label" style="margin-top: 220px;">
-                    <label for="product-price">Unit Price</label>
-                </div>
-                <div class="view-pprice">LKR <%= food.getPrice() %></div>
+                    <div class="form-label" style="margin-top: 220px;">
+                        <label for="product-price">Unit Price</label>
+                    </div>
+                    <div class="view-pprice">LKR <%= food.getPrice() %></div>
 
-                <div class="form-label" style="margin-top: 330px;">
-                    <label for="product-image">Food Item Image</label>
-                </div>
-                <img class="image-display" src="images/Food/<%= food.getFood_Image() %>">
+                    <div class="form-label" style="margin-top: 330px;">
+                        <label for="product-image">Food Item Image</label>
+                    </div>
+                    <img class="image-display" src="images/Food/<%= food.getFood_Image() %>">
 
-                <div class="slider-endhline">
-                    <hr size="2" color="#F5C51B">
+                    <div class="slider-endhline">
+                        <hr size="2" color="#F5C51B">
+                    </div>
+                    <button class="sbut-done" onclick="hideReviewSlider()">Done</button>
+                    <%
+                    } else {
+                    %>
+                    <div class="error-message">No food item found</div>
+                    <%
+                            }
+                        }
+                    %>
+
                 </div>
-                <button class="sbut-done" onclick="hideReviewSlider()">Done</button>
-                <% } else { %>
-                <div class="error-message">No food item found</div>
-                <% } %>
-             </div>
         </div>
 
 
