@@ -3,7 +3,6 @@
 <%@ page import="model.FoodMenu"%>
 <%@ page import="java.util.List" %>
 
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -22,6 +21,8 @@
             .icon-button {
                 color: inherit;
             }
+
+
 
         </style>
         <link rel="stylesheet" href="StyleSheet10.css" />
@@ -290,58 +291,45 @@
             
             
         <!-- Slider review Item Form -->
-                <%
-    // Retrieve the attributes set by the servlet
-    FoodMenu food = (FoodMenu) request.getAttribute("food");
-    Integer foodID = (Integer) request.getAttribute("foodID");
-%>
         <div class="slider" id="reviewItemsslider">
             <div class="slider-container">
 
                 <div class="slider-header">
-                        <div class="Add">
-                            <a href="FoodView.java?foodID=<%= request.getAttribute("foodID") %>" style="text-decoration: none; color: inherit;">View Food Item</a>
-                        </div>
-                        </div>
+                        <div class="Add">View Food Item</div>
                     <img class="close" srcset="images/icons/Cancelslide.png" class="img" onclick="hideReviewSlider()" />
                     <div class="slider-hline" >
                         <hr size="2" color="#F5C51B" >
                     </div>
                 </div>
 
-
-            <% if (food != null) { %>
                 <div class="slider-form">
                     
                     <div class="form-label" style="margin-top: 30px;">
                        <label for="product-name">Food Item Name</label>
                    </div>
-                   <div class="view-pname"><%= food.getName() %></div>
+                   <div class="view-pname">Sweet Popcron Large</div>
                    
                    <div class="form-label" style="margin-top: 130px;">
                        <label for="product-category">Food Type</label>
                    </div>
-                   <div class="pcat-type"><%= food.getType() %></div>
+                   <div class="pcat-type">Popcorn</div>
                    
                    <div class="form-label" style="margin-top: 220px;">
                        <label for="product-price">Unit Price</label>
                    </div>
-                   <div class="view-pprice">LKR <%= food.getPrice() %></div>
+                   <div class="view-pprice">LKR 3500</div>
                    
                    <div class="form-label" style="margin-top: 330px;">
                        <label for="product-image">Food Item Image</label>
                    </div>
-                   <img class="image-display" src="<img class="image-display" src="images/Food/<%= food.getFood_Image() %>" alt="Food Image">
-
+                   <img class="image-display" src="images/icons/popcorn.png">
+                   
                     <div class="slider-endhline"  >
                         <hr size="2" color="#F5C51B" >
                     </div>
 
                     <button class="sbut-done" onclick="hideReviewSlider()">Done</button>
                 </div>
-                <% } else { %>
-                <p>No food item found for the provided ID.</p>
-                <% } %>
         </div>
 
 

@@ -5,7 +5,6 @@ public class FoodMenu {
     private String Name;
     private String Type;
     private double Price;
-    private String Food_Image;
 
     public FoodMenu() {
     }
@@ -39,11 +38,5 @@ public class FoodMenu {
     }
     public void setPrice(double price) {
         Price = price;
-    }
-    public String getFood_Image() {
-        return Food_Image;
-    }
-    public void setFood_Image(String food_Image) {
-        Food_Image = food_Image;
     }
 }
