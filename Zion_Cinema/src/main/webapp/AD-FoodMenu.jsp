@@ -138,10 +138,7 @@
                     <p class="product-type"><%=food.getType() %></p>
                     <p class="product-unitprice">LKR <%= String.format("%.2f", food.getPrice()) %></p>
                     <div class="actions">
-
-                        <div class="view" onclick="return populateAndSubmitForm('<%=food.getFoodID() %>');">
-                            <i class="bi bi-eye-fill"></i>
-                        </div>
+                        <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
 
                         <div class="edit" onclick="return populateAndSubmitForm('<%=food.getFoodID() %>');">
                             <i class="bi bi-pencil-fill"></i>
@@ -291,73 +288,54 @@
                 </div>
             </form>
         </div>
+            
+            
+        <!-- Slider review Item Form -->
+        <div class="slider" id="reviewItemsslider">
+            <div class="slider-container">
 
-
-            <!-- Slider review Item Form -->
-            <div class="slider" id="reviewItemSlider">
-                <div class="slider-container">
-
-                    <% FoodMenu food = (FoodMenu) request.getAttribute("food"); %>
-
-                    <div class="slider-header">
+                <div class="slider-header">
                         <div class="Add">View Food Item</div>
-                        <img class="close" src="images/icons/Cancelslide.png" class="img" onclick="hideReviewSlider()" />
-                        <div class="slider-hline">
-                            <hr size="2" color="#F5C51B">
-                        </div>
+                    <img class="close" srcset="images/icons/Cancelslide.png" class="img" onclick="hideReviewSlider()" />
+                    <div class="slider-hline" >
+                        <hr size="2" color="#F5C51B" >
+                    </div>
+                </div>
+
+                <div class="slider-form">
+                    
+                    <div class="form-label" style="margin-top: 30px;">
+                       <label for="product-name">Food Item Name</label>
+                   </div>
+                   <div class="view-pname">Sweet Popcron Large</div>
+                   
+                   <div class="form-label" style="margin-top: 130px;">
+                       <label for="product-category">Food Type</label>
+                   </div>
+                   <div class="pcat-type">Popcorn</div>
+                   
+                   <div class="form-label" style="margin-top: 220px;">
+                       <label for="product-price">Unit Price</label>
+                   </div>
+                   <div class="view-pprice">LKR 3500</div>
+                   
+                   <div class="form-label" style="margin-top: 330px;">
+                       <label for="product-image">Food Item Image</label>
+                   </div>
+                   <img class="image-display" src="images/icons/popcorn.png">
+                   
+                    <div class="slider-endhline"  >
+                        <hr size="2" color="#F5C51B" >
                     </div>
 
-                    <!-- Form starts here -->
-                    <form action="viewfood" method="get" enctype="multipart/form-data" class="slider-form">
-                        <!-- Hidden input to send the food ID -->
-                        <input type="hidden" name="foodID" value="<%= food.getFoodID() %>">
-
-                        <div class="form-label" style="margin-top: 30px;">
-                            <label for="product-name">Food Item Name</label>
-                        </div>
-                        <div class="view-pname">
-                            <input type="text" name="name" value="<%= food.getName() %>" readonly>
-                        </div>
-
-                        <div class="form-label" style="margin-top: 130px;">
-                            <label for="product-category">Food Type</label>
-                        </div>
-                        <div class="pcat-type">
-                            <input type="text" name="type" value="<%= food.getType() %>" readonly>
-                        </div>
-
-                        <div class="form-label" style="margin-top: 220px;">
-                            <label for="product-price">Unit Price</label>
-                        </div>
-                        <div class="view-pprice">
-                            <input type="text" name="price" value="LKR <%= food.getPrice() %>" readonly>
-                        </div>
-
-                        <div class="form-label" style="margin-top: 330px;">
-                            <label for="product-image">Food Item Image</label>
-                        </div>
-                        <div class="image-display">
-                            <img src="images/Food/<%= food.getFood_Image() %>" alt="Food Image">
-                        </div>
-
-                        <div class="slider-endhline">
-                            <hr size="2" color="#F5C51B">
-                        </div>
-
-                        <!-- Submit or cancel buttons -->
-                        <div class="form-buttons">
-                            <button type="button" class="sbut-done" onclick="hideReviewSlider()">Done</button>
-                        </div>
-                    </form>
-                    <!-- Form ends here -->
+                    <button class="sbut-done" onclick="hideReviewSlider()">Done</button>
                 </div>
-            </div>
+        </div>
 
 
-
-
-
-            <script>
+            
+            
+        <script>
             function showSlider() {
                 document.getElementById('addItemSlider').classList.add('active');
             }
@@ -377,11 +355,11 @@
             }
 
             function showReviewSlider() {
-                document.getElementById('reviewItemSlider').classList.add('active');
+                document.getElementById('reviewItemsslider').classList.add('active');
             }
 
             function hideReviewSlider() {
-                document.getElementById('reviewItemSlider').classList.remove('active');
+                document.getElementById('reviewItemsslider').classList.remove('active');
             }
 
             function populateAndSubmitForm(foodID) {
