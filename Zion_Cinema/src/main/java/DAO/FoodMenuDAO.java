@@ -199,5 +199,49 @@ public class FoodMenuDAO {
         }
     }
 
+    public static FoodMenu viewFood(int foodID) {
+        FoodMenu food = null;
+        Connection connection = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            // Establish database connection
+            connection = dbcon.connect();
+
+            // Check if connection is successful
+            if (connection == null) {
+                System.out.println("Database connection failed");
+                return null;
+            }
+
+            String query = "SELECT FoodID, Name, Type, Price, Food_Image FROM fooditem WHERE FoodID = ?";
+            stmt = connection.prepareStatement(query);
+            stmt.setInt(1, foodID);
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                food = new FoodMenu();
+                food.setFoodID(rs.getInt("FoodID"));
+                food.setName(rs.getString("Name"));
+                food.setType(rs.getString("Type"));
+                food.setPrice(rs.getDouble("Price"));
+                food.setFood_Image(rs.getString("Food_Image"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+                if (connection != null) connection.close();
+            } catch (SQLException e) {
+                System.out.println("Error closing database resources: " + e.getMessage());
+            }
+        }
+
+        return food;
+    }
+
 
 }
