@@ -5,15 +5,17 @@ public class FoodMenu {
     private String Name;
     private String Type;
     private double Price;
+    private String Food_Image;
 
     public FoodMenu() {
     }
 
-    public FoodMenu(int FoodID, String Name, String Type, double Price) {
+    public FoodMenu(int FoodID, String Name, String Type, double Price, String Food_Image) {
         this.FoodID = FoodID;
         this.Name = Name;
         this.Type = Type;
         this.Price = Price;
+        this.Food_Image = Food_Image;
     }
     public int getFoodID() {
         return FoodID;
@@ -38,5 +40,11 @@ public class FoodMenu {
     }
     public void setPrice(double price) {
         Price = price;
+    }
+    public String getFood_Image() {
+        return Food_Image;
+    }
+    public void setFood_Image(String food_Image) {
+        Food_Image = food_Image;
     }
 }

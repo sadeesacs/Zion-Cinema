@@ -138,7 +138,21 @@
                     <p class="product-type"><%=food.getType() %></p>
                     <p class="product-unitprice">LKR <%= String.format("%.2f", food.getPrice()) %></p>
                     <div class="actions">
-                        <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
+
+
+                        <div class="view" onclick="viewFormID('<%=food.getFoodID() %>');">
+                            <i class="bi bi-eye-fill"></i>
+                        </div>
+
+
+                        <form action="viewfood" method="get">
+                            <div class="edit">
+                                <input type="hidden" name="foodID" value="<%=food.getFoodID() %>">
+                                    <i class="bi bi-pencil-fill"></i>
+                                </button>
+                            </div>
+                        </form>
+
 
                         <div class="edit" onclick="return editFormID('<%=food.getFoodID() %>');">
                             <i class="bi bi-pencil-fill"></i>
@@ -303,33 +317,47 @@
                 </div>
 
                 <div class="slider-form">
-                    
-                    <div class="form-label" style="margin-top: 30px;">
-                       <label for="product-name">Food Item Name</label>
-                   </div>
-                   <div class="view-pname">Sweet Popcron Large</div>
-                   
-                   <div class="form-label" style="margin-top: 130px;">
-                       <label for="product-category">Food Type</label>
-                   </div>
-                   <div class="pcat-type">Popcorn</div>
-                   
-                   <div class="form-label" style="margin-top: 220px;">
-                       <label for="product-price">Unit Price</label>
-                   </div>
-                   <div class="view-pprice">LKR 3500</div>
-                   
-                   <div class="form-label" style="margin-top: 330px;">
-                       <label for="product-image">Food Item Image</label>
-                   </div>
-                   <img class="image-display" src="images/icons/popcorn.png">
-                   
-                    <div class="slider-endhline"  >
-                        <hr size="2" color="#F5C51B" >
-                    </div>
 
-                    <button class="sbut-done" onclick="hideReviewSlider()">Done</button>
+                    <%
+                        // Check for errors first
+                        String error = (String) request.getAttribute("error");
+                        if (error != null) {
+                    %>
+                    <div class="error-message"><%= error %></div>
+                    <%
+                    } else {
+                        // Retrieve food item
+                        FoodMenu food = (FoodMenu) request.getAttribute("food");
+                        if (food != null) {
+                    %>
+                    <div class="form-label" style="margin-top: 30px;">
+                    <label for="product-name">Food Item Name</label>
                 </div>
+                <div class="view-pname"><%= food.getName() %></div>
+
+                <div class="form-label" style="margin-top: 130px;">
+                    <label for="product-category">Food Type</label>
+                </div>
+                <div class="pcat-type"><%= food.getType() %></div>
+
+                <div class="form-label" style="margin-top: 220px;">
+                    <label for="product-price">Unit Price</label>
+                </div>
+                <div class="view-pprice">LKR <%= food.getPrice() %></div>
+
+                <div class="form-label" style="margin-top: 330px;">
+                    <label for="product-image">Food Item Image</label>
+                </div>
+                <img class="image-display" src="images/Food/<%= food.getFood_Image() %>">
+
+                <div class="slider-endhline">
+                    <hr size="2" color="#F5C51B">
+                </div>
+                <button class="sbut-done" onclick="hideReviewSlider()">Done</button>
+                <% } else { %>
+                <div class="error-message">No food item found</div>
+                <% } %>
+             </div>
         </div>
 
 
@@ -392,6 +420,10 @@
                 return false;
             }
 
+            function viewFormID(foodID) {
+                // Send AJAX request or redirect to servlet
+                window.location.href = 'viewfood?foodID=' + foodID;
+            }
         </script>
         
         
