@@ -136,7 +136,7 @@
                     <p class="product-id"><%=food.getFoodID() %></p>
                     <p class="product-name"><%=food.getName() %></p>
                     <p class="product-type"><%=food.getType() %></p>
-                    <p class="product-unitprice">LKR <%=food.getPrice()%></p>
+                    <p class="product-unitprice">LKR <%= String.format("%.2f", food.getPrice()) %></p>
                     <div class="actions">
                         <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
 
@@ -221,7 +221,7 @@
                        <hr size="2" color="#F5C51B" >
                    </div>
 
-                   <button class="sbut-cancel">Cancel</button>
+                   <button class="sbut-cancel" type="button" onclick="hideSlider()">Cancel</button>
                    <button class="sbut-save">Add Item</button>
                </div>
            </form>
@@ -273,12 +273,12 @@
                    </div>
                    <div class="image-select">
                         <label class="custom-file-upload">
-                            <img class="image-edit" src="images/icons/popcorn.png" />
-                            <input type="file" id="edit-food-item-image" accept=".jpeg, .webp, .png" style="display: none;" name="image" />
+                            <img src="images/icons/Upload.png" class="img-3" />
+                            <input type="file" accept=".jpeg, .webp, .png" name="image" />
                         </label>
+                       <div class="div-20">Drag your images/icons here</div>
+                       <div class="div-21">(Only *.jpeg, *.webp and *.png images/icons will be accepted)</div>
                     </div>
-
-
                     <div class="slider-endhline"  >
                         <hr size="2" color="#F5C51B" >
                     </div>
@@ -342,6 +342,7 @@
 
             function hideSlider() {
                 document.getElementById('addItemSlider').classList.remove('active');
+                location.reload();
             }
 
             function showEditSlider() {
@@ -350,6 +351,7 @@
 
             function hideEditSlider() {
                 document.getElementById('editItemSlider').classList.remove('active');
+                location.reload();
             }
 
             function showReviewSlider() {
