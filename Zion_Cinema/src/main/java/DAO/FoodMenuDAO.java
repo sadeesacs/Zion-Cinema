@@ -214,21 +214,24 @@ public class FoodMenuDAO {
                 System.out.println("Database connection failed");
                 return null;
             }
-            String query = "SELECT FoodID, Name, Type, Price, Food_Image FROM fooditem WHERE FoodID = ?";
 
+            String query = "SELECT FoodID, Name, Type, Price, Food_Image FROM fooditem WHERE FoodID = ?";
             stmt = connection.prepareStatement(query);
-            stmt.setInt(1, foodID);
+            stmt.setInt(1, foodID);  // Set the foodID parameter in the query
 
             rs = stmt.executeQuery();
 
-                if (rs.next()) {
-                    food = new FoodMenu();
-                    food.setFoodID(rs.getInt("FoodID"));
-                    food.setName(rs.getString("Name"));
-                    food.setType(rs.getString("Type"));
-                    food.setPrice(rs.getDouble("Price"));
-                    food.setFood_Image(rs.getString("Food_Image"));
-                }
+            // Check if food item is found
+            if (rs.next()) {
+                food = new FoodMenu();
+                food.setFoodID(rs.getInt("FoodID"));
+                food.setName(rs.getString("Name"));
+                food.setType(rs.getString("Type"));
+                food.setPrice(rs.getDouble("Price"));
+                food.setFood_Image(rs.getString("Food_Image"));
+            } else {
+                System.out.println("No food item found for ID: " + foodID);
+            }
 
         } catch (SQLException e) {
             System.out.println("Error viewing food item: " + e.getMessage());

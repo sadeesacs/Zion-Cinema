@@ -10,7 +10,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import model.FoodMenu;
 
 import java.io.IOException;
-
 @MultipartConfig
 @WebServlet("/viewfood")
 public class FoodView extends HttpServlet {
@@ -18,44 +17,48 @@ public class FoodView extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        handleRequest(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        handleRequest(request, response);
+    }
+
+    private void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String foodId = request.getParameter("foodID");
 
         // Debug log for received food ID
         System.out.println("Received foodID: " + foodId);
 
-        // Check if the foodID parameter is provided
         if (foodId == null || foodId.trim().isEmpty()) {
             response.getWriter().write("Food ID is missing");
             return;
         }
 
         try {
-            // Parse food ID to integer
             int foodIDInt = Integer.parseInt(foodId);
-
-            // Call to DAO layer to fetch food details
             FoodMenuDAO foodMenuDAO = new FoodMenuDAO();
-            FoodMenu food = foodMenuDAO.viewFood(foodIDInt); // Assume viewFood returns a FoodMenu object
+            FoodMenu food = foodMenuDAO.viewFood(foodIDInt);
 
             if (food != null) {
-                // Attach the food details to the request attributes
-                request.setAttribute("food", food);
+                // Log the food data for debugging
+                System.out.println("Food found: " + food.getName() + " | " + food.getType() + " | " + food.getPrice());
 
-                // Forward the request to the JSP page for displaying the food details
+                request.setAttribute("food", food);
                 request.getRequestDispatcher("/AD-FoodMenu.jsp").forward(request, response);
             } else {
-                // Handle the case where no food item is found
+                System.out.println("No food item found for ID: " + foodId);
                 request.setAttribute("errorMessage", "No food item found with ID: " + foodId);
                 request.getRequestDispatcher("/error.jsp").forward(request, response);
             }
 
         } catch (NumberFormatException e) {
-            // Handle invalid ID format
+            System.out.println("Invalid food ID format");
             request.setAttribute("errorMessage", "Invalid food ID format");
             request.getRequestDispatcher("/error.jsp").forward(request, response);
 
         } catch (Exception e) {
-            // General error handling
             e.printStackTrace();
             request.setAttribute("errorMessage", "An unexpected error occurred: " + e.getMessage());
             request.getRequestDispatcher("/error.jsp").forward(request, response);
