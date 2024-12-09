@@ -140,7 +140,7 @@
                     <div class="actions">
                         <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
 
-                        <div class="edit" onclick="return populateAndSubmitForm('<%=food.getFoodID() %>');">
+                        <div class="edit" onclick="return editFormID('<%=food.getFoodID() %>');">
                             <i class="bi bi-pencil-fill"></i>
                         </div>
 
@@ -173,7 +173,7 @@
            <div class="slider-container">
                <div class="slider-header">
                    <div class="Add">Add Food Item</div>
-                   <img class="close" srcset="images/icons/Cancelslide.png" class="img" onclick="hideSlider()" />
+                   <img class="close" srcset="images/icons/Cancelslide.png" class="img" onclick="hideSlider2()" />
                    <div class="slider-hline" >
                        <hr size="2" color="#F5C51B">
                    </div>
@@ -234,7 +234,7 @@
             <div class="slider-container">
                 <div class="slider-header">
                     <div class="Add">Edit Food Item</div>
-                    <img class="close" srcset="images/icons/Cancelslide.png" class="img" onclick="hideEditSlider()" />
+                    <img class="close" srcset="images/icons/Cancelslide.png" class="img" onclick="hideEditSlider2()" />
                     <div class="slider-hline" >
                         <hr size="2" color="#F5C51B" >
                     </div>
@@ -344,6 +344,10 @@
                 document.getElementById('addItemSlider').classList.remove('active');
                 location.reload();
             }
+            function hideSlider2() {
+                document.getElementById('addItemSlider').classList.remove('active');
+                location.reload();
+            }
 
             function showEditSlider() {
                 document.getElementById('editItemSlider').classList.add('active');
@@ -352,6 +356,9 @@
             function hideEditSlider() {
                 document.getElementById('editItemSlider').classList.remove('active');
                 location.reload();
+            }
+            function hideEditSlider2() {
+                document.getElementById('editItemSlider').classList.remove('active');
             }
 
             function showReviewSlider() {
@@ -362,7 +369,7 @@
                 document.getElementById('reviewItemsslider').classList.remove('active');
             }
 
-            function populateAndSubmitForm(foodID) {
+            function editFormID(foodID) {
                 // Get references to elements
                 const form = document.getElementById('editForm');
                 const editSlider = document.getElementById('editItemSlider');
