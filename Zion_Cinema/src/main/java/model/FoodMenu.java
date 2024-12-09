@@ -5,6 +5,7 @@ public class FoodMenu {
     private String Name;
     private String Type;
     private double Price;
+    private String ;
 
     public FoodMenu() {
     }

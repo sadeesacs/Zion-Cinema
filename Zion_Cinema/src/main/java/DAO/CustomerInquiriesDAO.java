@@ -1,6 +1,8 @@
 package DAO;
 import Db.dbcon;
 import model.CustomerInquiries;
+import model.FoodMenu;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -62,4 +64,35 @@ public class CustomerInquiriesDAO {
 
         return inquiries;
     }
+
+
+
+
+        // View Single Food Item
+        public static FoodMenu viewFood(int foodID) {
+            FoodMenu food = null;
+            String query = "SELECT FoodID, Name, Type, Price, Food_Image FROM fooditem WHERE FoodID = ?";
+
+            try (Connection conn = getConnection();
+                 PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+                pstmt.setInt(1, foodID);
+
+                try (ResultSet rs = pstmt.executeQuery()) {
+                    if (rs.next()) {
+                        food = new FoodMenu();
+                        food.setFoodID(rs.getInt("FoodID"));
+                        food.setName(rs.getString("Name"));
+                        food.setType(rs.getString("Type"));
+                        food.setPrice(rs.getDouble("Price"));
+                        food.setFood_Image(rs.getString("Food_Image"));
+                    }
+                }
+            } catch (SQLException e) {
+                logError("Error viewing food item", e);
+            }
+
+            return food;
+        }
+
 }
