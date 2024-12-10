@@ -111,7 +111,7 @@
     <!-- billing Section -->
     <div class="billing-container">
         <h2>Billing Details</h2>
-        <form class="billing-form">
+        <form class="billing-form" action="checkout.html">
             <!-- First and Last Name -->
             <div class="form-row">
                 <div class="form-group">
