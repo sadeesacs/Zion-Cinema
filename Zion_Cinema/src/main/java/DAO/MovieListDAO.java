@@ -20,55 +20,61 @@ public class MovieListDAO {
             // Establish database connection
             connection = dbcon.connect();
 
-            // Check if connection is successful
             if (connection == null) {
-                System.out.println("Database connection failed");
-                return Movie; // Return empty list
+                System.err.println("ERROR: Database connection is null");
+                return Movie;
             }
 
             // Prepare SQL query
-            String query = "SELECT Movie_ID, Movie_Name,Description,Duration_Hour,Duration_Minutes,Trailer,Year,Rating,Status,Poster,Banner,Carousal FROM movies";
+            String query = "SELECT Movie_ID, Movie_Name, Description, Duration_Hour, Duration_Minutes, Trailer, Year, Rating, Status, Poster, Banner, Carousal FROM movies";
             stmt = connection.prepareStatement(query);
+
+            // Execute query and log the process
+            System.out.println("Executing query: " + query);
             rs = stmt.executeQuery();
 
-            // Check if result set is empty
+            // Check if any rows exist
             if (!rs.isBeforeFirst()) {
-                System.out.println("No data found in Movies table");
-                return Movie; // Return empty list
+                System.err.println("WARNING: No data found in Movies table");
+                return Movie;
             }
 
-            // Iterate through results
+            // Iterate through results and log number of rows
+            int rowCount = 0;
             while (rs.next()) {
                 MovieList Movies = new MovieList();
-              Movies.setMovieID(rs.getInt("Movie_ID"));
-              Movies.setMovieName(rs.getString("Movie_Name"));
-              Movies.setDescription(rs.getString("Description"));
-              Movies.setDurationhour(rs.getInt("Duration_Hour"));
-              Movies.setDurationminute(rs.getInt("Duration_Minutes"));
-              Movies.setTrailer(rs.getString("Trailer"));
-              Movies.setYear(rs.getInt("Year"));
-              Movies.setRating(rs.getInt("Rating"));
-              Movies.setPoster(rs.getString("Poster"));
-              Movies.setBanner(rs.getString("Banner"));
-              Movies.setCarousal(rs.getString("Carousal"));
-              Movie.add(Movies);
-
+                Movies.setMovieID(rs.getInt("Movie_ID"));
+                Movies.setMovieName(rs.getString("Movie_Name"));
+                Movies.setDescription(rs.getString("Description"));
+                Movies.setDurationhour(rs.getInt("Duration_Hour"));
+                Movies.setDurationminute(rs.getInt("Duration_Minutes"));
+                Movies.setTrailer(rs.getString("Trailer"));
+                Movies.setYear(rs.getInt("Year"));
+                Movies.setRating(rs.getString("Rating"));
+                Movies.setPoster(rs.getString("Poster"));
+                Movies.setBanner(rs.getString("Banner"));
+                Movies.setCarousal(rs.getString("Carousal"));
+                Movie.add(Movies);
+                rowCount++;
             }
+
+            System.out.println("Retrieved " + rowCount + " movies from database");
+
         } catch (SQLException e) {
-            System.out.println("Database error: " + e.getMessage());
-            // Log the full stack trace for detailed debugging
+            System.err.println("Database error: " + e.getMessage());
             e.printStackTrace();
         } finally {
-            // Properly close all database resources
+            // Close resources
             try {
                 if (rs != null) rs.close();
                 if (stmt != null) stmt.close();
                 if (connection != null) connection.close();
             } catch (SQLException e) {
-                System.out.println("Error closing database resources: " + e.getMessage());
+                System.err.println("Error closing database resources: " + e.getMessage());
             }
         }
 
         return Movie;
     }
+
 }
