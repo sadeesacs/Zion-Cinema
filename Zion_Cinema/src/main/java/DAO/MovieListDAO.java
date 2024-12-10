@@ -30,7 +30,6 @@ public class MovieListDAO {
             stmt = connection.prepareStatement(query);
 
             // Execute query and log the process
-            System.out.println("Executing query: " + query);
             rs = stmt.executeQuery();
 
             // Check if any rows exist
@@ -58,7 +57,7 @@ public class MovieListDAO {
                 rowCount++;
             }
 
-            System.out.println("Retrieved " + rowCount + " movies from database");
+
 
         } catch (SQLException e) {
             System.err.println("Database error: " + e.getMessage());
