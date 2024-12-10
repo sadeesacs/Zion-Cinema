@@ -1,23 +1,20 @@
+//Carasoul Function
 document.addEventListener("DOMContentLoaded", function () {
-    const slides = document.querySelectorAll('.slide'); // All slides
-    const carouselSlides = document.querySelector('.carousel-slides'); // Carousel container
+    const slides = document.querySelectorAll('.slide'); 
+    const carouselSlides = document.querySelector('.carousel-slides'); 
 
-    // Clone the first and last slides for smooth looping
     const firstClone = slides[0].cloneNode(true);
     const lastClone = slides[slides.length - 1].cloneNode(true);
 
-    // Append and prepend clones
-    carouselSlides.appendChild(firstClone); // Append first slide clone at the end
-    carouselSlides.insertBefore(lastClone, slides[0]); // Prepend last slide clone at the beginning
+    carouselSlides.appendChild(firstClone);
+    carouselSlides.insertBefore(lastClone, slides[0]); 
 
-    const totalSlides = slides.length + 2; // Total slides including clones
-    let currentIndex = 1; // Start at the first original slide
-    let isTransitioning = false; // Prevent multiple transitions
+    const totalSlides = slides.length + 2; 
+    let currentIndex = 1; 
+    let isTransitioning = false; 
 
-    // Set initial position
     carouselSlides.style.transform = `translateX(-${currentIndex * 100}%)`;
 
-    // Function to update slide position
     function showSlide(index) {
         isTransitioning = true;
         carouselSlides.style.transition = 'transform 0.5s ease-in-out';
@@ -40,18 +37,53 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Function to move to the next slide automatically
     function nextSlide() {
-        if (isTransitioning) return; // Prevent multiple transitions
+        if (isTransitioning) return; 
         currentIndex++;
         showSlide(currentIndex);
     }
 
-    // Automatic slide transition every 3 seconds
     let autoSlide = setInterval(nextSlide, 3000);
 
     // Prevent long-term issues by restarting `setInterval` periodically
     setInterval(() => {
         clearInterval(autoSlide);
         autoSlide = setInterval(nextSlide, 3000);
-    }, 60000); // Restart every 60 seconds to avoid potential timer drift
+    }, 60000); 
 });
+
+
+
+//Movie listing section function
+document.addEventListener("DOMContentLoaded", () => {
+    const nowShowingBtn = document.getElementById("now-showing-btn");
+    const comingSoonBtn = document.getElementById("coming-soon-btn");
+
+    const nowShowingMovies = document.querySelectorAll(".now-showing");
+    const comingSoonMovies = document.querySelectorAll(".coming-soon");
+
+    // Set default state: Show "Now Showing" movies and hide "Coming Soon"
+    nowShowingMovies.forEach((movie) => (movie.style.display = "block"));
+    comingSoonMovies.forEach((movie) => (movie.style.display = "none"));
+
+    // Add active class to the currently selected button (optional)
+    nowShowingBtn.classList.add("active");
+
+    // Button click events
+    nowShowingBtn.addEventListener("click", () => {
+        nowShowingMovies.forEach((movie) => (movie.style.display = "block"));
+        comingSoonMovies.forEach((movie) => (movie.style.display = "none"));
+
+        nowShowingBtn.classList.add("active");
+        comingSoonBtn.classList.remove("active");
+    });
+
+    comingSoonBtn.addEventListener("click", () => {
+        nowShowingMovies.forEach((movie) => (movie.style.display = "none"));
+        comingSoonMovies.forEach((movie) => (movie.style.display = "block"));
+
+        comingSoonBtn.classList.add("active");
+        nowShowingBtn.classList.remove("active");
+    });
+});
+
 
