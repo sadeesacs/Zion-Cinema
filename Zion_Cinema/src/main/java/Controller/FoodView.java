@@ -43,7 +43,7 @@ public class FoodView extends HttpServlet {
 
             if (food != null) {
                 // Log the food data for debugging
-                System.out.println("Food found: " + food.getName() + " | " + food.getType() + " | " + food.getPrice());
+                System.out.println("Food found: " + food.getName() + " | " + food.getType() + " | " + food.getPrice() + " | " + food.getFood_Image() );
 
                 request.setAttribute("food", food);
                 request.getRequestDispatcher("/AD-FoodMenu.jsp").forward(request, response);
