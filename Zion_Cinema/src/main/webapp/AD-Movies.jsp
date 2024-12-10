@@ -1,4 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="DAO.MovieListDAO" %>
+<%@ page import="java.util.List" %>
+<%@ page import="model.MovieList" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -98,155 +101,43 @@
             <div class="header-container" style="top:60px;">
                 <span class="header-top" style="margin-left:20px">Movie ID</span>
                 <span class="header-top" style="margin-left:150px">Movie Name</span>
-                <div class="header-top" style="margin-left:580px">Genre</div>
                 <div class="header-top" style="margin-left:720px">Duration</div>
                 <div class="header-top" style="margin-left:870px">Action</div>                
             </div>
                 
             <div class="content-container" style="margin-top:150px;height: 70%">
+                <%
+                    // Fetching the list of Customer inquiries
+                    List<MovieList> Movie = MovieListDAO.getAllMovies();
+                    //Loop to display data
+                    if (!Movie.isEmpty()) {
+                        for (MovieList Movies : Movie) {
+
+
+                %>
                 <div class="movie">
-                    <p class="movie-id">0001</p>
-                    <p class="movie-name">Pirates of the Caribbean: Dead Men Tell No Tales</p>
-                    <p class="movie-genre">Adventure</p>
-                    <p class="movie-duration">1 h 30 mints</p>
+                    <p class="movie-id"><%=Movies.getMovieID()%></p>
+                    <p class="movie-name"><%=Movies.getMovieName()%></p>
+                    <p class="movie-duration"><%=Movies.getDurationhour()%>h <%=Movies.getDurationminute()%>min</p>
                     <div class="movie-actions">
                         <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
                         <div class="edit" onclick="showEditSlider()"><i class="bi bi-pencil-fill"></i></div>
                         <div class="delete"><i class="bi bi-trash3-fill"></i></div>
                     </div> 
                 </div>
-                <div class="movie">
-                    <p class="movie-id">0001</p>
-                    <p class="movie-name">Pirates of the Caribbean: Dead Men Tell No Tales</p>
-                    <p class="movie-genre">Adventure</p>
-                    <p class="movie-duration">1 h 30 mints</p>
-                    <div class="movie-actions">
-                        <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
-                        <div class="edit" onclick="showEditSlider()"><i class="bi bi-pencil-fill"></i></div>
-                        <div class="delete"><i class="bi bi-trash3-fill"></i></div>
-                    </div> 
-                </div>
-                <div class="movie">
-                    <p class="movie-id">0001</p>
-                    <p class="movie-name">Pirates of the Caribbean: Dead Men Tell No Tales</p>
-                    <p class="movie-genre">Adventure</p>
-                    <p class="movie-duration">1 h 30 mints</p>
-                    <div class="movie-actions">
-                        <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
-                        <div class="edit" onclick="showEditSlider()"><i class="bi bi-pencil-fill"></i></div>
-                        <div class="delete"><i class="bi bi-trash3-fill"></i></div>
-                    </div> 
-                </div>
-                <div class="movie">
-                    <p class="movie-id">0001</p>
-                    <p class="movie-name">Pirates of the Caribbean: Dead Men Tell No Tales</p>
-                    <p class="movie-genre">Adventure</p>
-                    <p class="movie-duration">1 h 30 mints</p>
-                    <div class="movie-actions">
-                        <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
-                        <div class="edit" onclick="showEditSlider()"><i class="bi bi-pencil-fill"></i></div>
-                        <div class="delete"><i class="bi bi-trash3-fill"></i></div>
-                    </div> 
-                </div>
-                <div class="movie">
-                    <p class="movie-id">0001</p>
-                    <p class="movie-name">Pirates of the Caribbean: Dead Men Tell No Tales</p>
-                    <p class="movie-genre">Adventure</p>
-                    <p class="movie-duration">1 h 30 mints</p>
-                    <div class="movie-actions">
-                        <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
-                        <div class="edit" onclick="showEditSlider()"><i class="bi bi-pencil-fill"></i></div>
-                        <div class="delete"><i class="bi bi-trash3-fill"></i></div>
-                    </div> 
-                </div>
-                <div class="movie">
-                    <p class="movie-id">0001</p>
-                    <p class="movie-name">Pirates of the Caribbean: Dead Men Tell No Tales</p>
-                    <p class="movie-genre">Adventure</p>
-                    <p class="movie-duration">1 h 30 mints</p>
-                    <div class="movie-actions">
-                        <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
-                        <div class="edit" onclick="showEditSlider()"><i class="bi bi-pencil-fill"></i></div>
-                        <div class="delete"><i class="bi bi-trash3-fill"></i></div>
-                    </div> 
-                </div>
-                <div class="movie">
-                    <p class="movie-id">0001</p>
-                    <p class="movie-name">Pirates of the Caribbean: Dead Men Tell No Tales</p>
-                    <p class="movie-genre">Adventure</p>
-                    <p class="movie-duration">1 h 30 mints</p>
-                    <div class="movie-actions">
-                        <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
-                        <div class="edit" onclick="showEditSlider()"><i class="bi bi-pencil-fill"></i></div>
-                        <div class="delete"><i class="bi bi-trash3-fill"></i></div>
-                    </div> 
-                </div>
-                <div class="movie">
-                    <p class="movie-id">0001</p>
-                    <p class="movie-name">Pirates of the Caribbean: Dead Men Tell No Tales</p>
-                    <p class="movie-genre">Adventure</p>
-                    <p class="movie-duration">1 h 30 mints</p>
-                    <div class="movie-actions">
-                        <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
-                        <div class="edit" onclick="showEditSlider()"><i class="bi bi-pencil-fill"></i></div>
-                        <div class="delete"><i class="bi bi-trash3-fill"></i></div>
-                    </div> 
-                </div>
-                <div class="movie">
-                    <p class="movie-id">0001</p>
-                    <p class="movie-name">Pirates of the Caribbean: Dead Men Tell No Tales</p>
-                    <p class="movie-genre">Adventure</p>
-                    <p class="movie-duration">1 h 30 mints</p>
-                    <div class="movie-actions">
-                        <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
-                        <div class="edit" onclick="showEditSlider()"><i class="bi bi-pencil-fill"></i></div>
-                        <div class="delete"><i class="bi bi-trash3-fill"></i></div>
-                    </div> 
-                </div>
-                <div class="movie">
-                    <p class="movie-id">0001</p>
-                    <p class="movie-name">Pirates of the Caribbean: Dead Men Tell No Tales</p>
-                    <p class="movie-genre">Adventure</p>
-                    <p class="movie-duration">1 h 30 mints</p>
-                    <div class="movie-actions">
-                        <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
-                        <div class="edit" onclick="showEditSlider()"><i class="bi bi-pencil-fill"></i></div>
-                        <div class="delete"><i class="bi bi-trash3-fill"></i></div>
-                    </div> 
-                </div>
-                <div class="movie">
-                    <p class="movie-id">0001</p>
-                    <p class="movie-name">Pirates of the Caribbean: Dead Men Tell No Tales</p>
-                    <p class="movie-genre">Adventure</p>
-                    <p class="movie-duration">1 h 30 mints</p>
-                    <div class="movie-actions">
-                        <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
-                        <div class="edit" onclick="showEditSlider()"><i class="bi bi-pencil-fill"></i></div>
-                        <div class="delete"><i class="bi bi-trash3-fill"></i></div>
-                    </div> 
-                </div>
-                <div class="movie">
-                    <p class="movie-id">0001</p>
-                    <p class="movie-name">Pirates of the Caribbean: Dead Men Tell No Tales</p>
-                    <p class="movie-genre">Adventure</p>
-                    <p class="movie-duration">1 h 30 mints</p>
-                    <div class="movie-actions">
-                        <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
-                        <div class="edit" onclick="showEditSlider()"><i class="bi bi-pencil-fill"></i></div>
-                        <div class="delete"><i class="bi bi-trash3-fill"></i></div>
-                    </div> 
-                </div>
-                <div class="movie">
-                    <p class="movie-id">0001</p>
-                    <p class="movie-name">Pirates of the Caribbean: Dead Men Tell No Tales</p>
-                    <p class="movie-genre">Adventure</p>
-                    <p class="movie-duration">1 h 30 mints</p>
-                    <div class="movie-actions">
-                        <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
-                        <div class="edit" onclick="showEditSlider()"><i class="bi bi-pencil-fill"></i></div>
-                        <div class="delete"><i class="bi bi-trash3-fill"></i></div>
-                    </div> 
-                </div>
+                <%
+                    }
+                }
+                else{
+                %>
+                <p>
+                    <span class="header-top" style="margin-left:500px"> No Movies on the List</span>
+                </p>
+
+                <%
+                    }
+                %>
+
             </div>
         </div>
         

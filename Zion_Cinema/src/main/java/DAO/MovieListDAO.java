@@ -27,7 +27,7 @@ public class MovieListDAO {
             }
 
             // Prepare SQL query
-            String query = "SELECT Movie_ID, Movie_Name,Description,Duration_Hour,Duration_Minutes,Trailer,Year,Rating,Status,Poster,Banner,Carousal FROM Movies";
+            String query = "SELECT Movie_ID, Movie_Name,Description,Duration_Hour,Duration_Minutes,Trailer,Year,Rating,Status,Poster,Banner,Carousal FROM movies";
             stmt = connection.prepareStatement(query);
             rs = stmt.executeQuery();
 
