@@ -145,15 +145,6 @@
                         </div>
 
 
-                        <form action="viewfood" method="get">
-                            <div class="edit">
-                                <input type="hidden" name="foodID" value="<%=food.getFoodID() %>">
-                                    <i class="bi bi-pencil-fill"></i>
-                                </button>
-                            </div>
-                        </form>
-
-
                         <div class="edit" onclick="return editFormID('<%=food.getFoodID() %>');">
                             <i class="bi bi-pencil-fill"></i>
                         </div>
