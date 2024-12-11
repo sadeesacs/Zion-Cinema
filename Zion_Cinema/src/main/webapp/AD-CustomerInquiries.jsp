@@ -2,6 +2,7 @@
 <%@page import="DAO.CustomerInquiriesDAO" %>
 <%@ page import="model.CustomerInquiries"%>
 <%@ page import="java.util.List" %>
+<%@ page import="jakarta.servlet.http.HttpSession" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -22,10 +23,16 @@
                     <span>Search here.....</span>
                         <span style="left: 210px;color:white"><i class="bi bi-search"></i></span>
                 </div>
+                <%
 
-                <div class="AD-username">Emma Watson</div>
+                    String username = (session != null) ? (String) session.getAttribute("username") : null;
+                    if (username != null){
+                    %>
+                <div class="AD-username"><%=username%></div>
                 <div class="word-admin">Admin</div>
-
+                <%
+                    }
+                %>
                 <div class="user-icon" ><i class="bi bi-person-fill"></i></div>
 
                 <img src="images/icons/notificationicon.png" class="notification-icon">
