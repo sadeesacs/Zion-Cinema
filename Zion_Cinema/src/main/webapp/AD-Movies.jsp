@@ -131,7 +131,7 @@
                 <div class="movie">
                     <p class="movie-id"><%=Movies.getMovieID()%></p>
                     <p class="movie-name"><%=Movies.getMovieName()%></p>
-                    <p class="movie-duration"><%=Movies.getDurationhour()%>h <%=Movies.getDurationminute()%>min</p>
+                    <p class="movie-duration"><%=Movies.getDuration()%></p>
                     <div class="movie-actions">
                         <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
                         <div class="edit" onclick="showEditSlider()"><i class="bi bi-pencil-fill"></i></div>
@@ -179,28 +179,28 @@
 
                 <!-- Scrollable Form Section -->
                 <div class="movie-slider-form">
-                    <form>
+                    <form action="AddFood" method="post" enctype="multipart/form-data">
                         <div class="movie-form">
                             
                             <div class="movie-form-row" style="margin-top: 20px;">
                                 <label for="movie-name" class="movie-form-label">Movie Name</label>
-                                <input class="form-m-name" type="text" id="movie-name" />
+                                <input class="form-m-name" name="name" type="text" id="movie-name" />
                             </div>
                             <div class="movie-form-row">
                                 <label for="movie-desc" class="movie-form-label">Movie Description</label>
-                                <textarea class="form-m-desc" id="movie-desc"></textarea>
+                                <textarea class="form-m-desc" name="description" id="movie-desc"></textarea>
                             </div>
                             <div class="movie-form-row">
                                 <label for="movie-duration" class="movie-form-label">Movie Duration</label>
-                                <input class="form-m-duration" type="text" id="movie-duration" />
+                                <input class="form-m-duration" name="duration" type="text" id="movie-duration" />
                             </div>
                             <div class="movie-form-row">
                                 <label for="movie-year" class="movie-form-label">Movie Year</label>
-                                <input class="form-m-year" type="text" id="movie-year" />
+                                <input class="form-m-year" name="year" type="text" id="movie-year" />
                             </div>
                             <div class="movie-form-row">
                                 <label for="movie-rating" class="movie-form-label">Movie Rating</label>
-                                <input class="form-m-rating" type="text" id="movie-rating" />
+                                <input class="form-m-rating" name="rating" type="text" id="movie-rating" />
                             </div>
                             <div class="movie-form-row">
                                 <label for="movie-genre" class="movie-form-label">Movie Genre 01</label>

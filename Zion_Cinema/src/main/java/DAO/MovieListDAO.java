@@ -26,7 +26,7 @@ public class MovieListDAO {
             }
 
             // Prepare SQL query
-            String query = "SELECT Movie_ID, Movie_Name, Description, Duration_Hour, Duration_Minutes, Trailer, Year, Rating, Status, Poster, Banner, Carousal FROM movies";
+            String query = "SELECT Movie_ID, Movie_Name, Description, Duration, Trailer, Year, Rating, Status, Poster, Banner, Carousal FROM movies";
             stmt = connection.prepareStatement(query);
 
             // Execute query and log the process
@@ -45,8 +45,7 @@ public class MovieListDAO {
                 Movies.setMovieID(rs.getInt("Movie_ID"));
                 Movies.setMovieName(rs.getString("Movie_Name"));
                 Movies.setDescription(rs.getString("Description"));
-                Movies.setDurationhour(rs.getInt("Duration_Hour"));
-                Movies.setDurationminute(rs.getInt("Duration_Minutes"));
+                Movies.setDuration(rs.getString("Duration"));
                 Movies.setTrailer(rs.getString("Trailer"));
                 Movies.setYear(rs.getInt("Year"));
                 Movies.setRating(rs.getString("Rating"));

@@ -4,8 +4,7 @@ public class MovieList {
     private int MovieID;
     private String MovieName;
     private String Description;
-    private int Durationhour;
-    private int Durationminute;
+    private String Duration;
     private String Trailer;
     private int Year;
     private String Rating;
@@ -18,12 +17,11 @@ public class MovieList {
 
     }
 
-    public MovieList(int MovieID, String MovieName, String Description, int Durationhour, int Durationminute, String Trailer, int Year, String Rating, String status, String poster, String banner, String carousal) {
+    public MovieList(int MovieID, String MovieName, String Description, String Duration, String Trailer, int Year, String Rating, String status, String poster, String banner, String carousal) {
         this.MovieID = MovieID;
         this.MovieName = MovieName;
         this.Description = Description;
-        this.Durationhour = Durationhour;
-        this.Durationminute = Durationminute;
+        this.Duration = Duration;
         this.Trailer = Trailer;
         this.Year = Year;
         this.Rating = Rating;
@@ -52,17 +50,11 @@ public class MovieList {
     public void setDescription(String description) {
         Description = description;
     }
-    public int getDurationhour() {
-        return Durationhour;
+    public String getDuration() {
+        return Duration;
     }
-    public void setDurationhour(int durationhour) {
-        Durationhour = durationhour;
-    }
-    public int getDurationminute() {
-        return Durationminute;
-    }
-    public void setDurationminute(int durationminute) {
-        Durationminute = durationminute;
+    public void setDuration(String duration) {
+        Duration = duration;
     }
     public String getTrailer() {
         return Trailer;

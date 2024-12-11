@@ -298,7 +298,7 @@
             
             
         <!-- Slider review Item Form -->
-            <form id="reviewItemsslider" class="slider" method="post" style="display:none;">
+            <form id="reviewItemsslider" class="slider" method="get" style="display:none;">
                 <input type="hidden" name="foodID" id="viewFoodIDInput">
                 <div class="slider-container">
                     <div class="slider-header">
