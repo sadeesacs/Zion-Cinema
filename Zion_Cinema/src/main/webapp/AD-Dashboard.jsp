@@ -1,3 +1,7 @@
+<%@ page import="model.MovieList" %>
+<%@ page import="DAO.ShowTimeDAO" %>
+<%@ page import="model.FoodMenu" %>
+<%@ page import="java.util.List" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -87,10 +91,27 @@
                 <div class="zion-movie-selection">
                     <div class="dashboard-topic">Select a Movie:</div>
                     <select id="movie">
-                        <option value="movie1">Avengers: Endgame</option>
-                        <option value="movie2">The Dark Knight</option>
-                        <option value="movie3">Inception</option>
-                        <option value="movie3">Inception</option>
+                        <%
+                            // Fetching the list of Customer inquiries
+                            List<MovieList> Movie = ShowTimeDAO.getAllMovies();
+                            //Loop to display data
+                            if (!Movie.isEmpty()) {
+                                for (MovieList movies: Movie) {
+                        %>
+                        <option value="<%=movies.getMovieName()%>"><%=movies.getMovieName()%></option>
+
+                        <%
+                            }
+                        }
+                        else{
+                        %>
+                        <p>
+                            <span class="header-top" style="margin-left:500px"> No Movie found</span>
+                        </p>
+
+                        <%
+                            }
+                        %>
                     </select>
                 </div>
 
