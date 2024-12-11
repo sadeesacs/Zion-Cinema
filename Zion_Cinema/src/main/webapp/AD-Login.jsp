@@ -17,7 +17,7 @@
             <div class="ADlog-head-1" >Admin Login</div>
             <div class="ADlog-head-2">Please enter your details</div>
             <div class="ADlogin-form">
-                <form>
+                <form method="POST" action="adlogin">
                     <label for="username" >User Name</label>
                         <input type="text" id="username" name="username">
 
