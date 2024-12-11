@@ -45,29 +45,32 @@
           </div>
         </div>
         <div class="login-right">
+    <% String error = (String) request.getAttribute("error"); %>
+    <% if (error != null) { %>
+        <div class="error"><%= error %></div>
+    <% } %>
             <div class="title">Welcome to <span>Zion Cinema</span></div>
             <div class="tagline">Login to unlock the magic of movies at Zion Cinema!</div>
-            <form class="form">
-            <div class="form-group">
-              <label for="email">Email Address</label>
-              <input type="email" id="email"/>
-            </div>
-
-            <div class="form-group">
-              <label for="password">Password</label>   
-              <a href="#" class="forgot-password">Forgot password?</a>                         
-              <input type="password" id="password"/>
-            </div>
-
-              <div class="checkbox-container">
-                  <input type="checkbox" id="keep-logged-in">
-                  <span>Keep me logged in</span>
-              </div>
             
-            <button type="submit" class="login-button">Login</button>
-          </form>
+            <form action="LoginServlet" method="POST" class="form">
+    <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" />
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <a href="#" class="forgot-password">Forgot password?</a>
+        <input type="password" id="password" name="password" />
+    </div>
+    <div class="checkbox-container">
+        <input type="checkbox" id="keep-logged-in" />
+        <span>Keep me logged in</span>
+    </div>
+    <button type="submit" class="login-button">Login</button>
+</form>
+
           <p class="signup-text">
-            Don’t have an account? <a href="#">Sign up</a>
+            Don’t have an account? <a href="UserRegistration.jsp">Sign up</a>
           </p>
           <div class="admin-link">
             <img src="images/AdminIcon.png" alt="Logo" class="admin-logo">
