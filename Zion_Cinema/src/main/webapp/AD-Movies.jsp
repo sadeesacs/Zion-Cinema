@@ -8,7 +8,19 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Movies</title>
-        
+        <style>
+            .icon-button {
+                background: none; /* Removes the default background */
+                border: none; /* Removes the default border */
+                padding: 0; /* Removes default padding */
+                margin: 0; /* Adjusts margin if needed */
+                cursor: pointer; /* Makes it look clickable */
+            }
+
+            .icon-button {
+                color: inherit;
+            }
+        </style>
         <link rel="stylesheet" href="StyleSheet10.css" />
         
     </head>
@@ -123,7 +135,16 @@
                     <div class="movie-actions">
                         <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
                         <div class="edit" onclick="showEditSlider()"><i class="bi bi-pencil-fill"></i></div>
-                        <div class="delete"><i class="bi bi-trash3-fill"></i></div>
+
+
+                        <form action="DeleteMovie" method="post">
+                            <!-- Hidden input for foodID -->
+                            <input type="hidden" name="MovieID" value="<%=Movies.getMovieID()%>" />
+                            <button class="icon-button " type="submit" name="delete">
+                                <div class="delete"><i class="bi bi-trash3-fill"></i></div>
+                            </button>
+                        </form>
+
                     </div> 
                 </div>
                 <%

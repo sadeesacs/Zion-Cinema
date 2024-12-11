@@ -76,4 +76,48 @@ public class MovieListDAO {
         return Movie;
     }
 
+
+    public boolean deleteMovieById(int MovieId) {
+        Connection connection = null;
+        PreparedStatement stmt = null;
+
+        try {
+            // Establish database connection
+            connection = dbcon.connect();
+
+            // Check if connection is successful
+            if (connection == null) {
+                System.out.println("Database connection failed");
+                return false;
+            }
+
+            // Prepare SQL delete statement
+            String query = "DELETE FROM movies WHERE Movie_ID = ?";
+            stmt = connection.prepareStatement(query);
+
+            // Set parameter
+            stmt.setInt(1, MovieId);
+
+            // Execute the delete
+            int rowsAffected = stmt.executeUpdate();
+            System.out.println("Rows affected: " + rowsAffected);
+
+            // Return true if at least one row was deleted
+            return rowsAffected > 0;
+
+        } catch (SQLException e) {
+            System.out.println("Error deleting Movie: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        } finally {
+            // Properly close database resources
+            try {
+                if (stmt != null) stmt.close();
+                if (connection != null) connection.close();
+            } catch (SQLException e) {
+                System.out.println("Error closing database resources: " + e.getMessage());
+            }
+        }
+    }
+
 }
