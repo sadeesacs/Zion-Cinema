@@ -111,6 +111,7 @@
                     List<MovieList> Movie = MovieListDAO.getAllMovies();
                     //Loop to display data
                     if (!Movie.isEmpty()) {
+                        // data type,variable,array name
                         for (MovieList Movies : Movie) {
 
 

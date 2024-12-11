@@ -10,6 +10,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import model.FoodMenu;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Map;
+
 @MultipartConfig
 @WebServlet("/viewfood")
 public class FoodView extends HttpServlet {
@@ -26,10 +29,23 @@ public class FoodView extends HttpServlet {
     }
 
     private void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Debug: Print all parameters
+        Map<String, String[]> paramMap = request.getParameterMap();
+        System.out.println("Received Parameters:");
+        for (String key : paramMap.keySet()) {
+            System.out.println(key + ": " + Arrays.toString(paramMap.get(key)));
+        }
+
         String foodId = request.getParameter("foodID");
 
         // Debug log for received food ID
         System.out.println("Received foodID: " + foodId);
+
+        if (foodId == null || foodId.trim().isEmpty()) {
+            System.err.println("WARNING: No foodID parameter received");
+            response.getWriter().write("Food ID is missing");
+            return;
+        }
 
         if (foodId == null || foodId.trim().isEmpty()) {
             response.getWriter().write("Food ID is missing");
@@ -46,6 +62,7 @@ public class FoodView extends HttpServlet {
                 System.out.println("Food found: " + food.getName() + " | " + food.getType() + " | " + food.getPrice() + " | " + food.getFood_Image() );
 
                 request.setAttribute("food", food);
+
                 request.getRequestDispatcher("/AD-FoodMenu.jsp").forward(request, response);
             } else {
                 System.out.println("No food item found for ID: " + foodId);

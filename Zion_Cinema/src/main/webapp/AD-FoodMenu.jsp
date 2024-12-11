@@ -139,10 +139,12 @@
                     <p class="product-unitprice">LKR <%= String.format("%.2f", food.getPrice()) %></p>
                     <div class="actions">
 
-
-                        <div class="view" onclick="return viewFormID('<%=food.getFoodID() %>');">
-                            <i class="bi bi-eye-fill"></i>
-                        </div>
+                        <form action="viewfood" method="post" id="viewFoodForm<%=food.getFoodID()%>">
+                            <input type="hidden" name="foodID" value="<%=food.getFoodID() %>">
+                            <button class="icon-button" type="submit" onclick="showReviewSlider(<%=food.getFoodID()%>)">
+                                <div class="view"><i class="bi bi-eye-fill"></i></div>
+                            </button>
+                        </form>
 
 
                         <div class="edit" onclick="return editFormID('<%=food.getFoodID() %>');">
@@ -296,7 +298,7 @@
             
             
         <!-- Slider review Item Form -->
-            <form id="reviewItemsslider" class="slider" action="viewfood" method="post" style="display:none;">
+            <form id="reviewItemsslider" class="slider" method="post" style="display:none;">
                 <input type="hidden" name="foodID" id="viewFoodIDInput">
                 <div class="slider-container">
                     <div class="slider-header">
@@ -309,61 +311,52 @@
 
                     <div class="slider-form">
                         <%
-                            // Check for errors first
-                            String error = (String) request.getAttribute("error");
-                            if (error != null) {
-                        %>
-                        <div class="error-message"><%= error %></div>
-                        <%
-                        } else {
                             // Retrieve food item
                             FoodMenu food = (FoodMenu) request.getAttribute("food");
-                            if (food != null) {
+                            if (food != null) {System.out.println("Food Data is: " + food.getName());
                         %>
                         <div class="form-group">
                             <div class="form-label">
                                 <label for="product-name">Food Item Name</label>
                             </div>
-                            <div class="view-pname"><%= food.getName() %></div>
+                            <input type="text" id="product-name" class="form-control" value="<%= food.getName() %>" readonly>
                         </div>
 
                         <div class="form-group">
                             <div class="form-label">
                                 <label for="product-category">Food Type</label>
                             </div>
-                            <div class="pcat-type"><%= food.getType() %></div>
+                            <input type="text" id="product-category" class="form-control" value="<%= food.getType() %>" readonly>
                         </div>
 
                         <div class="form-group">
                             <div class="form-label">
                                 <label for="product-price">Unit Price</label>
                             </div>
-                            <div class="view-pprice">LKR <%= food.getPrice() %></div>
+                            <input type="text" id="product-price" class="form-control" value="LKR <%= food.getPrice() %>" readonly>
                         </div>
 
                         <div class="form-group">
                             <div class="form-label">
                                 <label for="product-image">Food Item Image</label>
                             </div>
+                            <input type="text" id="product-image" class="form-control" value="<%= food.getFood_Image() %>" readonly>
                             <img class="image-display" src="images/Food/<%= food.getFood_Image() %>" alt="Food Image">
                         </div>
 
-                        <div class="slider-endhline">
-                            <hr size="2" color="#F5C51B">
-                        </div>
                         <button type="button" class="sbut-done" onclick="hideReviewSlider()">Done</button>
                         <%
-                        } else {
+                        } else System.out.println("No food data received");
+                        {
                         %>
                         <div class="error-message">No food item found</div>
+
                         <%
-                                }
                             }
                         %>
                     </div>
                 </div>
             </form>
-
 
 
 
@@ -394,9 +387,9 @@
                 document.getElementById('editItemSlider').classList.remove('active');
             }
 
-            function showReviewSlider() {
-                document.getElementById('reviewItemsslider').classList.add('active');
-            }
+            // function showReviewSlider() {
+            //     document.getElementById('reviewItemsslider').classList.add('active');
+            // }
 
             function hideReviewSlider() {
                 document.getElementById('reviewItemsslider').classList.remove('active');
@@ -425,35 +418,31 @@
                 return false;
             }
 
-            function viewFormID(foodID) {
-                // Ensure slider opens before navigation
-                const reviewSlider = document.getElementById('reviewItemsslider');
-                if (reviewSlider) {
-                    // Add active class to ensure slider is visible
-                    reviewSlider.classList.add('active');
+            function showReviewSlider(foodID) {
+                event.preventDefault();
+                var form = document.getElementById('viewFoodForm' + foodID);
 
-                    // Optional: Additional checks to ensure visibility
-                    reviewSlider.style.display = 'block';
-                    reviewSlider.style.visibility = 'visible';
+                // Set the hidden input value in the slider form
+                document.getElementById('viewFoodIDInput').value = foodID;
 
-                    console.log('Review slider should be open now');
-                } else {
-                    console.error('Review slider element not found');
-                }
+                fetch(form.action, {
+                    method: form.method,
+                    body: new FormData(form)
+                })
+                    .then(response => response.text())
+                    .then(html => {
+                        // Create a temporary div to parse the response
+                        var tempDiv = document.createElement('div');
+                        tempDiv.innerHTML = html;
 
-                // Navigate to the page with food ID
-                window.location.href = 'viewfood?foodID=' + foodID;
-
-                return false;
-            }
-
-            // Ensure slider can be hidden
-            function hideReviewSlider() {
-                const reviewSlider = document.getElementById('reviewItemsslider');
-                if (reviewSlider) {
-                    reviewSlider.classList.remove('active');
-                    reviewSlider.style.display = 'none';
-                }
+                        // Extract the selected food data (you might need to adjust this)
+                        var slider = document.getElementById('reviewItemsslider');
+                        slider.style.display = 'block';
+                        slider.classList.add('active');
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
             }
         </script>
         
