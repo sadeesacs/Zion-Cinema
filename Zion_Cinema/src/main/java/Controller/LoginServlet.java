@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import Db.dbcon;
+import jakarta.servlet.http.HttpSession;
 import org.mindrot.jbcrypt.BCrypt;
 
 @WebServlet("/LoginServlet")
@@ -28,10 +29,13 @@ public class LoginServlet extends HttpServlet {
 
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
-    String hashedPassword = rs.getString("Password");
-
+            String hashedPassword = rs.getString("Password");
+    
+            HttpSession session = request.getSession();
+            session.setMaxInactiveInterval(3600);
     // Verify password
     if (BCrypt.checkpw(password, hashedPassword)) {
+        session.setAttribute("email", email);
         response.sendRedirect("HomePage.jsp");
     } else {
         request.setAttribute("error", "Invalid email or password.");

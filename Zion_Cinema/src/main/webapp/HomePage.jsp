@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="jakarta.servlet.http.HttpSession"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -32,9 +33,19 @@
                     <div>Buy Tickets</div>
                 </a>
 
-                <a href="Login.html" class="but-login">
-                    <div>Login</div>
-                </a>
+                <%-- Login/Logout Button --%>
+                <% 
+                    session = request.getSession(false);
+                    if (session != null && session.getAttribute("email") != null) {
+                %>
+                    <a href="LogoutServlet" class="but-login">
+                        <div>Logout</div>
+                    </a>
+                <% } else { %>
+                    <a href="Login.jsp" class="but-login">
+                        <div>Login</div>
+                    </a>
+                <% } %>
 
             </div>
         </div>
