@@ -1,4 +1,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="model.Showtime" %>
+<%@ page import="model.Seat" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,7 +19,7 @@
         <div class="header-container">
 
         <!--Zion Cinema logo-->
-        <img src="images/logo.png">
+        <img src="images/icons/logo.png">
         <a href="HomePage.html" class="logo-name">Zion Cinema</a>
 
         <!--Navigation Bar-->
@@ -65,31 +70,40 @@
     
 
     <!-- Selected Movie Details -->
-     <div class="selected-movie-name">Pirates of the Caribbean : Dead Men Tell No Tales</div>
+     <div class="selected-movie-name"><%= request.getAttribute("movieName") %></div>
      <div class="selected-container" >
         <div class="date-selected" >
             <ul>
-                <li>Mon</li>
-                <li>Tue</li>
-                <li>Wed</li>
-                <li>Thu</li>
-                <li>Fri</li>
+                <% for (Showtime date : (List<Showtime>) request.getAttribute("closestDates")) { %>
+                    <li class="date-li"><%= new java.text.SimpleDateFormat("EEE").format(java.sql.Date.valueOf(date.getDate())) %></li>
+                <% } %>
             </ul>
             <form class="dateselected-buttons-form">
-                <button type="button" class="datesel-button">26</button>
-                <button type="button" class="datesel-button">27</button>
-                <button type="button" class="datesel-button">28</button>
-                <button type="button" class="datesel-button">29</button>
-                <button type="button" class="datesel-button">30</button>
+                <% 
+                String selectedDate = (String) request.getAttribute("selectedDate");
+                for (Showtime date : (List<Showtime>) request.getAttribute("closestDates")) { 
+                    boolean isActive = selectedDate != null && selectedDate.equals(date.getDate());
+                %>
+                    <button type="button" class="datesel-button <%= isActive ? "active" : "" %>">
+                        <%= new java.text.SimpleDateFormat("dd").format(java.sql.Date.valueOf(date.getDate())) %>
+                    </button>
+                <% } %>
             </form>
         </div>
 
         <div class="time-selected">
             <div class="span-2">Zion Cinema</div>
             <div class="timeselected-buttons-form">
-                <button type="button" class="timesel-button">10.00 AM</button>
-                <button type="button" class="timesel-button">12.00 AM</button>
-                <button type="button" class="timesel-button">01.00 PM</button>
+                <% 
+                String selectedTime = (String) request.getAttribute("selectedTime");
+                for (String time : (List<String>) request.getAttribute("timesForDate")) { 
+                    String formattedTime = new java.text.SimpleDateFormat("hh:mm a").format(java.sql.Time.valueOf(time));
+                    boolean isActive = selectedTime != null && selectedTime.equals(time);
+                %>
+                    <button type="button" class="timesel-button <%= isActive ? "active" : "" %>">
+                        <%= formattedTime %>
+                    </button>
+                <% } %>
             </div>
         </div>
     </div>
@@ -98,94 +112,40 @@
     <!-- Seat Selection Section -->
     <div class="seat-reserve-container">
         <h2>Select Seats</h2>
-        <div class="screen-container"><img src="images/moviescreen.png"></div>
-                
-                <span class="seat-label" style="margin-top: 35px;">A</span>
-                <div class="seat-row-A-L">
-                    <div class="seat available" data-seat="A1"></div>
-                    <div class="seat available" data-seat="A2"></div>
-                    <div class="seat available" data-seat="A3"></div>
-                </div>
+        <div class="screen-container"><img src="images/icons/moviescreen.png"></div>
+            <span class="seat-label" style="margin-top: 35px;">A</span>
+            <span class="seat-label" style="margin-top: 105px;">B</span>
+            <span class="seat-label" style="margin-top: 175px;">C</span>
+            <span class="seat-label" style="margin-top: 245px;">D</span>
+            <span class="seat-label" style="margin-top: 345px;">E</span>
+            <span class="seat-label" style="margin-top: 415px;">F</span>
+            <%
+                List<Seat> seats = (List<Seat>) request.getAttribute("seats");
+                if (seats != null && !seats.isEmpty()) {
+                    int currentIndex = 0;
+                    for (char row = 'A'; row <= 'F'; row++) {
+                        int seatsPerSection = (row == 'A' || row == 'B') ? 3 : 4;
 
-                <div class="seat-row-A-R">
-                    <div class="seat available" data-seat="A1"></div>
-                    <div class="seat available" data-seat="A2"></div>
-                    <div class="seat available" data-seat="A3"></div>
-                </div>
+                        // Left Section
+                        out.print("<div class='seat-row-" + row + "-L'>");
+                        for (int i = 0; i < seatsPerSection && currentIndex < seats.size(); i++) {
+                            Seat seat = seats.get(currentIndex++);
+                            out.print("<button class='seat available' data-seat-id='" + seat.getSeatId() + "' data-seat-number='" + seat.getSeatNumber() + "'></button>");
+                        }
+                        out.print("</div>");
 
-                <span class="seat-label" style="margin-top: 105px;">B</span>
-                <div class="seat-row-B-L">
-                    <div class="seat available" data-seat="A1"></div>
-                    <div class="seat available" data-seat="A2"></div>
-                    <div class="seat available" data-seat="A3"></div>
-                </div>
-
-                <div class="seat-row-B-R">
-                    <div class="seat available" data-seat="A1"></div>
-                    <div class="seat reserved" data-seat="A2"></div>
-                    <div class="seat reserved" data-seat="A3"></div>
-                </div>
-
-                <span class="seat-label" style="margin-top: 175px;">C</span>
-                <div class="seat-row-C-L">
-                    <div class="seat available" data-seat="A1"></div>
-                    <div class="seat available" data-seat="A2"></div>
-                    <div class="seat available" data-seat="A3"></div>
-                    <div class="seat available" data-seat="A2"></div>
-                </div>
-
-                <div class="seat-row-C-R">
-                    <div class="seat available" data-seat="A1"></div>
-                    <div class="seat available" data-seat="A2"></div>
-                    <div class="seat available" data-seat="A3"></div>
-                    <div class="seat available" data-seat="A2"></div>
-                </div>
-
-                <span class="seat-label" style="margin-top: 245px;">D</span>
-                <div class="seat-row-D-L">
-                    <div class="seat available" data-seat="A1"></div>
-                    <div class="seat available" data-seat="A2"></div>
-                    <div class="seat reserved" data-seat="A3"></div>
-                    <div class="seat reserved" data-seat="A2"></div>
-                </div>
-
-                <div class="seat-row-D-R">
-                    <div class="seat available" data-seat="A1"></div>
-                    <div class="seat available" data-seat="A2"></div>
-                    <div class="seat available" data-seat="A3"></div>
-                    <div class="seat available" data-seat="A2"></div>
-                </div>
-
-                <span class="seat-label" style="margin-top: 345px;">E</span>
-                <div class="seat-row-E-L">
-                    <div class="seat available" data-seat="A1"></div>
-                    <div class="seat available" data-seat="A2"></div>
-                    <div class="seat available" data-seat="A3"></div>
-                    <div class="seat available" data-seat="A2"></div>
-                </div>
-
-                <div class="seat-row-E-R">
-                    <div class="seat available" data-seat="A1"></div>
-                    <div class="seat available" data-seat="A2"></div>
-                    <div class="seat available" data-seat="A3"></div>
-                    <div class="seat available" data-seat="A2"></div>
-                </div>
-
-                <span class="seat-label" style="margin-top: 415px;">F</span>
-                <div class="seat-row-F-L">
-                    <div class="seat available" data-seat="A1"></div>
-                    <div class="seat available" data-seat="A2"></div>
-                    <div class="seat reserved" data-seat="A3"></div>
-                    <div class="seat reserved" data-seat="A2"></div>
-                </div>
-
-                <div class="seat-row-F-R">
-                    <div class="seat available" data-seat="A1"></div>
-                    <div class="seat available" data-seat="A2"></div>
-                    <div class="seat available" data-seat="A3"></div>
-                    <div class="seat available" data-seat="A2"></div>
-                </div> 
-
+                        // Right Section
+                        out.print("<div class='seat-row-" + row + "-R'>");
+                        for (int i = 0; i < seatsPerSection && currentIndex < seats.size(); i++) {
+                            Seat seat = seats.get(currentIndex++);
+                            out.print("<button class='seat available' data-seat-id='" + seat.getSeatId() + "' data-seat-number='" + seat.getSeatNumber() + "'></button>");
+                        }
+                        out.print("</div>");
+                    }
+                } else {
+                    out.print("<p>No seats available for this showtime.</p>");
+                }
+            %>
 
         <!-- Seat Legend -->
         <div class="seat-legend">
@@ -204,35 +164,43 @@
 
     <!-- Booking summary -->
     <div class="booking-summary-container">
-        <img src="images/jakeposter.png" alt="Pirates of the Caribbean Poster" >
+        <img src="<%= request.getAttribute("moviePoster") %>" alt="<%= request.getAttribute("movieName") %> Poster" />
         <div class="ticket-pricing">
             <div class="ticket-type">
                 <span>Adult</span>
-                <p>LKR 1500</p>
+                <p>LKR <span id="adultPrice"><%= request.getAttribute("adultPrice") %></span></p>
+                
                 <div class="quantity-control">
-                    <button class="quantity-decrement">-</button>
-                    <button class="quantity">2</button>
-                    <button class="quantity-increment">+</button>
+                    <button class="quantity-decrement" onclick="updateQuantity('adult', -1)">-</button>
+                    <span id="adultQuantity">0</span>
+                    <button class="quantity-increment" onclick="updateQuantity('adult', 1)">+</button>
                 </div>
             </div>
+                
             <div class="ticket-type">
                 <span>Child</span>
-                <p>LKR 1500</p>
+                <p>LKR <span id="childPrice"><%= request.getAttribute("childPrice") %></span></p>
 
                 <div class="quantity-control">
-                    <button class="quantity-decrement">-</button>
-                    <span class="quantity">1</span>
-                    <button class="quantity-increment">+</button>
+                    <button class="quantity-decrement" onclick="updateQuantity('child', -1)">-</button>
+                    <span id="childQuantity">0</span>
+                    <button class="quantity-increment" onclick="updateQuantity('child', 1)">+</button>
                 </div>
             </div>
         </div>
         <div class="total-price">
             <span class="span-3">Total</span>
-            <span>LKR 5500</span>
+            <span>LKR <span id="totalPrice">0</span></span>
         </div>
-        <button class="continue-button">Continue</button>
+        <form method="post" action="SeatReservationServlet" id="seatReservationForm">
+            <input type="hidden" name="movieId" value="<%= request.getAttribute("movieId") %>" />
+            <input type="hidden" name="showtimeId" value="<%= request.getAttribute("showtimeId") %>" />
+            <input type="hidden" id="selectedSeats" name="selectedSeats" />
+            <input type="hidden" id="ticketTypes" name="ticketTypes" />
+            <input type="hidden" id="seatPrices" name="seatPrices" />
+            <button type="button" class="continue-button">Continue</button>
+        </form>
     </div>
-
 
 
     <!-- Footer  -->
@@ -244,10 +212,10 @@
                 and comfortable seating. Enjoy the latest blockbusters and timeless classics like never before!
             </p>
             <div class="social-icons">
-                <a href="https://web.facebook.com"><img src="images/fbicon.png"></a>
-                <a href="https://www.instagram.com/"><img src="images/instaicon.png"></a>
-                <a href="https://x.com"><img src="images/xicon.png"></a>
-                <a href="https://www.tiktok.com"><img src="images/tiktokicon.png"></a>
+                <a href="https://web.facebook.com"><img src="images/icons/fbicon.png"></a>
+                <a href="https://www.instagram.com/"><img src="images/icons/instaicon.png"></a>
+                <a href="https://x.com"><img src="images/icons/xicon.png"></a>
+                <a href="https://www.tiktok.com"><img src="images/icons/tiktokicon.png"></a>
             </div>
         </div>
     
@@ -282,43 +250,105 @@
     </footer>
     
 
-
     <!-- JS Code  -->
     <script>
-
-        // Select all buttons
-        const buttons = document.querySelectorAll('.datesel-button');
-
-        buttons.forEach(button => {
-            button.addEventListener('click', () => {
-        buttons.forEach(btn => btn.classList.remove('active'));
-
-        button.classList.add('active');
-            });
-        });
-
-
-        // Select all time buttons
-        const timeButtons = document.querySelectorAll('.timesel-button');
-
-        timeButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                timeButtons.forEach(btn => btn.classList.remove('active'));
-                
-                button.classList.add('active');
-            });
-        });
-
+        // Initial quantities and prices
+        let adultQuantity = 0;
+        let childQuantity = 0;
+        const adultPrice = parseFloat(document.getElementById("adultPrice").innerText);
+        const childPrice = parseFloat(document.getElementById("childPrice").innerText);
+        let totalSeats = 0.00; 
 
         // Seat Selection Logic
-            const seats = document.querySelectorAll(".seat.available");
+        const seats = document.querySelectorAll(".seat.available");
 
-            seats.forEach((seat) => {
-                seat.addEventListener("click", () => {
-                    seat.classList.toggle("selected"); // Toggle the 'selected' class
-                });
+        seats.forEach((seat) => {
+            seat.addEventListener("click", () => {
+                seat.classList.toggle("selected");
+
+                // Update totalSeats based on selected seats
+                totalSeats = document.querySelectorAll(".seat.available.selected").length;
+
+                // Adjust ticket quantities if they exceed the number of selected seats
+                if (adultQuantity + childQuantity > totalSeats) {
+                    const excess = adultQuantity + childQuantity - totalSeats;
+
+                    if (childQuantity >= excess) {
+                        childQuantity -= excess;
+                    } else {
+                        const remainingExcess = excess - childQuantity;
+                        childQuantity = 0;
+                        adultQuantity = Math.max(0, adultQuantity - remainingExcess);
+                    }
+                    document.getElementById("adultQuantity").innerText = adultQuantity;
+                    document.getElementById("childQuantity").innerText = childQuantity;
+                }
+                calculateTotalPrice();
             });
+        });
 
+        // Function to update ticket quantity
+        function updateQuantity(type, delta) {
+            if (type === "adult") {
+                if (adultQuantity + childQuantity + delta <= totalSeats && adultQuantity + delta >= 0) {
+                    adultQuantity += delta;
+                    document.getElementById("adultQuantity").innerText = adultQuantity;
+                }
+            } else if (type === "child") {
+                if (adultQuantity + childQuantity + delta <= totalSeats && childQuantity + delta >= 0) {
+                    childQuantity += delta;
+                    document.getElementById("childQuantity").innerText = childQuantity;
+                }
+            }
+            calculateTotalPrice();
+        }
+
+        // Function to calculate total price
+        function calculateTotalPrice() {
+            const totalPrice = (adultQuantity * adultPrice) + (childQuantity * childPrice);
+            document.getElementById("totalPrice").innerText = totalPrice.toFixed(2);
+        }
+
+        // Form submission logic when the "Continue" button is clicked
+        const reservationForm = document.getElementById("seatReservationForm");
+        const continueButton = document.querySelector(".continue-button");
+
+        continueButton.addEventListener("click", () => {
+            // Collect selected seat IDs
+            const selectedSeats = Array.from(document.querySelectorAll(".seat.available.selected"))
+                .map(seat => seat.dataset.seatId); // Get SeatID from data-seat-id
+
+            if (selectedSeats.length === 0) {
+                alert("Please select at least one seat.");
+                console.log("No seats selected");
+                return;
+            }
+
+            if (adultQuantity + childQuantity !== selectedSeats.length) {
+                alert("Ticket quantities must match the number of selected seats.");
+                console.log("Ticket quantities do not match selected seats");
+                return;
+            }
+
+            // Populate hidden inputs with form data
+            document.getElementById("selectedSeats").value = JSON.stringify(selectedSeats);
+            document.getElementById("ticketTypes").value = JSON.stringify([
+                ...Array(adultQuantity).fill("Adult"),
+                ...Array(childQuantity).fill("Child"),
+            ]);
+            document.getElementById("seatPrices").value = JSON.stringify([
+                ...Array(adultQuantity).fill(adultPrice),
+                ...Array(childQuantity).fill(childPrice),
+            ]);
+
+            // Debugging log for form data
+            console.log("Selected Seats:", document.getElementById("selectedSeats").value);
+            console.log("Ticket Types:", document.getElementById("ticketTypes").value);
+            console.log("Seat Prices:", document.getElementById("seatPrices").value);
+
+            // Submit the form
+            reservationForm.submit();
+        });
     </script>
     
     </body>

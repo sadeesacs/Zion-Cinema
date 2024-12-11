@@ -136,4 +136,21 @@ public class MovieDetailDAO {
         }
         return times;
     }
+    
+    public int getShowtimeId(int movieId, String date, String time) {
+        String query = "SELECT ShowtimeID FROM showtime WHERE Movie_ID = ? AND Date = ? AND Show_Time = ?";
+        try (Connection connection = dbcon.connect();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, movieId);
+            statement.setString(2, date);
+            statement.setString(3, time);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt("ShowtimeID");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
 }

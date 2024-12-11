@@ -2,6 +2,8 @@
 <%@ page import="model.MovieDetail" %>
 <%@ page import="model.Showtime" %>
 <%@ page import="java.util.List" %>
+<%@ page import="DAO.MovieDetailDAO" %>
+
 
 <%
     MovieDetail movieDetail = (MovieDetail) request.getAttribute("movieDetail");
@@ -10,6 +12,7 @@
     List<String> timesForDate = (List<String>) request.getAttribute("timesForDate");
     String selectedDate = (String) request.getAttribute("selectedDate");
     List<MovieDetail> topNowShowing = (List<MovieDetail>) request.getAttribute("topNowShowing");
+    
 %>
 
 <!DOCTYPE html>
@@ -79,6 +82,7 @@
                         <li class="date-li"><%= new java.text.SimpleDateFormat("EEE").format(java.sql.Date.valueOf(date.getDate())) %></li>
                     <% } %>
                 </ul>
+                <!-- Original form remains unchanged -->
                 <form class="date-buttons-form" method="get" action="MovieDetailServlet">
                     <% for (Showtime date : closestDates) { %>
                         <button type="submit" name="selectedDate" value="<%= date.getDate() %>"
@@ -98,16 +102,26 @@
                         for (String time : timesForDate) {
                             String formattedTime = new java.text.SimpleDateFormat("hh:mm a").format(java.sql.Time.valueOf(time));
                     %>
-                            <button type="button" class="time-button"><%= formattedTime %></button>
+                            <button type="button" class="time-button" 
+                                    onclick="setTime('<%= time %>', '<%= new MovieDetailDAO().getShowtimeId(movieDetail.getMovieId(), selectedDate, time) %>')">
+                                <%= formattedTime %>
+                            </button>
                     <%  }
                     } else { %>
                         <p>No times available for the selected date.</p>
                     <% } %>
                 </div>
             </div>
-            <button class="book-now-button">
-                <span>Book Now</span>
-            </button>
+
+            <!-- Additional Form for SeatReservationServlet -->
+            <form id="seatReservationForm" method="post" action="SeatReservationServlet">
+                <input type="hidden" name="movieId" value="<%= movieDetail.getMovieId() %>" />
+                <input type="hidden" name="selectedDate" id="hiddenSelectedDate" value="<%= selectedDate %>" />
+                <input type="hidden" name="showtimeId" id="hiddenShowtimeId" value="" />
+                <button type="submit" class="book-now-button">
+                    <span>Book Now</span>
+                </button>
+            </form>
         </div>
 
 
@@ -184,6 +198,21 @@
         </footer>
         
         <script>
+            
+            function setTime(selectedTime, showtimeId) {
+                // Set the ShowtimeID and selected time in the hidden form inputs
+                document.getElementById('hiddenShowtimeId').value = showtimeId;
+                document.getElementById('hiddenSelectedDate').value = selectedTime;
+            }
+            
+            function setDate(date) {
+                document.getElementById('hiddenSelectedDate').value = date;
+            }
+
+            function setShowtime(time, showtimeId) {
+                document.getElementById('hiddenShowtimeId').value = showtimeId;
+            }
+            
             // Select all buttons
             const buttons = document.querySelectorAll('.date-button');
 

@@ -44,6 +44,8 @@ public class MovieDetailServlet extends HttpServlet {
         request.setAttribute("topNowShowing", topNowShowing);
         request.setAttribute("timesForDate", timesForDate);
         request.setAttribute("selectedDate", dateForTimes);
+        
+        request.setAttribute("movieDAO", movieDAO);
 
         request.getRequestDispatcher("MovieDetail.jsp").forward(request, response);
     }
