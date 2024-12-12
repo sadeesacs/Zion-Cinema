@@ -29,7 +29,7 @@ public class ADLoginDAO {
                     if (BCrypt.checkpw(password, hashedPassword)) {
                         // Set session if authentication succeeds
                         HttpSession session = request.getSession();
-                        session.setMaxInactiveInterval(40);
+                        session.setMaxInactiveInterval(3600);
                         session.setAttribute("username", username);
                         return true;
                     }

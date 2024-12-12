@@ -27,9 +27,14 @@
 
                     String username = (session != null) ? (String) session.getAttribute("username") : null;
                     if (username != null){
+                        System.out.println("Session is null.");
                     %>
                 <div class="AD-username"><%=username%></div>
                 <div class="word-admin">Admin</div>
+                <%
+                } else {
+                %>
+                <div class="AD-username">Session expired or not logged in.</div>
                 <%
                     }
                 %>
