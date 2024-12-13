@@ -190,89 +190,89 @@
 
                 <!-- Scrollable Form Section -->
                 <div class="movie-slider-form">
-                    <form action="AddFood" method="post" enctype="multipart/form-data">
+                    <form action="AddMovie" method="post" enctype="multipart/form-data">
                         <div class="movie-form">
                             
                             <div class="movie-form-row" style="margin-top: 20px;">
                                 <label for="movie-name" class="movie-form-label">Movie Name</label>
-                                <input class="form-m-name" name="name" type="text" id="movie-name" />
+                                <input class="form-m-name" name="name" type="text" id="movie-name" required />
                             </div>
                             <div class="movie-form-row">
                                 <label for="movie-desc" class="movie-form-label">Movie Description</label>
-                                <textarea class="form-m-desc" name="description" id="movie-desc"></textarea>
+                                <textarea class="form-m-desc" name="description" id="movie-desc" required></textarea>
                             </div>
                             <div class="movie-form-row">
                                 <label for="movie-duration" class="movie-form-label">Movie Duration</label>
-                                <input class="form-m-duration" name="duration" type="text" id="movie-duration" />
+                                <input class="form-m-duration" name="duration" type="text" id="movie-duration" required />
                             </div>
                             <div class="movie-form-row">
                                 <label for="movie-year" class="movie-form-label">Movie Year</label>
-                                <input class="form-m-year" name="year" type="text" id="movie-year" />
+                                <input class="form-m-year" name="year" type="text" id="movie-year" required />
                             </div>
                             <div class="movie-form-row">
                                 <label for="movie-rating" class="movie-form-label">Movie Rating</label>
-                                <input class="form-m-rating" name="rating" type="text" id="movie-rating" />
+                                <input class="form-m-rating" name="rating" type="text" id="movie-rating" required />
                             </div>
                             <div class="movie-form-row">
                                 <label for="movie-genre" class="movie-form-label">Movie Genre 01</label>
                                 <div class="genre-select">
-                                    <select>
-                                        <option value="Action">Action</option>
-                                        <option value="Comedy">Comedy</option>
-                                        <option value="Drama">Drama</option>
-                                        <option value="Horror">Horror</option>
-                                        <option value="Romance">Romance</option>
-                                        <option value="Sci-Fi">Sci-Fi</option>
-                                        <option value="Adventure">Adventure</option>
+                                    <select name="genre1" >
+                                        <option value="1">Action</option>
+                                        <option value="2">Comedy</option>
+                                        <option value="3">Drama</option>
+                                        <option value="4">Horror</option>
+                                        <option value="5">Romance</option>
+                                        <option value="6-Fi">Sci-Fi</option>
+                                        <option value="7">Adventure</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="movie-form-row">
                                 <label for="movie-genre" class="movie-form-label">Movie Genre 02</label>
                                 <div class="genre-select">
-                                    <select>
-                                        <option value="Action">Action</option>
-                                        <option value="Comedy">Comedy</option>
-                                        <option value="Drama">Drama</option>
-                                        <option value="Horror">Horror</option>
-                                        <option value="Romance">Romance</option>
-                                        <option value="Sci-Fi">Sci-Fi</option>
-                                        <option value="Adventure">Adventure</option>
+                                    <select name="genre2" >
+                                        <option value="1">Action</option>
+                                        <option value="2">Comedy</option>
+                                        <option value="3">Drama</option>
+                                        <option value="4">Horror</option>
+                                        <option value="5">Romance</option>
+                                        <option value="6-Fi">Sci-Fi</option>
+                                        <option value="7">Adventure</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="movie-form-row">
                                 <label for="movie-genre" class="movie-form-label">Movie Genre 03</label>
                                 <div class="genre-select">
-                                    <select>
-                                        <option value="Action">Action</option>
-                                        <option value="Comedy">Comedy</option>
-                                        <option value="Drama">Drama</option>
-                                        <option value="Horror">Horror</option>
-                                        <option value="Romance">Romance</option>
-                                        <option value="Sci-Fi">Sci-Fi</option>
-                                        <option value="Adventure">Adventure</option>
+                                    <select name="genre3" >
+                                        <option value="1">Action</option>
+                                        <option value="2">Comedy</option>
+                                        <option value="3">Drama</option>
+                                        <option value="4">Horror</option>
+                                        <option value="5">Romance</option>
+                                        <option value="6-Fi">Sci-Fi</option>
+                                        <option value="7">Adventure</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="movie-form-row">
                                 <label for="movie-genre" class="movie-form-label">Movie Genre 04</label>
                                 <div class="genre-select">
-                                    <select>
-                                        <option value="Action">Action</option>
-                                        <option value="Comedy">Comedy</option>
-                                        <option value="Drama">Drama</option>
-                                        <option value="Horror">Horror</option>
-                                        <option value="Romance">Romance</option>
-                                        <option value="Sci-Fi">Sci-Fi</option>
-                                        <option value="Adventure">Adventure</option>
+                                    <select name="genre4" >
+                                        <option value="1">Action</option>
+                                        <option value="2">Comedy</option>
+                                        <option value="3">Drama</option>
+                                        <option value="4">Horror</option>
+                                        <option value="5">Romance</option>
+                                        <option value="6-Fi">Sci-Fi</option>
+                                        <option value="7">Adventure</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="movie-form-row">
                                 <label for="movie-status" class="movie-form-label">Show Status</label>
                                 <div class="status-select">
-                                    <select>
+                                    <select name="status" required>
                                         <option value="NowShowing">Now Showing</option>
                                         <option value="Comming Soon">Coming Soon</option>
                                     </select>
@@ -280,14 +280,14 @@
                             </div>
                             <div class="movie-form-row">
                                 <label for="movie-trailer" class="movie-form-label">Movie Trailer</label>
-                                <input class="form-m-trailer" type="text" id="movie-trailer" />
+                                <input class="form-m-trailer" type="text" name="trailer" id="movie-trailer"  required />
                             </div>
                             <div class="movie-form-row">
                                 <label for="movie-Banner" class="movie-form-label">Movie Banner</label>
                                 <div class="m-image-select">
                                     <label class="custom-file-upload">
                                         <img src="images/icons/Upload.png" class="m-img-3" />
-                                        <input type="file" accept=".jpeg, .webp, .png" />
+                                        <input type="file" name="banner" accept=".jpeg, .webp, .png"  />
                                     </label>
                                     <div class="div-20">Drag your images/icons here</div>
                                     <div class="div-21">(Only *.jpeg, *.webp and *.png images/icons will be accepted)</div>
@@ -298,7 +298,7 @@
                                 <div class="m-image-select">
                                     <label class="custom-file-upload">
                                         <img src="images/icons/Upload.png" class="m-img-3" />
-                                        <input type="file" accept=".jpeg, .webp, .png" />
+                                        <input type="file" name="poster" accept=".jpeg, .webp, .png"  />
                                     </label>
                                     <div class="div-20">Drag your images/icons here</div>
                                     <div class="div-21">(Only *.jpeg, *.webp and *.png images/icons will be accepted)</div>
@@ -309,14 +309,14 @@
                                 <div class="m-image-select">
                                     <label class="custom-file-upload">
                                         <img src="images/icons/Upload.png" class="m-img-3" />
-                                        <input type="file" accept=".jpeg, .webp, .png" />
+                                        <input type="file" name="carousal" accept=".jpeg, .webp, .png"  />
                                     </label>
                                     <div class="div-20">Drag your images/icons here</div>
                                     <div class="div-21">(Only *.jpeg, *.webp and *.png images/icons will be accepted)</div>
                                 </div>
                             </div>
                         </div>
-                    </form>
+
                 </div>
 
                 <!-- Fixed Footer -->
@@ -325,6 +325,7 @@
                     <button class="movie-btn-cancel" type="button" onclick="hideSlider()">Cancel</button>
                     <button class="movie-btn-save" type="submit">Add Movie</button>
                 </div>
+                </form>
             </div>
         </div>
 

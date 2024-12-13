@@ -120,42 +120,5 @@ public class MovieListDAO {
             }
         }
     }
-    
-    // Fetch all movies with Status = 'Now Showing'
-    public static List<Map<String, Object>> getNowShowingMovies() {
-        List<Map<String, Object>> movies = new ArrayList<>();
-        String query = "SELECT Movie_ID, Movie_Name FROM movies WHERE Status = 'Now Showing'";
-        try (Connection connection = dbcon.connect();
-             PreparedStatement statement = connection.prepareStatement(query);
-             ResultSet rs = statement.executeQuery()) {
-
-            if (connection == null) {
-                System.err.println("Database connection is null");
-                return movies;
-            }
-
-            while (rs.next()) {
-                Map<String, Object> movie = new HashMap<>();
-                movie.put("Movie_ID", rs.getInt("Movie_ID"));
-                movie.put("Movie_Name", rs.getString("Movie_Name"));
-                movies.add(movie);
-            }
-
-            System.out.println("Movies retrieved: " + movies.size());
-
-        } catch (SQLException e) {
-            System.err.println("Error executing query: " + e.getMessage());
-            e.printStackTrace();
-        }
-
-        return movies;
-    }
-    
-    public static void main(String[] args) {
-        List<Map<String, Object>> movies = getNowShowingMovies();
-        for (Map<String, Object> movie : movies) {
-            System.out.println("Movie ID: " + movie.get("Movie_ID") + ", Name: " + movie.get("Movie_Name"));
-        }
-    }
 }
 
