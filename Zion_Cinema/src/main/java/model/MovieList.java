@@ -6,7 +6,7 @@ public class MovieList {
     private String Description;
     private String Duration;
     private String Trailer;
-    private int Year;
+    private String Year;
     private String Rating;
     private String status;
     private String poster;
@@ -17,7 +17,7 @@ public class MovieList {
 
     }
 
-    public MovieList(int MovieID, String MovieName, String Description, String Duration, String Trailer, int Year, String Rating, String status, String poster, String banner, String carousal) {
+    public MovieList(int MovieID, String MovieName, String Description, String Duration, String Trailer, String Year, String Rating, String status, String poster, String banner, String carousal) {
         this.MovieID = MovieID;
         this.MovieName = MovieName;
         this.Description = Description;
@@ -62,10 +62,10 @@ public class MovieList {
     public void setTrailer(String trailer) {
         Trailer = trailer;
     }
-    public int getYear() {
+    public String getYear() {
         return Year;
     }
-    public void setYear(int year) {
+    public void setYear(String year) {
         Year = year;
     }
     public String getRating() {

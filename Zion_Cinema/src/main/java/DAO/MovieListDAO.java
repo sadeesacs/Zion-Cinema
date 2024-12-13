@@ -147,7 +147,7 @@ public class MovieListDAO {
             stmt.setString(8, imagebanner);
             stmt.setString(9, imageposter);
             stmt.setString(10, imagecarousal);
-            int rows = stmt.executeUpdate();
+
 
             // Execute the insert
             int rowsAffected = stmt.executeUpdate();
