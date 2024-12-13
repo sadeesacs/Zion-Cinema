@@ -7,8 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.HashMap;
-import java.util.Map;
 
 public class MovieListDAO {
     // Method to retrieve all customer inquiries from the database
@@ -108,6 +106,57 @@ public class MovieListDAO {
 
         } catch (SQLException e) {
             System.out.println("Error deleting Movie: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        } finally {
+            // Properly close database resources
+            try {
+                if (stmt != null) stmt.close();
+                if (connection != null) connection.close();
+            } catch (SQLException e) {
+                System.out.println("Error closing database resources: " + e.getMessage());
+            }
+        }
+    }
+    public boolean addmoviedata(String name, String description, String duration, String year,String rating,String status,String trailer,String imagebanner,String imageposter,String imagecarousal) {
+        Connection connection = null;
+        PreparedStatement stmt = null;
+
+        try {
+            // Establish database connection
+            connection = dbcon.connect();
+
+            // Check if connection is successful
+            if (connection == null) {
+                System.out.println("Database connection failed");
+                return false;
+            }
+
+            // Prepare SQL insert statement
+            String query = "INSERT INTO movies (Movie_Name,Description, Duration, Trailer,Year,Rating,Status,Poster,Banner,Carousal) VALUES (?,?,?,?,?,?,?,?,?,?)";
+            stmt = connection.prepareStatement(query);
+
+            // Set parameters
+            stmt.setString(1,name );
+            stmt.setString(2, description);
+            stmt.setString(3, duration);
+            stmt.setString(4, year);
+            stmt.setString(5, rating);
+            stmt.setString(6, trailer);
+            stmt.setString(7, status);
+            stmt.setString(8, imagebanner);
+            stmt.setString(9, imageposter);
+            stmt.setString(10, imagecarousal);
+            int rows = stmt.executeUpdate();
+
+            // Execute the insert
+            int rowsAffected = stmt.executeUpdate();
+
+            // Return true if at least one row was inserted
+            return rowsAffected > 0;
+
+        } catch (SQLException e) {
+            System.out.println("Error adding food item: " + e.getMessage());
             e.printStackTrace();
             return false;
         } finally {
