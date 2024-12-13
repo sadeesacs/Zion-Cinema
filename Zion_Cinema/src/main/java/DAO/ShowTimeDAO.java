@@ -8,7 +8,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ShowTimeDAO {
     public boolean addFood(String name,String type, double price, String imageName) {
@@ -94,8 +96,6 @@ public class ShowTimeDAO {
                 rowCount++;
             }
 
-
-
         } catch (SQLException e) {
             System.err.println("Database error: " + e.getMessage());
             e.printStackTrace();
@@ -112,6 +112,54 @@ public class ShowTimeDAO {
 
         return Movie;
     }
+    
+    public static List<Map<String, Object>> getScheduleByMovieId(int movieId) {
+        List<Map<String, Object>> schedule = new ArrayList<>();
+        String query = "SELECT Date, Show_Time FROM showtime WHERE Movie_ID = ?";
 
+        try (Connection connection = dbcon.connect();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setInt(1, movieId);
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+                Map<String, Object> row = new HashMap<>();
+                row.put("date", rs.getDate("Date"));
+                row.put("time", rs.getTime("Show_Time"));
+                schedule.add(row);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return schedule;
+    }
+
+    public static void updateShowtimes(int movieId, List<Map<String, String>> showtimes) {
+        String deleteQuery = "DELETE FROM showtime WHERE Movie_ID = ?";
+        String insertQuery = "INSERT INTO showtime (Movie_ID, Date, Show_Time) VALUES (?, ?, ?)";
+
+        try (Connection connection = dbcon.connect();
+             PreparedStatement deleteStmt = connection.prepareStatement(deleteQuery);
+             PreparedStatement insertStmt = connection.prepareStatement(insertQuery)) {
+
+            deleteStmt.setInt(1, movieId);
+            deleteStmt.executeUpdate();
+
+            for (Map<String, String> showtime : showtimes) {
+                insertStmt.setInt(1, movieId);
+                insertStmt.setString(2, showtime.get("date"));
+                insertStmt.setString(3, showtime.get("time"));
+                insertStmt.addBatch();
+            }
+
+            insertStmt.executeBatch();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
