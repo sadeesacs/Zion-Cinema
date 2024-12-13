@@ -136,8 +136,7 @@
                     if (!Movie.isEmpty()) {
                         // data type,variable,array name
                         for (MovieList Movies : Movie) {
-
-
+                            System.out.println(Movies.getMovieName());
                 %>
                 <div class="movie">
                     <p class="movie-id"><%=Movies.getMovieID()%></p>
@@ -580,7 +579,7 @@
             }
 
             function hideSlider2() {
-                document.getElementById('addItemSlider').classList.remove('active');
+                document.getElementById('addMovieSlider').classList.remove('active');
                 location.reload();
             }
 
@@ -593,7 +592,7 @@
             }
 
             function hideEditSlider2() {
-                document.getElementById('editItemSlider').classList.remove('active');
+                document.getElementById('editMovieSlider').classList.remove('active');
                 location.reload();
             }
 
