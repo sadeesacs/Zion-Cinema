@@ -9,7 +9,19 @@ public class Seat {
         this.seatNumber = seatNumber;
     }
 
-    public int getSeatId() {return seatId;}
+    public int getSeatId() {
+        return seatId;
+    }
 
-    public String getSeatNumber() {return seatNumber;}
+    public void setSeatId(int seatId) {
+        this.seatId = seatId;
+    }
+
+    public String getSeatNumber() {
+        return seatNumber;
+    }
+
+    public void setSeatNumber(String seatNumber) {
+        this.seatNumber = seatNumber;
+    }
 }

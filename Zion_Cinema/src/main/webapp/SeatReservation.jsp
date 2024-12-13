@@ -2,6 +2,7 @@
 <%@ page import="model.Showtime" %>
 <%@ page import="model.Seat" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.util.Set" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 
 <!DOCTYPE html>
@@ -121,29 +122,29 @@
             <span class="seat-label" style="margin-top: 415px;">F</span>
             <%
                 List<Seat> seats = (List<Seat>) request.getAttribute("seats");
-                if (seats != null && !seats.isEmpty()) {
-                    int currentIndex = 0;
-                    for (char row = 'A'; row <= 'F'; row++) {
-                        int seatsPerSection = (row == 'A' || row == 'B') ? 3 : 4;
+                Set<Integer> reservedSeatIds = (Set<Integer>) request.getAttribute("reservedSeatIds");
+                int currentIndex = 0;
 
-                        // Left Section
-                        out.print("<div class='seat-row-" + row + "-L'>");
-                        for (int i = 0; i < seatsPerSection && currentIndex < seats.size(); i++) {
-                            Seat seat = seats.get(currentIndex++);
-                            out.print("<button class='seat available' data-seat-id='" + seat.getSeatId() + "' data-seat-number='" + seat.getSeatNumber() + "'></button>");
-                        }
-                        out.print("</div>");
+                for (char row = 'A'; row <= 'F'; row++) {
+                    int seatsPerSection = (row == 'A' || row == 'B') ? 3 : 4;
 
-                        // Right Section
-                        out.print("<div class='seat-row-" + row + "-R'>");
-                        for (int i = 0; i < seatsPerSection && currentIndex < seats.size(); i++) {
-                            Seat seat = seats.get(currentIndex++);
-                            out.print("<button class='seat available' data-seat-id='" + seat.getSeatId() + "' data-seat-number='" + seat.getSeatNumber() + "'></button>");
-                        }
-                        out.print("</div>");
+                    // Left Section
+                    out.print("<div class='seat-row-" + row + "-L'>");
+                    for (int i = 0; i < seatsPerSection && currentIndex < seats.size(); i++) {
+                        Seat seat = seats.get(currentIndex++);
+                        String seatClass = reservedSeatIds.contains(seat.getSeatId()) ? "seat reserved" : "seat available";
+                        out.print("<button class='" + seatClass + "' data-seat-id='" + seat.getSeatId() + "' data-seat-number='" + seat.getSeatNumber() + "'></button>");
                     }
-                } else {
-                    out.print("<p>No seats available for this showtime.</p>");
+                    out.print("</div>");
+
+                    // Right Section
+                    out.print("<div class='seat-row-" + row + "-R'>");
+                    for (int i = 0; i < seatsPerSection && currentIndex < seats.size(); i++) {
+                        Seat seat = seats.get(currentIndex++);
+                        String seatClass = reservedSeatIds.contains(seat.getSeatId()) ? "seat reserved" : "seat available";
+                        out.print("<button class='" + seatClass + "' data-seat-id='" + seat.getSeatId() + "' data-seat-number='" + seat.getSeatNumber() + "'></button>");
+                    }
+                    out.print("</div>");
                 }
             %>
 
@@ -198,7 +199,8 @@
             <input type="hidden" id="selectedSeats" name="selectedSeats" />
             <input type="hidden" id="ticketTypes" name="ticketTypes" />
             <input type="hidden" id="seatPrices" name="seatPrices" />
-            <button type="button" class="continue-button">Continue</button>
+            <input type="hidden" name="continueToFood" value="true" />
+            <button type="submit" class="continue-button">Continue</button>
         </form>
     </div>
 
@@ -252,12 +254,11 @@
 
     <!-- JS Code  -->
     <script>
-        // Initial quantities and prices
         let adultQuantity = 0;
         let childQuantity = 0;
         const adultPrice = parseFloat(document.getElementById("adultPrice").innerText);
         const childPrice = parseFloat(document.getElementById("childPrice").innerText);
-        let totalSeats = 0.00; 
+        let totalSeats = 0.00;
 
         // Seat Selection Logic
         const seats = document.querySelectorAll(".seat.available");
@@ -331,6 +332,9 @@
             }
 
             // Populate hidden inputs with form data
+            const movieId = document.querySelector('input[name="movieId"]').value;
+            const showtimeId = document.querySelector('input[name="showtimeId"]').value;
+
             document.getElementById("selectedSeats").value = JSON.stringify(selectedSeats);
             document.getElementById("ticketTypes").value = JSON.stringify([
                 ...Array(adultQuantity).fill("Adult"),
@@ -342,6 +346,8 @@
             ]);
 
             // Debugging log for form data
+            console.log("MovieID:", movieId);
+            console.log("ShowtimeID:", showtimeId);
             console.log("Selected Seats:", document.getElementById("selectedSeats").value);
             console.log("Ticket Types:", document.getElementById("ticketTypes").value);
             console.log("Seat Prices:", document.getElementById("seatPrices").value);

@@ -13,7 +13,13 @@ public class TemporaryMoviesDAO {
     public void insertTemporaryMovie(int movieId, int showtimeId, int userId) {
         String query = "INSERT INTO temporarymovies (Movie_ID, Showtime_ID, UserID) VALUES (?, ?, ?)";
         try (Connection connection = dbcon.connect();
-             PreparedStatement statement = connection.prepareStatement(query)) {
+            PreparedStatement statement = connection.prepareStatement(query)) {
+            
+            System.out.println("Inserting Temporary Movie:");
+            System.out.println("Movie ID: " + movieId);
+            System.out.println("Showtime ID: " + showtimeId); ///this iss
+            System.out.println("UserID: " + userId);
+            
             statement.setInt(1, movieId);
             statement.setInt(2, showtimeId);
             statement.setInt(3, userId);

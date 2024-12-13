@@ -6,9 +6,14 @@ import DAO.SeatDAO;
 import DAO.TemporaryMoviesDAO;
 import DAO.TemporarySeatsDAO;
 import DAO.TicketPriceDAO;
+import DAO.SeatReservationDAO;
+import DAO.UserDAO;
 import model.Seat;
 import model.MovieDetail;
 import model.Showtime;
+
+import java.util.HashSet;
+import java.util.Set;
 import java.util.List;
 import java.util.Random;
 import org.json.JSONArray;
@@ -22,7 +27,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.json.JSONException;
 
-
 @WebServlet(name = "SeatReservationServlet", urlPatterns = {"/SeatReservationServlet"})
 public class SeatReservationServlet extends HttpServlet {
 
@@ -34,15 +38,21 @@ public class SeatReservationServlet extends HttpServlet {
 
             Object userIdObj = session.getAttribute("UserID");
             int userId;
+
+            // Check if user is a guest and create a UserID if necessary
             if (userIdObj == null) {
-                // Generate a unique ID for guest users
                 userId = 100000 + new Random().nextInt(900000);
                 session.setAttribute("UserID", userId);
                 session.setAttribute("IsGuest", 1);
+
+                // Insert the guest user into the users table
+                UserDAO userDAO = new UserDAO();
+                userDAO.insertGuestUser(userId);
             } else {
                 userId = (int) userIdObj;
             }
 
+            // Get movieId and showtimeId from the request
             String movieIdParam = request.getParameter("movieId");
             String showtimeIdParam = request.getParameter("showtimeId");
 
@@ -53,9 +63,12 @@ public class SeatReservationServlet extends HttpServlet {
             int movieId = Integer.parseInt(movieIdParam);
             int showtimeId = Integer.parseInt(showtimeIdParam);
 
+            // Fetch details and set attributes for JSP
             MovieDetailDAO movieDAO = new MovieDetailDAO();
             ShowtimeDAO showtimeDAO = new ShowtimeDAO();
             SeatDAO seatDAO = new SeatDAO();
+            TemporarySeatsDAO temporarySeatsDAO = new TemporarySeatsDAO();
+            SeatReservationDAO seatReservationDAO = new SeatReservationDAO();
             TicketPriceDAO ticketPriceDAO = new TicketPriceDAO();
 
             MovieDetail movieDetail = movieDAO.getMovieDetails(movieId);
@@ -63,7 +76,6 @@ public class SeatReservationServlet extends HttpServlet {
             List<Showtime> closestDates = showtimeDAO.getClosestDatesForMovie(movieId);
             List<String> timesForDate = showtimeDAO.getTimesForDate(movieId, selectedShowtime.getDate());
             List<Seat> seats = seatDAO.getAllSeats();
-
             double adultPrice = ticketPriceDAO.getTicketPrice(showtimeId, "Adult");
             double childPrice = ticketPriceDAO.getTicketPrice(showtimeId, "Child");
 
@@ -71,18 +83,10 @@ public class SeatReservationServlet extends HttpServlet {
                 throw new IllegalArgumentException("Invalid Movie or Showtime ID.");
             }
 
-            // Set attributes for JSP
-            request.setAttribute("movieId", movieId);
-            request.setAttribute("showtimeId", showtimeId);
-            request.setAttribute("movieName", movieDetail.getName());
-            request.setAttribute("moviePoster", movieDetail.getPoster());
-            request.setAttribute("closestDates", closestDates);
-            request.setAttribute("timesForDate", timesForDate);
-            request.setAttribute("selectedDate", selectedShowtime.getDate());
-            request.setAttribute("selectedTime", selectedShowtime.getTime());
-            request.setAttribute("seats", seats);
-            request.setAttribute("adultPrice", adultPrice);
-            request.setAttribute("childPrice", childPrice);
+            // Get reserved seats from both tables
+            Set<Integer> reservedSeatIds = new HashSet<>();
+            reservedSeatIds.addAll(temporarySeatsDAO.getReservedSeatIds(showtimeId));
+            reservedSeatIds.addAll(seatReservationDAO.getReservedSeatIds(showtimeId));
 
             // Save movie and seat selections to temporary tables
             TemporaryMoviesDAO temporaryMoviesDAO = new TemporaryMoviesDAO();
@@ -97,25 +101,58 @@ public class SeatReservationServlet extends HttpServlet {
                 JSONArray ticketTypes = new JSONArray(ticketTypesParam);
                 JSONArray seatPrices = new JSONArray(seatPricesParam);
 
-                TemporarySeatsDAO temporarySeatsDAO = new TemporarySeatsDAO();
-
                 for (int i = 0; i < seatIds.length(); i++) {
                     int seatId = seatIds.getInt(i);
+
+                    // Check if the seat is already reserved
+                    if (reservedSeatIds.contains(seatId)) {
+                        response.setContentType("text/html");
+                        response.getWriter().write(
+                            "<script>alert('The requested seat has been already booked.'); window.history.back();</script>"
+                        );
+                        return; // Stop processing further
+                    }
+
                     String ticketType = ticketTypes.getString(i);
                     double price = seatPrices.getDouble(i);
 
-                    // Insert seat into temporaryseats table
                     temporarySeatsDAO.insertTemporarySeat(userId, seatId, price, showtimeId, ticketType);
                 }
             }
+
+            // Store data in session for FoodPreOrder.jsp
+            session.setAttribute("selectedMovie", movieDetail);
+            session.setAttribute("selectedShowtime", selectedShowtime);
+            session.setAttribute("selectedDate", selectedShowtime.getDate());
+            session.setAttribute("selectedTime", selectedShowtime.getTime());
+            session.setAttribute("selectedSeats", selectedSeatsParam);
+
+            // Redirect to FoodPreOrderServlet if "continueToFood" is set
+            String continueToFood = request.getParameter("continueToFood");
+            if ("true".equals(continueToFood)) {
+                response.sendRedirect("FoodPreOrderServlet");
+                return;
+            }
+
+            // Forward the request to the SeatReservation.jsp page
+            request.setAttribute("movieId", movieId);
+            request.setAttribute("showtimeId", showtimeId);
+            request.setAttribute("movieName", movieDetail.getName());
+            request.setAttribute("moviePoster", movieDetail.getPoster());
+            request.setAttribute("closestDates", closestDates);
+            request.setAttribute("timesForDate", timesForDate);
+            request.setAttribute("selectedDate", selectedShowtime.getDate());
+            request.setAttribute("selectedTime", selectedShowtime.getTime());
+            request.setAttribute("seats", seats);
+            request.setAttribute("reservedSeatIds", reservedSeatIds);
+            request.setAttribute("adultPrice", adultPrice);
+            request.setAttribute("childPrice", childPrice);
+
             request.getRequestDispatcher("SeatReservation.jsp").forward(request, response);
 
-        } catch (NumberFormatException e) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid numeric parameter: " + e.getMessage());
-        } catch (IllegalArgumentException e) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, e.getMessage());
-        } catch (ServletException | IOException | JSONException e) {
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "An unexpected error occurred: " + e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
         }
     }
 }

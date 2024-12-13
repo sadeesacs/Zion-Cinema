@@ -62,7 +62,7 @@ public class MovieDetailDAO {
             statement.setInt(1, movieId);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                showtimes.add(new Showtime(resultSet.getString("Date"), resultSet.getString("Show_Time")));
+                showtimes.add(new Showtime(0, resultSet.getString("Date"), resultSet.getString("Show_Time")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -111,7 +111,7 @@ public class MovieDetailDAO {
             statement.setInt(1, movieId);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                showtimes.add(new Showtime(resultSet.getString("Date"), null)); // Only add dates for now
+                showtimes.add(new Showtime(0, resultSet.getString("Date"), null));// Only add dates for now
             }
         } catch (SQLException e) {
             e.printStackTrace();
