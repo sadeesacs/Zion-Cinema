@@ -182,7 +182,7 @@
             <div class="movie-slider-container">
                 <div class="movie-slider-header">
                     <div class="movie-slider-title">Add Movie Details</div>
-                    <img class="close-movie-slider" src="images/icons/Cancelslide.png" onclick="hideSlider()" />
+                    <img class="close-movie-slider" src="images/icons/Cancelslide.png" onclick="hideSlider2()" />
                     <div class="movie-slider-hline">
                         <hr size="2" color="#F5C51B" />
                     </div>
@@ -338,7 +338,7 @@
             <div class="movie-slider-container">
                 <div class="movie-slider-header">
                     <div class="movie-slider-title">Edit Movie Details</div>
-                    <img class="close-movie-slider" src="images/icons/Cancelslide.png" onclick="hideEditSlider()" />
+                    <img class="close-movie-slider" src="images/icons/Cancelslide.png" onclick="hideEditSlider2()" />
                     <div class="movie-slider-hline">
                         <hr size="2" color="#F5C51B" />
                     </div>
@@ -579,12 +579,22 @@
                 document.getElementById('addMovieSlider').classList.remove('active');
             }
 
+            function hideSlider2() {
+                document.getElementById('addItemSlider').classList.remove('active');
+                location.reload();
+            }
+
             function showEditSlider() {
                 document.getElementById('editMovieSlider').classList.add('active');
             }
 
             function hideEditSlider() {
                 document.getElementById('editMovieSlider').classList.remove('active');
+            }
+
+            function hideEditSlider2() {
+                document.getElementById('editItemSlider').classList.remove('active');
+                location.reload();
             }
 
             function showReviewSlider() {
