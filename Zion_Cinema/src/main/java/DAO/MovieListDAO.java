@@ -133,16 +133,16 @@ public class MovieListDAO {
             }
 
             // Prepare SQL insert statement
-            String query = "INSERT INTO movies (Movie_Name,Description, Duration, Trailer,Year,Rating,Status,Poster,Banner,Carousal) VALUES (?,?,?,?,?,?,?,?,?,?)";
+            String query = "INSERT INTO movies (Movie_Name,Description,Duration,Trailer,Year,Rating,Status,Poster,Banner,Carousal) VALUES (?,?,?,?,?,?,?,?,?,?)";
             stmt = connection.prepareStatement(query);
 
             // Set parameters
-            stmt.setString(1,name );
+            stmt.setString(1,name);
             stmt.setString(2, description);
             stmt.setString(3, duration);
             stmt.setString(4, year);
-            stmt.setString(5, rating);
-            stmt.setString(6, trailer);
+            stmt.setString(5, trailer);
+            stmt.setString(6, rating);
             stmt.setString(7, status);
             stmt.setString(8, imagebanner);
             stmt.setString(9, imageposter);
