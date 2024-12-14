@@ -40,10 +40,11 @@
             <img src="images/pic.png" alt="Cinema illustration">
         </div>
         <!-- Right Side Registration Form -->
-        <div class="registration-form"><br><br><br>
+        <div class="registration-form"  >
+    <br><br><br>
             <h1>Welcome to <span>Zion Cinema</span></h1>
             <p>Create Your Zion Cinema Account</p><br><br>
-            <form action="register.php" method="POST">
+            <form action="RegisterServlet" method="POST">
                 <div class="form-group">
                     <div class="form-field">
                         <label for="first_name">First Name</label>
