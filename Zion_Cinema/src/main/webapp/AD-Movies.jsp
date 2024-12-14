@@ -144,7 +144,10 @@
                     <p class="movie-duration"><%=Movies.getDuration()%></p>
                     <div class="movie-actions">
                         <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
-                        <div class="edit" onclick="showEditSlider()"><i class="bi bi-pencil-fill"></i></div>
+
+                        <div class="edit" onclick="return editFormID('<%=Movies.getMovieID()%>">
+                            <i class="bi bi-pencil-fill"></i>
+                        </div>
 
 
                         <form action="DeleteMovie" method="post">
@@ -345,7 +348,7 @@
 
                 <!-- Scrollable Form Section -->
                 <div class="movie-slider-form">
-                    <form>
+                    <form id="editMovieForm" action="EditMovie" method="post" enctype="multipart/form-data">
                         <div class="movie-form">
                             <div class="movie-form-row" style="margin-top: 20px;">
                                 <label for="movie-name" class="movie-form-label">Movie Name</label>
@@ -602,6 +605,29 @@
 
             function hideReviewSlider() {
                 document.getElementById('reviewMovieslider').classList.remove('active');
+            }
+
+            function editFormID(MovieID) {
+                // Get references to elements
+                const form = document.getElementById('editMovieForm');
+                const editSlider = document.getElementById('editMovieSlider');
+                const MovieIDInput = form.querySelector('[name="MovieID"]');
+
+                // Ensure foodID is set in the hidden input
+                if (MovieIDInput) {
+                    MovieIDInput.value = MovieID;
+                }
+
+                // Explicitly show the edit slider
+                if (editSlider) {
+                    editSlider.classList.add('active');
+                    console.log('Edit slider should be open now');
+                } else {
+                    console.error('Edit slider element not found');
+                }
+
+                // Prevent default form submission
+                return false;
             }
         </script>
         
