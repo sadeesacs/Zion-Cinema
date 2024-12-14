@@ -23,9 +23,23 @@
                 <div class="search-bar">
                     <span>Search here.....</span>
                 </div>
-                <div class="AD-username">Emma Watson</div>
+                <%
+                    // Check if session exists and retrieve the username attribute
+                    String username = (session != null) ? (String) session.getAttribute("username") : null;
+
+                    if (username != null) {
+                %>
+                <div class="AD-username"><%= username %></div>
                 <div class="word-admin">Admin</div>
-                <div class="user-icon"></div>
+                <%
+                } else {
+                %>
+                <div class="AD-username">Session expired or not logged in.</div>
+                <%
+                    }
+                %>
+
+                <div class="user-icon" ><i class="bi bi-person-fill"></i></div>
                 <img src="images/icons/notificationicon.png" class="notification-icon">
                 <img src="images/icons/messagesicon.png" class="message-icon">
             </div>
