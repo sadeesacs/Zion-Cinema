@@ -137,7 +137,7 @@ public class MovieListDAO {
             connection.setAutoCommit(false);
 
             // Prepare SQL insert statement for movie
-            String movieQuery = " UPDATE movies SET Movie_Name = ?, Description = ?, Duration = ?, Trailer = ?, year = ?,rating ? ,status = ?,imagebanner = ? , imageposter = ? , imagecarousal = ?  WHERE Movie_ID = ?;";
+            String movieQuery = " UPDATE movies SET Movie_Name = ?, Description = ?, Duration = ?, Trailer = ?, Year = ?,Rating = ? ,Status = ?, Banner = ? , Poster = ? , Carousal = ?  WHERE Movie_ID = ?";
             stmtMovie = connection.prepareStatement(movieQuery, PreparedStatement.RETURN_GENERATED_KEYS);
 
             // Set movie parameters
@@ -151,6 +151,7 @@ public class MovieListDAO {
             stmtMovie.setString(8, imagebanner);
             stmtMovie.setString(9, imageposter);
             stmtMovie.setString(10, imagecarousal);
+            stmtMovie.setString(11, MovieID);
 
             // Execute the movie insert
             int movieRowsAffected = stmtMovie.executeUpdate();
@@ -163,7 +164,7 @@ public class MovieListDAO {
             }
 
             // Prepare genre insert statement
-            String genreQuery = "UPDATE moviegenre SET GenreID = ? where MovieID ?";
+            String genreQuery = "UPDATE moviegenre SET GenreID = ? where Movie_ID = ?";
             stmtGenre = connection.prepareStatement(genreQuery);
 
             // Insert genres if movie was successfully added and genre IDs are provided
@@ -209,7 +210,7 @@ public class MovieListDAO {
                 if (stmtMovie != null) stmtMovie.close();
                 if (stmtGenre != null) stmtGenre.close();
                 if (connection != null) {
-                    connection.setAutoCommit(true); // Reset to default
+                    connection.setAutoCommit(true);
                     connection.close();
                 }
             } catch (SQLException e) {
@@ -274,17 +275,17 @@ public class MovieListDAO {
 
                 for (String genre : genres) {
                     if (genre != null && !genre.trim().isEmpty()) {
-                        // Convert genre to integer GenreID
-                        int genreId = Integer.parseInt(genre);
-
-                        // Set parameters for genre insert
-                        stmtGenre.setInt(1, movieId);
-                        stmtGenre.setInt(2, genreId);
-
-                        // Execute genre insert
-                        stmtGenre.executeUpdate();
+                        try {
+                            int genreId = Integer.parseInt(genre);
+                            stmtGenre.setInt(1, movieId);
+                            stmtGenre.setInt(2, genreId);
+                            stmtGenre.executeUpdate();
+                        } catch (NumberFormatException ex) {
+                            System.out.println("Invalid genre ID: " + genre);
+                        }
                     }
                 }
+
             }
 
             // Commit the transaction
