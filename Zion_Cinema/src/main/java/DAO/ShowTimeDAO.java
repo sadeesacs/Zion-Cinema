@@ -3,7 +3,7 @@ package DAO;
 import Db.dbcon;
 import java.sql.*;
 
-public class ShowtimeDAO {
+public class ShowTimeDAO {
     public boolean showtimeExists(int movieId, String date, String time) {
         String sql = "SELECT ShowtimeID FROM showtime WHERE Movie_ID = ? AND Date = ? AND Show_Time = ?";
         try (Connection conn = dbcon.connect();

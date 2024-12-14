@@ -1,10 +1,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="DAO.MovieDAO" %>
-<%@ page import="DAO.ShowtimeDAO" %>
+<%@ page import="DAO.ShowTimeDAO" %>
 <%@ page import="java.sql.ResultSet" %>
 <%@ page import="java.time.LocalDate" %>
-<%@ page import="java.time.format.TextStyle" %>
 <%@ page import="java.util.Locale" %>
+<%@ page import="DAO.ShowTimeDAO" %>
 
 <!DOCTYPE html>
 <html>
@@ -108,7 +108,7 @@
                 <%
                     if (!selectedMovie.equals("-1")) {
                         int movieId = Integer.parseInt(selectedMovie);
-                        ShowtimeDAO stDao = new ShowtimeDAO();
+                        ShowTimeDAO stDao = new ShowTimeDAO();
                         LocalDate startDate = LocalDate.now();
                         String[] times = {"10:00:00","13:00:00","18:00:00"};
                 %>

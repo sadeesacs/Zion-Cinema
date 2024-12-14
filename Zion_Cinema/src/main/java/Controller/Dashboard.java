@@ -1,7 +1,6 @@
 package Controller;
 
-import DAO.MovieDAO;
-import DAO.ShowtimeDAO;
+import DAO.ShowTimeDAO;
 import DAO.TicketPriceDAO;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -9,8 +8,8 @@ import jakarta.servlet.annotation.*;
 import java.io.IOException;
 import java.time.LocalDate;
 
-@WebServlet(name = "AdminDashboardServlet", urlPatterns = {"/AdminDashboardServlet"})
-public class AdminDashboardServlet extends HttpServlet {
+@WebServlet(name = "Dashboard", urlPatterns = {"/Dashboard"})
+public class Dashboard extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -58,7 +57,7 @@ public class AdminDashboardServlet extends HttpServlet {
     }
 
     private void saveShowtimes(HttpServletRequest request, int movieId) {
-        ShowtimeDAO showtimeDAO = new ShowtimeDAO();
+        ShowTimeDAO showtimeDAO = new ShowTimeDAO();
         TicketPriceDAO ticketPriceDAO = new TicketPriceDAO();
 
         String[] formShowtimes = request.getParameterValues("showtime");
@@ -100,7 +99,7 @@ public class AdminDashboardServlet extends HttpServlet {
     }
 
     private void updatePrices(HttpServletRequest request, int movieId, String adult, String child) {
-        ShowtimeDAO showtimeDAO = new ShowtimeDAO();
+        ShowTimeDAO showtimeDAO = new ShowTimeDAO();
         TicketPriceDAO ticketPriceDAO = new TicketPriceDAO();
 
         double adultPrice = Double.parseDouble(adult);
