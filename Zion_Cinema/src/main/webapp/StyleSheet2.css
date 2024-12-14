@@ -281,17 +281,24 @@ body{
     color:white;
 }
 
-.date-selection ul{
+.date-selection .date-li{
     list-style: none;
-    position:absolute;
-    margin-top: 110px;
-    margin-left: 6px;
     color: #f4f4f4;
     font-size: 1.25rem;
     display: flex;
     justify-content: space-between;
-    width:270px;
-    padding: 0; 
+    /*padding: 0px 10px;*/ 
+    margin-left: 30px;
+}
+
+.date-ul {
+    display: flex;
+    /*gap: 25px;*/ 
+    position: absolute;
+    margin-top: 110px;
+    margin-left: -70px;
+    display: flex;
+    font-size: 1.25rem;
 }
 
 .date-buttons-form {
@@ -344,7 +351,7 @@ body{
 
 .time-button {
     width: 100px; 
-    height: 40px; 
+    height: 45px; 
     border-radius: 10px; 
     background-color: white; 
     color: black;
@@ -371,7 +378,7 @@ body{
     margin-top: 110px;
     margin-left: 35%;
     color: white;
-    font-size: 1rem;
+    font-size: 1.25rem;
     display: flex;
     width:250px;
 }
@@ -493,6 +500,11 @@ body{
     height: 35px;
 }
 
+.get-tickets-button a{
+    text-decoration: none;
+    color: black;
+}
+
 .view-details-button {
     display: flex;
     align-items: center;
@@ -502,6 +514,11 @@ body{
     color: #F4F4F4;
     width: 110px;
     height: 35px;
+}
+
+.view-details-button a{
+    text-decoration: none;
+    color: #F4F4F4;
 }
 
 /* Movie Detail Page styling end */
@@ -763,7 +780,9 @@ body{
 .seat {
     width: 40px;
     height: 40px;
-    background-image: url('images/seat.svg');
+    background: transparent;
+    background-image: url('images/icons/seat.svg');
+    border: none;
     background-size: cover;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -967,6 +986,7 @@ body{
 .booking-summary-container img{
     position: relative;
     width:80%;
+    height: 50%;
     margin-left: 10%;
     margin-top: 40px;
 }

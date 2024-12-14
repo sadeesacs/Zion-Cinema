@@ -1,4 +1,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="model.Showtime" %>
+<%@ page import="model.MovieDetail" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.Map" %>
+<%@ page import="model.FoodItem" %>
+<%@ page import="org.json.JSONArray" %>
+<%@ page import="org.json.JSONObject" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,7 +22,7 @@
         <div class="header-container">
 
             <!--Zion Cinema logo-->
-            <img src="images/logo.png">
+            <img src="images/icons/logo.png">
             <a href="HomePage.html" class="logo-name">Zion Cinema</a>
 
             <!--Navigation Bar-->
@@ -60,638 +67,134 @@
                 <div class="circle"></div>
             </div>
         </div>
-
+        
+        <%
+            MovieDetail movieDetail = (MovieDetail) request.getAttribute("selectedMovie");
+            Showtime selectedShowtime = (Showtime) request.getAttribute("selectedShowtime");
+            String selectedSeats = (String) request.getAttribute("selectedSeats");
+        %>
 
         <!-- Selected Movie Details -->
-         <div class="selected-movie-name">Pirates of the Caribbean : Dead Men Tell No Tales</div>
-         <div class="selected-container" >
+        <div class="selected-movie-name"><%= movieDetail.getName() %></div>
+        <div class="selected-container" >
             <div class="date-selected" >
                 <ul>
-                    <li>Mon</li>
-                    <li>Tue</li>
-                    <li>Wed</li>
-                    <li>Thu</li>
-                    <li>Fri</li>
+                    <li><%= new java.text.SimpleDateFormat("EEE").format(java.sql.Date.valueOf(selectedShowtime.getDate())) %></li>
                 </ul>
                 <form class="dateselected-buttons-form">
-                    <button type="button" class="datesel-button">26</button>
-                    <button type="button" class="datesel-button">27</button>
-                    <button type="button" class="datesel-button active">28</button>
-                    <button type="button" class="datesel-button">29</button>
-                    <button type="button" class="datesel-button">30</button>
+                    <button type="button" class="datesel-button active">
+                        <%= new java.text.SimpleDateFormat("dd").format(java.sql.Date.valueOf((String) session.getAttribute("selectedDate"))) %>
+                    </button>
                 </form>
             </div>
 
             <div class="time-selected">
                 <div class="span-2">Zion Cinema</div>
                 <div class="timeselected-buttons-form">
-                    <button type="button" class="timesel-button">10.00 AM</button>
-                    <button type="button" class="timesel-button active">12.00 AM</button>
-                    <button type="button" class="timesel-button">01.00 PM</button>
+                    <button class="timesel-button active">
+                        <%= new java.text.SimpleDateFormat("hh:mm a").format(java.sql.Time.valueOf(selectedShowtime.getTime())) %>
+                    </button>
                 </div>
             </div>
 
             <div class="seat-selected">
                 <div class="span-3">Seat Info</div>
                 <div class="seatselected-buttons-form">
-                    <button type="button" class="seatsel-button">C1</button>
-                    <button type="button" class="seatsel-button">C2</button>
-                    <button type="button" class="seatsel-button">D1</button>
+                    <%
+                        org.json.JSONArray seatsArray = new org.json.JSONArray(selectedSeats);
+                        for (int i = 0; i < seatsArray.length(); i++) {
+                    %>
+                        <button class="seatsel-button"><%= seatsArray.getString(i) %></button>
+                    <% } %>
                 </div>
             </div>
         </div>
-
 
         <!-- Food Menu Container -->
         <div class="food-menu-container">
             <div class="food-menu-title">Food and Beverages</div>
-
             <nav class="food-nav">
-                <button data-target="popcorn" class="active">Popcorn</button>
-                <button data-target="beverages">Beverages</button>
-                <button data-target="coffee">Coffee</button>
-                <button data-target="hot-kitchen">Hot Kitchen</button>
-                <button data-target="snacks">Snacks</button>
+                <% Map<String, List<FoodItem>> foodItemsByType = (Map<String, List<FoodItem>>) request.getAttribute("foodItemsByType"); %>
+                <% for (String foodType : foodItemsByType.keySet()) { %>
+                    <button data-target="<%= foodType %>" class="<%= foodType.equals("Hot Kitchen") ? "active" : "" %>"><%= foodType %></button>
+                <% } %>
             </nav>
 
             <div class="food-slides">
-                <div id="popcorn" class="food-slide active">
-
-                    <div class="food-slide active" id="popcorn">
+                <% for (Map.Entry<String, List<FoodItem>> entry : foodItemsByType.entrySet()) { %>
+                    <div id="<%= entry.getKey() %>" class="food-slide <%= entry.getKey().equals("Hot Kitchen") ? "active" : "" %>">
                         <div class="food-cards-container">
-
-                            <div class="food-card">
-                                <img src="images/popcorn.png" alt="Salted Popcorn - Large">
-                                <div class="food-info">
-                                    <span class="food-name">Salted Popcorn - Large</span>
-                                    <p>LKR 500</p>
-                                    <div class="food-quantity-control">
-                                        <button class="food-quantity-decrement">-</button>
-                                        <button class="food-quantity">1</button>
-                                        <button class="food-quantity-increment">+</button>
+                            <% for (FoodItem foodItem : entry.getValue()) { %>
+                                <div class="food-card"
+                                    data-food-id="<%= foodItem.getFoodId() %>"
+                                    data-food-name="<%= foodItem.getName() %>"
+                                    data-food-price="<%= foodItem.getPrice() %>">
+                                    <img src="<%= foodItem.getFoodImage() %>" alt="<%= foodItem.getName() %>">
+                                    <div class="food-info">
+                                        <span class="food-name"><%= foodItem.getName() %></span>
+                                        <p>LKR <%= foodItem.getPrice() %></p>
+                                        <div class="food-quantity-control">
+                                            <button class="food-quantity-decrement">-</button>
+                                            <button class="food-quantity">1</button>
+                                            <button class="food-quantity-increment">+</button>
+                                        </div>
+                                        <button class="add-to-cart">ADD</button>
                                     </div>
-                                    <button class="add-to-cart">ADD</button>
                                 </div>
-                            </div>
-
-                            <div class="food-card">
-                                <img src="images/popcorn.png" alt="Salted Popcorn - Large">
-                                <div class="food-info">
-                                    <span class="food-name">Salted Popcorn - Large</span>
-                                    <p>LKR 500</p>
-                                    <div class="food-quantity-control">
-                                        <button class="food-quantity-decrement">-</button>
-                                        <button class="food-quantity">1</button>
-                                        <button class="food-quantity-increment">+</button>
-                                    </div>
-                                    <button class="add-to-cart">ADD</button>
-                                </div>
-                            </div>
-
-                            <div class="food-card">
-                                <img src="images/popcorn.png" alt="Salted Popcorn - Large">
-                                <div class="food-info">
-                                    <span class="food-name">Salted Popcorn - Large</span>
-                                    <p>LKR 500</p>
-                                    <div class="food-quantity-control">
-                                        <button class="food-quantity-decrement">-</button>
-                                        <button class="food-quantity">1</button>
-                                        <button class="food-quantity-increment">+</button>
-                                    </div>
-                                    <button class="add-to-cart">ADD</button>
-                                </div>
-                            </div>
-
-                            <div class="food-card">
-                                <img src="images/popcorn.png" alt="Salted Popcorn - Large">
-                                <div class="food-info">
-                                    <span class="food-name">Salted Popcorn - Large</span>
-                                    <p>LKR 500</p>
-                                    <div class="food-quantity-control">
-                                        <button class="food-quantity-decrement">-</button>
-                                        <button class="food-quantity">1</button>
-                                        <button class="food-quantity-increment">+</button>
-                                    </div>
-                                    <button class="add-to-cart">ADD</button>
-                                </div>
-                            </div>
-
-                            <div class="food-card">
-                                <img src="images/popcorn.png" alt="Salted Popcorn - Large">
-                                <div class="food-info">
-                                    <span class="food-name">Salted Popcorn - Large</span>
-                                    <p>LKR 500</p>
-                                    <div class="food-quantity-control">
-                                        <button class="food-quantity-decrement">-</button>
-                                        <button class="food-quantity">1</button>
-                                        <button class="food-quantity-increment">+</button>
-                                    </div>
-                                    <button class="add-to-cart">ADD</button>
-                                </div>
-                            </div>
-
-                            <div class="food-card">
-                                <img src="images/popcorn.png" alt="Salted Popcorn - Large">
-                                <div class="food-info">
-                                    <span class="food-name">Salted Popcorn - Large</span>
-                                    <p>LKR 500</p>
-                                    <div class="food-quantity-control">
-                                        <button class="food-quantity-decrement">-</button>
-                                        <button class="food-quantity">1</button>
-                                        <button class="food-quantity-increment">+</button>
-                                    </div>
-                                    <button class="add-to-cart">ADD</button>
-                                </div>
-                            </div>
-
-                            <div class="food-card">
-                                <img src="images/popcorn.png" alt="Salted Popcorn - Large">
-                                <div class="food-info">
-                                    <span class="food-name">Salted Popcorn - Large</span>
-                                    <p>LKR 500</p>
-                                    <div class="food-quantity-control">
-                                        <button class="food-quantity-decrement">-</button>
-                                        <button class="food-quantity">1</button>
-                                        <button class="food-quantity-increment">+</button>
-                                    </div>
-                                    <button class="add-to-cart">ADD</button>
-                                </div>
-                            </div>
-
+                            <% } %>
                         </div>
                     </div>
-                </div>
-
-
-                <div id="beverages" class="food-slide">
-                    <div class="food-cards-container">
-
-                        <div class="food-card">
-                            <img src="images/popcorn.png" alt="Salted Popcorn - Large">
-                            <div class="food-info">
-                                <span class="food-name">Salted Popcorn - Large</span>
-                                <p>LKR 500</p>
-                                <div class="food-quantity-control">
-                                        <button class="food-quantity-decrement">-</button>
-                                        <button class="food-quantity">1</button>
-                                        <button class="food-quantity-increment">+</button>
-                                </div>
-                                <button class="add-to-cart">ADD</button>
-                            </div>
-                        </div>
-
-                        <div class="food-card">
-                            <img src="images/popcorn.png" alt="Salted Popcorn - Large">
-                            <div class="food-info">
-                                <span class="food-name">Salted Popcorn - Large</span>
-                                <p>LKR 500</p>
-                                <div class="food-quantity-control">
-                                        <button class="food-quantity-decrement">-</button>
-                                        <button class="food-quantity">1</button>
-                                        <button class="food-quantity-increment">+</button>
-                                </div>
-                                <button class="add-to-cart">ADD</button>
-                            </div>
-                        </div>
-
-                        <div class="food-card">
-                            <img src="images/popcorn.png" alt="Salted Popcorn - Large">
-                            <div class="food-info">
-                                <span class="food-name">Salted Popcorn - Large</span>
-                                <p>LKR 500</p>
-                                <div class="food-quantity-control">
-                                        <button class="food-quantity-decrement">-</button>
-                                        <button class="food-quantity">1</button>
-                                        <button class="food-quantity-increment">+</button>
-                                </div>
-                                <button class="add-to-cart">ADD</button>
-                            </div>
-                        </div>
-
-                        <div class="food-card">
-                            <img src="images/popcorn.png" alt="Salted Popcorn - Large">
-                            <div class="food-info">
-                                <span class="food-name">Salted Popcorn - Large</span>
-                                <p>LKR 500</p>
-                                <div class="food-quantity-control">
-                                        <button class="food-quantity-decrement">-</button>
-                                        <button class="food-quantity">1</button>
-                                        <button class="food-quantity-increment">+</button>
-                                </div>
-                                <button class="add-to-cart">ADD</button>
-                            </div>
-                        </div>
-
-                        <div class="food-card">
-                            <img src="images/popcorn.png" alt="Salted Popcorn - Large">
-                            <div class="food-info">
-                                <span class="food-name">Salted Popcorn - Large</span>
-                                <p>LKR 500</p>
-                                <div class="food-quantity-control">
-                                        <button class="food-quantity-decrement">-</button>
-                                        <button class="food-quantity">1</button>
-                                        <button class="food-quantity-increment">+</button>
-                                </div>
-                                <button class="add-to-cart">ADD</button>
-                            </div>
-                        </div>
-
-                        <div class="food-card">
-                            <img src="images/popcorn.png" alt="Salted Popcorn - Large">
-                            <div class="food-info">
-                                <span class="food-name">Salted Popcorn - Large</span>
-                                <p>LKR 500</p>
-                                <div class="food-quantity-control">
-                                        <button class="food-quantity-decrement">-</button>
-                                        <button class="food-quantity">1</button>
-                                        <button class="food-quantity-increment">+</button>
-                                </div>
-                                <button class="add-to-cart">ADD</button>
-                            </div>
-                        </div>
-
-                        <div class="food-card">
-                            <img src="images/popcorn.png" alt="Salted Popcorn - Large">
-                            <div class="food-info">
-                                <span class="food-name">Salted Popcorn - Large</span>
-                                <p>LKR 500</p>
-                                <div class="food-quantity-control">
-                                        <button class="food-quantity-decrement">-</button>
-                                        <button class="food-quantity">1</button>
-                                        <button class="food-quantity-increment">+</button>
-                                </div>
-                                <button class="add-to-cart">ADD</button>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-
-                <div id="coffee" class="food-slide">
-                    <div class="food-cards-container">
-
-                        <div class="food-card">
-                            <img src="images/popcorn.png" alt="Salted Popcorn - Large">
-                            <div class="food-info">
-                                <span class="food-name">Salted Popcorn - Large</span>
-                                <p>LKR 500</p>
-                                <div class="food-quantity-control">
-                                        <button class="food-quantity-decrement">-</button>
-                                        <button class="food-quantity">1</button>
-                                        <button class="food-quantity-increment">+</button>
-                                </div>
-                                <button class="add-to-cart">ADD</button>
-                            </div>
-                        </div>
-
-                        <div class="food-card">
-                            <img src="images/popcorn.png" alt="Salted Popcorn - Large">
-                            <div class="food-info">
-                                <span class="food-name">Salted Popcorn - Large</span>
-                                <p>LKR 500</p>
-                                <div class="food-quantity-control">
-                                        <button class="food-quantity-decrement">-</button>
-                                        <button class="food-quantity">1</button>
-                                        <button class="food-quantity-increment">+</button>
-                                </div>
-                                <button class="add-to-cart">ADD</button>
-                            </div>
-                        </div>
-
-                        <div class="food-card">
-                            <img src="images/popcorn.png" alt="Salted Popcorn - Large">
-                            <div class="food-info">
-                                <span class="food-name">Salted Popcorn - Large</span>
-                                <p>LKR 500</p>
-                                <div class="food-quantity-control">
-                                        <button class="food-quantity-decrement">-</button>
-                                        <button class="food-quantity">1</button>
-                                        <button class="food-quantity-increment">+</button>
-                                </div>
-                                <button class="add-to-cart">ADD</button>
-                            </div>
-                        </div>
-
-                        <div class="food-card">
-                            <img src="images/popcorn.png" alt="Salted Popcorn - Large">
-                            <div class="food-info">
-                                <span class="food-name">Salted Popcorn - Large</span>
-                                <p>LKR 500</p>
-                                <div class="food-quantity-control">
-                                        <button class="food-quantity-decrement">-</button>
-                                        <button class="food-quantity">1</button>
-                                        <button class="food-quantity-increment">+</button>
-                                </div>
-                                <button class="add-to-cart">ADD</button>
-                            </div>
-                        </div>
-
-                        <div class="food-card">
-                            <img src="images/popcorn.png" alt="Salted Popcorn - Large">
-                            <div class="food-info">
-                                <span class="food-name">Salted Popcorn - Large</span>
-                                <p>LKR 500</p>
-                                <div class="food-quantity-control">
-                                        <button class="food-quantity-decrement">-</button>
-                                        <button class="food-quantity">1</button>
-                                        <button class="food-quantity-increment">+</button>
-                                </div>
-                                <button class="add-to-cart">ADD</button>
-                            </div>
-                        </div>
-
-                        <div class="food-card">
-                            <img src="images/popcorn.png" alt="Salted Popcorn - Large">
-                            <div class="food-info">
-                                <span class="food-name">Salted Popcorn - Large</span>
-                                <p>LKR 500</p>
-                                <div class="food-quantity-control">
-                                        <button class="food-quantity-decrement">-</button>
-                                        <button class="food-quantity">1</button>
-                                        <button class="food-quantity-increment">+</button>
-                                </div>
-                                <button class="add-to-cart">ADD</button>
-                            </div>
-                        </div>
-
-                        <div class="food-card">
-                            <img src="images/popcorn.png" alt="Salted Popcorn - Large">
-                            <div class="food-info">
-                                <span class="food-name">Salted Popcorn - Large</span>
-                                <p>LKR 500</p>
-                                <div class="food-quantity-control">
-                                        <button class="food-quantity-decrement">-</button>
-                                        <button class="food-quantity">1</button>
-                                        <button class="food-quantity-increment">+</button>
-                                </div>
-                                <button class="add-to-cart">ADD</button>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-
-                <div id="hot-kitchen" class="food-slide">
-                    <div class="food-cards-container">
-
-                        <div class="food-card">
-                            <img src="images/popcorn.png" alt="Salted Popcorn - Large">
-                            <div class="food-info">
-                                <span class="food-name">Salted Popcorn - Large</span>
-                                <p>LKR 500</p>
-                                <div class="food-quantity-control">
-                                        <button class="food-quantity-decrement">-</button>
-                                        <button class="food-quantity">1</button>
-                                        <button class="food-quantity-increment">+</button>
-                                </div>
-                                <button class="add-to-cart">ADD</button>
-                            </div>
-                        </div>
-
-                        <div class="food-card">
-                            <img src="images/popcorn.png" alt="Salted Popcorn - Large">
-                            <div class="food-info">
-                                <span class="food-name">Salted Popcorn - Large</span>
-                                <p>LKR 500</p>
-                                <div class="food-quantity-control">
-                                        <button class="food-quantity-decrement">-</button>
-                                        <button class="food-quantity">1</button>
-                                        <button class="food-quantity-increment">+</button>
-                                </div>
-                                <button class="add-to-cart">ADD</button>
-                            </div>
-                        </div>
-
-                        <div class="food-card">
-                            <img src="images/popcorn.png" alt="Salted Popcorn - Large">
-                            <div class="food-info">
-                                <span class="food-name">Salted Popcorn - Large</span>
-                                <p>LKR 500</p>
-                                <div class="food-quantity-control">
-                                        <button class="food-quantity-decrement">-</button>
-                                        <button class="food-quantity">1</button>
-                                        <button class="food-quantity-increment">+</button>
-                                </div>
-                                <button class="add-to-cart">ADD</button>
-                            </div>
-                        </div>
-
-                        <div class="food-card">
-                            <img src="images/popcorn.png" alt="Salted Popcorn - Large">
-                            <div class="food-info">
-                                <span class="food-name">Salted Popcorn - Large</span>
-                                <p>LKR 500</p>
-                                <div class="food-quantity-control">
-                                        <button class="food-quantity-decrement">-</button>
-                                        <button class="food-quantity">1</button>
-                                        <button class="food-quantity-increment">+</button>
-                                </div>
-                                <button class="add-to-cart">ADD</button>
-                            </div>
-                        </div>
-
-                        <div class="food-card">
-                            <img src="images/popcorn.png" alt="Salted Popcorn - Large">
-                            <div class="food-info">
-                                <span class="food-name">Salted Popcorn - Large</span>
-                                <p>LKR 500</p>
-                                <div class="food-quantity-control">
-                                        <button class="food-quantity-decrement">-</button>
-                                        <button class="food-quantity">1</button>
-                                        <button class="food-quantity-increment">+</button>
-                                </div>
-                                <button class="add-to-cart">ADD</button>
-                            </div>
-                        </div>
-
-                        <div class="food-card">
-                            <img src="images/popcorn.png" alt="Salted Popcorn - Large">
-                            <div class="food-info">
-                                <span class="food-name">Salted Popcorn - Large</span>
-                                <p>LKR 500</p>
-                                <div class="food-quantity-control">
-                                        <button class="food-quantity-decrement">-</button>
-                                        <button class="food-quantity">1</button>
-                                        <button class="food-quantity-increment">+</button>
-                                </div>
-                                <button class="add-to-cart">ADD</button>
-                            </div>
-                        </div>
-
-                        <div class="food-card">
-                            <img src="images/popcorn.png" alt="Salted Popcorn - Large">
-                            <div class="food-info">
-                                <span class="food-name">Salted Popcorn - Large</span>
-                                <p>LKR 500</p>
-                                <div class="food-quantity-control">
-                                        <button class="food-quantity-decrement">-</button>
-                                        <button class="food-quantity">1</button>
-                                        <button class="food-quantity-increment">+</button>
-                                </div>
-                                <button class="add-to-cart">ADD</button>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-
-                <div id="snacks" class="food-slide">
-                    <div class="food-cards-container">
-
-                        <div class="food-card">
-                            <img src="images/popcorn.png" alt="Salted Popcorn - Large">
-                            <div class="food-info">
-                                <span class="food-name">Salted Popcorn - Large</span>
-                                <p>LKR 500</p>
-                                <div class="food-quantity-control">
-                                        <button class="food-quantity-decrement">-</button>
-                                        <button class="food-quantity">1</button>
-                                        <button class="food-quantity-increment">+</button>
-                                </div>
-                                <button class="add-to-cart">ADD</button>
-                            </div>
-                        </div>
-
-                        <div class="food-card">
-                            <img src="images/popcorn.png" alt="Salted Popcorn - Large">
-                            <div class="food-info">
-                                <span class="food-name">Salted Popcorn - Large</span>
-                                <p>LKR 500</p>
-                                <div class="food-quantity-control">
-                                        <button class="food-quantity-decrement">-</button>
-                                        <button class="food-quantity">1</button>
-                                        <button class="food-quantity-increment">+</button>
-                                </div>
-                                <button class="add-to-cart">ADD</button>
-                            </div>
-                        </div>
-
-                        <div class="food-card">
-                            <img src="images/popcorn.png" alt="Salted Popcorn - Large">
-                            <div class="food-info">
-                                <span class="food-name">Salted Popcorn - Large</span>
-                                <p>LKR 500</p>
-                                <div class="food-quantity-control">
-                                        <button class="food-quantity-decrement">-</button>
-                                        <button class="food-quantity">1</button>
-                                        <button class="food-quantity-increment">+</button>
-                                </div>
-                                <button class="add-to-cart">ADD</button>
-                            </div>
-                        </div>
-
-                        <div class="food-card">
-                            <img src="images/popcorn.png" alt="Salted Popcorn - Large">
-                            <div class="food-info">
-                                <span class="food-name">Salted Popcorn - Large</span>
-                                <p>LKR 500</p>
-                                <div class="food-quantity-control">
-                                        <button class="food-quantity-decrement">-</button>
-                                        <button class="food-quantity">1</button>
-                                        <button class="food-quantity-increment">+</button>
-                                </div>
-                                <button class="add-to-cart">ADD</button>
-                            </div>
-                        </div>
-
-                        <div class="food-card">
-                            <img src="images/popcorn.png" alt="Salted Popcorn - Large">
-                            <div class="food-info">
-                                <span class="food-name">Salted Popcorn - Large</span>
-                                <p>LKR 500</p>
-                                <div class="food-quantity-control">
-                                        <button class="food-quantity-decrement">-</button>
-                                        <button class="food-quantity">1</button>
-                                        <button class="food-quantity-increment">+</button>
-                                </div>
-                                <button class="add-to-cart">ADD</button>
-                            </div>
-                        </div>
-
-                        <div class="food-card">
-                            <img src="images/popcorn.png" alt="Salted Popcorn - Large">
-                            <div class="food-info">
-                                <span class="food-name">Salted Popcorn - Large</span>
-                                <p>LKR 500</p>
-                                <div class="food-quantity-control">
-                                        <button class="food-quantity-decrement">-</button>
-                                        <button class="food-quantity">1</button>
-                                        <button class="food-quantity-increment">+</button>
-                                </div>
-                                <button class="add-to-cart">ADD</button>
-                            </div>
-                        </div>
-
-                        <div class="food-card">
-                            <img src="images/popcorn.png" alt="Salted Popcorn - Large">
-                            <div class="food-info">
-                                <span class="food-name">Salted Popcorn - Large</span>
-                                <p>LKR 500</p>
-                                <div class="food-quantity-control">
-                                        <button class="food-quantity-decrement">-</button>
-                                        <button class="food-quantity">1</button>
-                                        <button class="food-quantity-increment">+</button>
-                                </div>
-                                <button class="add-to-cart">ADD</button>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
+                <% } %>
             </div>
         </div>
 
+        <form action="FoodPreOrderServlet" method="post">
+            <!-- Purchase Summary Container -->
+            <div class="purchase-summary-container">
+                <div class="purchase-summary">
+                    <h2>Purchase Summary</h2>
 
-        <!-- Purchase Summary Container -->
-        <div class="purchase-summary-container">
-            <div class="purchase-summary">
-                <h2>Purchase Summary</h2>
+                    <!-- Tickets Section -->
+                    <div class="summary-section">
+                        <h3>Tickets</h3>
+                        <%
+                            List<model.TicketSummary> ticketSummaries = (List<model.TicketSummary>) request.getAttribute("ticketSummaries");
+                            if (ticketSummaries != null) {
+                                for (model.TicketSummary summary : ticketSummaries) {
+                        %>
+                            <div class="ticket-item">
+                                <span class="ticket-pro-name"><%= summary.getTicketType() %> Ticket</span>
+                                <span class="ticket-pro-quantity"><%= summary.getQuantity() %></span>
+                                <span class="ticket-pro-price">LKR <%= summary.getTotalPrice() %></span>
+                            </div>
+                        <%
+                                }
+                            }
+                        %>
+                    </div>
 
-                <!-- Tickets Section -->
-                <div class="summary-section">
-                    <h3>Tickets</h3>
-                    <div class="ticket-item">
-                        <span class="ticket-pro-name">Adult Ticket</span>
-                        <span class="ticket-pro-quantity">2</span>
-                        <span class="ticket-pro-price">LKR 2500</span>
+                    <!-- Food and Beverages Section -->
+                    <div class="summary-section">
+                        <h3>Food and Beverages</h3>
+                        <!-- Container for dynamically added food items -->
+                        <div class="food-summary-items"></div>
                     </div>
-                    <div class="ticket-item">
-                        <span class="ticket-pro-name">Child Ticket</span>
-                        <span class="ticket-pro-quantity">1</span>
-                        <span class="ticket-pro-price">LKR 1100</span>
+
+                    <!-- Total Price Section -->
+                    <div class="total-price">
+                        <span>Total</span>
+                        <span class="total-amount">LKR 0</span>
                     </div>
+
+                    <input type="hidden" name="action" value="saveFoodOrder">
+                    <input type="hidden" name="cartData" class="cart-data" value="">
+                    <input type="hidden" id="ticket-total" value="<%= request.getAttribute("ticketTotal") %>" />
+
+                    <!-- Continue Button -->
+                    <button type="submit" class="continue-button">Continue</button>
                 </div>
-
-                <!-- Food and Beverages Section -->
-                <div class="summary-section">
-                    <h3>Food and Beverages</h3>
-                    <div class="summary-item">
-                        <span class="sum-pro-name">Popcorn Large</span>
-                        <span class="sum-pro-quantity">2</span>
-                        <span class="sum-pro-price">LKR 1500</span>
-                        <a href="" class="delete-icon">x</a>
-                    </div>
-                    <div class="summary-item">
-                        <span class="sum-pro-name">Milo Shake</span>
-                        <span class="sum-pro-quantity">2</span>
-                        <span class="sum-pro-price">LKR 700</span>
-                        <a href="#" class="delete-icon">x</a>
-                    </div>
-                </div>
-
-                <!-- Total Price Section -->
-                <div class="total-price">
-                    <span>Total</span>
-                    <span>LKR 5500</span>
-                </div>
-
-                <!-- Continue Button -->
-                <button class="continue-button">Continue</button>
             </div>
-        </div>
+        </form>
 
 
         <!-- Footer  -->
@@ -703,10 +206,10 @@
                     and comfortable seating. Enjoy the latest blockbusters and timeless classics like never before!
                 </p>
                 <div class="social-icons">
-                    <a href="https://web.facebook.com"><img src="images/fbicon.png"></a>
-                    <a href="https://www.instagram.com/"><img src="images/instaicon.png"></a>
-                    <a href="https://x.com"><img src="images/xicon.png"></a>
-                    <a href="https://www.tiktok.com"><img src="images/tiktokicon.png"></a>
+                    <a href="https://web.facebook.com"><img src="images/icons/fbicon.png"></a>
+                    <a href="https://www.instagram.com/"><img src="images/icons/instaicon.png"></a>
+                    <a href="https://x.com"><img src="images/icons/xicon.png"></a>
+                    <a href="https://www.tiktok.com"><img src="images/icons/tiktokicon.png"></a>
                 </div>
             </div>
 
@@ -739,25 +242,17 @@
             </div>
         </footer>
 
-
-
-
         <script>
             document.addEventListener("DOMContentLoaded", () => {
                 const navButtons = document.querySelectorAll(".food-nav button");
                 const slides = document.querySelectorAll(".food-slide");
 
-                // Add click event to each navigation button
+                // Handle nav buttons for food categories
                 navButtons.forEach((button) => {
                     button.addEventListener("click", () => {
-                        // Get the target ID
                         const targetId = button.getAttribute("data-target");
-
-                        // Update the active navigation button
                         navButtons.forEach((btn) => btn.classList.remove("active"));
                         button.classList.add("active");
-
-                        // Update the active food slide
                         slides.forEach((slide) => {
                             slide.classList.remove("active");
                             if (slide.id === targetId) {
@@ -766,9 +261,109 @@
                         });
                     });
                 });
+
+                let cart = []; // {foodId, name, price, quantity}
+
+                // Update quantity on the card
+                document.querySelectorAll(".food-card").forEach(card => {
+                    const decrementBtn = card.querySelector(".food-quantity-decrement");
+                    const incrementBtn = card.querySelector(".food-quantity-increment");
+                    const quantityBtn = card.querySelector(".food-quantity");
+
+                    decrementBtn.addEventListener("click", () => {
+                        let currentQty = parseInt(quantityBtn.textContent);
+                        if (currentQty > 1) {
+                            quantityBtn.textContent = currentQty - 1;
+                        }
+                    });
+
+                    incrementBtn.addEventListener("click", () => {
+                        let currentQty = parseInt(quantityBtn.textContent);
+                        quantityBtn.textContent = currentQty + 1;
+                    });
+                });
+
+                // Add to cart functionality
+                document.querySelectorAll(".food-card .add-to-cart").forEach(addBtn => {
+                    addBtn.addEventListener("click", () => {
+                        const card = addBtn.closest(".food-card");
+                        const foodId = card.getAttribute("data-food-id");
+                        const price = parseFloat(card.getAttribute("data-food-price"));
+                        const name = card.getAttribute("data-food-name");
+                        const quantity = parseInt(card.querySelector(".food-quantity").textContent);
+
+                        const existingItem = cart.find(item => item.foodId === foodId);
+                        if (existingItem) {
+                            existingItem.quantity += quantity;
+                        } else {
+                            cart.push({ foodId: foodId, name: name, price: price, quantity: quantity });
+                        }
+                        updateSummary();
+                    });
+                });
+
+                function updateSummary() {
+                    const summaryContainer = document.querySelector(".food-summary-items");
+                    summaryContainer.textContent = "";
+
+                    let foodTotal = 0; 
+
+                    // Calculate food total
+                    cart.forEach(item => {
+                        const itemTotal = item.price * item.quantity;
+                        foodTotal += itemTotal;
+
+                        const div = document.createElement("div");
+                        div.classList.add("summary-item");
+
+                        const nameSpan = document.createElement("span");
+                        nameSpan.classList.add("sum-pro-name");
+                        nameSpan.textContent = item.name;
+                        div.appendChild(nameSpan);
+
+                        const quantitySpan = document.createElement("span");
+                        quantitySpan.classList.add("sum-pro-quantity");
+                        quantitySpan.textContent = item.quantity;
+                        div.appendChild(quantitySpan);
+
+                        const priceSpan = document.createElement("span");
+                        priceSpan.classList.add("sum-pro-price");
+                        priceSpan.textContent = "LKR " + itemTotal;
+                        div.appendChild(priceSpan);
+
+                        const deleteLink = document.createElement("a");
+                        deleteLink.href = "#";
+                        deleteLink.classList.add("delete-icon");
+                        deleteLink.textContent = "x";
+                        deleteLink.addEventListener("click", (e) => {
+                            e.preventDefault();
+                            removeItemFromCart(item.foodId);
+                        });
+                        div.appendChild(deleteLink);
+
+                        summaryContainer.appendChild(div);
+                    });
+
+                    const ticketTotal = parseFloat(document.getElementById("ticket-total").value);
+
+                    // Calculate the combined total (tickets + food)
+                    const combinedTotal = ticketTotal + foodTotal;
+
+                    document.querySelector(".total-amount").textContent = "LKR " + combinedTotal.toFixed(2);
+                }
+
+                function removeItemFromCart(foodId) {
+                    cart = cart.filter(i => i.foodId !== foodId);
+                    updateSummary();
+                }
+
+                const form = document.querySelector("form[action='FoodPreOrderServlet']");
+                form.addEventListener("submit", (e) => {
+                    const cartDataInput = document.querySelector(".cart-data");
+                    cartDataInput.value = JSON.stringify(cart);
+                });
             });
         </script>
-        
     </body>
 </html>
 

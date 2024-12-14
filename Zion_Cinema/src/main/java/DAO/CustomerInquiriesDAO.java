@@ -1,4 +1,5 @@
 package DAO;
+
 import Db.dbcon;
 import model.CustomerInquiries;
 import java.sql.*;
