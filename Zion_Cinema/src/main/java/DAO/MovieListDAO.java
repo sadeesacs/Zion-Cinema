@@ -47,7 +47,6 @@ public class MovieListDAO {
                 Movies.setDescription(rs.getString("Description"));
                 Movies.setDuration(rs.getString("Duration"));
                 Movies.setTrailer(rs.getString("Trailer"));
-                Movies.setYear(rs.getInt("Year"));
                 Movies.setRating(rs.getString("Rating"));
                 Movies.setPoster(rs.getString("Poster"));
                 Movies.setBanner(rs.getString("Banner"));
