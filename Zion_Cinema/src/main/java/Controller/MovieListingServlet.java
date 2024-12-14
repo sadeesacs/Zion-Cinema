@@ -32,5 +32,6 @@ public class MovieListingServlet extends HttpServlet {
             request.setAttribute("nowShowing", nowShowing);
             request.setAttribute("comingSoon", comingSoon);
             request.getRequestDispatcher("MovieListing.jsp").forward(request, response);
+            
     }
 }

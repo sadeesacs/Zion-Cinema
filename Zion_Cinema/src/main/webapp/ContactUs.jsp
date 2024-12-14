@@ -7,9 +7,9 @@
         <link rel="stylesheet" href="StyleSheet12.css">
     </head>
     <body>
-       <!-- Header -->
+        
+    <!-- Header -->
     <div class="header-container">
-
         <!--Zion Cinema logo-->
         <img src="images/logo.png">
         <a href="HomePage.html" class="logo-name">Zion Cinema</a>
@@ -33,10 +33,6 @@
     </div>
     <div class="header-line"></div>
 
-
-
-
-
     <div class="contact-header">
         <h1>Contact Us</h1><br>
         <pre>
@@ -46,21 +42,14 @@ as soon as possible.
         </pre>
     </div>
 
-
-
-<div class="contact-image">
-    <img src="images/contactImage.png" alt="contact image">
-</div>
-
-
-
-
+    <div class="contact-image">
+        <img src="images/contactImage.png" alt="contact image">
+    </div>
 
     <div class="contact-info">
-      <p><a href="zioncinema@gmail.com"> zioncinema@gmail.com</a></p>
-      <p><a href="Support: (+94) 123 4567 891"> Support: (+94) 123 4567 891</a></p>
+        <p><a href="mailto:zioncinema@gmail.com"> zioncinema@gmail.com</a></p>
+        <p><a href="tel:(+94) 123 4567 891"> Support: (+94) 123 4567 891</a></p>
     </div>
-    
 
     <div class="call-image">
         <img src="images/call-icon.png" alt="call image">
@@ -70,16 +59,11 @@ as soon as possible.
         <img src="images/mail-icon.png" alt="mail image">
     </div>
     
-
-
-
-
-
     <div class="contact-form-container">
         <h1>Let's get in touch</h1>
-        <form class="contact-form">
+        <form class="contact-form" action="ContactUsServlet" method="post">
           <label for="full-name">Full Name</label>
-          <input type="text" id="full-name" name="full-name" required>
+          <input type="text" id="full-name" name="fullName" required>
     
           <label for="email">Email</label>
           <input type="email" id="email" name="email" required>
@@ -89,14 +73,7 @@ as soon as possible.
     
           <button type="submit" class="send-btn">Send Message</button>
         </form>
-      </div>
-
-
-
-
-
-
-
+    </div>
 
     <!--Footer-->
     <footer class="footer-container">
@@ -134,8 +111,7 @@ as soon as possible.
                </ul>
            </div>
        </div>
-
-
+        
        <div class="footer-column">
            <h3 style="margin-left: 3px;">Newsletter Subscription</h3>
            <form class="newsletter-form">
@@ -144,5 +120,5 @@ as soon as possible.
            </form>
        </div>
    </footer> 
-    </body>
+   </body>
 </html>
