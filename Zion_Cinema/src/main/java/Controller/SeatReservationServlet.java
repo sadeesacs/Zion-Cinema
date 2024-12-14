@@ -29,7 +29,6 @@ import org.json.JSONException;
 
 @WebServlet(name = "SeatReservationServlet", urlPatterns = {"/SeatReservationServlet"})
 public class SeatReservationServlet extends HttpServlet {
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -39,7 +38,6 @@ public class SeatReservationServlet extends HttpServlet {
             Object userIdObj = session.getAttribute("UserID");
             int userId;
 
-            // Check if user is a guest and create a UserID if necessary
             if (userIdObj == null) {
                 userId = 100000 + new Random().nextInt(900000);
                 session.setAttribute("UserID", userId);
@@ -110,9 +108,8 @@ public class SeatReservationServlet extends HttpServlet {
                         response.getWriter().write(
                             "<script>alert('The requested seat has been already booked.'); window.history.back();</script>"
                         );
-                        return; // Stop processing further
+                        return;
                     }
-
                     String ticketType = ticketTypes.getString(i);
                     double price = seatPrices.getDouble(i);
 
@@ -151,7 +148,6 @@ public class SeatReservationServlet extends HttpServlet {
             request.getRequestDispatcher("SeatReservation.jsp").forward(request, response);
 
         } catch (Exception e) {
-            e.printStackTrace();
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
         }
     }

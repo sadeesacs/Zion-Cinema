@@ -29,7 +29,6 @@ public class MovieDetailDAO {
                 );
             }
         } catch (SQLException e) {
-            e.printStackTrace();
         }
         return null;
     }
@@ -48,7 +47,6 @@ public class MovieDetailDAO {
                 genres.add(resultSet.getString("Name"));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
         }
         return genres;
     }
@@ -65,7 +63,6 @@ public class MovieDetailDAO {
                 showtimes.add(new Showtime(0, resultSet.getString("Date"), resultSet.getString("Show_Time")));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
         }
         return showtimes;
     }
@@ -92,7 +89,6 @@ public class MovieDetailDAO {
                 ));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
         }
         return nowShowing;
     }
@@ -111,7 +107,7 @@ public class MovieDetailDAO {
             statement.setInt(1, movieId);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                showtimes.add(new Showtime(0, resultSet.getString("Date"), null));// Only add dates for now
+                showtimes.add(new Showtime(0, resultSet.getString("Date"), null));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -132,7 +128,6 @@ public class MovieDetailDAO {
                 times.add(resultSet.getString("Show_Time"));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
         }
         return times;
     }
@@ -149,7 +144,6 @@ public class MovieDetailDAO {
                 return resultSet.getInt("ShowtimeID");
             }
         } catch (SQLException e) {
-            e.printStackTrace();
         }
         return -1;
     }

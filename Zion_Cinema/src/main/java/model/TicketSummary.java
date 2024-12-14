@@ -1,4 +1,3 @@
-
 package model;
 
 public class TicketSummary {
@@ -12,15 +11,7 @@ public class TicketSummary {
         this.totalPrice = totalPrice;
     }
 
-    public String getTicketType() {
-        return ticketType;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public double getTotalPrice() {
-        return totalPrice;
-    }
+    public String getTicketType() {return ticketType;}
+    public int getQuantity() {return quantity;}
+    public double getTotalPrice() {return totalPrice;}
 }

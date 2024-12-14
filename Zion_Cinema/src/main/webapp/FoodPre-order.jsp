@@ -74,7 +74,6 @@
             String selectedSeats = (String) request.getAttribute("selectedSeats");
         %>
 
-
         <!-- Selected Movie Details -->
         <div class="selected-movie-name"><%= movieDetail.getName() %></div>
         <div class="selected-container" >
@@ -110,7 +109,6 @@
                 </div>
             </div>
         </div>
-
 
         <!-- Food Menu Container -->
         <div class="food-menu-container">
@@ -244,9 +242,6 @@
             </div>
         </footer>
 
-
-
-
         <script>
             document.addEventListener("DOMContentLoaded", () => {
                 const navButtons = document.querySelectorAll(".food-nav button");
@@ -309,38 +304,33 @@
 
                 function updateSummary() {
                     const summaryContainer = document.querySelector(".food-summary-items");
-                    summaryContainer.textContent = ""; // Clear the container
+                    summaryContainer.textContent = "";
 
-                    let foodTotal = 0; // Initialize food total
+                    let foodTotal = 0; 
 
                     // Calculate food total
                     cart.forEach(item => {
                         const itemTotal = item.price * item.quantity;
                         foodTotal += itemTotal;
 
-                        // Create a div for each item
                         const div = document.createElement("div");
                         div.classList.add("summary-item");
 
-                        // Create and append the name
                         const nameSpan = document.createElement("span");
                         nameSpan.classList.add("sum-pro-name");
                         nameSpan.textContent = item.name;
                         div.appendChild(nameSpan);
 
-                        // Create and append the quantity
                         const quantitySpan = document.createElement("span");
                         quantitySpan.classList.add("sum-pro-quantity");
                         quantitySpan.textContent = item.quantity;
                         div.appendChild(quantitySpan);
 
-                        // Create and append the price
                         const priceSpan = document.createElement("span");
                         priceSpan.classList.add("sum-pro-price");
                         priceSpan.textContent = "LKR " + itemTotal;
                         div.appendChild(priceSpan);
 
-                        // Create and append the delete button
                         const deleteLink = document.createElement("a");
                         deleteLink.href = "#";
                         deleteLink.classList.add("delete-icon");
@@ -351,17 +341,14 @@
                         });
                         div.appendChild(deleteLink);
 
-                        // Append the item div to the summary container
                         summaryContainer.appendChild(div);
                     });
 
-                    // Fetch ticket total from the hidden input
                     const ticketTotal = parseFloat(document.getElementById("ticket-total").value);
 
                     // Calculate the combined total (tickets + food)
                     const combinedTotal = ticketTotal + foodTotal;
 
-                    // Update the total amount in the DOM
                     document.querySelector(".total-amount").textContent = "LKR " + combinedTotal.toFixed(2);
                 }
 
@@ -370,7 +357,6 @@
                     updateSummary();
                 }
 
-                // Serialize cart before submitting
                 const form = document.querySelector("form[action='FoodPreOrderServlet']");
                 form.addEventListener("submit", (e) => {
                     const cartDataInput = document.querySelector(".cart-data");
@@ -378,7 +364,6 @@
                 });
             });
         </script>
-        
     </body>
 </html>
 

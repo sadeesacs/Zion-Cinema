@@ -20,7 +20,6 @@ public class TemporaryFoodOrderDAO {
             ps.setInt(5, userID);
             ps.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
         } finally {
             try { if (ps != null) ps.close(); } catch(SQLException ignore) {}
             try { if (conn != null) conn.close(); } catch(SQLException ignore) {}

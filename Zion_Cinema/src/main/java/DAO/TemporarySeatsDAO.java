@@ -16,13 +16,6 @@ public class TemporarySeatsDAO {
         try (Connection connection = dbcon.connect();
             PreparedStatement statement = connection.prepareStatement(query)) {
             
-            System.out.println("Inserting Temporary Seat:");
-            System.out.println("Seat ID: " + seatId);
-            System.out.println("UserID: " + userId);
-            System.out.println("Showtime ID: " + showtimeId);
-            System.out.println("Ticket Type: " + ticketType);
-            System.out.println("Price: " + price);
-            
             statement.setInt(1, seatId);
             statement.setInt(2, userId);
             statement.setInt(3, showtimeId);
@@ -44,7 +37,6 @@ public class TemporarySeatsDAO {
                 reservedSeats.add(resultSet.getInt("SeatID"));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
         }
         return reservedSeats;
     }
@@ -57,12 +49,11 @@ public class TemporarySeatsDAO {
             statement.setInt(2, showtimeId);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                return resultSet.getInt(1) > 0; // Return true if seat is reserved
+                return resultSet.getInt(1) > 0;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
         }
-        return false; // Return false if not reserved
+        return false; 
     }
     
     public List<TicketSummary> getTicketSummaryByUserId(int userId) {
@@ -82,7 +73,6 @@ public class TemporarySeatsDAO {
                 ticketSummaries.add(new TicketSummary(ticketType, quantity, totalPrice));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
         }
         return ticketSummaries;
     }
@@ -98,7 +88,6 @@ public class TemporarySeatsDAO {
                 totalPrice = resultSet.getDouble("TotalPrice");
             }
         } catch (SQLException e) {
-            e.printStackTrace();
         }
         return totalPrice;
     }

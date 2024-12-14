@@ -151,7 +151,6 @@
             </div>
         </footer>
         
-        
         <script>
             document.addEventListener('DOMContentLoaded', () => {
                 const leftArrow = document.querySelector('.bi-arrow-left-square');

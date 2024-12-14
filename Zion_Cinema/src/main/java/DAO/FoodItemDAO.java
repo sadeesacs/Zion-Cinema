@@ -28,7 +28,6 @@ public class FoodItemDAO {
                 foodItems.add(foodItem);
             }
         } catch (Exception e) {
-            e.printStackTrace();
         }
         return foodItems;
     }
@@ -43,7 +42,6 @@ public class FoodItemDAO {
                 types.add(resultSet.getString("Type"));
             }
         } catch (Exception e) {
-            e.printStackTrace();
         }
         return types;
     }

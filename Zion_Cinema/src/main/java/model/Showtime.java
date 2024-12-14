@@ -11,15 +11,7 @@ public class Showtime {
         this.time = time;
     }
 
-    public int getShowtimeID() {
-        return showtimeID;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public String getTime() {
-        return time;
-    }
+    public int getShowtimeID() {return showtimeID;}
+    public String getDate() {return date;}
+    public String getTime() {return time;}
 }

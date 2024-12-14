@@ -4,7 +4,6 @@
 <%@ page import="java.util.List" %>
 <%@ page import="DAO.MovieDetailDAO" %>
 
-
 <%
     MovieDetail movieDetail = (MovieDetail) request.getAttribute("movieDetail");
     List<String> genres = (List<String>) request.getAttribute("genres");
@@ -71,7 +70,6 @@
                 <div>Watch Trailer</div>
             </a>
         </div>
-
                 
         <!-- Date and Time Selection Container -->
         <div class="selection-container">
@@ -82,7 +80,6 @@
                         <li class="date-li"><%= new java.text.SimpleDateFormat("EEE").format(java.sql.Date.valueOf(date.getDate())) %></li>
                     <% } %>
                 </ul>
-                <!-- Original form remains unchanged -->
                 <form class="date-buttons-form" method="get" action="MovieDetailServlet">
                     <% for (Showtime date : closestDates) { %>
                         <button type="submit" name="selectedDate" value="<%= date.getDate() %>"
@@ -113,7 +110,6 @@
                 </div>
             </div>
 
-            <!-- Additional Form for SeatReservationServlet -->
             <form id="seatReservationForm" method="post" action="SeatReservationServlet">
                 <input type="hidden" name="movieId" value="<%= movieDetail.getMovieId() %>" />
                 <input type="hidden" name="selectedDate" id="hiddenSelectedDate" value="<%= selectedDate %>" />
@@ -126,7 +122,6 @@
 
 
         <div class="topic-2">Now Screening</div>
-
         <!-- Movie Cards -->
         <div class="movie-cards-container">
             <% if (topNowShowing != null && !topNowShowing.isEmpty()) {
@@ -198,9 +193,7 @@
         </footer>
         
         <script>
-            
             function setTime(selectedTime, showtimeId) {
-                // Set the ShowtimeID and selected time in the hidden form inputs
                 document.getElementById('hiddenShowtimeId').value = showtimeId;
                 document.getElementById('hiddenSelectedDate').value = selectedTime;
             }
@@ -224,14 +217,12 @@
                 });
             });
 
-
             // Select all time buttons
             const timeButtons = document.querySelectorAll('.time-button');
 
             timeButtons.forEach(button => {
                 button.addEventListener('click', () => {
                     timeButtons.forEach(btn => btn.classList.remove('active'));
-                    
                     button.classList.add('active');
                 });
             });

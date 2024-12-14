@@ -17,7 +17,7 @@ public class TemporaryMoviesDAO {
             
             System.out.println("Inserting Temporary Movie:");
             System.out.println("Movie ID: " + movieId);
-            System.out.println("Showtime ID: " + showtimeId); ///this iss
+            System.out.println("Showtime ID: " + showtimeId);
             System.out.println("UserID: " + userId);
             
             statement.setInt(1, movieId);

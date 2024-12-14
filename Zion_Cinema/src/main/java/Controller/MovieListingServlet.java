@@ -12,16 +12,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-
 @WebServlet("/MovieListingServlet")
 public class MovieListingServlet extends HttpServlet {
-    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
             MovieListingDAO movieDAO = new MovieListingDAO();
             List<MovieListing> allMovies = movieDAO.getAllMovies();
-
             List<MovieListing> nowShowing = new ArrayList<>();
             List<MovieListing> comingSoon = new ArrayList<>();
 
@@ -32,7 +29,6 @@ public class MovieListingServlet extends HttpServlet {
                     comingSoon.add(movie);
                 }
             }
-            
             request.setAttribute("nowShowing", nowShowing);
             request.setAttribute("comingSoon", comingSoon);
             request.getRequestDispatcher("MovieListing.jsp").forward(request, response);

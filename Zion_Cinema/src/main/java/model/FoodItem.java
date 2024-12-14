@@ -1,6 +1,4 @@
-
 package model;
-
 
 public class FoodItem {
     private int foodId;
@@ -16,24 +14,10 @@ public class FoodItem {
         this.type = type;
         this.price = price;
     }
-
-    public int getFoodId() {
-        return foodId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getFoodImage() {
-        return foodImage;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public double getPrice() {
-        return price;
-    }
+    
+    public int getFoodId() {return foodId;}
+    public String getName() {return name;}
+    public String getFoodImage() {return foodImage;}
+    public String getType() {return type;}
+    public double getPrice() {return price;}
 }

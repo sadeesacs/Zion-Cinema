@@ -1,4 +1,3 @@
-
 package Controller;
 
 import DAO.FoodItemDAO;
@@ -7,7 +6,6 @@ import model.FoodItem;
 import model.Showtime;
 import DAO.TemporarySeatsDAO;
 import model.TicketSummary;
-
 
 import jakarta.servlet.http.HttpSession;
 import java.util.HashMap;
@@ -22,7 +20,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
 
 @WebServlet(name = "FoodPreOrderServlet", urlPatterns = {"/FoodPreOrderServlet"})
 public class FoodPreOrderServlet extends HttpServlet {
@@ -68,11 +65,9 @@ public class FoodPreOrderServlet extends HttpServlet {
             request.setAttribute("ticketSummaries", ticketSummaries);
             request.setAttribute("ticketTotal", ticketTotal);
             
-            // Forward to JSP
             request.getRequestDispatcher("FoodPre-order.jsp").forward(request, response);
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException e) {
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "An error occurred: " + e.getMessage());
         }
     }
@@ -80,13 +75,12 @@ public class FoodPreOrderServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Handle saving the food order if any
+        
         HttpSession session = request.getSession();
-        // Assuming UserID is stored in session
+        
         Integer userId = (Integer) session.getAttribute("UserID");  
-        // Assuming showtime_id can be retrieved from the selectedShowtime object
         Showtime selectedShowtime = (Showtime) session.getAttribute("selectedShowtime");
-        int showtimeID = selectedShowtime.getShowtimeID(); // getShowtimeID now returns int
+        int showtimeID = selectedShowtime.getShowtimeID();
         String showtimeIDStr = String.valueOf(showtimeID);
 
         String action = request.getParameter("action");
@@ -109,9 +103,7 @@ public class FoodPreOrderServlet extends HttpServlet {
                     }
                 }
             }
-            
-            // After saving, redirect to the next step
-            response.sendRedirect("Payment.jsp"); // or wherever the next page is
+            response.sendRedirect("Payment.jsp");
         } else {
             doGet(request, response);
         }

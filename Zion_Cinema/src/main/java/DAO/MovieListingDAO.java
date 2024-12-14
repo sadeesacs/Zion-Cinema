@@ -12,7 +12,6 @@ public class MovieListingDAO {
     public MovieListingDAO() {
         this.connection = dbcon.connect();
     }
-
     public List<MovieListing> getAllMovies() {
         List<MovieListing> movies = new ArrayList<>();
         String query = "SELECT movies.Movie_ID, movies.Poster, movies.Movie_Name, movies.Duration, movies.Year, movies.Rating, movies.Status, movies.Trailer, " +
@@ -42,6 +41,4 @@ public class MovieListingDAO {
         }
         return movies;
     }
-    
-    
 }
