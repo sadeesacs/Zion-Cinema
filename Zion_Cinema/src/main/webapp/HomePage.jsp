@@ -1,5 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="jakarta.servlet.http.HttpSession"%>
+<%@page import="model.MovieListing"%>
+<%@page import="java.util.List"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -54,44 +57,37 @@
         
 
         <!-- Movie Banner carousel -->
+        <%
+            List<MovieListing> carousalMovies = (List<MovieListing>) request.getAttribute("carousalMovies");
+        %>
         <div class="carousel">
             <div class="carousel-slides">
-                <div class="slide">
-                    <img src="images/Carousal/Spider Man No Way Home.jpg" alt="Spider-Man No Way Home">
-                    <div class="banner-gradient"></div>
-                    <div class="slide-content">
-                        <h1>Spider-Man No Way Home</h1>
-                        <p>Experience the thrill of the big screen with Spider-Man: No Way Home! Witness Peter Parker's epic battle to restore his secret identity, featuring jaw-dropping action, multiverse twists, and your favorite iconic villains.!</p>
-                        <button class="book-now">Book Tickets</button>
+                <%
+                    if (carousalMovies != null) {
+                        DAO.MovieListingDAO cDao = new DAO.MovieListingDAO();
+                        for (MovieListing movie : carousalMovies) {
+                            String carousalImg = cDao.getCarousalImage(movie.getMovieId());
+                            if (carousalImg != null && !carousalImg.trim().isEmpty()) {
+                %>
+                    <div class="slide">
+                        <img src="<%=carousalImg%>" alt="<%=movie.getName()%>">
+                        <div class="banner-gradient"></div>
+                        <div class="slide-content">
+                            <h1><%=movie.getName()%></h1>
+                            <p><%=movie.getDuration()%></p> 
+                            <%
+                                DAO.MovieListingDAO tempDao = new DAO.MovieListingDAO();
+                                String desc = tempDao.getMovieDescription(movie.getMovieId());
+                            %>
+                            <p><%=desc%></p>
+                            <button class="book-now"><a href="MovieDetailServlet?movieId=<%=movie.getMovieId()%>">Book Tickets</a></button>
+                        </div>
                     </div>
-                </div>
-                <div class="slide">
-                    <img src="images/Carousal/The Wild Robot.jpg" alt="Another Movie">
-                    <div class="banner-gradient"></div>
-                    <div class="slide-content">
-                        <h1>The Wild Robot</h1>
-                        <p>Embark on an extraordinary journey with The Wild Robot! Follow Roz, a robot stranded on a remote island, as she discovers the beauty of nature, forms unexpected friendships, and learns what it truly means to be alive.</p>
-                        <button class="book-now">Book Tickets</button>
-                    </div>
-                </div>
-                <div class="slide">
-                    <img src="images/Carousal/End Game.png" alt="Another Movie">
-                    <div class="banner-gradient"></div>
-                    <div class="slide-content">
-                        <h1>Avengers Endgame</h1>
-                        <p>After the devastating events of Avengers: Infinity War (2018), the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to reverse Thanos' actions and restore balance to the universe.</p>
-                        <button class="book-now">Book Tickets</button>
-                    </div>
-                </div>
-                <div class="slide">
-                    <img src="images/Carousal/The Lion King.jpg" alt="Another Movie">
-                    <div class="banner-gradient"></div>
-                    <div class="slide-content">
-                        <h1>Mufasa: The Lion King</h1>
-                        <p>Journey into the majestic pride lands with Mufasa: The Lion King! Uncover the untold story of Simba's father, as young Mufasa rises from humble beginnings to become a legendary king. Experience breathtaking visuals, heartfelt bonds!</p>
-                        <button class="book-now">Book Tickets</button>
-                    </div>
-                </div>
+                <%
+                            }
+                        }
+                    }
+                %>
             </div>
         </div>
         
@@ -101,140 +97,60 @@
             <button id="now-showing-btn" class="category-button">Now Showing</button>
             <button id="coming-soon-btn" class="category-button">Coming Soon</button>
         </div>
+        
+        <%
+            List<MovieListing> nowShowingMovies = (List<MovieListing>) request.getAttribute("nowShowingMovies");
+            List<MovieListing> comingSoonMovies = (List<MovieListing>) request.getAttribute("comingSoonMovies");
+        %>
 
         <div class="movie-cards-container">
             <!-- Now Showing Movies -->
-            <div class="movie-card now-showing">
-                <img src="images/poster/Venom The Last Dance.png" alt="Venom: The Last Dance">
-                <h3>Venom: The Last Dance</h3>
+            <%
+                if (nowShowingMovies != null) {
+                    for (MovieListing movie : nowShowingMovies) {
+            %>
+            <div class="movie-card Now Showing">
+                <img src="<%=movie.getPoster()%>" alt="<%=movie.getName()%>">
+                <h3><%=movie.getName()%></h3>
                 <div class="movie-genre">
-                    <span>Genre : </span><span>Adventure</span>
+                    <span>Genre : </span><span><%=movie.getGenre()%></span>
                 </div>
                 <div class="movie-info">
-                    <span>2024</span> <span>NR</span> <span>1h 48m</span>
+                    <span><%=movie.getYear()%></span> <span><%=movie.getRating()%></span> <span><%=movie.getDuration()%></span>
                 </div>
                 <div class="card-buttons">
-                    <button class="get-tickets-button">Get Tickets</button>
-                    <button class="view-details-button">View Details</button>
+                    <button class="get-tickets-button"><a href="MovieDetailServlet?movieId=<%= movie.getMovieId() %>">Get Tickets</a></button>
+                    <button class="view-details-button"><a href="<%=movie.getTrailer()%>" target="_blank">Watch Trailer</a></button>
                 </div>
             </div>
-            <div class="movie-card now-showing">
-                <img src="images/poster/Moana 2.jpeg" alt="Venom: The Last Dance">
-                <h3>Venom: The Last Dance</h3>
-                <div class="movie-genre">
-                    <span>Genre : </span><span>Adventure</span>
-                </div>
-                <div class="movie-info">
-                    <span>2024</span> <span>NR</span> <span>1h 48m</span>
-                </div>
-                <div class="card-buttons">
-                    <button class="get-tickets-button">Get Tickets</button>
-                    <button class="view-details-button">View Details</button>
-                </div>
-            </div>
-            <div class="movie-card now-showing">
-                <img src="images/poster/Sonic 3.png" alt="Venom: The Last Dance">
-                <h3>Venom: The Last Dance</h3>
-                <div class="movie-genre">
-                    <span>Genre : </span><span>Adventure</span>
-                </div>
-                <div class="movie-info">
-                    <span>2024</span> <span>NR</span> <span>1h 48m</span>
-                </div>
-                <div class="card-buttons">
-                    <button class="get-tickets-button">Get Tickets</button>
-                    <button class="view-details-button">View Details</button>
-                </div>
-            </div>
-            <div class="movie-card now-showing">
-                <img src="images/poster/Kraven The Hunter.png" alt="Venom: The Last Dance">
-                <h3>Venom: The Last Dance</h3>
-                <div class="movie-genre">
-                    <span>Genre : </span><span>Adventure</span>
-                </div>
-                <div class="movie-info">
-                    <span>2024</span> <span>NR</span> <span>1h 48m</span>
-                </div>
-                <div class="card-buttons">
-                    <button class="get-tickets-button">Get Tickets</button>
-                    <button class="view-details-button">View Details</button>
-                </div>
-            </div>
+            <%
+                    }
+                }
+            %>
 
             <!-- Coming Soon Movies -->
-            <div class="movie-card coming-soon">
-                <img src="images/poster/Gladiator 2.jpg" alt="Gladiator II">
-                <h3>Gladiator II</h3>
+            <%
+                if (comingSoonMovies != null) {
+                    for (MovieListing movie : comingSoonMovies) {
+            %>
+            <div class="movie-card Coming Soon">
+                <img src="<%=movie.getPoster()%>" alt="<%=movie.getName()%>">
+                <h3><%=movie.getName()%></h3>
                 <div class="movie-genre">
-                    <span>Genre : </span><span>Action</span>
+                    <span>Genre : </span><span><%=movie.getGenre()%></span>
                 </div>
                 <div class="movie-info">
-                    <span>2024</span> <span>PG</span> <span>2h 15m</span>
+                    <span><%=movie.getYear()%></span> <span><%=movie.getRating()%></span> <span><%=movie.getDuration()%></span>
                 </div>
                 <div class="card-buttons">
-                    <button class="get-tickets-button">Get Tickets</button>
-                    <button class="view-details-button">View Details</button>
+                    <button class="get-tickets-button"><a href="MovieDetailServlet?movieId=<%= movie.getMovieId() %>">Get Tickets</a></button>
+                    <button class="view-details-button"><a href="<%=movie.getTrailer()%>" target="_blank">Watch Trailer</a></button>
                 </div>
             </div>
-            <div class="movie-card coming-soon">
-                <img src="images/poster/Gladiator 2.jpg" alt="Gladiator II">
-                <h3>Gladiator II</h3>
-                <div class="movie-genre">
-                    <span>Genre : </span><span>Action</span>
-                </div>
-                <div class="movie-info">
-                    <span>2024</span> <span>PG</span> <span>2h 15m</span>
-                </div>
-                <div class="card-buttons">
-                    <button class="get-tickets-button">Get Tickets</button>
-                    <button class="view-details-button">View Details</button>
-                </div>
-            </div>
-            <div class="movie-card coming-soon">
-                <img src="images/poster/Gladiator 2.jpg" alt="Gladiator II">
-                <h3>Gladiator II</h3>
-                <div class="movie-genre">
-                    <span>Genre : </span><span>Action</span>
-                </div>
-                <div class="movie-info">
-                    <span>2024</span> <span>PG</span> <span>2h 15m</span>
-                </div>
-                <div class="card-buttons">
-                    <button class="get-tickets-button">Get Tickets</button>
-                    <button class="view-details-button">View Details</button>
-                </div>
-            </div>
-            <div class="movie-card coming-soon">
-                <img src="images/poster/Gladiator 2.jpg" alt="Gladiator II">
-                <h3>Gladiator II</h3>
-                <div class="movie-genre">
-                    <span>Genre : </span><span>Action</span>
-                </div>
-                <div class="movie-info">
-                    <span>2024</span> <span>PG</span> <span>2h 15m</span>
-                </div>
-                <div class="card-buttons">
-                    <button class="get-tickets-button">Get Tickets</button>
-                    <button class="view-details-button">View Details</button>
-                </div>
-            </div>
-        </div>
-        
-        
-        <!--Advertisement Section-->
-        <div class="movie-munchies-section">
-            <div class="content-container">
-                <div class="text-content">
-                    <h1>
-                        Movie <span class="highlight">Munchies</span>: Where 
-                        <span class="highlight">Flavor</span> Takes Center Stage!
-                    </h1>
-                    <p>Experience a flavor explosion with outrageous snacks and gourmet treats that elevate your movie night.</p>
-                </div>
-                <div class="image-container">
-                    <img src="images/Popcornposter.png" alt="Popcorn">
-                </div>
-            </div>
+            <%
+                    }
+                }
+            %>
         </div>
         
         
@@ -283,9 +199,6 @@
                 </div>
             </div>
         </div>
-        
-        
-        
         
         <!-- Footer  -->
         <footer class="footer-container">
