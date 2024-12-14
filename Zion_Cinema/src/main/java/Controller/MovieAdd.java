@@ -135,7 +135,7 @@ public class MovieAdd extends HttpServlet {
         // Save to database
         try {
             MovieListDAO movielist = new MovieListDAO();
-            boolean success = movielist.addmoviedata(name, description, duration, year,rating,status,trailer,imagebanner,imageposter,imagecarousal);
+            boolean success = movielist.addmoviedata(name, description, duration, year,rating,status,trailer,imagebanner,imageposter,imagecarousal,genre1,genre2,genre3,genre4);
 
             if (success) {
                 response.sendRedirect("AD-Movies.jsp");
