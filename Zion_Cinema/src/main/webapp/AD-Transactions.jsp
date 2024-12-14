@@ -111,34 +111,64 @@
             <div class="content-container">
                 <div class="Transactions">
 
-                    <%
-                        // Fetching the list of Customer inquiries
-                        List<Transaction> Transaction = TransactionDAO.getAllTransaction();
-                        // Loop to display data
-                        if (!Transaction.isEmpty()) {
-                            for (Transaction transaction : Transaction) {
-                    %>
+                        <%
+                            // Fetching the list of Customer inquiries
+                            List<Transaction> Transaction = TransactionDAO.getAllTransaction();
+                            // Loop to display data
+                            if (!Transaction.isEmpty()) {
+                                for (Transaction transaction : Transaction) {
+                        %>
                     <div class="Transactions">
                         <p class="Trans-id"><%=transaction.getTransactionID() %></p>
                         <p class="Trans-movie-name"><%=transaction.getMovieName() %></p>
                         <p class="Trans-show-time"><%=transaction.getDate() %>  <%=transaction.getTime() %>  </p>
-                        <p class="Trans-seats"><%=transaction.getSeatNumber() %></p>
-                        <div class="Trans-food-order"><%=transaction.getFoodName() %> </div>
-                        <p class="Trans-total"><%=transaction.getTotalPrice() %></p>
 
+                        <%
+                            // Handle multiple seats
+                            String[] seats = transaction.getSeatNumber().split(","); // Assuming seats are comma-separated
+                        %>
+                        <p class="Trans-seats">
+                            Seats:
+                            <%
+                                for (int i = 0; i < seats.length; i++) {
+                                    out.print(seats[i].trim());
+                                    if (i < seats.length - 1) {
+                                        out.print(", ");
+                                    }
+                                }
+                            %>
+                        </p>
+
+                        <%
+                            // Handle multiple food items
+                            String[] foodItems = transaction.getFoodName().split(","); // Assuming food items are comma-separated
+                        %>
+                        <div class="Trans-food-order">
+                            Food Orders:
+                            <ul>
+                                <%
+                                    for (String foodItem : foodItems) {
+                                %>
+                                <li><%=foodItem.trim() %></li>
+                                <%
+                                    }
+                                %>
+                            </ul>
+                        </div>
+
+                        <p class="Trans-total"><%=transaction.getTotalPrice() %></p>
                     </div>
-                    <%
-                        }
+                        <%
+                     }
                     }
-                    else {
+                else {
                     %>
                     <p>
                         <span class="header-top" style="margin-left:500px"> No Transaction found</span>
                     </p>
-                    <%
-                        }
+                        <%
+                    }
                     %>
-
 
 
         
