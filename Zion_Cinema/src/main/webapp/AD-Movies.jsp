@@ -142,7 +142,7 @@
                     <p class="movie-name"><%=Movies.getMovieName()%></p>
                     <p class="movie-duration"><%=Movies.getDuration()%></p>
                     <div class="movie-actions">
-                        <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
+<%--                        <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>--%>
 
                         <div class="edit" onclick="return editFormID('<%=Movies.getMovieID()%>')">
                             <i class="bi bi-pencil-fill"></i>

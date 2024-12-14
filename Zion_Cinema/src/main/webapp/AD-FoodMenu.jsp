@@ -150,12 +150,12 @@
                     <p class="product-unitprice">LKR <%= String.format("%.2f", food.getPrice()) %></p>
                     <div class="actions">
 
-                        <form action="viewfood" method="post" id="viewFoodForm<%=food.getFoodID()%>">
-                            <input type="hidden" name="foodID" value="<%=food.getFoodID() %>">
-                            <button class="icon-button" type="submit" onclick="showReviewSlider(<%=food.getFoodID()%>)">
-                                <div class="view"><i class="bi bi-eye-fill"></i></div>
-                            </button>
-                        </form>
+<%--                        <form action="viewfood" method="post" id="viewFoodForm<%=food.getFoodID()%>">--%>
+<%--                            <input type="hidden" name="foodID" value="<%=food.getFoodID() %>">--%>
+<%--                            <button class="icon-button" type="submit" onclick="showReviewSlider(<%=food.getFoodID()%>)">--%>
+<%--                                <div class="view"><i class="bi bi-eye-fill"></i></div>--%>
+<%--                            </button>--%>
+<%--                        </form>--%>
 
 
                         <div class="edit" onclick="return editFormID('<%=food.getFoodID() %>');">
