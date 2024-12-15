@@ -95,7 +95,7 @@
         </div>
 
         <div class="middle-container">
-            <form method="post" action="AdminDashboardServlet" onsubmit="return validatePrices();">
+            <form method="post" action="ADDashboard" onsubmit="return validatePrices();">
                 <%
                     String selectedMovie = (String) request.getAttribute("selectedMovie");
                     if (selectedMovie == null) selectedMovie = "1";
@@ -195,11 +195,6 @@
             function validatePrices() {
                 const adult = document.getElementById("adult").value.trim();
                 const child = document.getElementById("child").value.trim();
-                if (adult === "" || child === "") {
-                    alert("Please provide both adult and child prices.");
-                    return false;
-                }
-                return true;
             }
         </script>
     </body>

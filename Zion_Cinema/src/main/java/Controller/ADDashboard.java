@@ -18,7 +18,7 @@ public class ADDashboard extends HttpServlet {
             selectedMovie = "1";
         }
         request.setAttribute("selectedMovie", selectedMovie);
-        request.getRequestDispatcher("AD-ADDashboard.jsp").forward(request, response);
+        request.getRequestDispatcher("AD-Dashboard.jsp").forward(request, response);
     }
 
     @Override
