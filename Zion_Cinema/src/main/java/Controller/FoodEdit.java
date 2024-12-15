@@ -1,5 +1,5 @@
 package Controller;
-import DAO.FoodMenuDAO;
+import DAO.ADFoodMenuDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -77,8 +77,8 @@ public class FoodEdit  extends HttpServlet {
 
         // Save to database
         try {
-            FoodMenuDAO foodMenuDAO = new FoodMenuDAO();
-            boolean success = foodMenuDAO.editFood(foodID,name, type, price, imageName);
+            ADFoodMenuDAO ADFoodMenuDAO = new ADFoodMenuDAO();
+            boolean success = ADFoodMenuDAO.editFood(foodID,name, type, price, imageName);
 
             if (success) {
                 response.sendRedirect("AD-FoodMenu.jsp");

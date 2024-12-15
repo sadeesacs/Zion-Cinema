@@ -1,5 +1,5 @@
 package Controller;
-import DAO.MovieListDAO;
+import DAO.ADMovieListDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -134,7 +134,7 @@ public class MovieAdd extends HttpServlet {
 
         // Save to database
         try {
-            MovieListDAO movielist = new MovieListDAO();
+            ADMovieListDAO movielist = new ADMovieListDAO();
             boolean success = movielist.addmoviedata(name, description, duration, year,rating,status,trailer,imagebanner,imageposter,imagecarousal,genre1,genre2,genre3,genre4);
 
             if (success) {

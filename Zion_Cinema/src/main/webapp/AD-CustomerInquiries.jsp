@@ -1,5 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="DAO.CustomerInquiriesDAO" %>
+<%@page import="DAO.ADCustomerInquiriesDAO" %>
 <%@ page import="model.CustomerInquiries"%>
 <%@ page import="java.util.List" %>
 <%@ page import="jakarta.servlet.http.HttpSession" %>
@@ -108,7 +108,7 @@
 
                 <%
                     // Fetching the list of Customer inquiries
-                    List<CustomerInquiries> inquiries = CustomerInquiriesDAO.getAllInquiries();
+                    List<CustomerInquiries> inquiries = ADCustomerInquiriesDAO.getAllInquiries();
                     //Loop to display data
                     if (!inquiries.isEmpty()) {
                         for (CustomerInquiries inquiry : inquiries) {

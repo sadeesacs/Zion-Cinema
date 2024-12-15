@@ -1,6 +1,6 @@
 package Controller;
 
-import DAO.FoodMenuDAO;
+import DAO.ADFoodMenuDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -54,8 +54,8 @@ public class FoodView extends HttpServlet {
 
         try {
             int foodIDInt = Integer.parseInt(foodId);
-            FoodMenuDAO foodMenuDAO = new FoodMenuDAO();
-            FoodMenu food = foodMenuDAO.viewFood(foodIDInt);
+            ADFoodMenuDAO ADFoodMenuDAO = new ADFoodMenuDAO();
+            FoodMenu food = ADFoodMenuDAO.viewFood(foodIDInt);
 
             if (food != null) {
                 // Log the food data for debugging

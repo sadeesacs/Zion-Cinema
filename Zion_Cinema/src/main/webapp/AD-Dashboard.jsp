@@ -1,10 +1,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page import="DAO.MovieDAO" %>
-<%@ page import="DAO.ShowTimeDAO" %>
+<%@ page import="DAO.ADMovieDAO" %>
+<%@ page import="DAO.ADShowTimeDAO" %>
 <%@ page import="java.sql.ResultSet" %>
 <%@ page import="java.time.LocalDate" %>
 <%@ page import="java.util.Locale" %>
-<%@ page import="DAO.ShowTimeDAO" %>
+<%@ page import="DAO.ADShowTimeDAO" %>
 
 <!DOCTYPE html>
 <html>
@@ -100,8 +100,8 @@
                     String selectedMovie = (String) request.getAttribute("selectedMovie");
                     if (selectedMovie == null) selectedMovie = "1";
 
-                    MovieDAO movieDAO = new MovieDAO();
-                    ResultSet movieRS = movieDAO.getAllMoviesResultSet();
+                    ADMovieDAO ADMovieDAO = new ADMovieDAO();
+                    ResultSet movieRS = ADMovieDAO.getAllMoviesResultSet();
                 %>
                 <div class="zion-movie-selection">
                     <div class="dashboard-topic">Select a Movie:</div>
@@ -122,7 +122,7 @@
                 <%
                     if (!selectedMovie.equals("-1")) {
                         int movieId = Integer.parseInt(selectedMovie);
-                        ShowTimeDAO stDao = new ShowTimeDAO();
+                        ADShowTimeDAO stDao = new ADShowTimeDAO();
                         LocalDate startDate = LocalDate.now();
                         String[] times = {"10:00:00","13:00:00","18:00:00"};
                 %>

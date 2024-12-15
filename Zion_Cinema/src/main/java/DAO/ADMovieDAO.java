@@ -4,7 +4,7 @@ import Db.dbcon;
 import model.Movie;
 import java.sql.*;
 
-public class MovieDAO {
+public class ADMovieDAO {
     public Movie getMovieById(int id) {
         String sql = "SELECT Movie_ID, Movie_Name FROM movies WHERE Movie_ID = ?";
         try (Connection conn = dbcon.connect();

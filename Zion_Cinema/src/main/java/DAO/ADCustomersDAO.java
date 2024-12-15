@@ -5,7 +5,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomersDAO {
+public class ADCustomersDAO {
 
     public static List<Customers> getAllCustomers() {
         List<Customers> Customer = new ArrayList<>();

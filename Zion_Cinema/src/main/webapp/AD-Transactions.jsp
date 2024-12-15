@@ -1,5 +1,5 @@
 <%@ page import="model.Transaction" %>
-<%@ page import="DAO.TransactionDAO" %>
+<%@ page import="DAO.ADTransactionDAO" %>
 <%@ page import="java.util.List" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -113,7 +113,7 @@
 
                         <%
                             // Fetching the list of Customer inquiries
-                            List<Transaction> Transaction = TransactionDAO.getAllTransaction();
+                            List<Transaction> Transaction = ADTransactionDAO.getAllTransaction();
                             // Loop to display data
                             if (!Transaction.isEmpty()) {
                                 for (Transaction transaction : Transaction) {

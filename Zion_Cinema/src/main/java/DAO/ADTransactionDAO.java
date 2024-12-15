@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TransactionDAO {
+public class ADTransactionDAO {
 
     public static List<Transaction> getAllTransaction() {
         List<Transaction> Transaction = new ArrayList<>();

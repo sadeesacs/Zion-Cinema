@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MovieListDAO {
+public class ADMovieListDAO {
     // Method to retrieve all customer inquiries from the database
     public static List<MovieList> getAllMovies() {
         List<MovieList> Movie = new ArrayList<>();

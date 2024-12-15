@@ -5,7 +5,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomerInquiriesDAO {
+public class ADCustomerInquiriesDAO {
 
     // Method to retrieve all customer inquiries from the database
     public static List<CustomerInquiries> getAllInquiries() {

@@ -1,5 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="DAO.FoodMenuDAO" %>
+<%@page import="DAO.ADFoodMenuDAO" %>
 <%@ page import="model.FoodMenu"%>
 <%@ page import="java.util.List" %>
 
@@ -138,7 +138,7 @@
 
                 <%
                     // Fetching the list of Customer inquiries
-                    List<FoodMenu> Food = FoodMenuDAO.getAllFood();
+                    List<FoodMenu> Food = ADFoodMenuDAO.getAllFood();
                     //Loop to display data
                     if (!Food.isEmpty()) {
                         for (FoodMenu food : Food) {

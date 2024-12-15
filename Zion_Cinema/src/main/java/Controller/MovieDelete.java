@@ -1,5 +1,5 @@
 package Controller;
-import DAO.MovieListDAO;
+import DAO.ADMovieListDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -23,8 +23,8 @@ public class MovieDelete extends HttpServlet {
                 int MovieIdInt = Integer.parseInt(MovieId);
 
                 //call to DAO layer to delete food
-                MovieListDAO movieListDAO = new MovieListDAO();
-                Boolean isDeleted = movieListDAO.deleteMovieById(MovieIdInt);
+                ADMovieListDAO ADMovieListDAO = new ADMovieListDAO();
+                Boolean isDeleted = ADMovieListDAO.deleteMovieById(MovieIdInt);
                 // Redirect based on the result of the deletion
                 if (isDeleted) {
                     response.sendRedirect("AD-Movies.jsp");

@@ -1,5 +1,5 @@
 package Controller;
-import DAO.FoodMenuDAO;
+import DAO.ADFoodMenuDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -22,7 +22,7 @@ import java.io.IOException;
                     int foodIDInt = Integer.parseInt(foodId);
 
                     //call to DAO layer to delete food
-                    FoodMenuDAO foodMenuDAO = new FoodMenuDAO();
+                    ADFoodMenuDAO foodMenuDAO = new ADFoodMenuDAO();
                     Boolean isDeleted = foodMenuDAO.deleteFoodById(foodIDInt);
                     // Redirect based on the result of the deletion
                     if (isDeleted) {

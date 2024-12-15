@@ -1,5 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="DAO.CustomersDAO" %>
+<%@page import="DAO.ADCustomersDAO" %>
 <%@ page import="model.Customers"%>
 <%@ page import="java.util.List" %>
 <!DOCTYPE html>
@@ -109,7 +109,7 @@
 
                     <%
                         // Fetching the list of Customer inquiries
-                        List<Customers> customers = CustomersDAO.getAllCustomers();
+                        List<Customers> customers = ADCustomersDAO.getAllCustomers();
                         // Loop to display data
                         if (!customers.isEmpty()) {
                             for (Customers user : customers) {
