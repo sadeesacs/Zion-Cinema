@@ -66,7 +66,7 @@
             <div class="bi-stopwatch">
                 <span><%= movieDetail.getDuration() %></span>
             </div>    
-            <a href="<%= movieDetail.getTrailer() %>" class="but-trailer">
+            <a href="<%= movieDetail.getTrailer() %>" target="_blank" class="but-trailer">
                 <div>Watch Trailer</div>
             </a>
         </div>

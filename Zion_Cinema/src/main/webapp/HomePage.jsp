@@ -142,7 +142,6 @@
                     <span><%=movie.getYear()%></span> <span><%=movie.getRating()%></span> <span><%=movie.getDuration()%></span>
                 </div>
                 <div class="card-buttons">
-                    <button class="get-tickets-button"><a href="MovieDetailServlet?movieId=<%= movie.getMovieId() %>">Get Tickets</a></button>
                     <button class="view-details-button"><a href="<%=movie.getTrailer()%>" target="_blank">Watch Trailer</a></button>
                 </div>
             </div>
