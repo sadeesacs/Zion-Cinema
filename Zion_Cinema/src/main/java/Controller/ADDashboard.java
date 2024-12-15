@@ -8,7 +8,7 @@ import jakarta.servlet.annotation.*;
 import java.io.IOException;
 import java.time.LocalDate;
 
-@WebServlet(name = "ADDashboard", urlPatterns = {"/AdminDashboardServlet"})
+@WebServlet(name = "AdminDashboardServlet", urlPatterns = {"/AdminDashboardServlet"})
 public class ADDashboard extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -18,7 +18,7 @@ public class ADDashboard extends HttpServlet {
             selectedMovie = "1";
         }
         request.setAttribute("selectedMovie", selectedMovie);
-        request.getRequestDispatcher("AD-ADDashboard.jsp").forward(request, response);
+        request.getRequestDispatcher("AD-Dashboard.jsp").forward(request, response);
     }
 
     @Override
