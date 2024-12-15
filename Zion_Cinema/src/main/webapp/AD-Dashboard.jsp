@@ -88,12 +88,14 @@
                     <span>Settings</span>
                 </li>
             </ul>
-            <a href="AD-Login.jsp">
-                <button class="logout">
-                    <img src="images/icons/Logouticon.png"></img>
-                    <span>Logout</span>
-                </button>
-            </a>
+            <button class="logout">
+                <a href="AD-Login.jsp" style="text-decoration: none;">
+                    <li class="nav-item ">
+                        <img src="images/icons/Logouticon.png"/>
+                        <span>Logout</span>
+                    </li>
+                </a>
+
         </div>
 
         <div class="middle-container">
