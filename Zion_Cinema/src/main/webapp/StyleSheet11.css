@@ -75,6 +75,12 @@ body{
     color: #F5C51B;
 }
 
+.header-container .nav span{
+    font-size: inherit;
+    border-bottom: 1px solid white;
+    padding:5px 10px;
+}
+
 
 
 
@@ -157,7 +163,7 @@ body{
 .FAQ-image img{
     position: absolute;
     top: calc(10% + 5%); /* Places it below the header with a 5% margin */
-    margin-left: 915px;
+    margin-left: 830px;
     width: 600px; 
     height: 320px; 
 }
