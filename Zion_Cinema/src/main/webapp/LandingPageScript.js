@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
         showSlide(currentIndex);
     }
 
-    let autoSlide = setInterval(nextSlide, 3000);
+    let autoSlide = setInterval(nextSlide, 4000);
 
     // Prevent long-term issues by restarting `setInterval` periodically
     setInterval(() => {
@@ -58,8 +58,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const nowShowingBtn = document.getElementById("now-showing-btn");
     const comingSoonBtn = document.getElementById("coming-soon-btn");
 
-    const nowShowingMovies = document.querySelectorAll(".now-showing");
-    const comingSoonMovies = document.querySelectorAll(".coming-soon");
+    const nowShowingMovies = document.querySelectorAll('.movie-card[class="movie-card Now Showing"]');
+    const comingSoonMovies = document.querySelectorAll('.movie-card[class="movie-card Coming Soon"]');
 
     // Set default state: Show "Now Showing" movies and hide "Coming Soon"
     nowShowingMovies.forEach((movie) => (movie.style.display = "block"));

@@ -253,6 +253,11 @@ body{
     height: 35px;
 }
 
+.get-tickets-button a{
+    text-decoration: none;
+    color: black;
+}
+
 .view-details-button {
     display: flex;
     align-items: center;
@@ -343,6 +348,18 @@ body{
     position: relative;
     margin-top: 20px;
     cursor: pointer;
+}
+
+.watch-trailer-btn a {
+    font-size: inherit; 
+    text-decoration: none; 
+    color: black;
+}
+
+.view-details-button a {
+    font-size: inherit; 
+    text-decoration: none; 
+    color: #F4F4F4;
 }
 
 
