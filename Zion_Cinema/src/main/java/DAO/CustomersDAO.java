@@ -1,15 +1,14 @@
 package DAO;
 import Db.dbcon;
-import model.ADCustomers;
-
+import model.Customers;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ADCustomersDAO {
+public class CustomersDAO {
 
-    public static List<ADCustomers> getAllCustomers() {
-        List<ADCustomers> Customer = new ArrayList<>();
+    public static List<Customers> getAllCustomers() {
+        List<Customers> Customer = new ArrayList<>();
         Connection connection = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -37,7 +36,7 @@ public class ADCustomersDAO {
 
             // Iterate through results
             while (rs.next()) {
-                ADCustomers user = new ADCustomers();
+                Customers user = new Customers();
                 user.setUserID(rs.getInt("UserID"));
                 user.setFirstName(rs.getString("FirstName"));
                 user.setLastName(rs.getString("Lastname"));

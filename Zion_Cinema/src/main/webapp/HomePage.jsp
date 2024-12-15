@@ -53,7 +53,7 @@
         
         
 
-        <!-- ADMovie Banner carousel -->
+        <!-- Movie Banner carousel -->
         <div class="carousel">
             <div class="carousel-slides">
                 <div class="slide">
@@ -96,7 +96,7 @@
         </div>
         
         
-        <!--ADMovie Listing sections-->
+        <!--Movie Listing sections-->
         <div class="movie-categories">
             <button id="now-showing-btn" class="category-button">Now Showing</button>
             <button id="coming-soon-btn" class="category-button">Coming Soon</button>

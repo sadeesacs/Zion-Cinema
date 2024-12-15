@@ -1,7 +1,6 @@
-<%@ page import="model.ADTransaction" %>
-<%@ page import="DAO.ADTransactionDAO" %>
+<%@ page import="model.Transaction" %>
+<%@ page import="DAO.TransactionDAO" %>
 <%@ page import="java.util.List" %>
-<%@ page import="model.ADTransaction" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -15,7 +14,7 @@
     </head>
     <body>
         
-        <!-- Header of the Admin ADDashboard -->
+        <!-- Header of the Admin Dashboard -->
         <header>
             <div class="header">
                 <div class="Logo"><img src="images/icons/logo.png" /></div>
@@ -48,7 +47,7 @@
         </header>
         
         
-        <!-- Navigational Panel of the Admin ADDashboard -->
+        <!-- Navigational Panel of the Admin Dashboard -->
         <div class="navigation">
             <ul class="nav-menu">
                 <a href="AD-Dashboard.jsp">
@@ -114,19 +113,19 @@
 
                         <%
                             // Fetching the list of Customer inquiries
-                            List<ADTransaction> ADTransaction = ADTransactionDAO.getAllTransaction();
+                            List<Transaction> Transaction = TransactionDAO.getAllTransaction();
                             // Loop to display data
-                            if (!ADTransaction.isEmpty()) {
-                                for (ADTransaction ADTransaction : ADTransaction) {
+                            if (!Transaction.isEmpty()) {
+                                for (Transaction transaction : Transaction) {
                         %>
                     <div class="Transactions">
-                        <p class="Trans-id"><%=ADTransaction.getTransactionID() %></p>
-                        <p class="Trans-movie-name"><%=ADTransaction.getMovieName() %></p>
-                        <p class="Trans-show-time"><%=ADTransaction.getDate() %>  <%=ADTransaction.getTime() %>  </p>
+                        <p class="Trans-id"><%=transaction.getTransactionID() %></p>
+                        <p class="Trans-movie-name"><%=transaction.getMovieName() %></p>
+                        <p class="Trans-show-time"><%=transaction.getDate() %>  <%=transaction.getTime() %>  </p>
 
                         <%
                             // Handle multiple seats
-                            String[] seats = ADTransaction.getSeatNumber().split(","); // Assuming seats are comma-separated
+                            String[] seats = transaction.getSeatNumber().split(","); // Assuming seats are comma-separated
                         %>
                         <p class="Trans-seats">
                             Seats:
@@ -142,7 +141,7 @@
 
                         <%
                             // Handle multiple food items
-                            String[] foodItems = ADTransaction.getFoodName().split(","); // Assuming food items are comma-separated
+                            String[] foodItems = transaction.getFoodName().split(","); // Assuming food items are comma-separated
                         %>
                         <div class="Trans-food-order">
                             Food Orders:
@@ -157,7 +156,7 @@
                             </ul>
                         </div>
 
-                        <p class="Trans-total"><%=ADTransaction.getTotalPrice() %></p>
+                        <p class="Trans-total"><%=transaction.getTotalPrice() %></p>
                     </div>
                         <%
                      }
@@ -165,7 +164,7 @@
                 else {
                     %>
                     <p>
-                        <span class="header-top" style="margin-left:500px"> No ADTransaction found</span>
+                        <span class="header-top" style="margin-left:500px"> No Transaction found</span>
                     </p>
                         <%
                     }

@@ -38,7 +38,7 @@
 
 
 
-        <!-- ADMovie Detail Container -->
+        <!-- Movie Detail Container -->
         <div class="Movie-detail-container">
             <img src="images/pic1.png">
             <div class="gradient"></div>
@@ -100,7 +100,7 @@
 
         <div class="topic-2">Now Screening</div>
 
-        <!-- ADMovie Cards -->
+        <!-- Movie Cards -->
         <div class="movie-cards-container">
             <!-- Card 1 -->
             <div class="movie-card">

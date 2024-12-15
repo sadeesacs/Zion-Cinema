@@ -1,8 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="DAO.ADCustomersDAO" %>
-<%@ page import="model.ADCustomers"%>
+<%@page import="DAO.CustomersDAO" %>
+<%@ page import="model.Customers"%>
 <%@ page import="java.util.List" %>
-<%@ page import="model.ADCustomers" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -13,7 +12,7 @@
         <link rel="stylesheet" href="StyleSheet10.css" />
     </head>
     <body>
-        <!-- Header of the Admin ADDashboard -->
+        <!-- Header of the Admin Dashboard -->
         <header>
             <div class="header">
                 <div class="Logo"><img src="images/icons/logo.png" /></div>
@@ -46,7 +45,7 @@
         </header>
         
         
-        <!-- Navigational Panel of the Admin ADDashboard -->
+        <!-- Navigational Panel of the Admin Dashboard -->
         <div class="navigation">
             <ul class="nav-menu">
                 <a href="AD-Dashboard.jsp">
@@ -110,10 +109,10 @@
 
                     <%
                         // Fetching the list of Customer inquiries
-                        List<ADCustomers> customers = ADCustomersDAO.getAllCustomers();
+                        List<Customers> customers = CustomersDAO.getAllCustomers();
                         // Loop to display data
                         if (!customers.isEmpty()) {
-                            for (ADCustomers user : customers) {
+                            for (Customers user : customers) {
                     %>
                 <div class="customer">
                         <p class="customer-fname"><%=user.getFirstName() %></p>

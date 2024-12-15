@@ -1,7 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="DAO.ADMovieListDAO" %>
+<%@page import="DAO.MovieListDAO" %>
 <%@ page import="java.util.List" %>
-<%@ page import="model.ADMovieList" %>
+<%@ page import="model.MovieList" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -26,7 +26,7 @@
     </head>
     <body>
         
-        <!-- Header of the Admin ADDashboard -->
+        <!-- Header of the Admin Dashboard -->
         <header>
             <div class="header">
                 <div class="Logo"><img src="images/icons/logo.png" /></div>
@@ -60,7 +60,7 @@
         
         
         
-        <!-- Navigational Panel of the Admin ADDashboard -->
+        <!-- Navigational Panel of the Admin Dashboard -->
         <div class="navigation">
             <ul class="nav-menu">
                 <a href="AD-Dashboard.jsp">
@@ -131,11 +131,11 @@
             <div class="content-container" style="margin-top:150px;height: 70%">
                 <%
                     // Fetching the list of Customer inquiries
-                    List<ADMovieList> Movie = ADMovieListDAO.getAllMovies();
+                    List<MovieList> Movie = MovieListDAO.getAllMovies();
                     //Loop to display data
                     if (!Movie.isEmpty()) {
                         // data type,variable,array name
-                        for (ADMovieList Movies : Movie) {
+                        for (MovieList Movies : Movie) {
                 %>
                 <div class="movie">
                     <p class="movie-id"><%=Movies.getMovieID()%></p>

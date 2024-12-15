@@ -1,16 +1,16 @@
 package model;
 
-public class ADFoodMenu {
+public class FoodMenu {
     private int FoodID;
     private String Name;
     private String Type;
     private double Price;
     private String Food_Image;
 
-    public ADFoodMenu() {
+    public FoodMenu() {
     }
 
-    public ADFoodMenu(int FoodID, String Name, String Type, double Price, String Food_Image) {
+    public FoodMenu(int FoodID, String Name, String Type, double Price, String Food_Image) {
         this.FoodID = FoodID;
         this.Name = Name;
         this.Type = Type;

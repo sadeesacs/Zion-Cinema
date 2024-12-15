@@ -3,13 +3,13 @@ package model;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class ADShowtime {
+public class Showtime {
     private int showtimeID;
     private int movieID;
     private LocalDate date;
     private LocalTime time;
 
-    public ADShowtime(int showtimeID, int movieID, LocalDate date, LocalTime time) {
+    public Showtime(int showtimeID, int movieID, LocalDate date, LocalTime time) {
         this.showtimeID = showtimeID;
         this.movieID = movieID;
         this.date = date;

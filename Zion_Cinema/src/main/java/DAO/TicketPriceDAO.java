@@ -3,7 +3,7 @@ package DAO;
 import Db.dbcon;
 import java.sql.*;
 
-public class ADTicketPriceDAO {
+public class TicketPriceDAO {
     public void upsertTicketPrice(int showtimeId, String category, double price) {
         String checkSql = "SELECT TicketPriceID FROM ticketprice WHERE ShowtimeID = ? AND Category = ?";
         try (Connection conn = dbcon.connect();

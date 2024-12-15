@@ -1,13 +1,13 @@
 package Controller;
 
-import DAO.ADFoodMenuDAO;
+import DAO.FoodMenuDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.ADFoodMenu;
+import model.FoodMenu;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -15,7 +15,7 @@ import java.util.Map;
 
 @MultipartConfig
 @WebServlet("/viewfood")
-public class ADFoodView extends HttpServlet {
+public class FoodView extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     @Override
@@ -54,8 +54,8 @@ public class ADFoodView extends HttpServlet {
 
         try {
             int foodIDInt = Integer.parseInt(foodId);
-            ADFoodMenuDAO ADFoodMenuDAO = new ADFoodMenuDAO();
-            ADFoodMenu food = ADFoodMenuDAO.viewFood(foodIDInt);
+            FoodMenuDAO foodMenuDAO = new FoodMenuDAO();
+            FoodMenu food = foodMenuDAO.viewFood(foodIDInt);
 
             if (food != null) {
                 // Log the food data for debugging
@@ -63,7 +63,7 @@ public class ADFoodView extends HttpServlet {
 
                 request.setAttribute("food", food);
 
-                request.getRequestDispatcher("/AD-ADFoodMenu.jsp").forward(request, response);
+                request.getRequestDispatcher("/AD-FoodMenu.jsp").forward(request, response);
             } else {
                 System.out.println("No food item found for ID: " + foodId);
                 request.setAttribute("errorMessage", "No food item found with ID: " + foodId);

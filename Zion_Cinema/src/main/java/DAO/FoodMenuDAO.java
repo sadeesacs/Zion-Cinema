@@ -1,16 +1,15 @@
 package DAO;
 import Db.dbcon;
-import model.ADFoodMenu;
-
+import model.FoodMenu;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ADFoodMenuDAO {
+public class FoodMenuDAO {
 
     // Method to retrieve all customer inquiries from the database
-    public static List<ADFoodMenu> getAllFood() {
-        List<ADFoodMenu> Food = new ArrayList<>();
+    public static List<FoodMenu> getAllFood() {
+        List<FoodMenu> Food = new ArrayList<>();
         Connection connection = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -38,7 +37,7 @@ public class ADFoodMenuDAO {
 
             // Iterate through results
             while (rs.next()) {
-                ADFoodMenu food = new ADFoodMenu();
+                FoodMenu food = new FoodMenu();
                 food.setFoodID(rs.getInt("FoodID"));
                 food.setName(rs.getString("Name"));
                 food.setType(rs.getString("Type"));
@@ -200,8 +199,8 @@ public class ADFoodMenuDAO {
         }
     }
     // View Single Food Item
-    public ADFoodMenu viewFood(int foodID) {
-        ADFoodMenu food = null;
+    public FoodMenu viewFood(int foodID) {
+        FoodMenu food = null;
         Connection connection = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -224,7 +223,7 @@ public class ADFoodMenuDAO {
 
             // Check if food item is found
             if (rs.next()) {
-                food = new ADFoodMenu();
+                food = new FoodMenu();
                 food.setFoodID(rs.getInt("FoodID"));
                 food.setName(rs.getString("Name"));
                 food.setType(rs.getString("Type"));

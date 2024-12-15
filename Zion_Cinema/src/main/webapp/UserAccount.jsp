@@ -66,9 +66,9 @@
         
         
         
-        <!-- User ADTransaction history listing Container -->
+        <!-- User transaction history listing Container -->
         <div class="Trans-history">
-            <h1>ADTransaction History</h1>
+            <h1>Transaction History</h1>
             <div class="middle-container">
                 <div class="middle-header-container">
                     <span class="header-top" style="margin-left:20px">Receipt No</span>

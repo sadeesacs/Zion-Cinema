@@ -1,9 +1,9 @@
 package model;
 
-public class ADMovie {
+public class Movie {
     private int movieId;
     private String name;
-    public ADMovie(int movieId, String name) {
+    public Movie(int movieId, String name) {
         this.movieId = movieId;
         this.name = name;
     }

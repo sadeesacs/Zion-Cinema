@@ -1,17 +1,17 @@
 package model;
 
-public class ADCustomerInquiries {
+public class CustomerInquiries {
     private int InquiryID;
     private String Name;
     private String Email;
     private String Message;
 
 
-    public ADCustomerInquiries() {
+    public CustomerInquiries() {
 
     }
 
-    public ADCustomerInquiries(int InquiryID, String Name, String Email, String Message) {
+    public CustomerInquiries(int InquiryID, String Name, String Email, String Message) {
         this.InquiryID = InquiryID;
         this.Name = Name;
         this.Email = Email;

@@ -1,6 +1,6 @@
 package model;
 
-public class ADMovieList {
+public class MovieList {
     private int MovieID;
     private String MovieName;
     private String Description;
@@ -13,11 +13,11 @@ public class ADMovieList {
     private String banner;
     private String carousal;
 
-    public ADMovieList() {
+    public MovieList() {
 
     }
 
-    public ADMovieList(int MovieID, String MovieName, String Description, String Duration, String Trailer, String Year, String Rating, String status, String poster, String banner, String carousal) {
+    public MovieList(int MovieID, String MovieName, String Description, String Duration, String Trailer, String Year, String Rating, String status, String poster, String banner, String carousal) {
         this.MovieID = MovieID;
         this.MovieName = MovieName;
         this.Description = Description;

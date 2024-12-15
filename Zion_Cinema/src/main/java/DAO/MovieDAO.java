@@ -1,19 +1,18 @@
 package DAO;
 
 import Db.dbcon;
-import model.ADMovie;
-
+import model.Movie;
 import java.sql.*;
 
-public class ADMovieDAO {
-    public ADMovie getMovieById(int id) {
+public class MovieDAO {
+    public Movie getMovieById(int id) {
         String sql = "SELECT Movie_ID, Movie_Name FROM movies WHERE Movie_ID = ?";
         try (Connection conn = dbcon.connect();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                return new ADMovie(rs.getInt("Movie_ID"), rs.getString("Movie_Name"));
+                return new Movie(rs.getInt("Movie_ID"), rs.getString("Movie_Name"));
             }
         } catch (Exception e) { e.printStackTrace(); }
         return null;

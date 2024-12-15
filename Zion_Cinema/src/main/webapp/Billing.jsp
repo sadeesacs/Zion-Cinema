@@ -68,7 +68,7 @@
     
 
 
-   <!-- Selected ADMovie Details -->
+   <!-- Selected Movie Details -->
    <div class="selected-movie-name">Pirates of the Caribbean : Dead Men Tell No Tales</div>
    <div class="selected-container" >
       <div class="date-selected" >

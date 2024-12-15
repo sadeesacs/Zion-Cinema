@@ -44,7 +44,7 @@
         </div>
         
         
-        <!-- ADMovie Cards -->
+        <!-- Movie Cards -->
         <div class="movie-cards-container">
             <!-- Card 1 -->
             <div class="movie-card">
@@ -194,7 +194,7 @@
 
         <div class="movie-cards-scroll-container">
             <div class="movie-cards-row">
-                <!-- ADMovie cards -->
+                <!-- Movie cards -->
                 <div class="movie-card-new">
                     <img src="images/venommovie.png" alt="Venom: The Last Dance">
                     <h3>Venom: The Last Dance</h3>
@@ -324,7 +324,7 @@
     const movieCardsRow = document.querySelector('.movie-cards-row');
 
     if (!movieCardsRow) {
-        console.error("ADMovie cards row not found!");
+        console.error("Movie cards row not found!");
         return;
     }
 

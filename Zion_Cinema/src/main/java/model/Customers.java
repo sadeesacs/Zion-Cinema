@@ -1,6 +1,6 @@
 package model;
 
-public class ADCustomers {
+public class Customers {
     private int UserID;
     private String FirstName;
     private String LastName;
@@ -8,11 +8,11 @@ public class ADCustomers {
     private String PhoneNumber;
     private String Password;
 
-    public ADCustomers() {
+    public Customers() {
 
     }
 
-    public ADCustomers(int UserID, String FirstName, String LastName, String Email, String PhoneNumber, String Password) {
+    public Customers(int UserID, String FirstName, String LastName, String Email, String PhoneNumber, String Password) {
         this.UserID = UserID;
         this.FirstName = FirstName;
         this.LastName = LastName;

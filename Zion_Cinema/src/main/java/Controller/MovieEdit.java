@@ -1,6 +1,6 @@
 package Controller;
 
-import DAO.ADMovieListDAO;
+import DAO.MovieListDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -15,7 +15,7 @@ import java.io.InputStream;
 
 @MultipartConfig
 @WebServlet("/EditMovie")
-public class ADMovieEdit extends HttpServlet {
+public class MovieEdit extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         // Input validation
@@ -136,7 +136,7 @@ public class ADMovieEdit extends HttpServlet {
 
         // Save to database
         try {
-            ADMovieListDAO movielist = new ADMovieListDAO();
+            MovieListDAO movielist = new MovieListDAO();
             boolean success = movielist.editmoviedata(MovieID,name, description, duration, year,rating,status,trailer,imagebanner,imageposter,imagecarousal,genre1,genre2,genre3,genre4);
 
             if (success) {
@@ -147,7 +147,7 @@ public class ADMovieEdit extends HttpServlet {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            response.getWriter().println("Error: Failed to add ADMovie to the database.");
+            response.getWriter().println("Error: Failed to add Movie to the database.");
         }
     }
 }

@@ -1,6 +1,6 @@
 package DAO;
 import Db.dbcon;
-import model.ADMovieList;
+import model.MovieList;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,10 +8,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ADMovieListDAO {
+public class MovieListDAO {
     // Method to retrieve all customer inquiries from the database
-    public static List<ADMovieList> getAllMovies() {
-        List<ADMovieList> Movie = new ArrayList<>();
+    public static List<MovieList> getAllMovies() {
+        List<MovieList> Movie = new ArrayList<>();
         Connection connection = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -41,7 +41,7 @@ public class ADMovieListDAO {
             // Iterate through results and log number of rows
             int rowCount = 0;
             while (rs.next()) {
-                ADMovieList Movies = new ADMovieList();
+                MovieList Movies = new MovieList();
                 Movies.setMovieID(rs.getInt("Movie_ID"));
                 Movies.setMovieName(rs.getString("Movie_Name"));
                 Movies.setDescription(rs.getString("Description"));
@@ -103,7 +103,7 @@ public class ADMovieListDAO {
             return rowsAffected > 0;
 
         } catch (SQLException e) {
-            System.out.println("Error deleting ADMovie: " + e.getMessage());
+            System.out.println("Error deleting Movie: " + e.getMessage());
             e.printStackTrace();
             return false;
         } finally {
