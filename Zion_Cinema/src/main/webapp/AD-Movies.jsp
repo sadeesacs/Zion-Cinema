@@ -26,7 +26,7 @@
     </head>
     <body>
         
-        <!-- Header of the Admin Dashboard -->
+        <!-- Header of the Admin ADDashboard -->
         <header>
             <div class="header">
                 <div class="Logo"><img src="images/icons/logo.png" /></div>
@@ -60,7 +60,7 @@
         
         
         
-        <!-- Navigational Panel of the Admin Dashboard -->
+        <!-- Navigational Panel of the Admin ADDashboard -->
         <div class="navigation">
             <ul class="nav-menu">
                 <a href="AD-Dashboard.jsp">

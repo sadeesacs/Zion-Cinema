@@ -13,7 +13,7 @@ import java.io.InputStream;
 
 @MultipartConfig
 @WebServlet("/EditFood")
-public class FoodEdit  extends HttpServlet {
+public class ADFoodEdit extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

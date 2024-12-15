@@ -15,7 +15,7 @@ import java.io.InputStream;
 
 @MultipartConfig
 @WebServlet("/EditMovie")
-public class MovieEdit extends HttpServlet {
+public class ADMovieEdit extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         // Input validation

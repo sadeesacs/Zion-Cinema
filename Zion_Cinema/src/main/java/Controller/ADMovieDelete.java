@@ -10,7 +10,7 @@ import java.io.IOException;
 
 @MultipartConfig
 @WebServlet("/DeleteMovie")
-public class MovieDelete extends HttpServlet {
+public class ADMovieDelete extends HttpServlet {
     private static final long serialVersionUID = 1L;
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

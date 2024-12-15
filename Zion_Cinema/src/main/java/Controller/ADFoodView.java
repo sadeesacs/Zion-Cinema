@@ -15,7 +15,7 @@ import java.util.Map;
 
 @MultipartConfig
 @WebServlet("/viewfood")
-public class FoodView extends HttpServlet {
+public class ADFoodView extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     @Override
