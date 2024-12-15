@@ -1,3 +1,6 @@
+<%@ page import="model.ADTransaction" %>
+<%@ page import="DAO.ADTransactionDAO" %>
+<%@ page import="java.util.List" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -11,74 +14,85 @@
     </head>
     <body>
         
-        <!-- Header of the Admin Dashboard -->
+        <!-- Header of the Admin ADDashboard -->
         <header>
             <div class="header">
-                <div class="Logo"><img src="images/logo.png" /></div>
-                <div class="zion-cinema"><a href="HomePage.html">Zion Cinema</a></div>
+                <div class="Logo"><img src="images/icons/logo.png" /></div>
+                <div class="zion-cinema"><a href="HomePage.jsp">Zion Cinema</a></div>
 
                 <div class="search-bar">
                     <span>Search here.....</span>
                         <span style="left: 210px;color:white"><i class="bi bi-search"></i></span>
                 </div>
+                <%
+                    // Check if session exists and retrieve the username attribute
+                    String username = (session != null) ? (String) session.getAttribute("username") : null;
 
-                <div class="AD-username">Emma Watson</div>
+                    if (username != null) {
+                %>
+                <div class="AD-username"><%= username %></div>
                 <div class="word-admin">Admin</div>
-
+                <%
+                } else {
+                %>
+                <div class="AD-username">Session expired or not logged in.</div>
+                <%
+                    }
+                %>
                 <div class="user-icon" ><i class="bi bi-person-fill"></i></div>
 
-                <img src="images/notificationicon.png" class="notification-icon">
-                <img src="images/messagesicon.png" class="message-icon">
+                <img src="images/icons/notificationicon.png" class="notification-icon">
+                <img src="images/icons/messagesicon.png" class="message-icon">
             </div>
         </header>
         
         
-        <!-- Navigational Panel of the Admin Dashboard -->
+        <!-- Navigational Panel of the Admin ADDashboard -->
         <div class="navigation">
             <ul class="nav-menu">
-                <a href="AD-Dashbaord.jsp">
+                <a href="AD-Dashboard.jsp">
                     <li class="nav-item">
-                        <img src="images/Dashboardicon.png"></img>
+                        <img src="images/icons/Dashboardicon.png"></img>
                         <span>Dashboard</span>
                     </li>
                 </a>
                 <a href="AD-Movies.jsp">
                     <li class="nav-item">
-                        <img src="images/Movieicon.png"></img>
+                        <img src="images/icons/Movieicon.png"></img>
                         <span>Movies</span>
                     </li>
                 </a>
                 <a href="AD-FoodMenu.jsp">
                     <li class="nav-item">
-                        <img src="images/Foodicon.png"></img>
+                        <img src="images/icons/Foodicon.png"></img>
                         <span>Food Menu</span>
                     </li>
                 </a>
                 <a href="AD-Transactions.jsp">
                     <li class="nav-item active">
-                        <img src="images/Billicon.png"></img>
+                        <img src="images/icons/Billicon.png"></img>
                         <span>Transactions</span>
                     </li>
                 </a>
                 <a href="AD-CustomerInquiries.jsp">
                     <li class="nav-item ">
-                        <img src="images/Inquiryicon.png"></img>
+                        <img src="images/icons/Inquiryicon.png"></img>
                         <span>Customer Inquiries</span>
                     </li>
                 </a>
                 <a href="AD-Customers.jsp">
                     <li class="nav-item ">
-                        <img src="images/customericon.png"></img>
+                        <img src="images/icons/customericon.png"></img>
                         <span>Customers</span>
                     </li>
                 </a>
                     <li class="nav-item">
-                        <img src="images/Settingicon.png"></img>
+                        <img src="images/icons/Settingicon.png"></img>
                         <span>Settings</span>
                     </li>
             </ul>
             <button class="logout">
-                <img src="images/Logouticon.png"></img>
+                <img src="images/icons/Logouticon.png"></img>
                 <span>Logout</span>
             </button>
         </div>
@@ -96,358 +110,66 @@
             </div>
             <div class="content-container">
                 <div class="Transactions">
-                    <p class="Trans-id">012536</p>
-                    <p class="Trans-movie-name">Venom: The Last Dance</p>
-                    <p class="Trans-show-time">2020/05/25 1.30PM</p>
-                    <p class="Trans-seats">
-                        <span>E1</span>
-                        <span>E2</span>
-                        <span>E3</span>
-                        <span>E4</span>
-                        <span>E5</span>
-                        <span>E5</span>
-                        <span>E5</span>
-                        <span>E5</span>
-                        <span>E5</span>
-                    </p>
-                    <div class="Trans-food-order">
-                        <div class="food-Trow">
-                            <span class="food-Tname">Popcorn L</span>
-                            <span class="food-Tquantity">1</span>
+
+                        <%
+                            // Fetching the list of Customer inquiries
+                            List<ADTransaction> ADTransaction = ADTransactionDAO.getAllTransaction();
+                            // Loop to display data
+                            if (!ADTransaction.isEmpty()) {
+                                for (ADTransaction Transaction : ADTransaction) {
+                        %>
+                    <div class="Transactions">
+                        <p class="Trans-id"><%=Transaction.getTransactionID() %></p>
+                        <p class="Trans-movie-name"><%=Transaction.getMovieName() %></p>
+                        <p class="Trans-show-time"><%=Transaction.getDate() %>  <%=Transaction.getTime() %>  </p>
+
+                        <%
+                            // Handle multiple seats
+                            String[] seats = Transaction.getSeatNumber().split(","); // Assuming seats are comma-separated
+                        %>
+                        <p class="Trans-seats">
+                            Seats:
+                            <%
+                                for (int i = 0; i < seats.length; i++) {
+                                    out.print(seats[i].trim());
+                                    if (i < seats.length - 1) {
+                                        out.print(", ");
+                                    }
+                                }
+                            %>
+                        </p>
+
+                        <%
+                            // Handle multiple food items
+                            String[] foodItems = Transaction.getFoodName().split(","); // Assuming food items are comma-separated
+                        %>
+                        <div class="Trans-food-order">
+                            Food Orders:
+                            <ul>
+                                <%
+                                    for (String foodItem : foodItems) {
+                                %>
+                                <li><%=foodItem.trim() %></li>
+                                <%
+                                    }
+                                %>
+                            </ul>
                         </div>
-                        <div class="food-Trow">
-                            <span class="food-Tname">Pepsi L</span>
-                            <span class="food-Tquantity">2</span>
-                        </div>
-                        <div class="food-Trow">
-                            <span class="food-Tname">Coffee</span>
-                            <span class="food-Tquantity">3</span>
-                        </div>
-                        <div class="food-Trow">
-                            <span class="food-Tname">Coffee</span>
-                            <span class="food-Tquantity">3</span>
-                        </div>
-                        <div class="food-Trow">
-                            <span class="food-Tname">Coffee</span>
-                            <span class="food-Tquantity">3</span>
-                        </div>
+
+                        <p class="Trans-total"><%=Transaction.getTotalPrice() %></p>
                     </div>
-                    <p class="Trans-total">LKR 6000</p>
-                </div>
-                <div class="Transactions">
-                    <p class="Trans-id">012536</p>
-                    <p class="Trans-movie-name">Venom: The Last Dance</p>
-                    <p class="Trans-show-time">2020/05/25 1.30PM</p>
-                    <p class="Trans-seats">
-                        <span>E1</span>
-                        <span>E2</span>
-                        <span>E3</span>
-                        <span>E4</span>
-                        <span>E5</span>
-                        <span>E5</span>
-                        <span>E5</span>
-                        <span>E5</span>
-                        <span>E5</span>
+                        <%
+                     }
+                    }
+                else {
+                    %>
+                    <p>
+                        <span class="header-top" style="margin-left:500px"> No Transaction found</span>
                     </p>
-                    <div class="Trans-food-order">
-                        <div class="food-Trow">
-                            <span class="food-Tname">Popcorn L</span>
-                            <span class="food-Tquantity">1</span>
-                        </div>
-                        <div class="food-Trow">
-                            <span class="food-Tname">Pepsi L</span>
-                            <span class="food-Tquantity">2</span>
-                        </div>
-                        <div class="food-Trow">
-                            <span class="food-Tname">Coffee</span>
-                            <span class="food-Tquantity">3</span>
-                        </div>
-                        <div class="food-Trow">
-                            <span class="food-Tname">Coffee</span>
-                            <span class="food-Tquantity">3</span>
-                        </div>
-                        <div class="food-Trow">
-                            <span class="food-Tname">Coffee</span>
-                            <span class="food-Tquantity">3</span>
-                        </div>
-                    </div>
-                    <p class="Trans-total">LKR 6000</p>
-                </div>
-                <div class="Transactions">
-                    <p class="Trans-id">012536</p>
-                    <p class="Trans-movie-name">Venom: The Last Dance</p>
-                    <p class="Trans-show-time">2020/05/25 1.30PM</p>
-                    <p class="Trans-seats">
-                        <span>E1</span>
-                        <span>E2</span>
-                        <span>E3</span>
-                        <span>E4</span>
-                        <span>E5</span>
-                        <span>E5</span>
-                        <span>E5</span>
-                        <span>E5</span>
-                        <span>E5</span>
-                    </p>
-                    <div class="Trans-food-order">
-                        <div class="food-Trow">
-                            <span class="food-Tname">Popcorn L</span>
-                            <span class="food-Tquantity">1</span>
-                        </div>
-                        <div class="food-Trow">
-                            <span class="food-Tname">Pepsi L</span>
-                            <span class="food-Tquantity">2</span>
-                        </div>
-                        <div class="food-Trow">
-                            <span class="food-Tname">Coffee</span>
-                            <span class="food-Tquantity">3</span>
-                        </div>
-                        <div class="food-Trow">
-                            <span class="food-Tname">Coffee</span>
-                            <span class="food-Tquantity">3</span>
-                        </div>
-                        <div class="food-Trow">
-                            <span class="food-Tname">Coffee</span>
-                            <span class="food-Tquantity">3</span>
-                        </div>
-                    </div>
-                    <p class="Trans-total">LKR 6000</p>
-                </div>
-                <div class="Transactions">
-                    <p class="Trans-id">012536</p>
-                    <p class="Trans-movie-name">Venom: The Last Dance</p>
-                    <p class="Trans-show-time">2020/05/25 1.30PM</p>
-                    <p class="Trans-seats">
-                        <span>E1</span>
-                        <span>E2</span>
-                        <span>E3</span>
-                        <span>E4</span>
-                        <span>E5</span>
-                        <span>E5</span>
-                        <span>E5</span>
-                        <span>E5</span>
-                        <span>E5</span>
-                    </p>
-                    <div class="Trans-food-order">
-                        <div class="food-Trow">
-                            <span class="food-Tname">Popcorn L</span>
-                            <span class="food-Tquantity">1</span>
-                        </div>
-                        <div class="food-Trow">
-                            <span class="food-Tname">Pepsi L</span>
-                            <span class="food-Tquantity">2</span>
-                        </div>
-                        <div class="food-Trow">
-                            <span class="food-Tname">Coffee</span>
-                            <span class="food-Tquantity">3</span>
-                        </div>
-                        <div class="food-Trow">
-                            <span class="food-Tname">Coffee</span>
-                            <span class="food-Tquantity">3</span>
-                        </div>
-                        <div class="food-Trow">
-                            <span class="food-Tname">Coffee</span>
-                            <span class="food-Tquantity">3</span>
-                        </div>
-                    </div>
-                    <p class="Trans-total">LKR 6000</p>
-                </div>
-                <div class="Transactions">
-                    <p class="Trans-id">012536</p>
-                    <p class="Trans-movie-name">Venom: The Last Dance</p>
-                    <p class="Trans-show-time">2020/05/25 1.30PM</p>
-                    <p class="Trans-seats">
-                        <span>E1</span>
-                        <span>E2</span>
-                        <span>E3</span>
-                        <span>E4</span>
-                        <span>E5</span>
-                        <span>E5</span>
-                        <span>E5</span>
-                        <span>E5</span>
-                        <span>E5</span>
-                    </p>
-                    <div class="Trans-food-order">
-                        <div class="food-Trow">
-                            <span class="food-Tname">Popcorn L</span>
-                            <span class="food-Tquantity">1</span>
-                        </div>
-                        <div class="food-Trow">
-                            <span class="food-Tname">Pepsi L</span>
-                            <span class="food-Tquantity">2</span>
-                        </div>
-                        <div class="food-Trow">
-                            <span class="food-Tname">Coffee</span>
-                            <span class="food-Tquantity">3</span>
-                        </div>
-                        <div class="food-Trow">
-                            <span class="food-Tname">Coffee</span>
-                            <span class="food-Tquantity">3</span>
-                        </div>
-                        <div class="food-Trow">
-                            <span class="food-Tname">Coffee</span>
-                            <span class="food-Tquantity">3</span>
-                        </div>
-                    </div>
-                    <p class="Trans-total">LKR 6000</p>
-                </div>
-                <div class="Transactions">
-                    <p class="Trans-id">012536</p>
-                    <p class="Trans-movie-name">Venom: The Last Dance</p>
-                    <p class="Trans-show-time">2020/05/25 1.30PM</p>
-                    <p class="Trans-seats">
-                        <span>E1</span>
-                        <span>E2</span>
-                        <span>E3</span>
-                        <span>E4</span>
-                        <span>E5</span>
-                        <span>E5</span>
-                        <span>E5</span>
-                        <span>E5</span>
-                        <span>E5</span>
-                    </p>
-                    <div class="Trans-food-order">
-                        <div class="food-Trow">
-                            <span class="food-Tname">Popcorn L</span>
-                            <span class="food-Tquantity">1</span>
-                        </div>
-                        <div class="food-Trow">
-                            <span class="food-Tname">Pepsi L</span>
-                            <span class="food-Tquantity">2</span>
-                        </div>
-                        <div class="food-Trow">
-                            <span class="food-Tname">Coffee</span>
-                            <span class="food-Tquantity">3</span>
-                        </div>
-                        <div class="food-Trow">
-                            <span class="food-Tname">Coffee</span>
-                            <span class="food-Tquantity">3</span>
-                        </div>
-                        <div class="food-Trow">
-                            <span class="food-Tname">Coffee</span>
-                            <span class="food-Tquantity">3</span>
-                        </div>
-                    </div>
-                    <p class="Trans-total">LKR 6000</p>
-                </div>
-                <div class="Transactions">
-                    <p class="Trans-id">012536</p>
-                    <p class="Trans-movie-name">Venom: The Last Dance</p>
-                    <p class="Trans-show-time">2020/05/25 1.30PM</p>
-                    <p class="Trans-seats">
-                        <span>E1</span>
-                        <span>E2</span>
-                        <span>E3</span>
-                        <span>E4</span>
-                        <span>E5</span>
-                        <span>E5</span>
-                        <span>E5</span>
-                        <span>E5</span>
-                        <span>E5</span>
-                    </p>
-                    <div class="Trans-food-order">
-                        <div class="food-Trow">
-                            <span class="food-Tname">Popcorn L</span>
-                            <span class="food-Tquantity">1</span>
-                        </div>
-                        <div class="food-Trow">
-                            <span class="food-Tname">Pepsi L</span>
-                            <span class="food-Tquantity">2</span>
-                        </div>
-                        <div class="food-Trow">
-                            <span class="food-Tname">Coffee</span>
-                            <span class="food-Tquantity">3</span>
-                        </div>
-                        <div class="food-Trow">
-                            <span class="food-Tname">Coffee</span>
-                            <span class="food-Tquantity">3</span>
-                        </div>
-                        <div class="food-Trow">
-                            <span class="food-Tname">Coffee</span>
-                            <span class="food-Tquantity">3</span>
-                        </div>
-                    </div>
-                    <p class="Trans-total">LKR 6000</p>
-                </div>
-                <div class="Transactions">
-                    <p class="Trans-id">012536</p>
-                    <p class="Trans-movie-name">Venom: The Last Dance</p>
-                    <p class="Trans-show-time">2020/05/25 1.30PM</p>
-                    <p class="Trans-seats">
-                        <span>E1</span>
-                        <span>E2</span>
-                        <span>E3</span>
-                        <span>E4</span>
-                        <span>E5</span>
-                        <span>E5</span>
-                        <span>E5</span>
-                        <span>E5</span>
-                        <span>E5</span>
-                    </p>
-                    <div class="Trans-food-order">
-                        <div class="food-Trow">
-                            <span class="food-Tname">Popcorn L</span>
-                            <span class="food-Tquantity">1</span>
-                        </div>
-                        <div class="food-Trow">
-                            <span class="food-Tname">Pepsi L</span>
-                            <span class="food-Tquantity">2</span>
-                        </div>
-                        <div class="food-Trow">
-                            <span class="food-Tname">Coffee</span>
-                            <span class="food-Tquantity">3</span>
-                        </div>
-                        <div class="food-Trow">
-                            <span class="food-Tname">Coffee</span>
-                            <span class="food-Tquantity">3</span>
-                        </div>
-                        <div class="food-Trow">
-                            <span class="food-Tname">Coffee</span>
-                            <span class="food-Tquantity">3</span>
-                        </div>
-                    </div>
-                    <p class="Trans-total">LKR 6000</p>
-                </div>
-                <div class="Transactions">
-                    <p class="Trans-id">012536</p>
-                    <p class="Trans-movie-name">Venom: The Last Dance</p>
-                    <p class="Trans-show-time">2020/05/25 1.30PM</p>
-                    <p class="Trans-seats">
-                        <span>E1</span>
-                        <span>E2</span>
-                        <span>E3</span>
-                        <span>E4</span>
-                        <span>E5</span>
-                        <span>E5</span>
-                        <span>E5</span>
-                        <span>E5</span>
-                        <span>E5</span>
-                    </p>
-                    <div class="Trans-food-order">
-                        <div class="food-Trow">
-                            <span class="food-Tname">Popcorn L</span>
-                            <span class="food-Tquantity">1</span>
-                        </div>
-                        <div class="food-Trow">
-                            <span class="food-Tname">Pepsi L</span>
-                            <span class="food-Tquantity">2</span>
-                        </div>
-                        <div class="food-Trow">
-                            <span class="food-Tname">Coffee</span>
-                            <span class="food-Tquantity">3</span>
-                        </div>
-                        <div class="food-Trow">
-                            <span class="food-Tname">Coffee</span>
-                            <span class="food-Tquantity">3</span>
-                        </div>
-                        <div class="food-Trow">
-                            <span class="food-Tname">Coffee</span>
-                            <span class="food-Tquantity">3</span>
-                        </div>
-                    </div>
-                    <p class="Trans-total">LKR 6000</p>
-                </div>
-            </div>
-        </div>
+                        <%
+                    }
+                    %>
+
 
         
     </body>

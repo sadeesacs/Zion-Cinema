@@ -1,14 +1,16 @@
 package DAO;
 import Db.dbcon;
-import model.Customers;
+import model.ADCustomerInquiries;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomersDAO {
+public class ADCustomerInquiriesDAO {
 
-    public static List<Customers> getAllInquiries() {
-        List<Customers> Customer = new ArrayList<>();
+    // Method to retrieve all customer inquiries from the database
+    public static List<ADCustomerInquiries> getAllInquiries() {
+        List<ADCustomerInquiries> inquiries = new ArrayList<>();
         Connection connection = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -20,29 +22,29 @@ public class CustomersDAO {
             // Check if connection is successful
             if (connection == null) {
                 System.out.println("Database connection failed");
-                return Customer; // Return empty list
+                return inquiries; // Return empty list
             }
 
             // Prepare SQL query
-            String query = "SELECT UserID, FirstName,Lastname, Email,PhoneNumber  FROM User";
+            String query = "SELECT InquiryID, Name, Email, Message FROM CustomerInquiries";
             stmt = connection.prepareStatement(query);
             rs = stmt.executeQuery();
 
             // Check if result set is empty
             if (!rs.isBeforeFirst()) {
-                System.out.println("No data found in User table");
-                return Customer; // Return empty list
+                System.out.println("No data found in ADCustomerInquiries table");
+                return inquiries; // Return empty list
             }
 
             // Iterate through results
             while (rs.next()) {
-                Customers user = new Customers();
-                user.setUserID(rs.getInt("UserID"));
-                user.setFirstName(rs.getString("FirstName"));
-                user.setLastName(rs.getString("Lastname"));
-                user.setEmail(rs.getString("Email"));
-                user.setPhoneNumber(rs.getString("PhoneNumber"));
-                Customer.add(user);
+                ADCustomerInquiries inquiry = new ADCustomerInquiries();
+                inquiry.setInquiryID(rs.getInt("InquiryID"));
+                inquiry.setName(rs.getString("Name"));
+                inquiry.setEmail(rs.getString("Email"));
+                inquiry.setMessage(rs.getString("Message"));
+
+                inquiries.add(inquiry);
             }
         } catch (SQLException e) {
             System.out.println("Database error: " + e.getMessage());
@@ -59,7 +61,6 @@ public class CustomersDAO {
             }
         }
 
-        return Customer;
+        return inquiries;
     }
 }
-

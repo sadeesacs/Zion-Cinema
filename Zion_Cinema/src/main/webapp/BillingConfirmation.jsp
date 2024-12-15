@@ -73,7 +73,7 @@
         <br><br>
 
         <div class="Movie-details">
-            <!-- Movie details -->
+            <!-- ADMovie details -->
             <p>Movie Details</p>
             <div class="divider"></div>
 
