@@ -1,7 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="DAO.ADFoodMenuDAO" %>
-<%@ page import="model.FoodMenu"%>
+<%@ page import="model.ADFoodMenu"%>
 <%@ page import="java.util.List" %>
+<%@ page import="model.ADFoodMenu" %>
 
 <!DOCTYPE html>
 <html>
@@ -138,10 +139,10 @@
 
                 <%
                     // Fetching the list of Customer inquiries
-                    List<FoodMenu> Food = ADFoodMenuDAO.getAllFood();
+                    List<ADFoodMenu> Food = ADFoodMenuDAO.getAllFood();
                     //Loop to display data
                     if (!Food.isEmpty()) {
-                        for (FoodMenu food : Food) {
+                        for (ADFoodMenu food : Food) {
                 %>
                 <div class="product">
                     <p class="product-id"><%=food.getFoodID() %></p>
@@ -323,7 +324,7 @@
                     <div class="slider-form">
                         <%
                             // Retrieve food item
-                            FoodMenu food = (FoodMenu) request.getAttribute("food");
+                            ADFoodMenu food = (ADFoodMenu) request.getAttribute("food");
                             if (food != null) {System.out.println("Food Data is: " + food.getName());
                         %>
                         <div class="form-group">

@@ -207,7 +207,7 @@ header .message-icon{
 
 
 
-/* AD-Customers Webpage Styles */
+/* AD-ADCustomers Webpage Styles */
 
 .middle-container{
     height: 90%;
@@ -319,7 +319,7 @@ header .message-icon{
     display: inline-block; 
 }
 
-/* Admin Dashboard Customers webpage styling end */
+/* Admin Dashboard ADCustomers webpage styling end */
 
 
 
@@ -801,7 +801,7 @@ input[type="text"] {
   
   
   
-/*  Movie CRUD Operations Admin Dashboard*/
+/*  ADMovie CRUD Operations Admin Dashboard*/
 
 
 .content-container .movie{
@@ -866,7 +866,7 @@ input[type="text"] {
 }
 
 
-/*Movie Slider Styles*/
+/*ADMovie Slider Styles*/
 
 .movie-slider {
     position: fixed;

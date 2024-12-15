@@ -1,6 +1,6 @@
 package model;
 
-public class Transaction {
+public class ADTransaction {
 
     private int TransactionID;
     private int ShowtimeID;
@@ -15,7 +15,7 @@ public class Transaction {
     private int Quantity;
     private float TotalPrice;
 
-    public Transaction() {
+    public ADTransaction() {
 
     }
 

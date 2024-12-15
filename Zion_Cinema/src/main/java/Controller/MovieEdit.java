@@ -147,7 +147,7 @@ public class MovieEdit extends HttpServlet {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            response.getWriter().println("Error: Failed to add Movie to the database.");
+            response.getWriter().println("Error: Failed to add ADMovie to the database.");
         }
     }
 }

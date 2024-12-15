@@ -7,7 +7,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.FoodMenu;
+import model.ADFoodMenu;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -55,7 +55,7 @@ public class FoodView extends HttpServlet {
         try {
             int foodIDInt = Integer.parseInt(foodId);
             ADFoodMenuDAO ADFoodMenuDAO = new ADFoodMenuDAO();
-            FoodMenu food = ADFoodMenuDAO.viewFood(foodIDInt);
+            ADFoodMenu food = ADFoodMenuDAO.viewFood(foodIDInt);
 
             if (food != null) {
                 // Log the food data for debugging
@@ -63,7 +63,7 @@ public class FoodView extends HttpServlet {
 
                 request.setAttribute("food", food);
 
-                request.getRequestDispatcher("/AD-FoodMenu.jsp").forward(request, response);
+                request.getRequestDispatcher("/AD-ADFoodMenu.jsp").forward(request, response);
             } else {
                 System.out.println("No food item found for ID: " + foodId);
                 request.setAttribute("errorMessage", "No food item found with ID: " + foodId);

@@ -1,4 +1,4 @@
-<%@ page import="model.Transaction" %>
+<%@ page import="model.ADTransaction" %>
 <%@ page import="DAO.ADTransactionDAO" %>
 <%@ page import="java.util.List" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -113,19 +113,19 @@
 
                         <%
                             // Fetching the list of Customer inquiries
-                            List<Transaction> Transaction = ADTransactionDAO.getAllTransaction();
+                            List<ADTransaction> ADTransaction = ADTransactionDAO.getAllTransaction();
                             // Loop to display data
-                            if (!Transaction.isEmpty()) {
-                                for (Transaction transaction : Transaction) {
+                            if (!ADTransaction.isEmpty()) {
+                                for (ADTransaction Transaction : ADTransaction) {
                         %>
                     <div class="Transactions">
-                        <p class="Trans-id"><%=transaction.getTransactionID() %></p>
-                        <p class="Trans-movie-name"><%=transaction.getMovieName() %></p>
-                        <p class="Trans-show-time"><%=transaction.getDate() %>  <%=transaction.getTime() %>  </p>
+                        <p class="Trans-id"><%=Transaction.getTransactionID() %></p>
+                        <p class="Trans-movie-name"><%=Transaction.getMovieName() %></p>
+                        <p class="Trans-show-time"><%=Transaction.getDate() %>  <%=Transaction.getTime() %>  </p>
 
                         <%
                             // Handle multiple seats
-                            String[] seats = transaction.getSeatNumber().split(","); // Assuming seats are comma-separated
+                            String[] seats = Transaction.getSeatNumber().split(","); // Assuming seats are comma-separated
                         %>
                         <p class="Trans-seats">
                             Seats:
@@ -141,7 +141,7 @@
 
                         <%
                             // Handle multiple food items
-                            String[] foodItems = transaction.getFoodName().split(","); // Assuming food items are comma-separated
+                            String[] foodItems = Transaction.getFoodName().split(","); // Assuming food items are comma-separated
                         %>
                         <div class="Trans-food-order">
                             Food Orders:
@@ -156,7 +156,7 @@
                             </ul>
                         </div>
 
-                        <p class="Trans-total"><%=transaction.getTotalPrice() %></p>
+                        <p class="Trans-total"><%=Transaction.getTotalPrice() %></p>
                     </div>
                         <%
                      }

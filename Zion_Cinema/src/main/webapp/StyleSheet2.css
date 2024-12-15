@@ -137,9 +137,9 @@ body{
 
 
 
-/* Movie Detail Page */
+/* ADMovie Detail Page */
 
-/* Movie detail bannner */
+/* ADMovie detail bannner */
 
 .Movie-detail-container{
     display: flex;
@@ -415,7 +415,7 @@ body{
     margin-top:50px;
 }
 
-/* Movie cards container */
+/* ADMovie cards container */
 .movie-cards-container {
     position: relative;
     margin-top: 50px;
@@ -504,7 +504,7 @@ body{
     height: 35px;
 }
 
-/* Movie Detail Page styling end */
+/* ADMovie Detail Page styling end */
 
 
 
@@ -593,7 +593,7 @@ body{
 
 
 
-/* Selected Movie Details Container Styling */
+/* Selected ADMovie Details Container Styling */
 .selected-movie-name{
     font-size: 2rem;
     position: relative;

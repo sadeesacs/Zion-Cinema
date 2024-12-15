@@ -1,7 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="DAO.ADMovieListDAO" %>
 <%@ page import="java.util.List" %>
-<%@ page import="model.MovieList" %>
+<%@ page import="model.ADMovieList" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -131,11 +131,11 @@
             <div class="content-container" style="margin-top:150px;height: 70%">
                 <%
                     // Fetching the list of Customer inquiries
-                    List<MovieList> Movie = ADMovieListDAO.getAllMovies();
+                    List<ADMovieList> Movie = ADMovieListDAO.getAllMovies();
                     //Loop to display data
                     if (!Movie.isEmpty()) {
                         // data type,variable,array name
-                        for (MovieList Movies : Movie) {
+                        for (ADMovieList Movies : Movie) {
                 %>
                 <div class="movie">
                     <p class="movie-id"><%=Movies.getMovieID()%></p>

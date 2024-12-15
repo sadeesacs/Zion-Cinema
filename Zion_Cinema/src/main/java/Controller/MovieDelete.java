@@ -36,7 +36,7 @@ public class MovieDelete extends HttpServlet {
                 response.getWriter().write("Invalid food ID");
             }
         } else {
-            response.getWriter().write("Movie ID is missing");
+            response.getWriter().write("ADMovie ID is missing");
         }
     }
 }

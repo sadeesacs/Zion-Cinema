@@ -1,7 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="DAO.ADCustomersDAO" %>
-<%@ page import="model.Customers"%>
+<%@ page import="model.ADCustomers"%>
 <%@ page import="java.util.List" %>
+<%@ page import="model.ADCustomers" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -109,10 +110,10 @@
 
                     <%
                         // Fetching the list of Customer inquiries
-                        List<Customers> customers = ADCustomersDAO.getAllCustomers();
+                        List<ADCustomers> customers = ADCustomersDAO.getAllCustomers();
                         // Loop to display data
                         if (!customers.isEmpty()) {
-                            for (Customers user : customers) {
+                            for (ADCustomers user : customers) {
                     %>
                 <div class="customer">
                         <p class="customer-fname"><%=user.getFirstName() %></p>
