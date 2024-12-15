@@ -1,5 +1,5 @@
 package Controller;
-import DAO.FoodMenuDAO;
+import DAO.ADFoodMenuDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -12,11 +12,13 @@ import java.io.IOException;
 import java.io.InputStream;
 
 @MultipartConfig
-@WebServlet("/AddFood")
-public class FoodAdd extends HttpServlet {
+@WebServlet("/EditFood")
+public class ADFoodEdit extends HttpServlet {
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         // Input validation
+        String foodID = request.getParameter("foodID");
         String name = request.getParameter("name");
         String type = request.getParameter("type");
         String priceInput = request.getParameter("price");
@@ -75,11 +77,11 @@ public class FoodAdd extends HttpServlet {
 
         // Save to database
         try {
-            FoodMenuDAO foodMenuDAO = new FoodMenuDAO();
-            boolean success = foodMenuDAO.addFood(name, type, price, imageName);
+            ADFoodMenuDAO ADFoodMenuDAO = new ADFoodMenuDAO();
+            boolean success = ADFoodMenuDAO.editFood(foodID,name, type, price, imageName);
 
             if (success) {
-                response.sendRedirect("AD-FoodMenu.jsp");
+                response.sendRedirect("AD-ADFoodMenu.jsp");
             } else {
                 // we have to make handle errors
                 response.sendRedirect("error.jsp");

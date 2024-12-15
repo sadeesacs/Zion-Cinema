@@ -1,5 +1,5 @@
 package Controller;
-import DAO.FoodMenuDAO;
+import DAO.ADFoodMenuDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 @MultipartConfig
 @WebServlet("/DeleteFood")
-    public class FoodDelete extends HttpServlet {
+    public class ADFoodDelete extends HttpServlet {
         private static final long serialVersionUID = 1L;
         @Override
         protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -22,13 +22,13 @@ import java.io.IOException;
                     int foodIDInt = Integer.parseInt(foodId);
 
                     //call to DAO layer to delete food
-                    FoodMenuDAO foodMenuDAO = new FoodMenuDAO();
-                    Boolean isDeleted = foodMenuDAO.deleteFoodById(foodIDInt);
+                    ADFoodMenuDAO ADFoodMenuDAO = new ADFoodMenuDAO();
+                    Boolean isDeleted = ADFoodMenuDAO.deleteFoodById(foodIDInt);
                     // Redirect based on the result of the deletion
                     if (isDeleted) {
-                        response.sendRedirect("AD-FoodMenu.jsp");
+                        response.sendRedirect("AD-ADFoodMenu.jsp");
                     } else {
-                        response.sendRedirect("AD-FoodMenu.jsp");
+                        response.sendRedirect("AD-ADFoodMenu.jsp");
                         System.out.println("Deletion failed");
                     }
                 } catch (NumberFormatException e) {

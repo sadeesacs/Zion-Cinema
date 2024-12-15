@@ -10,8 +10,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import Db.dbcon;
 import org.mindrot.jbcrypt.BCrypt;
 
-@WebServlet("/RegisterServlet")
-public class RegisterServlet extends HttpServlet {
+@WebServlet("/ADRegisterServlet")
+public class ADRegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String firstName = request.getParameter("first_name");

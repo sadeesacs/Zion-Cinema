@@ -226,7 +226,7 @@ body{
 
 
 
-/*Movie Lisitng Section*/
+/*ADMovie Lisitng Section*/
 .coming-soon {
     display: none;
 }
@@ -262,7 +262,7 @@ body{
 }
 
 
-/* Movie listing section */
+/* ADMovie listing section */
 .movie-cards-container {
     position: relative;
     margin-top: 0px;

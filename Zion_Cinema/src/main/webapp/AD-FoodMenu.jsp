@@ -1,7 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="DAO.FoodMenuDAO" %>
-<%@ page import="model.FoodMenu"%>
+<%@page import="DAO.ADFoodMenuDAO" %>
+<%@ page import="model.ADFoodMenu"%>
 <%@ page import="java.util.List" %>
+<%@ page import="model.ADFoodMenu" %>
 
 <!DOCTYPE html>
 <html>
@@ -29,7 +30,7 @@
     </head>
     <body>
         
-        <!-- Header of the Admin Dashboard -->
+        <!-- Header of the Admin ADDashboard -->
         <header>
             <div class="header">
                 <div class="Logo"><img src="images/icons/logo.png" /></div>
@@ -63,7 +64,7 @@
         
         
         
-        <!-- Navigational Panel of the Admin Dashboard -->
+        <!-- Navigational Panel of the Admin ADDashboard -->
         <div class="navigation">
             <ul class="nav-menu">
                 <a href="AD-Dashboard.jsp">
@@ -138,10 +139,10 @@
 
                 <%
                     // Fetching the list of Customer inquiries
-                    List<FoodMenu> Food = FoodMenuDAO.getAllFood();
+                    List<ADFoodMenu> Food = ADFoodMenuDAO.getAllFood();
                     //Loop to display data
                     if (!Food.isEmpty()) {
-                        for (FoodMenu food : Food) {
+                        for (ADFoodMenu food : Food) {
                 %>
                 <div class="product">
                     <p class="product-id"><%=food.getFoodID() %></p>
@@ -323,7 +324,7 @@
                     <div class="slider-form">
                         <%
                             // Retrieve food item
-                            FoodMenu food = (FoodMenu) request.getAttribute("food");
+                            ADFoodMenu food = (ADFoodMenu) request.getAttribute("food");
                             if (food != null) {System.out.println("Food Data is: " + food.getName());
                         %>
                         <div class="form-group">

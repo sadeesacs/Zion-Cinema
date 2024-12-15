@@ -1,5 +1,5 @@
 package Controller;
-import DAO.MovieListDAO;
+import DAO.ADMovieListDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -10,7 +10,7 @@ import java.io.IOException;
 
 @MultipartConfig
 @WebServlet("/DeleteMovie")
-public class MovieDelete extends HttpServlet {
+public class ADMovieDelete extends HttpServlet {
     private static final long serialVersionUID = 1L;
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -23,8 +23,8 @@ public class MovieDelete extends HttpServlet {
                 int MovieIdInt = Integer.parseInt(MovieId);
 
                 //call to DAO layer to delete food
-                MovieListDAO movieListDAO = new MovieListDAO();
-                Boolean isDeleted = movieListDAO.deleteMovieById(MovieIdInt);
+                ADMovieListDAO ADMovieListDAO = new ADMovieListDAO();
+                Boolean isDeleted = ADMovieListDAO.deleteMovieById(MovieIdInt);
                 // Redirect based on the result of the deletion
                 if (isDeleted) {
                     response.sendRedirect("AD-Movies.jsp");
@@ -36,7 +36,7 @@ public class MovieDelete extends HttpServlet {
                 response.getWriter().write("Invalid food ID");
             }
         } else {
-            response.getWriter().write("Movie ID is missing");
+            response.getWriter().write("ADMovie ID is missing");
         }
     }
 }

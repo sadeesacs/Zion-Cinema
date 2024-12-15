@@ -1,15 +1,15 @@
 package Controller;
 
-import DAO.ShowTimeDAO;
-import DAO.TicketPriceDAO;
+import DAO.ADShowTimeDAO;
+import DAO.ADTicketPriceDAO;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import java.io.IOException;
 import java.time.LocalDate;
 
-@WebServlet(name = "Dashboard", urlPatterns = {"/Dashboard"})
-public class Dashboard extends HttpServlet {
+@WebServlet(name = "ADDashboard", urlPatterns = {"/ADDashboard"})
+public class ADDashboard extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -18,7 +18,7 @@ public class Dashboard extends HttpServlet {
             selectedMovie = "1";
         }
         request.setAttribute("selectedMovie", selectedMovie);
-        request.getRequestDispatcher("AD-Dashboard.jsp").forward(request, response);
+        request.getRequestDispatcher("AD-ADDashboard.jsp").forward(request, response);
     }
 
     @Override
@@ -57,8 +57,8 @@ public class Dashboard extends HttpServlet {
     }
 
     private void saveShowtimes(HttpServletRequest request, int movieId) {
-        ShowTimeDAO showtimeDAO = new ShowTimeDAO();
-        TicketPriceDAO ticketPriceDAO = new TicketPriceDAO();
+        ADShowTimeDAO showtimeDAOAD = new ADShowTimeDAO();
+        ADTicketPriceDAO ADTicketPriceDAO = new ADTicketPriceDAO();
 
         String[] formShowtimes = request.getParameterValues("showtime");
 
@@ -71,7 +71,7 @@ public class Dashboard extends HttpServlet {
             LocalDate current = startDate.plusDays(i);
             String dateStr = current.toString();
             for (String t : times) {
-                boolean existsInDB = showtimeDAO.showtimeExists(movieId, dateStr, t);
+                boolean existsInDB = showtimeDAOAD.showtimeExists(movieId, dateStr, t);
                 // Check if present in form
                 isSelectedInForm = false;
                 if (formShowtimes != null) {
@@ -85,22 +85,22 @@ public class Dashboard extends HttpServlet {
 
                 if (existsInDB && !isSelectedInForm) {
                     // Delete showtime and its prices
-                    int stId = showtimeDAO.getShowtimeId(movieId, dateStr, t);
+                    int stId = showtimeDAOAD.getShowtimeId(movieId, dateStr, t);
                     if (stId != -1) {
-                        ticketPriceDAO.deleteByShowtimeId(stId);
+                        ADTicketPriceDAO.deleteByShowtimeId(stId);
                     }
-                    showtimeDAO.deleteShowtime(movieId, dateStr, t);
+                    showtimeDAOAD.deleteShowtime(movieId, dateStr, t);
                 } else if (!existsInDB && isSelectedInForm) {
                     // Insert showtime
-                    showtimeDAO.insertShowtime(movieId, dateStr, t);
+                    showtimeDAOAD.insertShowtime(movieId, dateStr, t);
                 }
             }
         }
     }
 
     private void updatePrices(HttpServletRequest request, int movieId, String adult, String child) {
-        ShowTimeDAO showtimeDAO = new ShowTimeDAO();
-        TicketPriceDAO ticketPriceDAO = new TicketPriceDAO();
+        ADShowTimeDAO showtimeDAOAD = new ADShowTimeDAO();
+        ADTicketPriceDAO ADTicketPriceDAO = new ADTicketPriceDAO();
 
         double adultPrice = Double.parseDouble(adult);
         double childPrice = Double.parseDouble(child);
@@ -111,11 +111,11 @@ public class Dashboard extends HttpServlet {
                 String[] parts = fs.split("_");
                 String date = parts[0];
                 String time = parts[1];
-                int stId = showtimeDAO.getShowtimeId(movieId, date, time);
+                int stId = showtimeDAOAD.getShowtimeId(movieId, date, time);
                 if (stId != -1) {
                     // Upsert prices
-                    ticketPriceDAO.upsertTicketPrice(stId, "Adult", adultPrice);
-                    ticketPriceDAO.upsertTicketPrice(stId, "Child", childPrice);
+                    ADTicketPriceDAO.upsertTicketPrice(stId, "Adult", adultPrice);
+                    ADTicketPriceDAO.upsertTicketPrice(stId, "Child", childPrice);
                 }
             }
         }

@@ -1,7 +1,7 @@
 package DAO;
 
 import Db.dbcon;
-import model.Transaction;
+import model.ADTransaction;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,10 +10,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TransactionDAO {
+public class ADTransactionDAO {
 
-    public static List<Transaction> getAllTransaction() {
-        List<Transaction> Transaction = new ArrayList<>();
+    public static List<ADTransaction> getAllTransaction() {
+        List<ADTransaction> ADTransaction = new ArrayList<>();
         Connection connection = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -25,7 +25,7 @@ public class TransactionDAO {
             // Check if connection is successful
             if (connection == null) {
                 System.out.println("Database connection failed");
-                return Transaction; // Return empty list
+                return ADTransaction; // Return empty list
             }
 
             // Prepare SQL query
@@ -57,13 +57,13 @@ public class TransactionDAO {
 
             // Check if result set is empty
             if (!rs.isBeforeFirst()) {
-                System.out.println("No data found in Transaction table");
-                return Transaction; // Return empty list
+                System.out.println("No data found in ADTransaction table");
+                return ADTransaction; // Return empty list
             }
 
             // Iterate through results
             while (rs.next()) {
-                Transaction transaction = new Transaction();
+                ADTransaction transaction = new ADTransaction();
                 transaction.setTransactionID(rs.getInt("transaction_ID"));
                 transaction.setShowtimeID(rs.getInt("ShowtimeID"));
                 transaction.setMovieID(rs.getInt("movie_id"));
@@ -76,7 +76,7 @@ public class TransactionDAO {
                 transaction.setFoodName(rs.getString("FoodName"));
                 transaction.setQuantity(rs.getInt("Quantity"));
                 transaction.setTotalPrice(rs.getFloat("TotalPrice"));
-                Transaction.add(transaction);
+                ADTransaction.add(transaction);
             }
         } catch (SQLException e) {
             System.out.println("Database error: " + e.getMessage());
@@ -93,6 +93,6 @@ public class TransactionDAO {
             }
         }
 
-        return Transaction;
+        return ADTransaction;
     }
 }
