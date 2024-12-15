@@ -1,7 +1,7 @@
 package DAO;
 
 import Db.dbcon;
-import model.CustomerInquiries;
+import model.ADCustomerInquiries;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,8 +9,8 @@ import java.util.List;
 public class CustomerInquiriesDAO {
 
     // Method to retrieve all customer inquiries from the database
-    public static List<CustomerInquiries> getAllInquiries() {
-        List<CustomerInquiries> inquiries = new ArrayList<>();
+    public static List<ADCustomerInquiries> getAllInquiries() {
+        List<ADCustomerInquiries> inquiries = new ArrayList<>();
         Connection connection = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -38,7 +38,7 @@ public class CustomerInquiriesDAO {
 
             // Iterate through results
             while (rs.next()) {
-                CustomerInquiries inquiry = new CustomerInquiries();
+                ADCustomerInquiries inquiry = new ADCustomerInquiries();
                 inquiry.setInquiryID(rs.getInt("InquiryID"));
                 inquiry.setName(rs.getString("Name"));
                 inquiry.setEmail(rs.getString("Email"));
