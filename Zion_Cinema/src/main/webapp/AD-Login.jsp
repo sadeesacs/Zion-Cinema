@@ -9,6 +9,13 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="StyleSheet5.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .error-message {
+            color: red;
+            margin-top: 10px; /* Adds spacing between the button and the error message */
+            text-align: center; /* Centers the error message */
+        }
+    </style>
 </head>
 <body style="background: url('images/adminlogin-background.png') no-repeat center center fixed; background-size: cover;">
     <div class="container">
@@ -16,6 +23,7 @@
             <div class="EM-heading">Zion Cinema</div>
             <div class="ADlog-head-1" >Admin Login</div>
             <div class="ADlog-head-2">Please enter your details</div>
+
             <div class="ADlogin-form">
                 <form method="POST" action="adlogin">
                     <label for="username" >User Name</label>
@@ -27,6 +35,14 @@
                         <br>
 
                         <button type="login">Login</button>
+                    <%
+                        String errorMessage = (String) request.getAttribute("errorMessage");
+                        if (errorMessage != null) {
+                    %>
+                    <div class="error-message">
+                        <%= errorMessage %>
+                    </div>
+                    <% } %>
                 </form>
             </div>
         </div>
