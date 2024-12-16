@@ -10,7 +10,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 @WebServlet(name = "HomePageServlet", urlPatterns = {"/HomePageServlet"})
 public class HomePageServlet extends HttpServlet {
@@ -18,11 +17,6 @@ public class HomePageServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        HttpSession session = request.getSession(false);
-        Integer userId = (Integer) (session != null ? session.getAttribute("UserID") : null);
-        // If userId is null, user not logged in, just proceed without error.
-
         MovieListingDAO dao = new MovieListingDAO();
 
         // Get all carousal movies
@@ -40,5 +34,4 @@ public class HomePageServlet extends HttpServlet {
         
         request.getRequestDispatcher("HomePage.jsp").forward(request, response);
     }
-    
 }

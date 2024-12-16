@@ -9,23 +9,23 @@
     <body>
         <!-- Header Section -->
           <div class="header-container">
-              <img src="images/logo.png" alt="Zion Cinema Logo">
-              <a href="HomePage.html" class="logo-name">Zion Cinema</a>
+              <img src="images/icons/logo.png" alt="Zion Cinema Logo">
+              <a href="HomePageServlet" class="logo-name">Zion Cinema</a>
 
               <!-- Navigation Bar -->
               <div class="nav">
-                  <a href="HomePage.html">Home</a>
-                  <a href="Movie.html">Movies</a>
-                  <a href="About.html">About us</a>
-                  <a href="Contact.html">Contact</a>
-                  <a href="FAQ.html">FAQ</a>
+                  <a href="HomePageServlet">Home</a>
+                  <a href="MovieListingServlet">Movies</a>
+                  <a href="AboutUs.jsp">About us</a>
+                  <a href="ContactUs.jsp">Contact</a>
+                  <span><a href="FAQ.jsp">FAQ</a></span>
               </div>
 
               <!-- Header Buttons -->
-              <a href="Movies.html" class="but-buytickets">
+              <a href="MovieListingServlet" class="but-buytickets">
                   <div>Buy Tickets</div>
               </a>
-              <a href="Login.html" class="but-login">
+              <a href="UserLogin.jsp" class="but-login">
                   <div>Login</div>
               </a>
           </div>
@@ -35,16 +35,16 @@
           <div class="faq-header">
               <h1>Frequently Asked <br>Questions</h1><br>
               <pre>
-      Here, you’ll find answers to the most commonly asked questions. If you can’t find
-      what you’re looking for, feel free to reach out to us through our Contact Us page.
-      We’re here to ensure your cinema experience is seamless and enjoyable!
+Here, you’ll find answers to the most commonly asked questions. If you can’t find
+what you’re looking for, feel free to reach out to us through our Contact Us page.
+We’re here to ensure your cinema experience is seamless and enjoyable!
               </pre>
           </div>
 
 
 
       <div class="FAQ-image">
-      <img src="images/faq image.png" alt="faq image">
+      <img src="images/others/FAQ-image.png" alt="faq image">
       </div>
 
 
@@ -135,15 +135,15 @@
           <div class="footer-column">
               <h2>Zion Cinema</h2>
               <pre>
-                  Experience premium entertainment with advanced screens,
-                  immersive sound,and comfortable seating. Enjoy the latest
-                  blockbusters and timeless classics like never before!
+            Experience premium entertainment with advanced screens,
+            immersive sound,and comfortable seating. Enjoy the latest
+            blockbusters and timeless classics like never before!
               </pre>
               <div class="social-icons">
-                  <a href="https://web.facebook.com"><img src="images/fbicon.png"></a>
-                  <a href="https://www.instagram.com/"><img src="images/instaicon.png"></a>
-                  <a href="https://x.com"><img src="images/xicon.png"></a>
-                  <a href="https://www.tiktok.com"><img src="images/tiktokicon.png"></a>
+                  <a href="https://web.facebook.com"><img src="images/icons/fbicon.png"></a>
+                  <a href="https://www.instagram.com/"><img src="images/icons/instaicon.png"></a>
+                  <a href="https://x.com"><img src="images/icons/xicon.png"></a>
+                  <a href="https://www.tiktok.com"><img src="images/icons/tiktokicon.png"></a>
               </div>
           </div>
 
@@ -151,19 +151,19 @@
               <h3>Quick Links</h3>
               <div class="quick-links-container">
                   <ul class="quick-links">
-                      <li><a href="HomePage.html">Home</a></li>
-                      <li><a href="Movies.html">Buy Tickets</a></li>
-                      <li><a href="Movie.html">Movies</a></li>
-                      <li><a href="AboutUs.html">About us</a></li>
-                      <li><a href="Contact.html">Contact</a></li>
-                  </ul>
-                  <ul class="quick-links">
-                      <li><a href="Cancellation.html">Cancellations</a></li>
-                      <li><a href="UserAccount.html">My Account</a></li>
-                      <li><a href="Login.html">Login</a></li>
-                      <li><a href="Signup.html">Signup</a></li>
-                      <li><a href="FAQ.html">FAQ</a></li>
-                  </ul>
+                        <li><a href="HomePageServlet">Home</a></li>
+                        <li><a href="MovieListingServlet">Buy Tickets</a></li>
+                        <li><a href="MovieListingServlet">Movies</a></li>
+                        <li><a href="AboutUs.jsp">About us</a></li>
+                        <li><a href="ContactUs.jsp">Contact</a></li>
+                    </ul>
+                    <ul class="quick-links">
+                        <li><a href="Cancellation.jsp">Cancellations</a></li>
+                        <li><a href="UserAccount.jsp">My Account</a></li>
+                        <li><a href="UserLogin.jsp">Login</a></li>
+                        <li><a href="UserRegistration.jsp">Signup</a></li>
+                        <li><a href="FAQ.jsp">FAQ</a></li>
+                    </ul>
               </div>
           </div>
 

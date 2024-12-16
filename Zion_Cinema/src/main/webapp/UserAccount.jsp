@@ -1,5 +1,4 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -34,40 +33,42 @@
             </a>
         </div>
         <div class="header-line"></div>
-
+        
+        
+        
+        
         <!-- User Details listing Container -->
-
+        
         <div class="userdetails">
             <img src="images/usericon.png" class="user-icon">
-
+            
             <div class="label-fname">First Name :</div>
             <div class="user-fname">Leo</div>
-
+            
             <div class="label-lname">Last Name :</div>
             <div class="user-lname">Perera</div>
-
+            
             <div class="label-phone">Phone Number :</div>
             <div class="user-phone">0712549783</div>
-
+            
             <div class="label-email">Email Address :</div>
             <div class="user-email">leoperepa@gmail.com</div>
-
+            
             <a href="Cancellation.jsp" class="but-cancel">
                 <div>Cancel Order</div>
             </a>
-
-            <form action="LogoutServlet" method="get">
-                <button class="logout" type="submit">
-                    <img src="images/Logouticon.png" alt="Logout Icon" />
-                    <span>Logout</span>
-                </button>
-            </form>
-
+            
+            <button class="logout">
+                <img src="images/Logouticon.png"></img>
+                <span>Logout</span>
+            </button>
         </div>
-
-        <!-- User transaction history listing Container -->
+        
+        
+        
+        <!-- User ADTransaction history listing Container -->
         <div class="Trans-history">
-            <h1>Transaction History</h1>
+            <h1>ADTransaction History</h1>
             <div class="middle-container">
                 <div class="middle-header-container">
                     <span class="header-top" style="margin-left:20px">Receipt No</span>
@@ -432,8 +433,9 @@
                 </div>
             </div>
         </div>
-
-
+        
+        
+        
         <!-- Footer  -->
         <footer class="footer-container">
             <div class="footer-column">
@@ -478,6 +480,8 @@
                 </form>
             </div>
         </footer>
-
+        
+        
+        
     </body>
 </html>

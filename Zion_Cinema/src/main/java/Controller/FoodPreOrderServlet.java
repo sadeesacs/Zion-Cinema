@@ -28,34 +28,24 @@ public class FoodPreOrderServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            HttpSession session = request.getSession(false);
-            if (session == null) {
-                response.sendRedirect("SeatReservation.jsp");
-                return;
-            }
+            HttpSession session = request.getSession();
 
-            Integer userId = (Integer) session.getAttribute("UserID");
-            if (userId == null) {
-                // If userId is null here, that means they tried accessing this page without going through SeatReservation
-                response.sendRedirect("SeatReservation.jsp");
-                return;
-            }
-
+            // Get attributes from the session
             Object movieObj = session.getAttribute("selectedMovie");
             Object showtimeObj = session.getAttribute("selectedShowtime");
             Object seatsObj = session.getAttribute("selectedSeats");
-            
 
             if (movieObj == null || showtimeObj == null || seatsObj == null) {
                 response.sendRedirect("SeatReservation.jsp");
                 return;
             }
 
+            // Set attributes for FoodPre-order.jsp
             request.setAttribute("selectedMovie", movieObj);
             request.setAttribute("selectedShowtime", showtimeObj);
             request.setAttribute("selectedSeats", seatsObj);
-            
 
+            // Fetch food items grouped by type
             FoodItemDAO foodItemDAO = new FoodItemDAO();
             List<String> foodTypes = foodItemDAO.getAllFoodTypes();
             Map<String, List<FoodItem>> foodItemsByType = new HashMap<>();
@@ -67,13 +57,14 @@ public class FoodPreOrderServlet extends HttpServlet {
             request.setAttribute("foodItemsByType", foodItemsByType);
             
             TemporarySeatsDAO temporarySeatsDAO = new TemporarySeatsDAO();
+            int userId = (int) session.getAttribute("UserID");
+            
             List<TicketSummary> ticketSummaries = temporarySeatsDAO.getTicketSummaryByUserId(userId);
             double ticketTotal = temporarySeatsDAO.getTotalTicketPriceByUserId(userId);
             
             request.setAttribute("ticketSummaries", ticketSummaries);
             request.setAttribute("ticketTotal", ticketTotal);
             
-          
             request.getRequestDispatcher("FoodPre-order.jsp").forward(request, response);
 
         } catch (IOException e) {
@@ -85,24 +76,10 @@ public class FoodPreOrderServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        HttpSession session = request.getSession(false);
-        if (session == null) {
-            response.sendRedirect("SeatReservation.jsp");
-            return;
-        }
-
-        Integer userId = (Integer) session.getAttribute("UserID");
-        if (userId == null) {
-            response.sendRedirect("SeatReservation.jsp");
-            return;
-        }
-
+        HttpSession session = request.getSession();
+        
+        Integer userId = (Integer) session.getAttribute("UserID");  
         Showtime selectedShowtime = (Showtime) session.getAttribute("selectedShowtime");
-        if (selectedShowtime == null) {
-            response.sendRedirect("SeatReservation.jsp");
-            return;
-        }
-
         int showtimeID = selectedShowtime.getShowtimeID();
         String showtimeIDStr = String.valueOf(showtimeID);
 
@@ -115,6 +92,7 @@ public class FoodPreOrderServlet extends HttpServlet {
                 if (cartArray.length() > 0) {
                     TemporaryFoodOrderDAO tempOrderDAO = new TemporaryFoodOrderDAO();
                     
+                    // Insert each item in temporaryfoodorder
                     for (int i = 0; i < cartArray.length(); i++) {
                         JSONObject item = cartArray.getJSONObject(i);
                         int foodId = item.getInt("foodId");
@@ -125,8 +103,7 @@ public class FoodPreOrderServlet extends HttpServlet {
                     }
                 }
             }
-            
-            response.sendRedirect("BillingServlet");
+            response.sendRedirect("Payment.jsp");
         } else {
             doGet(request, response);
         }

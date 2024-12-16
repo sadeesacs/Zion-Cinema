@@ -33,25 +33,24 @@ public class SeatReservationServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            HttpSession session = request.getSession(true);
+            HttpSession session = request.getSession();
 
-            // Check if UserID exists
-            Integer userId = (Integer) session.getAttribute("UserID");
-            
-            // Only generate a new guest userId if userId is null
-            if (userId == null) {
-                // Generate guest userId
+            Object userIdObj = session.getAttribute("UserID");
+            int userId;
+
+            if (userIdObj == null) {
                 userId = 100000 + new Random().nextInt(900000);
                 session.setAttribute("UserID", userId);
                 session.setAttribute("IsGuest", 1);
 
-                // Insert guest user into the users table
+                // Insert the guest user into the users table
                 UserDAO userDAO = new UserDAO();
                 userDAO.insertGuestUser(userId);
+            } else {
+                userId = (int) userIdObj;
             }
 
-            // If user is logged in, userId is not null and we proceed without creating a new one.
-
+            // Get movieId and showtimeId from the request
             String movieIdParam = request.getParameter("movieId");
             String showtimeIdParam = request.getParameter("showtimeId");
 
@@ -62,6 +61,7 @@ public class SeatReservationServlet extends HttpServlet {
             int movieId = Integer.parseInt(movieIdParam);
             int showtimeId = Integer.parseInt(showtimeIdParam);
 
+            // Fetch details and set attributes for JSP
             MovieDetailDAO movieDAO = new MovieDetailDAO();
             ShowtimeDAO showtimeDAO = new ShowtimeDAO();
             SeatDAO seatDAO = new SeatDAO();
@@ -81,10 +81,12 @@ public class SeatReservationServlet extends HttpServlet {
                 throw new IllegalArgumentException("Invalid Movie or Showtime ID.");
             }
 
+            // Get reserved seats from both tables
             Set<Integer> reservedSeatIds = new HashSet<>();
             reservedSeatIds.addAll(temporarySeatsDAO.getReservedSeatIds(showtimeId));
             reservedSeatIds.addAll(seatReservationDAO.getReservedSeatIds(showtimeId));
 
+            // Save movie and seat selections to temporary tables
             TemporaryMoviesDAO temporaryMoviesDAO = new TemporaryMoviesDAO();
             temporaryMoviesDAO.insertTemporaryMovie(movieId, showtimeId, userId);
 
@@ -100,10 +102,11 @@ public class SeatReservationServlet extends HttpServlet {
                 for (int i = 0; i < seatIds.length(); i++) {
                     int seatId = seatIds.getInt(i);
 
+                    // Check if the seat is already reserved
                     if (reservedSeatIds.contains(seatId)) {
                         response.setContentType("text/html");
                         response.getWriter().write(
-                            "<script>alert('The requested seat has already been booked.'); window.history.back();</script>"
+                            "<script>alert('The requested seat has been already booked.'); window.history.back();</script>"
                         );
                         return;
                     }
@@ -114,18 +117,21 @@ public class SeatReservationServlet extends HttpServlet {
                 }
             }
 
+            // Store data in session for FoodPreOrder.jsp
             session.setAttribute("selectedMovie", movieDetail);
             session.setAttribute("selectedShowtime", selectedShowtime);
             session.setAttribute("selectedDate", selectedShowtime.getDate());
             session.setAttribute("selectedTime", selectedShowtime.getTime());
             session.setAttribute("selectedSeats", selectedSeatsParam);
 
+            // Redirect to FoodPreOrderServlet if "continueToFood" is set
             String continueToFood = request.getParameter("continueToFood");
             if ("true".equals(continueToFood)) {
                 response.sendRedirect("FoodPreOrderServlet");
                 return;
             }
 
+            // Forward the request to the SeatReservation.jsp page
             request.setAttribute("movieId", movieId);
             request.setAttribute("showtimeId", showtimeId);
             request.setAttribute("movieName", movieDetail.getName());

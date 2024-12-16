@@ -223,10 +223,15 @@ body{
     transform: scale(1.1);
 }
 
+.book-now a {
+    text-decoration: none;
+    color: white;
+}
 
 
 
-/*Movie Lisitng Section*/
+
+/*ADMovie Lisitng Section*/
 .coming-soon {
     display: none;
 }
@@ -262,7 +267,7 @@ body{
 }
 
 
-/* Movie listing section */
+/* ADMovie listing section */
 .movie-cards-container {
     position: relative;
     margin-top: 0px;
@@ -341,6 +346,11 @@ body{
     height: 35px;
 }
 
+.get-tickets-button a {
+    text-decoration: none;
+    color:black;
+}
+
 .view-details-button {
     display: flex;
     align-items: center;
@@ -352,6 +362,10 @@ body{
     height: 35px;
 }
 
+.view-details-button a {
+    text-decoration: none;
+    color:#F4F4F4;
+}
 
 
 
@@ -419,7 +433,7 @@ body{
     position: relative;
     color: white;
     text-align: center;
-    margin-top: 160px;
+    margin-top: 100px;
 }
 
 .section-title {

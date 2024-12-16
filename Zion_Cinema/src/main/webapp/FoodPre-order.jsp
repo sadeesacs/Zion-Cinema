@@ -23,37 +23,24 @@
 
             <!--Zion Cinema logo-->
             <img src="images/icons/logo.png">
-            <a href="HomePage.html" class="logo-name">Zion Cinema</a>
+            <a href="HomePageServlet" class="logo-name">Zion Cinema</a>
 
             <!--Navigation Bar-->
             <div class="nav">
-                <a href="HomePage.html">Home</a>
-                <span><a href="Movie.html">Movies</a></span>
-                <a href="About.html">About us</a>
-                <a href="Contact.html">Contact</a>
-                <a href="FAQ.html">FAQ</a>
+                <a href="HomePageServlet">Home</a>
+                <span><a href="MovieListingServlet">Movies</a></span>
+                <a href="AboutUs.jsp">About us</a>
+                <a href="ContactUs.jsp">Contact</a>
+                <a href="FAQ.jsp">FAQ</a>
             </div>
 
             <!-- Header Buttons -->
-            <a href="Movies.html" class="but-buytickets">
+            <a href="MovieListingServlet" class="but-buytickets">
                 <div>Buy Tickets</div>
             </a>
-            <%
-                Integer userID = (Integer) session.getAttribute("userID");
-                if (userID != null) {
-            %>
-            <a href="UserAccount.jsp" class="but-login">
-                <div>My Account</div>
-            </a>
-            <%
-            } else {
-            %>
             <a href="UserLogin.jsp" class="but-login">
                 <div>Login</div>
             </a>
-            <%
-                }
-            %>
         </div>
         <div class="header-line"></div>
 
@@ -90,7 +77,7 @@
         <!-- Selected Movie Details -->
         <div class="selected-movie-name"><%= movieDetail.getName() %></div>
         <div class="selected-container" >
-            <div class="date-selected" >
+            <div class="date-selected" style="width:50px;">
                 <ul>
                     <li><%= new java.text.SimpleDateFormat("EEE").format(java.sql.Date.valueOf(selectedShowtime.getDate())) %></li>
                 </ul>
@@ -101,7 +88,7 @@
                 </form>
             </div>
 
-            <div class="time-selected">
+            <div class="time-selected" style="width:100px;">
                 <div class="span-2">Zion Cinema</div>
                 <div class="timeselected-buttons-form">
                     <button class="timesel-button active">
@@ -230,18 +217,18 @@
                 <h3>Quick Links</h3>
                 <div class="quick-links-container">
                     <ul class="quick-links">
-                        <li><a href="HomePage.html">Home</a></li>
-                        <li><a href="Movies.html">Buy Tickets</a></li>
-                        <li><a href="Movie.html">Movies</a></li>
-                        <li><a href="AboutUs.html">About us</a></li>
-                        <li><a href="Contact.html">Contact</a></li>
+                        <li><a href="HomePageServlet">Home</a></li>
+                        <li><a href="MovieListingServlet">Buy Tickets</a></li>
+                        <li><a href="MovieListing.html">Movies</a></li>
+                        <li><a href="AboutUs.jsp">About us</a></li>
+                        <li><a href="ContactUs.jsp">Contact</a></li>
                     </ul>
                     <ul class="quick-links">
-                        <li><a href="Cancellation.html">Cancellations</a></li>
-                        <li><a href="UserAccount.html">My Account</a></li>
-                        <li><a href="Login.html">Login</a></li>
-                        <li><a href="Signup.html">Signup</a></li>
-                        <li><a href="FAQ.html">FAQ</a></li>
+                        <li><a href="Cancellation.jsp">Cancellations</a></li>
+                        <li><a href="UserAccount.jsp">My Account</a></li>
+                        <li><a href="UserLogin.jsp">Login</a></li>
+                        <li><a href="UserRegistration.jsp">Signup</a></li>
+                        <li><a href="FAQ.jsp">FAQ</a></li>
                     </ul>
                 </div>
             </div>
