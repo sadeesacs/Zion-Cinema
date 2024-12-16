@@ -51,6 +51,22 @@ public class MovieDetailDAO {
         return genres;
     }
 
+    public List<Showtime> getShowtimes(int movieId) {
+        List<Showtime> showtimes = new ArrayList<>();
+        String query = "SELECT Date, Show_Time FROM showtime WHERE Movie_ID = ?";
+        
+        try (Connection connection = dbcon.connect();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, movieId);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                showtimes.add(new Showtime(0, resultSet.getString("Date"), resultSet.getString("Show_Time")));
+            }
+        } catch (SQLException e) {
+        }
+        return showtimes;
+    }
+
     public List<MovieDetail> getTopNowShowingMovies(int currentMovieId) {
         List<MovieDetail> nowShowing = new ArrayList<>();
         String query = "SELECT Movie_ID, Poster, Banner, Movie_Name, Description, Duration, Trailer, Status " +
