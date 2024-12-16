@@ -41,7 +41,7 @@ Zion Cinema is a movie ticket booking platform designed for ease of use and effi
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-repo/zion-cinema.git
+   https://github.com/sadeesacs/JavaProject_Group-U.git
 2. **Import the project into NetBeans.**
 
 3. **Set up the database:**
