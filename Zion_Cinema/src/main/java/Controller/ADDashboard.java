@@ -8,7 +8,7 @@ import jakarta.servlet.annotation.*;
 import java.io.IOException;
 import java.time.LocalDate;
 
-@WebServlet(name = "AdminDashboardServlet", urlPatterns = {"/AdminDashboardServlet"})
+@WebServlet(name = "ADDashboard", urlPatterns = {"/ADDashboard"})
 public class ADDashboard extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
