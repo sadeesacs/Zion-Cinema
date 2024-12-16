@@ -1,11 +1,12 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="model.FoodItem"%>
+<%@page import="java.util.List"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8">
         <title>Food Menu</title>
-
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="StyleSheet10.css" />
     </head>
     <body>
@@ -18,7 +19,7 @@
 
                 <div class="search-bar">
                     <span>Search here.....</span>
-                        <span style="left: 210px;color:white"><i class="bi bi-search"></i></span>
+                    <span style="left: 210px;color:white"><i class="bi bi-search"></i></span>
                 </div>
 
                 <div class="AD-username">Emma Watson</div>
@@ -30,7 +31,6 @@
                 <img src="images/messagesicon.png" class="message-icon">
             </div>
         </header>
-        
         
         
         <!-- Navigational Panel of the Admin Dashboard -->
@@ -72,10 +72,10 @@
                         <span>Customers</span>
                     </li>
                 </a>
-                    <li class="nav-item">
-                        <img src="images/Settingicon.png"></img>
-                        <span>Settings</span>
-                    </li>
+                <li class="nav-item">
+                    <img src="images/Settingicon.png"></img>
+                    <span>Settings</span>
+                </li>
             </ul>
             <button class="logout">
                 <img src="images/Logouticon.png"></img>
@@ -88,10 +88,9 @@
 
             <div class="product-cat">Food Menu</div>
 
-            <button class="add-item">
-                <button class="add-item" onclick="showSlider()">
-                    <i class="bi bi-plus-circle"></i>
-                    <p>Add Item</p>
+            <button class="add-item" onclick="showSlider()">
+                <i class="bi bi-plus-circle"></i>
+                <p>Add Item</p>
             </button>
 
             <div class="header-container" style="top:60px;">
@@ -101,209 +100,38 @@
                 <div class="header-top" style="margin-left:670px">Unit Price</div>
                 <div class="header-top" style="margin-left:870px">Action</div>                
             </div>
-                
+            
             <div class="content-container" style="margin-top:150px;height: 70%">
+                <%
+                    List<FoodItem> foods = (List<FoodItem>) request.getAttribute("foods");
+                    boolean edit = request.getAttribute("edit") != null;
+                    boolean view = request.getAttribute("view") != null;
+
+                    FoodItem editItem = (FoodItem) request.getAttribute("editItem");
+                    FoodItem viewItem = (FoodItem) request.getAttribute("viewItem");
+                %>
+
+                <%
+                    if (foods != null) {
+                        for (FoodItem fi : foods) {
+                %>
                 <div class="product">
-                    <p class="product-id">0001</p>
-                    <p class="product-name">Pepsi - L</p>
-                    <p class="product-type">Beverages</p>
-                    <p class="product-unitprice">LKR 550</p>
+                    <p class="product-id"><%=fi.getFoodId()%></p>
+                    <p class="product-name"><%=fi.getName()%></p>
+                    <p class="product-type"><%=fi.getType()%></p>
+                    <p class="product-unitprice">LKR <%=fi.getPrice()%></p>
                     <div class="actions">
-                        <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
-                        <div class="edit" onclick="showEditSlider()"><i class="bi bi-pencil-fill"></i></div>
-                        <div class="delete"><i class="bi bi-trash3-fill"></i></div>
+                        <div class="view"><a href="ADFoodMenuServlet?action=view&foodId=<%=fi.getFoodId()%>"><i class="bi bi-eye-fill"></i></a></div>
+                        <div class="edit"><a href="ADFoodMenuServlet?action=editForm&foodId=<%=fi.getFoodId()%>"><i class="bi bi-pencil-fill"></i></a></div>
+                        <div class="delete"><a href="ADFoodMenuServlet?action=delete&foodId=<%=fi.getFoodId()%>" onclick="return confirm('Are you sure you want to delete this item?')"><i class="bi bi-trash3-fill"></i></a></div>
                     </div> 
                 </div>
-                <div class="product">
-                    <p class="product-id">0001</p>
-                    <p class="product-name">Pepsi - L</p>
-                    <p class="product-type">Beverages</p>
-                    <p class="product-unitprice">LKR 550</p>
-                    <div class="actions">
-                        <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
-                        <div class="edit" onclick="showEditSlider()"><i class="bi bi-pencil-fill"></i></div>
-                        <div class="delete"><i class="bi bi-trash3-fill"></i></div>
-                    </div> 
-                </div>
-                <div class="product">
-                    <p class="product-id">0001</p>
-                    <p class="product-name">Pepsi - L</p>
-                    <p class="product-type">Beverages</p>
-                    <p class="product-unitprice">LKR 550</p>
-                    <div class="actions">
-                        <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
-                        <div class="edit" onclick="showEditSlider()"><i class="bi bi-pencil-fill"></i></div>
-                        <div class="delete"><i class="bi bi-trash3-fill"></i></div>
-                    </div> 
-                </div>
-                <div class="product">
-                    <p class="product-id">0001</p>
-                    <p class="product-name">Pepsi - L</p>
-                    <p class="product-type">Beverages</p>
-                    <p class="product-unitprice">LKR 550</p>
-                    <div class="actions">
-                        <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
-                        <div class="edit" onclick="showEditSlider()"><i class="bi bi-pencil-fill"></i></div>
-                        <div class="delete"><i class="bi bi-trash3-fill"></i></div>
-                    </div> 
-                </div>
-                <div class="product">
-                    <p class="product-id">0001</p>
-                    <p class="product-name">Pepsi - L</p>
-                    <p class="product-type">Beverages</p>
-                    <p class="product-unitprice">LKR 550</p>
-                    <div class="actions">
-                        <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
-                        <div class="edit" onclick="showEditSlider()"><i class="bi bi-pencil-fill"></i></div>
-                        <div class="delete"><i class="bi bi-trash3-fill"></i></div>
-                    </div> 
-                </div>
-                <div class="product">
-                    <p class="product-id">0001</p>
-                    <p class="product-name">Pepsi - L</p>
-                    <p class="product-type">Beverages</p>
-                    <p class="product-unitprice">LKR 550</p>
-                    <div class="actions">
-                        <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
-                        <div class="edit" onclick="showEditSlider()"><i class="bi bi-pencil-fill"></i></div>
-                        <div class="delete"><i class="bi bi-trash3-fill"></i></div>
-                    </div> 
-                </div>
-                <div class="product">
-                    <p class="product-id">0001</p>
-                    <p class="product-name">Pepsi - L</p>
-                    <p class="product-type">Beverages</p>
-                    <p class="product-unitprice">LKR 550</p>
-                    <div class="actions">
-                        <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
-                        <div class="edit" onclick="showEditSlider()"><i class="bi bi-pencil-fill"></i></div>
-                        <div class="delete"><i class="bi bi-trash3-fill"></i></div>
-                    </div> 
-                </div>
-                <div class="product">
-                    <p class="product-id">0001</p>
-                    <p class="product-name">Pepsi - L</p>
-                    <p class="product-type">Beverages</p>
-                    <p class="product-unitprice">LKR 550</p>
-                    <div class="actions">
-                        <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
-                        <div class="edit" onclick="showEditSlider()"><i class="bi bi-pencil-fill"></i></div>
-                        <div class="delete"><i class="bi bi-trash3-fill"></i></div>
-                    </div> 
-                </div>
-                <div class="product">
-                    <p class="product-id">0001</p>
-                    <p class="product-name">Pepsi - L</p>
-                    <p class="product-type">Beverages</p>
-                    <p class="product-unitprice">LKR 550</p>
-                    <div class="actions">
-                        <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
-                        <div class="edit" onclick="showEditSlider()"><i class="bi bi-pencil-fill"></i></div>
-                        <div class="delete"><i class="bi bi-trash3-fill"></i></div>
-                    </div> 
-                </div>
-                <div class="product">
-                    <p class="product-id">0001</p>
-                    <p class="product-name">Pepsi - L</p>
-                    <p class="product-type">Beverages</p>
-                    <p class="product-unitprice">LKR 550</p>
-                    <div class="actions">
-                        <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
-                        <div class="edit" onclick="showEditSlider()"><i class="bi bi-pencil-fill"></i></div>
-                        <div class="delete"><i class="bi bi-trash3-fill"></i></div>
-                    </div> 
-                </div>
-                <div class="product">
-                    <p class="product-id">0001</p>
-                    <p class="product-name">Pepsi - L</p>
-                    <p class="product-type">Beverages</p>
-                    <p class="product-unitprice">LKR 550</p>
-                    <div class="actions">
-                        <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
-                        <div class="edit" onclick="showEditSlider()"><i class="bi bi-pencil-fill"></i></div>
-                        <div class="delete"><i class="bi bi-trash3-fill"></i></div>
-                    </div> 
-                </div>
-                <div class="product">
-                    <p class="product-id">0001</p>
-                    <p class="product-name">Pepsi - L</p>
-                    <p class="product-type">Beverages</p>
-                    <p class="product-unitprice">LKR 550</p>
-                    <div class="actions">
-                        <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
-                        <div class="edit" onclick="showEditSlider()"><i class="bi bi-pencil-fill"></i></div>
-                        <div class="delete"><i class="bi bi-trash3-fill"></i></div>
-                    </div> 
-                </div>
-                <div class="product">
-                    <p class="product-id">0001</p>
-                    <p class="product-name">Pepsi - L</p>
-                    <p class="product-type">Beverages</p>
-                    <p class="product-unitprice">LKR 550</p>
-                    <div class="actions">
-                        <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
-                        <div class="edit" onclick="showEditSlider()"><i class="bi bi-pencil-fill"></i></div>
-                        <div class="delete"><i class="bi bi-trash3-fill"></i></div>
-                    </div> 
-                </div>
-                <div class="product">
-                    <p class="product-id">0001</p>
-                    <p class="product-name">Pepsi - L</p>
-                    <p class="product-type">Beverages</p>
-                    <p class="product-unitprice">LKR 550</p>
-                    <div class="actions">
-                        <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
-                        <div class="edit" onclick="showEditSlider()"><i class="bi bi-pencil-fill"></i></div>
-                        <div class="delete"><i class="bi bi-trash3-fill"></i></div>
-                    </div> 
-                </div>
-                <div class="product">
-                    <p class="product-id">0001</p>
-                    <p class="product-name">Pepsi - L</p>
-                    <p class="product-type">Beverages</p>
-                    <p class="product-unitprice">LKR 550</p>
-                    <div class="actions">
-                        <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
-                        <div class="edit" onclick="showEditSlider()"><i class="bi bi-pencil-fill"></i></div>
-                        <div class="delete"><i class="bi bi-trash3-fill"></i></div>
-                    </div> 
-                </div>
-                <div class="product">
-                    <p class="product-id">0001</p>
-                    <p class="product-name">Pepsi - L</p>
-                    <p class="product-type">Beverages</p>
-                    <p class="product-unitprice">LKR 550</p>
-                    <div class="actions">
-                        <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
-                        <div class="edit" onclick="showEditSlider()"><i class="bi bi-pencil-fill"></i></div>
-                        <div class="delete"><i class="bi bi-trash3-fill"></i></div>
-                    </div> 
-                </div>
-                <div class="product">
-                    <p class="product-id">0001</p>
-                    <p class="product-name">Pepsi - L</p>
-                    <p class="product-type">Beverages</p>
-                    <p class="product-unitprice">LKR 550</p>
-                    <div class="actions">
-                        <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
-                        <div class="edit" onclick="showEditSlider()"><i class="bi bi-pencil-fill"></i></div>
-                        <div class="delete"><i class="bi bi-trash3-fill"></i></div>
-                    </div> 
-                </div>
-                <div class="product">
-                    <p class="product-id">0001</p>
-                    <p class="product-name">Pepsi - L</p>
-                    <p class="product-type">Beverages</p>
-                    <p class="product-unitprice">LKR 5500</p>
-                    <div class="actions">
-                        <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>
-                        <div class="edit" onclick="showEditSlider()"><i class="bi bi-pencil-fill"></i></div>
-                        <div class="delete"><i class="bi bi-trash3-fill"></i></div>
-                    </div> 
-                </div>
+                <%
+                        }
+                    }
+                %>
             </div>
         </div>
-        
         
         
          <!-- Slider Add Item Form -->
@@ -311,45 +139,45 @@
            <div class="slider-container">
                <div class="slider-header">
                    <div class="Add">Add Food Item</div>
-                   <img class="close" srcset="images/Cancelslide.png" class="img" onclick="hideSlider()" />
+                   <img class="close" src="images/Cancelslide.png" class="img" onclick="hideSlider()" />
                    <div class="slider-hline" >
                        <hr size="2" color="#F5C51B">
                    </div>
                </div>
 
-           <form>
+           <form action="ADFoodMenuServlet?action=add" method="post" enctype="multipart/form-data">
                <div class="slider-form">
                    
                    <div class="form-label" style="margin-top: 30px;">
                        <label for="product-name">Food Item Name</label>
                    </div>
-                   <input class="form-pname" type="text"/>
+                   <input class="form-pname" type="text" name="foodName" required/>
                    
                    <div class="form-label" style="margin-top: 130px;">
                        <label for="product-category">Food Type</label>
                    </div>
                    <div class="cat-select">
-                       <select>
+                       <select name="foodType" required>
                            <option value="Popcorn">Popcorn</option>
                            <option value="Beverages">Beverages</option>
                            <option value="Coffee">Coffee</option>
                            <option value="Hot Kitchen">Hot Kitchen</option>
-                           <option value="Snacks">Juice</option>
+                           <option value="Juice">Juice</option>
                        </select>
                    </div>
                    
                    <div class="form-label" style="margin-top: 220px;">
                        <label for="product-price">Unit Price</label>
                    </div>
-                   <input class="form-pprice" type="text"/>
+                   <input class="form-pprice" type="text" name="foodPrice" required/>
                    
                    <div class="form-label" style="margin-top: 330px;">
                        <label for="product-image">Food Item Image</label>
                    </div>
                    <div class="image-select">
                        <label class="custom-file-upload">
-                           <img src="images/Upload.png" class="img-3" />
-                           <input type="file" accept=".jpeg, .webp, .png" />
+                           <img src="images/Upload.png" class="img-3" id="addFoodPreview"/>
+                           <input type="file" name="foodImage" accept=".jpeg,.webp,.png" required onchange="previewImage(event,'addFoodPreview')"/>
                        </label>
                        <div class="div-20">Drag your images here</div>
                        <div class="div-21">(Only *.jpeg, *.webp and *.png images will be accepted)</div>
@@ -359,58 +187,63 @@
                        <hr size="2" color="#F5C51B" >
                    </div>
 
-                   <button class="sbut-cancel">Cancel</button>
-                   <button class="sbut-save">Add Item</button>
+                   <button class="sbut-cancel" type="button" onclick="hideSlider()">Cancel</button>
+                   <button class="sbut-save" type="submit">Add Item</button>
                </div>
            </form>
        </div>
-            
-            
+
+
         <!-- Slider edit Item Form -->
+        <% if (edit && editItem != null) { %>
+        <div class="slider active" id="editItemSlider">
+        <% } else { %>
         <div class="slider" id="editItemSlider">
+        <% } %>
             
             <div class="slider-container">
                 <div class="slider-header">
                     <div class="Add">Edit Food Item</div>
-                    <img class="close" srcset="images/Cancelslide.png" class="img" onclick="hideEditSlider()" />
+                    <img class="close" src="images/Cancelslide.png" class="img" onclick="hideEditSlider()" />
                     <div class="slider-hline" >
                         <hr size="2" color="#F5C51B" >
                     </div>
                 </div>
 
-            <form>
+            <form action="ADFoodMenuServlet?action=update" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="foodId" value="<%=editItem!=null?editItem.getFoodId():""%>"/>
                 <div class="slider-form">
                     
                     <div class="form-label" style="margin-top: 30px;">
                        <label for="product-name">Food Item Name</label>
                    </div>
-                   <input class="form-pname" type="text"/>
+                   <input class="form-pname" type="text" name="foodName" value="<%=editItem!=null?editItem.getName():""%>" required/>
                    
                    <div class="form-label" style="margin-top: 130px;">
                        <label for="product-category">Food Type</label>
                    </div>
                    <div class="cat-select">
-                       <select>
-                           <option value="Popcorn">Popcorn</option>
-                           <option value="Beverages">Beverages</option>
-                           <option value="Coffee">Coffee</option>
-                           <option value="Hot Kitchen">Hot Kitchen</option>
-                           <option value="Snacks">Juice</option>
+                       <select name="foodType" required>
+                           <option value="Popcorn" <%=editItem!=null && "Popcorn".equals(editItem.getType())?"selected":""%>>Popcorn</option>
+                           <option value="Beverages" <%=editItem!=null && "Beverages".equals(editItem.getType())?"selected":""%>>Beverages</option>
+                           <option value="Coffee" <%=editItem!=null && "Coffee".equals(editItem.getType())?"selected":""%>>Coffee</option>
+                           <option value="Hot Kitchen" <%=editItem!=null && "Hot Kitchen".equals(editItem.getType())?"selected":""%>>Hot Kitchen</option>
+                           <option value="Juice" <%=editItem!=null && "Juice".equals(editItem.getType())?"selected":""%>>Juice</option>
                        </select>
                    </div>
                    
                    <div class="form-label" style="margin-top: 220px;">
                        <label for="product-price">Unit Price</label>
                    </div>
-                   <input class="form-pprice" type="text"/>
+                   <input class="form-pprice" type="text" name="foodPrice" value="<%=editItem!=null?editItem.getPrice():""%>" required/>
                    
                    <div class="form-label" style="margin-top: 330px;">
                        <label for="product-image">Food Item Image</label>
                    </div>
                    <div class="image-select">
                         <label class="custom-file-upload">
-                            <img class="image-edit" src="images/popcorn.png" />
-                            <input type="file" id="edit-food-item-image" accept=".jpeg, .webp, .png" style="display: none;" />
+                            <img class="image-edit" src="<%=editItem!=null?editItem.getFoodImage():"images/Upload.png"%>" id="editFoodPreview"/>
+                            <input type="file" name="foodImage" accept=".jpeg,.webp,.png" style="display: none;" onchange="previewImage(event,'editFoodPreview')"/>
                         </label>
                     </div>
 
@@ -419,20 +252,24 @@
                         <hr size="2" color="#F5C51B" >
                     </div>
 
-                    <button class="sbut-cancel">Cancel</button>
-                    <button class="sbut-save">Save Changes</button>
+                    <button class="sbut-cancel" type="button" onclick="hideEditSlider()">Cancel</button>
+                    <button class="sbut-save" type="submit">Save Changes</button>
                 </div>
             </form>
         </div>
             
-            
+
         <!-- Slider review Item Form -->
+        <% if (view && viewItem != null) { %>
+        <div class="slider active" id="reviewItemsslider">
+        <% } else { %>
         <div class="slider" id="reviewItemsslider">
+        <% } %>
             <div class="slider-container">
 
                 <div class="slider-header">
                         <div class="Add">View Food Item</div>
-                    <img class="close" srcset="images/Cancelslide.png" class="img" onclick="hideReviewSlider()" />
+                    <img class="close" src="images/Cancelslide.png" class="img" onclick="hideReviewSlider()" />
                     <div class="slider-hline" >
                         <hr size="2" color="#F5C51B" >
                     </div>
@@ -443,22 +280,27 @@
                     <div class="form-label" style="margin-top: 30px;">
                        <label for="product-name">Food Item Name</label>
                    </div>
-                   <div class="view-pname">Sweet Popcron Large</div>
+                   <div class="view-pname"><%=viewItem!=null?viewItem.getName():""%></div>
                    
                    <div class="form-label" style="margin-top: 130px;">
                        <label for="product-category">Food Type</label>
                    </div>
-                   <div class="pcat-type">Popcorn</div>
+                   <div class="pcat-type"><%=viewItem!=null?viewItem.getType():""%></div>
                    
                    <div class="form-label" style="margin-top: 220px;">
                        <label for="product-price">Unit Price</label>
                    </div>
-                   <div class="view-pprice">LKR 3500</div>
+                   <div class="view-pprice">LKR <%=viewItem!=null?viewItem.getPrice():""%></div>
                    
                    <div class="form-label" style="margin-top: 330px;">
                        <label for="product-image">Food Item Image</label>
                    </div>
-                   <img class="image-display" src="images/popcorn.png">
+                   <%
+                     String vImg = (viewItem!=null?viewItem.getFoodImage():"");
+                     if(vImg!=null && !vImg.isEmpty()){
+                   %>
+                   <img class="image-display" src="<%=vImg%>">
+                   <% } %>
                    
                     <div class="slider-endhline"  >
                         <hr size="2" color="#F5C51B" >
@@ -469,8 +311,6 @@
         </div>
 
 
-            
-            
         <script>
             function showSlider() {
                 document.getElementById('addItemSlider').classList.add('active');
@@ -480,23 +320,29 @@
                 document.getElementById('addItemSlider').classList.remove('active');
             }
 
-            function showEditSlider() {
-                document.getElementById('editItemSlider').classList.add('active');
-            }
-
             function hideEditSlider() {
                 document.getElementById('editItemSlider').classList.remove('active');
-            }
-
-            function showReviewSlider() {
-                document.getElementById('reviewItemsslider').classList.add('active');
             }
 
             function hideReviewSlider() {
                 document.getElementById('reviewItemsslider').classList.remove('active');
             }
+
+            function previewImage(event, imgId) {
+                var output = document.getElementById(imgId);
+                output.src = URL.createObjectURL(event.target.files[0]);
+                output.onload = function() {
+                    URL.revokeObjectURL(output.src);
+                }
+            }
+
+            <% if (edit) { %>
+            document.getElementById('editItemSlider').classList.add('active');
+            <% } %>
+
+            <% if (view) { %>
+            document.getElementById('reviewItemsslider').classList.add('active');
+            <% } %>
         </script>
-        
-        
     </body>
 </html>

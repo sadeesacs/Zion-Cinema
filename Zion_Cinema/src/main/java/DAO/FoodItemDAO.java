@@ -3,9 +3,8 @@ package DAO;
 import Db.dbcon;
 import model.FoodItem;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,5 +43,96 @@ public class FoodItemDAO {
         } catch (Exception e) {
         }
         return types;
+    }
+    
+    public List<FoodItem> getAllFoodItems() {
+        List<FoodItem> items = new ArrayList<>();
+        String sql = "SELECT FoodID, Name, Food_Image, Type, Price FROM fooditem ORDER BY FoodID ASC";
+        try (Connection conn = dbcon.connect();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                items.add(new FoodItem(
+                    rs.getInt("FoodID"),
+                    rs.getString("Name"),
+                    rs.getString("Food_Image"),
+                    rs.getString("Type"),
+                    rs.getDouble("Price")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return items;
+    }
+
+    public int insertFoodItem(FoodItem item) {
+        String sql = "INSERT INTO fooditem (Name, Food_Image, Type, Price) VALUES (?,?,?,?)";
+        try (Connection conn = dbcon.connect();
+             PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            ps.setString(1, item.getName());
+            ps.setString(2, item.getFoodImage());
+            ps.setString(3, item.getType());
+            ps.setDouble(4, item.getPrice());
+            ps.executeUpdate();
+            ResultSet keys = ps.getGeneratedKeys();
+            if (keys.next()) {
+                return keys.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    public FoodItem getFoodItemById(int foodId) {
+        String sql = "SELECT FoodID, Name, Food_Image, Type, Price FROM fooditem WHERE FoodID = ?";
+        try (Connection conn = dbcon.connect();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, foodId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return new FoodItem(
+                    rs.getInt("FoodID"),
+                    rs.getString("Name"),
+                    rs.getString("Food_Image"),
+                    rs.getString("Type"),
+                    rs.getDouble("Price")
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public boolean updateFoodItem(FoodItem item) {
+        String sql = "UPDATE fooditem SET Name=?, Food_Image=?, Type=?, Price=? WHERE FoodID=?";
+        try (Connection conn = dbcon.connect();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, item.getName());
+            ps.setString(2, item.getFoodImage());
+            ps.setString(3, item.getType());
+            ps.setDouble(4, item.getPrice());
+            ps.setInt(5, item.getFoodId());
+            int updated = ps.executeUpdate();
+            return updated > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean deleteFoodItem(int foodId) {
+        String sql = "DELETE FROM fooditem WHERE FoodID = ?";
+        try (Connection conn = dbcon.connect();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, foodId);
+            int deleted = ps.executeUpdate();
+            return deleted > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }
