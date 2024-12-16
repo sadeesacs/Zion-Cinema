@@ -16,7 +16,6 @@ import Db.dbcon;
 
 /*deleting temp tables and recording in transaction and
 food tables when continue btn clicked on BillingConfirmation jsp*/
-
 @WebServlet("/ConfirmPurchaseServlet")
 public class ConfirmPurchaseServlet extends HttpServlet {
 
@@ -89,6 +88,14 @@ public class ConfirmPurchaseServlet extends HttpServlet {
             pstmt.executeUpdate();
             pstmt.close();
 
+            String transferSeatsQuery
+                    = "INSERT INTO seatreservation (SeatReservationID, SeatID, TicketType, Price, Showtime_ID, UserID) "
+                    + "SELECT NULL, SeatID, TicketType, Price, Showtime_ID, UserID FROM temporaryseats WHERE UserID = ?";
+            pstmt = conn.prepareStatement(transferSeatsQuery);
+            pstmt.setInt(1, userId);
+            pstmt.executeUpdate();
+            pstmt.close();
+
             // Step 6: Delete data from temporaryseats
             String deleteSeatsQuery = "DELETE FROM temporaryseats WHERE UserID = ?";
             pstmt = conn.prepareStatement(deleteSeatsQuery);
@@ -104,7 +111,7 @@ public class ConfirmPurchaseServlet extends HttpServlet {
 
             // Commit transaction
             conn.commit();
-            
+
             response.sendRedirect("UserAccount.jsp");
 
         } catch (SQLException e) {
