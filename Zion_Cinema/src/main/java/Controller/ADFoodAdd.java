@@ -79,7 +79,7 @@ public class ADFoodAdd extends HttpServlet {
             boolean success = ADFoodMenuDAO.addFood(name, type, price, imageName);
 
             if (success) {
-                response.sendRedirect("AD-ADFoodMenu.jsp");
+                response.sendRedirect("AD-FoodMenu.jsp");
             } else {
                 // we have to make handle errors
                 response.sendRedirect("error.jsp");

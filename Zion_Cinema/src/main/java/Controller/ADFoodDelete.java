@@ -26,9 +26,9 @@ import java.io.IOException;
                     Boolean isDeleted = foodMenuDAO.deleteFoodById(foodIDInt);
                     // Redirect based on the result of the deletion
                     if (isDeleted) {
-                        response.sendRedirect("AD-ADFoodMenu.jsp");
+                        response.sendRedirect("AD-FoodMenu.jsp");
                     } else {
-                        response.sendRedirect("AD-ADFoodMenu.jsp");
+                        response.sendRedirect("AD-FoodMenu.jsp");
                         System.out.println("Deletion failed");
                     }
                 } catch (NumberFormatException e) {

@@ -63,7 +63,7 @@ public class ADFoodView extends HttpServlet {
 
                 request.setAttribute("food", food);
 
-                request.getRequestDispatcher("/AD-ADFoodMenu.jsp").forward(request, response);
+                request.getRequestDispatcher("/AD-FoodMenu.jsp").forward(request, response);
             } else {
                 System.out.println("No food item found for ID: " + foodId);
                 request.setAttribute("errorMessage", "No food item found with ID: " + foodId);

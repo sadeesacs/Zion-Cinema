@@ -81,10 +81,10 @@ public class ADFoodEdit extends HttpServlet {
             boolean success = ADFoodMenuDAO.editFood(foodID,name, type, price, imageName);
 
             if (success) {
-                response.sendRedirect("AD-ADFoodMenu.jsp");
+                response.sendRedirect("AD-FoodMenu.jsp");
             } else {
                 // we have to make handle errors
-                response.sendRedirect("error.jsp");
+                response.sendRedirect("AD-FoodMenu.jsp");
             }
         } catch (Exception e) {
             e.printStackTrace();
