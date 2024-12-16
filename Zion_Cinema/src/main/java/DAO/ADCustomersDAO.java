@@ -25,7 +25,7 @@ public class ADCustomersDAO {
             }
 
             // Prepare SQL query
-            String query = "SELECT UserID, FirstName,Lastname, Email,PhoneNumber  FROM User where IsGuest = 0";
+            String query = "SELECT UserID, FirstName,Lastname, Email,PhoneNumber  FROM User";
             stmt = connection.prepareStatement(query);
             rs = stmt.executeQuery();
 

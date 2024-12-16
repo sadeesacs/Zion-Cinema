@@ -18,14 +18,12 @@ public class ADLogin extends HttpServlet {
         ADLoginDAO login = new ADLoginDAO();
         if (login.adlogin(username, password, request)) {
 
-            response.sendRedirect("AD-Dashboard.jsp");
+            response.sendRedirect("AD-ADDashboard.jsp");
+        } else {
+            response.sendRedirect("AD-Movies.jsp");
+        }
 
-        }
-        else
-        {
-            request.setAttribute("errorMessage", "Invalid username or password. Please try again.");
-            request.getRequestDispatcher("AD-Login.jsp").forward(request, response);
-        }
+
     }
 
 }

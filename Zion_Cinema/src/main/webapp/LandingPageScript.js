@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
         showSlide(currentIndex);
     }
 
-    let autoSlide = setInterval(nextSlide, 4000);
+    let autoSlide = setInterval(nextSlide, 3000);
 
     // Prevent long-term issues by restarting `setInterval` periodically
     setInterval(() => {

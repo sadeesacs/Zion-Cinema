@@ -136,7 +136,7 @@ body{
 
 
 
-/* Styling of ADMovie Listing Page */
+/* Styling of Movie Listing Page */
 
 /* Now Showing Section */
 .heading-1{
@@ -174,7 +174,7 @@ body{
     position: absolute;
 }
 
-/* ADMovie cards container */
+/* Movie cards container */
 .movie-cards-container {
     position: relative;
     margin-top: 70px;
@@ -287,7 +287,7 @@ body{
     cursor: pointer;
 }
 
-/* Coming soon ADMovie Cards Scroll Container */
+/* Coming soon Movie Cards Scroll Container */
 .movie-cards-scroll-container {
     overflow: hidden; 
     width: 90%;
@@ -304,7 +304,7 @@ body{
      will-change: transform;
 }
 
-/* ADMovie Cards */
+/* Movie Cards */
 .movie-card-new {
     flex: 0 0 310px;
     padding: 0px;

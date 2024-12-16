@@ -20,35 +20,40 @@
 
                 <!--Zion Cinema logo-->
                 <img src="images/icons/logo.png">
-                <a href="HomePageServlet" class="logo-name">Zion Cinema</a>
+                <a href="HomePage.html" class="logo-name">Zion Cinema</a>
 
                 <!--Navigation Bar-->
                 <div class="nav">
-                    <span><a href="HomePageServlet">Home</a></span>
-                    <a href="MovieListingServlet">Movies</a>
-                    <a href="AboutUs.jsp">About us</a>
-                    <a href="ContactUs.jsp">Contact</a>
-                    <a href="FAQ.jsp">FAQ</a>
+                    <span><a href="HomePage.html">Home</a></span>
+                    <a href="Movie.html">Movies</a>
+                    <a href="About.html">About us</a>
+                    <a href="Contact.html">Contact</a>
+                    <a href="FAQ.html">FAQ</a>
                 </div>
 
                 <!-- Header Buttons -->
-                <a href="MovieListingServlet" class="but-buytickets">
+                <a href="Movies.html" class="but-buytickets">
                     <div>Buy Tickets</div>
                 </a>
 
                 <%-- Login/Logout Button --%>
-                <% 
-                    session = request.getSession(false);
-                    if (session != null && session.getAttribute("email") != null) {
+
+                <%
+                    Integer UserID = (Integer) session.getAttribute("UserID");
+                    if (UserID != null) {
                 %>
-                    <a href="Logout.jsp" class="but-login">
-                        <div>Logout</div>
-                    </a>
-                <% } else { %>
-                    <a href="UserLogin.jsp" class="but-login">
-                        <div>Login</div>
-                    </a>
-                <% } %>
+                <a href="UserAccount.jsp" class="but-login">
+                    <div>My Account</div>
+                </a>
+                <%
+                } else {
+                %>
+                <a href="UserLogin.jsp" class="but-login">
+                    <div>Login</div>
+                </a>
+                <%
+                    }
+                %>
 
             </div>
         </div>
@@ -74,6 +79,7 @@
                         <div class="banner-gradient"></div>
                         <div class="slide-content">
                             <h1><%=movie.getName()%></h1>
+                            <p><%=movie.getDuration()%></p> 
                             <%
                                 DAO.MovieListingDAO tempDao = new DAO.MovieListingDAO();
                                 String desc = tempDao.getMovieDescription(movie.getMovieId());
@@ -142,6 +148,7 @@
                     <span><%=movie.getYear()%></span> <span><%=movie.getRating()%></span> <span><%=movie.getDuration()%></span>
                 </div>
                 <div class="card-buttons">
+                    <button class="get-tickets-button"><a href="MovieDetailServlet?movieId=<%= movie.getMovieId() %>">Get Tickets</a></button>
                     <button class="view-details-button"><a href="<%=movie.getTrailer()%>" target="_blank">Watch Trailer</a></button>
                 </div>
             </div>
@@ -161,7 +168,7 @@
             </h2>
             <div class="testimonials-container">
                 <div class="testimonial-card">
-                    <img src="images/others/customer1.png" class="client-avatar">
+                    <img src="images/customer1.png" class="client-avatar">
                     <h3 class="client-name">Leo Perera </h3>
                     <div class="rating">
                         ★ ★ ★ ★ ★
@@ -173,7 +180,7 @@
                 </div>
 
                 <div class="testimonial-card">
-                    <img src="images/others/customer2.png" class="client-avatar">
+                    <img src="images/customer2.png" class="client-avatar">
                     <h3 class="client-name">Randy Orton </h3>
                     <div class="rating">
                         ★ ★ ★ ★ ★
@@ -185,7 +192,7 @@
                 </div>
 
                 <div class="testimonial-card">
-                    <img src="images/others/customer3.png" class="client-avatar">
+                    <img src="images/customer3.png" class="client-avatar">
                     <h3 class="client-name">Diego Nevile </h3>
                     <div class="rating">
                         ★ ★ ★ ★ ★
@@ -207,10 +214,10 @@
                     and comfortable seating. Enjoy the latest blockbusters and timeless classics like never before!
                 </p>
                 <div class="social-icons">
-                    <a href="https://web.facebook.com"><img src="images/icons/fbicon.png"></a>
-                    <a href="https://www.instagram.com/"><img src="images/icons/instaicon.png"></a>
-                    <a href="https://x.com"><img src="images/icons/xicon.png"></a>
-                    <a href="https://www.tiktok.com"><img src="images/icons/tiktokicon.png"></a>
+                    <a href="https://web.facebook.com"><img src="images/fbicon.png"></a>
+                    <a href="https://www.instagram.com/"><img src="images/instaicon.png"></a>
+                    <a href="https://x.com"><img src="images/xicon.png"></a>
+                    <a href="https://www.tiktok.com"><img src="images/tiktokicon.png"></a>
                 </div>
             </div>
         
@@ -218,18 +225,18 @@
                 <h3>Quick Links</h3>
                 <div class="quick-links-container">
                     <ul class="quick-links">
-                        <li><a href="HomePageServlet">Home</a></li>
-                        <li><a href="MovieListingServlet">Buy Tickets</a></li>
-                        <li><a href="MovieListingServlet">Movies</a></li>
-                        <li><a href="AboutUs.jsp">About us</a></li>
-                        <li><a href="ContactUs.jsp">Contact</a></li>
+                        <li><a href="HomePage.html">Home</a></li>
+                        <li><a href="Movies.html">Buy Tickets</a></li>
+                        <li><a href="Movie.html">Movies</a></li>
+                        <li><a href="AboutUs.html">About us</a></li>
+                        <li><a href="Contact.html">Contact</a></li>
                     </ul>
                     <ul class="quick-links">
-                        <li><a href="Cancellation.jsp">Cancellations</a></li>
-                        <li><a href="UserAccount.jsp">My Account</a></li>
-                        <li><a href="UserLogin.jsp">Login</a></li>
-                        <li><a href="UserRegistration.jsp">Signup</a></li>
-                        <li><a href="FAQ.jsp">FAQ</a></li>
+                        <li><a href="Cancellation.html">Cancellations</a></li>
+                        <li><a href="UserAccount.html">My Account</a></li>
+                        <li><a href="Login.html">Login</a></li>
+                        <li><a href="Signup.html">Signup</a></li>
+                        <li><a href="FAQ.html">FAQ</a></li>
                     </ul>
                 </div>
             </div>

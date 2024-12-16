@@ -12,22 +12,22 @@
 
             <!--Zion Cinema logo-->
             <img src="images/icons/logo.png">
-            <a href="HomePageServlet" class="logo-name">Zion Cinema</a>
+            <a href="HomePage.html" class="logo-name">Zion Cinema</a>
 
             <!--Navigation Bar-->
             <div class="nav">
-                <a href="HomePageServlet">Home</a>
-               <a href="MovieListingServlet">Movies</a>
-               <span><a href="AboutUs.jsp">About us</a></span>
-                <a href="ContactUs.jsp">Contact</a>
-                <a href="FAQ.jsp">FAQ</a>
+                <a href="HomePage.html">Home</a>
+               <a href="Movie.html">Movies</a>
+               <span><a href="About.html">About us</a></span>
+                <a href="Contact.html">Contact</a>
+                <a href="FAQ.html">FAQ</a>
             </div>
 
             <!-- Header Buttons -->
-            <a href="MovieListingServlet" class="but-buytickets">
+            <a href="Movies.html" class="but-buytickets">
                 <div>Buy Tickets</div>
             </a>
-            <a href="UserLogin.jsp" class="but-login">
+            <a href="Login.html" class="but-login">
                 <div>Login</div>
             </a>
         </div>
@@ -164,7 +164,7 @@ commitment to audience satisfaction.
                 and comfortable seating. Enjoy the latest blockbusters and timeless classics like never before!
             </p>
             <div class="social-icons">
-                <a href="https://web.facebook.com"><img src="images/icons/fbicon.png"></a>
+                <a href="https://web.facebook.com"><img src="images/icins/fbicon.png"></a>
                 <a href="https://www.instagram.com/"><img src="images/icons/instaicon.png"></a>
                 <a href="https://x.com"><img src="images/icons/xicon.png"></a>
                 <a href="https://www.tiktok.com"><img src="images/icons/tiktokicon.png"></a>
@@ -175,18 +175,18 @@ commitment to audience satisfaction.
             <h3>Quick Links</h3>
             <div class="quick-links-container">
                 <ul class="quick-links">
-                    <li><a href="HomePageServlet">Home</a></li>
-                    <li><a href="MovieListingServlet">Buy Tickets</a></li>
-                    <li><a href="MovieListingServlet">Movies</a></li>
-                    <li><a href="AboutUs.jsp">About us</a></li>
-                    <li><a href="ContactUs.jsp">Contact</a></li>
+                    <li><a href="HomePage.html">Home</a></li>
+                    <li><a href="Movies.html">Buy Tickets</a></li>
+                    <li><a href="Movie.html">Movies</a></li>
+                    <li><a href="AboutUs.html">About us</a></li>
+                    <li><a href="Contact.html">Contact</a></li>
                 </ul>
                 <ul class="quick-links">
-                    <li><a href="Cancellation.jsp">Cancellations</a></li>
-                    <li><a href="UserAccount.jsp">My Account</a></li>
-                    <li><a href="UserLogin.jsp">Login</a></li>
-                    <li><a href="UserRegistration.jsp">Signup</a></li>
-                    <li><a href="FAQ.jsp">FAQ</a></li>
+                    <li><a href="Cancellation.html">Cancellations</a></li>
+                    <li><a href="UserAccount.html">My Account</a></li>
+                    <li><a href="Login.html">Login</a></li>
+                    <li><a href="Signup.html">Signup</a></li>
+                    <li><a href="FAQ.html">FAQ</a></li>
                 </ul>
             </div>
         </div>

@@ -1,4 +1,42 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="jakarta.servlet.http.HttpSession"%>
+<%@ page import="DAO.BillingHelperDAO " %>
+<%@ page import="java.sql.SQLException" %>
+<%@ page import="model.Showtime" %>
+<%@ page import="model.MovieDetail" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.Map" %>
+<%@ page import="model.FoodItem" %>
+<%@ page import="org.json.JSONArray" %>
+<%@ page import="org.json.JSONObject" %>
+<% 
+    session = request.getSession(false);
+    Object userIdObj = session.getAttribute("UserID");
+    double totalFoodPrice = 0;
+    double totalTicketPrice = 0;
+    double tax = 0;
+    double totalAmount = 0;
+
+    if (userIdObj != null) {
+        int userId = Integer.parseInt(userIdObj.toString());
+        try {
+            double[] totals = BillingHelperDAO.calculateTotals(userId);
+            totalFoodPrice = totals[0];
+            totalTicketPrice = totals[1];
+            tax = totals[2];
+            totalAmount = totals[3];
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+%>
+<%
+
+    String loggedInFirstName = (session != null) ? (String) session.getAttribute("firstName") : null;
+    String loggedInLastName = (session != null) ? (String) session.getAttribute("lastName") : null;
+    String loggedInPhoneNumber = (session != null) ? (String) session.getAttribute("phoneNumber") : null;
+    String loggedInEmail = (session != null) ? (String) session.getAttribute("email") : null;
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,9 +69,22 @@
         <a href="Movies.html" class="but-buytickets">
             <div>Buy Tickets</div>
         </a>
-        <a href="Login.html" class="but-login">
+        <%
+            Integer userID = (Integer) session.getAttribute("userID");
+            if (userID != null) {
+        %>
+        <a href="UserAccount.jsp" class="but-login">
+            <div>My Account</div>
+        </a>
+        <%
+        } else {
+        %>
+        <a href="UserLogin.jsp" class="but-login">
             <div>Login</div>
         </a>
+        <%
+            }
+        %>
     </div>
     <div class="header-line"></div>
 
@@ -65,124 +116,143 @@
             <div class="circle3"></div>            
         </div>
     </div>
-    
 
 
-   <!-- Selected ADMovie Details -->
-   <div class="selected-movie-name">Pirates of the Caribbean : Dead Men Tell No Tales</div>
-   <div class="selected-container" >
-      <div class="date-selected" >
-          <ul>
-              <li>Mon</li>
-              <li>Tue</li>
-              <li>Wed</li>
-              <li>Thu</li>
-              <li>Fri</li>
-          </ul>
-          <form class="dateselected-buttons-form">
-              <button type="button" class="datesel-button">26</button>
-              <button type="button" class="datesel-button">27</button>
-              <button type="button" class="datesel-button active">28</button>
-              <button type="button" class="datesel-button">29</button>
-              <button type="button" class="datesel-button">30</button>
-          </form>
-      </div>
-
-      <div class="time-selected">
-          <div class="span-2">Zion Cinema</div>
-          <div class="timeselected-buttons-form">
-              <button type="button" class="timesel-button">10.00 AM</button>
-              <button type="button" class="timesel-button active">12.00 AM</button>
-              <button type="button" class="timesel-button">01.00 PM</button>
-          </div>
-      </div>
-
-      <div class="seat-selected">
-          <div class="span-3">Seat Info</div>
-          <div class="seatselected-buttons-form">
-              <button type="button" class="seatsel-button">C1</button>
-              <button type="button" class="seatsel-button">C2</button>
-              <button type="button" class="seatsel-button">D1</button>
-          </div>
-      </div>
-  </div>
+    <%
+        MovieDetail movieDetail = (MovieDetail) request.getAttribute("selectedMovie");
+        Showtime selectedShowtime = (Showtime) request.getAttribute("selectedShowtime");
+        String selectedSeats = (String) request.getAttribute("selectedSeats");
 
 
-    <!-- billing Section -->
-    <div class="billing-container">
-        <h2>Billing Details</h2>
-        <form class="billing-form">
-            <!-- First and Last Name -->
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="first-name">First name</label>
-                    <input type="text" id="first-name">
-                </div>
-                <div class="form-group">
-                    <label for="last-name">Last name</label>
-                    <input type="text" id="last-name">
-                </div>
-            </div>
+    %>
 
-            <!-- Phone Number -->
-            <div class="form-group">
-                <label for="phone-number">Phone Number</label>
-                <input type="text" id="phone-number">
-            </div>
+    <!-- Selected Movie Details -->
+    <div class="selected-movie-name">
+        <% if (movieDetail != null) { %>
+        <%= movieDetail.getName() %>
+        <% } else { %>
+        Movie Not Selected
+        <% } %>
+    </div>
+    <div class="selected-container" >
+        <div class="date-selected" >
+            <ul>
+                <% if (selectedShowtime != null && selectedShowtime.getDate() != null) { %>
+                <li><%= new java.text.SimpleDateFormat("EEE").format(java.sql.Date.valueOf(selectedShowtime.getDate())) %></li>
+                <% } else { %>
+                <li>Date not available</li>
+                <% } %>
 
-            <!-- Email Address -->
-            <div class="form-group">
-                <label for="email-address">Email Address</label>
-                <input type="email" id="email-address">
-            </div>
-
-            <!-- Terms and Conditions -->
-            <div class="checkbox-container">
-                <input type="checkbox" id="terms">
-                <span>I agree to terms of use and privacy policy</span>
-            </div>
-
-            <!-- Submit Button -->
-            <button type="submit" class="pay-button">PAY NOW</button>
-        </form>
+            </ul>
+            <form class="dateselected-buttons-form">
+                <button type="button" class="datesel-button active">
+                    <%= new java.text.SimpleDateFormat("dd").format(java.sql.Date.valueOf((String) session.getAttribute("selectedDate"))) %>
+                </button>
+            </form>
         </div>
+
+        <div class="time-selected">
+            <div class="span-2">Zion Cinema</div>
+            <div class="timeselected-buttons-form">
+                <% if (selectedShowtime != null) { %>
+                <button class="timesel-button active">
+                    <%= new java.text.SimpleDateFormat("hh:mm a").format(java.sql.Time.valueOf(selectedShowtime.getTime())) %>
+                </button>
+                <% } %>
+            </div>
+        </div>
+
+        <div class="seat-selected">
+            <div class="span-3">Seat Info</div>
+            <div class="seatselected-buttons-form">
+                <%
+                    if (selectedSeats != null) {
+                        org.json.JSONArray seatsArray = new org.json.JSONArray(selectedSeats);
+                        for (int i = 0; i < seatsArray.length(); i++) {
+                %>
+                <button class="seatsel-button"><%= seatsArray.getString(i) %></button>
+                <%
+                    }
+                } else {
+                %>
+                <p>No Seats Selected</p>
+                <% } %>
+            </div>
+        </div>
+    </div>
+   <!-- billing Section -->
+   <div class="billing-container">
+       <h2>Billing Details</h2>
+       <form class="billing-form" action="BillingDAO" method="post">
+           <!-- First and Last Name -->
+           <div class="form-row">
+               <div class="form-group">
+                   <label for="first-name">First name</label>
+                   <input type="text" id="first-name" name="firstName"
+                          value="<%= (loggedInFirstName != null) ? loggedInFirstName : ""%>"
+                          <%= (loggedInFirstName != null) ? "readonly" : "required"%>>
+               </div>
+               <div class="form-group">
+                   <label for="last-name">Last name</label>
+                   <input type="text" id="last-name" name="lastName"
+                          value="<%= (loggedInLastName != null) ? loggedInLastName : ""%>"
+                          <%= (loggedInLastName != null) ? "readonly" : "required"%>>
+               </div>
+           </div>
+
+           <!-- Phone Number -->
+           <div class="form-group">
+               <label for="phone-number">Phone Number</label>
+               <input type="text" id="phone-number" name="phoneNumber"
+                      value="<%= (loggedInPhoneNumber != null) ? loggedInPhoneNumber : ""%>"
+                      <%= (loggedInPhoneNumber != null) ? "readonly" : "required"%>>
+           </div>
+
+           <!-- Email Address -->
+           <div class="form-group">
+               <label for="email-address">Email Address</label>
+               <input type="email" id="email-address" name="email"
+                      value="<%= (loggedInEmail != null) ? loggedInEmail : "" %>"
+                   <%= (loggedInEmail != null) ? "readonly" : "required" %>>
+           </div>
+
+           <!-- Terms and Conditions -->
+           <div class="checkbox-container">
+               <input type="checkbox" id="terms" name="terms" required>
+               <span>I agree to terms of use and privacy policy</span>
+           </div>
+
+           <!-- Submit Button -->
+           <button type="submit" class="pay-button">PAY NOW</button>
+       </form>
+   </div>
            
              
         <!--summary table-->
-        <div class="purchase-summary-container">
-            <div class="purchase-summary">
-                <h2>Purchase Summary</h2>
-                
-                <div class="summary-header">
-                </div>
-                <h3>Tickets</h3>
-                <div class="summary-items">
-                    <p>Adult Ticket<span>2</span>
-                        <span>LKR 2500</span></p>
-                    <p>Child Ticket<span>1</span>
-                        <span>LKR 1100</span></p>
-                </div>
-                <h3>Food and Beverages</h3>
-                <div class="summary-items1">
-                    <p>Popcorn large<span> 2</span>
-                        <span>LKR 1500 ×</span></p>
-                    <p>Milo Shake<span>&nbsp 2</span>
-                        <span>LKR 700 ×</span></p>
-                </div>
-                <hr>
-                <div class="summary-totals">
-                    <p>Subtotal<span>LKR 5500</span></p>
-                    <p>VAT 3%<span>LKR 165</span></p>
-                </div>
-                <hr>
-                <div class="summary-total-final">
-                    <strong style="color: white;">Total</strong>
-                    <strong><span style="font-size: 1.5rem;">LKR 5500</span></strong>
-                </div>
-                <hr>
-            </div>
+        <!-- Purchase Summary Section -->
+<div class="purchase-summary-container">
+    <div class="purchase-summary">
+        <h2>Purchase Summary</h2>
+        <h3>Tickets</h3>
+        <div class="summary-items">
+            <p>Total Ticket Price:<span><%=totalTicketPrice%></span></p>
         </div>
-
+        <h3>Food and Beverages</h3>
+        <div class="summary-items1">
+            <p>Total Food Price:<span><%=totalFoodPrice%></span></p>
+        </div>
+        <hr>
+        <div class="summary-totals">
+            <p>VAT (3%):<span><%=tax%></span></p>
+        </div>
+        <hr>
+        <div class="summary-total-final">
+            <strong style="color: white;">Total Amount:</strong>
+            <strong><span style="font-size: 1.5rem;"><%=totalAmount%></span></strong>
+        </div>
+        <hr>
+    </div>
+</div>
 
         <!--Footer-->
         <footer class="footer-container">
