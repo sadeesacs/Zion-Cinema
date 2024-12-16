@@ -89,22 +89,12 @@ public class ConfirmPurchaseServlet extends HttpServlet {
             pstmt.executeUpdate();
             pstmt.close();
 
-            String transferMovieQuery
-                    = "INSERT INTO seatreservation (SeatID, TicketType, Price, Showtime_ID, UserID) "
-                    + "SELECT SeatID, TicketType, Price, Showtime_ID, UserID FROM temporaryseatreservation WHERE UserID = ?";
-            pstmt = conn.prepareStatement(transferMovieQuery);
-            pstmt.setInt(1, userId);
-            pstmt.executeUpdate();
-            pstmt.close();
-            
             // Step 6: Delete data from temporaryseats
             String deleteSeatsQuery = "DELETE FROM temporaryseats WHERE UserID = ?";
             pstmt = conn.prepareStatement(deleteSeatsQuery);
             pstmt.setInt(1, userId);
             pstmt.executeUpdate();
             pstmt.close();
-            
-            
 
             String deleteMovieQuery = "DELETE FROM temporarymovies WHERE UserID = ?";
             pstmt = conn.prepareStatement(deleteMovieQuery);
