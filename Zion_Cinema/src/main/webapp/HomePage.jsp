@@ -37,18 +37,22 @@
                 </a>
 
                 <%-- Login/Logout Button --%>
-                <% 
-                    session = request.getSession(false);
-                    if (session != null && session.getAttribute("email") != null) {
+               <%
+                    Integer UserID = (Integer) session.getAttribute("UserID");
+                    if (UserID != null) {
                 %>
-                    <a href="Logout.jsp" class="but-login">
-                        <div>Logout</div>
-                    </a>
-                <% } else { %>
-                    <a href="UserLogin.jsp" class="but-login">
-                        <div>Login</div>
-                    </a>
-                <% } %>
+                <a href="UserAccount.jsp" class="but-login">
+                    <div>My Account</div>
+                </a>
+                <%
+                } else {
+                %>
+                <a href="UserLogin.jsp" class="but-login">
+                    <div>Login</div>
+                </a>
+                <%
+                    }
+                %>
 
             </div>
         </div>
