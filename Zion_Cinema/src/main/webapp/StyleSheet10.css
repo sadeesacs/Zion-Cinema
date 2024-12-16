@@ -660,13 +660,13 @@ header .message-icon{
   
 .div-20 {
     margin-top: 14px;
-    font: 18px ;
+    font-size: 18px ;
     color:white;
 }
   
 .div-21 {
     margin-top: 12px;
-    font: 12px;
+    font-size: 12px;
     margin-left: 30px;
     width:400px;
     color:white;
@@ -862,8 +862,25 @@ input[type="text"] {
     left: 850px; 
     position: absolute; 
     top: 50%; 
-    transform: translateY(-50%); 
+    transform: translateY(-50%);
+    
 }
+.view a {
+    text-decoration: none;
+    color: white;
+}
+
+.edit a {
+    text-decoration: none;
+    color: #F5C51B;
+}
+
+.delete a {
+    text-decoration: none;
+    color: red;
+}
+
+
 
 
 /*ADMovie Slider Styles*/
@@ -931,7 +948,7 @@ input[type="text"] {
     text-align: center;
     background-color: black;
     border-top: 1px solid #F5C51B;
-    height:40px
+    height:40px;
 }
 
 .movie-btn-cancel {
@@ -945,7 +962,6 @@ input[type="text"] {
     border-radius: 5px;
     cursor: pointer;
     left:30px;
-    position: absolute;
 }
 
 .movie-btn-save {
@@ -958,7 +974,6 @@ input[type="text"] {
     cursor: pointer;
     border: none;
     left:53%;
-    position: absolute;
 }
 
 

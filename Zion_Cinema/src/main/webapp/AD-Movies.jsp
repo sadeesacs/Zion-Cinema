@@ -1,117 +1,88 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="DAO.ADMovieListDAO" %>
-<%@ page import="java.util.List" %>
-<%@ page import="model.ADMovieList" %>
+<%@page import="java.util.List"%>
+<%@page import="Controller.ADMoviesServlet.MovieInfo"%>
+<%@page import="model.Movie"%>
+<%@page import="model.Genre"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8">
         <title>Movies</title>
-        <style>
-            .icon-button {
-                background: none; /* Removes the default background */
-                border: none; /* Removes the default border */
-                padding: 0; /* Removes default padding */
-                margin: 0; /* Adjusts margin if needed */
-                cursor: pointer; /* Makes it look clickable */
-            }
-
-            .icon-button {
-                color: inherit;
-            }
-        </style>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="StyleSheet10.css" />
-        
     </head>
     <body>
         
-        <!-- Header of the Admin ADDashboard -->
+        <!-- Header of the Admin Dashboard -->
         <header>
             <div class="header">
-                <div class="Logo"><img src="images/icons/logo.png" /></div>
+                <div class="Logo"><img src="images/logo.png" /></div>
                 <div class="zion-cinema"><a href="HomePage.html">Zion Cinema</a></div>
 
                 <div class="search-bar">
                     <span>Search here.....</span>
-                        <span style="left: 210px;color:white"><i class="bi bi-search"></i></span>
+                    <span style="left: 210px;color:white"><i class="bi bi-search"></i></span>
                 </div>
-                <%
-                    // Check if session exists and retrieve the username attribute
-                    String username = (session != null) ? (String) session.getAttribute("username") : null;
 
-                    if (username != null) {
-                %>
-                <div class="AD-username"><%= username %></div>
+                <div class="AD-username">Emma Watson</div>
                 <div class="word-admin">Admin</div>
-                <%
-                } else {
-                %>
-                <div class="AD-username">Session expired or not logged in.</div>
-                <%
-                    }
-                %>
+
                 <div class="user-icon" ><i class="bi bi-person-fill"></i></div>
 
-                <img src="images/icons/notificationicon.png" class="notification-icon">
-                <img src="images/icons/messagesicon.png" class="message-icon">
+                <img src="images/notificationicon.png" class="notification-icon">
+                <img src="images/messagesicon.png" class="message-icon">
             </div>
         </header>
         
         
-        
-        <!-- Navigational Panel of the Admin ADDashboard -->
+        <!-- Navigational Panel of the Admin Dashboard -->
         <div class="navigation">
             <ul class="nav-menu">
-                <a href="AD-Dashboard.jsp">
+                <a href="AD-Dashbaord.jsp">
                     <li class="nav-item">
-                        <img src="images/icons/Dashboardicon.png"></img>
+                        <img src="images/Dashboardicon.png"></img>
                         <span>Dashboard</span>
                     </li>
                 </a>
                 <a href="AD-Movies.jsp">
                     <li class="nav-item active">
-                        <img src="images/icons/Movieicon.png"></img>
+                        <img src="images/Movieicon.png"></img>
                         <span>Movies</span>
                     </li>
                 </a>
                 <a href="AD-FoodMenu.jsp">
                     <li class="nav-item ">
-                        <img src="images/icons/Foodicon.png"></img>
+                        <img src="images/Foodicon.png"></img>
                         <span>Food Menu</span>
                     </li>
                 </a>
                 <a href="AD-Transactions.jsp">
                     <li class="nav-item">
-                        <img src="images/icons/Billicon.png"></img>
+                        <img src="images/Billicon.png"></img>
                         <span>Transactions</span>
                     </li>
                 </a>
                 <a href="AD-CustomerInquiries.jsp">
                     <li class="nav-item ">
-                        <img src="images/icons/Inquiryicon.png"></img>
+                        <img src="images/Inquiryicon.png"></img>
                         <span>Customer Inquiries</span>
                     </li>
                 </a>
                 <a href="AD-Customers.jsp">
                     <li class="nav-item ">
-                        <img src="images/icons/customericon.png"></img>
+                        <img src="images/customericon.png"></img>
                         <span>Customers</span>
                     </li>
                 </a>
-                    <li class="nav-item">
-                        <img src="images/icons/Settingicon.png"></img>
-                        <span>Settings</span>
-                    </li>
+                <li class="nav-item">
+                    <img src="images/Settingicon.png"></img>
+                    <span>Settings</span>
+                </li>
             </ul>
             <button class="logout">
-                <a href="AD-Login.jsp" style="text-decoration: none;">
-                    <li class="nav-item ">
-                        <img src="images/icons/Logouticon.png"/>
-                        <span>Logout</span>
-                    </li>
-                </a>
-
+                <img src="images/Logouticon.png"></img>
+                <span>Logout</span>
+            </button>
         </div>
         
         
@@ -119,472 +90,389 @@
 
             <div class="product-cat">Movies</div>
 
-            <button class="add-item" style="font-size: 15px">
-                <button class="add-item" onclick="showSlider()">
-                    <i class="bi bi-plus-circle"></i>
-                    <p>Add Movie</p>
+            <button class="add-item" style="font-size: 15px" onclick="showSlider()">
+                <i class="bi bi-plus-circle"></i>
+                <p>Add Movie</p>
             </button>
 
             <div class="header-container" style="top:60px;">
                 <span class="header-top" style="margin-left:20px">Movie ID</span>
                 <span class="header-top" style="margin-left:150px">Movie Name</span>
+                <div class="header-top" style="margin-left:580px">Genre</div>
                 <div class="header-top" style="margin-left:720px">Duration</div>
                 <div class="header-top" style="margin-left:870px">Action</div>                
             </div>
                 
             <div class="content-container" style="margin-top:150px;height: 70%">
                 <%
-                    // Fetching the list of Customer inquiries
-                    List<ADMovieList> Movie = ADMovieListDAO.getAllMovies();
-                    //Loop to display data
-                    if (!Movie.isEmpty()) {
-                        // data type,variable,array name
-                        for (ADMovieList Movies : Movie) {
+                    List<MovieInfo> movies = (List<MovieInfo>) request.getAttribute("movies");
+                    if (movies != null) {
+                        for (MovieInfo mi : movies) {
+                            Movie mv = mi.getMovie();
+                            String fGenre = mi.getFirstGenre();
                 %>
                 <div class="movie">
-                    <p class="movie-id"><%=Movies.getMovieID()%></p>
-                    <p class="movie-name"><%=Movies.getMovieName()%></p>
-                    <p class="movie-duration"><%=Movies.getDuration()%></p>
+                    <p class="movie-id"><%= mv.getMovieId()%></p>
+                    <p class="movie-name"><%= mv.getName() %></p>
+                    <p class="movie-genre"><%= fGenre %></p>
+                    <p class="movie-duration"><%= mv.getDuration()%></p>
                     <div class="movie-actions">
-<%--                        <div class="view" onclick="showReviewSlider()"><i class="bi bi-eye-fill"></i></div>--%>
-
-                        <div class="edit" onclick="return editFormID('<%=Movies.getMovieID()%>')">
-                            <i class="bi bi-pencil-fill"></i>
-                        </div>
-
-
-                        <form action="DeleteMovie" method="post">
-                            <!-- Hidden input for foodID -->
-                            <input type="hidden" name="MovieID" value="<%=Movies.getMovieID()%>" />
-                            <button class="icon-button " type="submit" name="delete">
-                                <div class="delete"><i class="bi bi-trash3-fill"></i></div>
-                            </button>
-                        </form>
-
+                        <div class="view"><a href="ADMoviesServlet?action=view&movieId=<%=mv.getMovieId()%>"><i class="bi bi-eye-fill"></i></a></div>
+                        <div class="edit"><a href="ADMoviesServlet?action=editForm&movieId=<%=mv.getMovieId()%>"><i class="bi bi-pencil-fill"></i></a></div>
+                        <div class="delete"><a href="ADMoviesServlet?action=delete&movieId=<%=mv.getMovieId()%>" onclick="return confirm('Are you sure you want to delete this movie?')"><i class="bi bi-trash3-fill"></i></a></div>
                     </div> 
                 </div>
                 <%
-                    }
-                }
-                else{
-                %>
-                <p>
-                    <span class="header-top" style="margin-left:500px"> No Movies on the List</span>
-                </p>
-
-                <%
+                        }
                     }
                 %>
-
             </div>
         </div>
         
-        
+        <%
+            List<Genre> allGenres = (List<Genre>) request.getAttribute("allGenres");
+            boolean edit = request.getAttribute("edit") != null;
+            boolean view = request.getAttribute("view") != null;
 
+            Movie editMovie = (Movie) request.getAttribute("editMovie");
+            List<String> editMovieGenres = (List<String>) request.getAttribute("editMovieGenres");
+            if (editMovieGenres == null) editMovieGenres = java.util.Collections.emptyList();
+
+            Movie viewMovie = (Movie) request.getAttribute("viewMovie");
+            List<String> viewGenres = (List<String>) request.getAttribute("movieGenres");
+            if (viewGenres == null) viewGenres = java.util.Collections.emptyList();
+        %>
 
         <!--Add Item Slider-->
-         <div class="movie-slider" id="addMovieSlider">
+        <div class="movie-slider" id="addMovieSlider">
             <div class="movie-slider-container">
                 <div class="movie-slider-header">
                     <div class="movie-slider-title">Add Movie Details</div>
-                    <img class="close-movie-slider" src="images/icons/Cancelslide.png" onclick="hideSlider2()" />
+                    <img class="close-movie-slider" src="images/Cancelslide.png" onclick="hideSlider()" />
                     <div class="movie-slider-hline">
                         <hr size="2" color="#F5C51B" />
                     </div>
                 </div>
 
-                <!-- Scrollable Form Section -->
+                <!-- Add Movie Form -->
                 <div class="movie-slider-form">
-                    <form action="AddMovie" method="post" enctype="multipart/form-data">
+                    <form action="ADMoviesServlet?action=add" method="post" enctype="multipart/form-data">
                         <div class="movie-form">
                             
                             <div class="movie-form-row" style="margin-top: 20px;">
-                                <label for="movie-name" class="movie-form-label">Movie Name</label>
-                                <input class="form-m-name" name="name" type="text" id="movie-name" required />
+                                <label class="movie-form-label">Movie Name</label>
+                                <input class="form-m-name" type="text" name="movieName" required/>
                             </div>
                             <div class="movie-form-row">
-                                <label for="movie-desc" class="movie-form-label">Movie Description</label>
-                                <textarea class="form-m-desc" name="description" id="movie-desc" required></textarea>
+                                <label class="movie-form-label">Movie Description</label>
+                                <textarea class="form-m-desc" name="movieDesc" required></textarea>
                             </div>
                             <div class="movie-form-row">
-                                <label for="movie-duration" class="movie-form-label">Movie Duration</label>
-                                <input class="form-m-duration" name="duration" type="text" id="movie-duration" required />
+                                <label class="movie-form-label">Movie Duration</label>
+                                <input class="form-m-duration" type="text" name="movieDuration" required/>
                             </div>
                             <div class="movie-form-row">
-                                <label for="movie-year" class="movie-form-label">Movie Year</label>
-                                <input class="form-m-year" name="year" type="text" id="movie-year" required />
+                                <label class="movie-form-label">Movie Year</label>
+                                <input class="form-m-year" type="text" name="movieYear" required/>
                             </div>
                             <div class="movie-form-row">
-                                <label for="movie-rating" class="movie-form-label">Movie Rating</label>
-                                <input class="form-m-rating" name="rating" type="text" id="movie-rating" required />
+                                <label class="movie-form-label">Movie Rating</label>
+                                <input class="form-m-rating" type="text" name="movieRating" required/>
                             </div>
+                            <%
+                                for (int i = 1; i <= 4; i++) {
+                            %>
                             <div class="movie-form-row">
-                                <label for="movie-genre" class="movie-form-label">Movie Genre 01</label>
+                                <label class="movie-form-label">Movie Genre 0<%=i%></label>
                                 <div class="genre-select">
-                                    <select name="genre1" >
-                                        <option value="1">Action</option>
-                                        <option value="2">Comedy</option>
-                                        <option value="3">Drama</option>
-                                        <option value="4">Horror</option>
-                                        <option value="5">Romance</option>
-                                        <option value="6">Sci-Fi</option>
-                                        <option value="7">Adventure</option>
+                                    <select name="movieGenre<%=i%>">
+                                        <option value="">--Select--</option>
+                                        <%
+                                            if (allGenres != null) {
+                                                for (Genre g : allGenres) {
+                                        %>
+                                        <option value="<%=g.getName()%>"><%=g.getName()%></option>
+                                        <%
+                                                }
+                                            }
+                                        %>
                                     </select>
                                 </div>
                             </div>
+                            <%
+                                }
+                            %>
                             <div class="movie-form-row">
-                                <label for="movie-genre" class="movie-form-label">Movie Genre 02</label>
-                                <div class="genre-select">
-                                    <select name="genre2" >
-                                        <option value="1">Action</option>
-                                        <option value="2">Comedy</option>
-                                        <option value="3">Drama</option>
-                                        <option value="4">Horror</option>
-                                        <option value="5">Romance</option>
-                                        <option value="6">Sci-Fi</option>
-                                        <option value="7">Adventure</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="movie-form-row">
-                                <label for="movie-genre" class="movie-form-label">Movie Genre 03</label>
-                                <div class="genre-select">
-                                    <select name="genre3" >
-                                        <option value="1">Action</option>
-                                        <option value="2">Comedy</option>
-                                        <option value="3">Drama</option>
-                                        <option value="4">Horror</option>
-                                        <option value="5">Romance</option>
-                                        <option value="6">Sci-Fi</option>
-                                        <option value="7">Adventure</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="movie-form-row">
-                                <label for="movie-genre" class="movie-form-label">Movie Genre 04</label>
-                                <div class="genre-select">
-                                    <select name="genre4" >
-                                        <option value="1">Action</option>
-                                        <option value="2">Comedy</option>
-                                        <option value="3">Drama</option>
-                                        <option value="4">Horror</option>
-                                        <option value="5">Romance</option>
-                                        <option value="6">Sci-Fi</option>
-                                        <option value="7">Adventure</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="movie-form-row">
-                                <label for="movie-status" class="movie-form-label">Show Status</label>
+                                <label class="movie-form-label">Show Status</label>
                                 <div class="status-select">
-                                    <select name="status" required>
-                                        <option value="NowShowing">Now Showing</option>
-                                        <option value="Comming Soon">Coming Soon</option>
+                                    <select name="movieStatus">
+                                        <option value="Now Showing">Now Showing</option>
+                                        <option value="Coming Soon">Coming Soon</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="movie-form-row">
-                                <label for="movie-trailer" class="movie-form-label">Movie Trailer</label>
-                                <input class="form-m-trailer" type="text" name="trailer" id="movie-trailer"  required />
+                                <label class="movie-form-label">Movie Trailer</label>
+                                <input class="form-m-trailer" type="text" name="movieTrailer" required/>
                             </div>
                             <div class="movie-form-row">
-                                <label for="movie-Banner" class="movie-form-label">Movie Banner</label>
+                                <label class="movie-form-label">Movie Banner</label>
                                 <div class="m-image-select">
                                     <label class="custom-file-upload">
-                                        <img src="images/icons/Upload.png" class="m-img-3" />
-                                        <input type="file" name="banner" accept=".jpeg, .webp, .png"  />
+                                        <img src="images/Upload.png" class="m-img-3" id="bannerPreview"/>
+                                        <input type="file" name="movieBanner" accept=".jpeg,.webp,.png" required onchange="previewImage(event,'bannerPreview')"/>
                                     </label>
-                                    <div class="div-20">Drag your images/icons here</div>
-                                    <div class="div-21">(Only *.jpeg, *.webp and *.png images/icons will be accepted)</div>
+                                    <div class="div-20">Drag your images here</div>
+                                    <div class="div-21">(Only *.jpeg, *.webp and *.png images will be accepted)</div>
                                 </div>
                             </div>
                             <div class="movie-form-row">
-                                <label for="movie-Banner" class="movie-form-label">Movie Poster</label>
+                                <label class="movie-form-label">Movie Poster</label>
                                 <div class="m-image-select">
                                     <label class="custom-file-upload">
-                                        <img src="images/icons/Upload.png" class="m-img-3" />
-                                        <input type="file" name="poster" accept=".jpeg, .webp, .png"  />
+                                        <img src="images/Upload.png" class="m-img-3" id="posterPreview"/>
+                                        <input type="file" name="moviePoster" accept=".jpeg,.webp,.png" required onchange="previewImage(event,'posterPreview')"/>
                                     </label>
-                                    <div class="div-20">Drag your images/icons here</div>
-                                    <div class="div-21">(Only *.jpeg, *.webp and *.png images/icons will be accepted)</div>
+                                    <div class="div-20">Drag your images here</div>
+                                    <div class="div-21">(Only *.jpeg, *.webp and *.png images will be accepted)</div>
                                 </div>
                             </div>
                             <div class="movie-form-row">
-                                <label for="movie-Banner" class="movie-form-label" >Movie Carousal</label>
+                                <label class="movie-form-label">Movie Carousal</label>
                                 <div class="m-image-select">
                                     <label class="custom-file-upload">
-                                        <img src="images/icons/Upload.png" class="m-img-3" />
-                                        <input type="file" name="carousal" accept=".jpeg, .webp, .png"  />
+                                        <img src="images/Upload.png" class="m-img-3" id="carousalPreview"/>
+                                        <input type="file" name="movieCarousal" accept=".jpeg,.webp,.png" onchange="previewImage(event,'carousalPreview')"/>
                                     </label>
-                                    <div class="div-20">Drag your images/icons here</div>
-                                    <div class="div-21">(Only *.jpeg, *.webp and *.png images/icons will be accepted)</div>
+                                    <div class="div-20">Drag your images here</div>
+                                    <div class="div-21">(Only *.jpeg, *.webp and *.png images will be accepted)</div>
                                 </div>
                             </div>
                         </div>
-
-                </div>
-
-                <!-- Fixed Footer -->
-                <div class="movie-slider-footer">
                     
-                    <button class="movie-btn-cancel" type="button" onclick="hideSlider()">Cancel</button>
-                    <button class="movie-btn-save" type="submit">Add Movie</button>
-                </div>
-                </form>
-            </div>
-        </div>
-
-        
-        
-        
-        
-        <!--Edit Item Slider-->
-         <div class="movie-slider" id="editMovieSlider">
-            <div class="movie-slider-container">
-                <div class="movie-slider-header">
-                    <div class="movie-slider-title">Edit Movie Details</div>
-                    <img class="close-movie-slider" src="images/icons/Cancelslide.png" onclick="hideEditSlider2()" />
-                    <div class="movie-slider-hline">
-                        <hr size="2" color="#F5C51B" />
-                    </div>
-                </div>
-
-                <!-- Scrollable Form Section -->
-                <div class="movie-slider-form">
-                    <form id="editMovieForm" action="EditMovie" method="post" enctype="multipart/form-data">
-                        <div class="movie-form">
-
-                            <input type="hidden" name="MovieID" value="" />
-
-                            <div class="movie-form-row" style="margin-top: 20px;">
-                                <label for="movie-name" class="movie-form-label">Movie Name</label>
-                                <input class="form-m-name" name="name" type="text" id="movie-name" required />
-                            </div>
-                            <div class="movie-form-row">
-                                <label for="movie-desc" class="movie-form-label">Movie Description</label>
-                                <textarea class="form-m-desc" name="description" id="movie-desc" required></textarea>
-                            </div>
-                            <div class="movie-form-row">
-                                <label for="movie-duration" class="movie-form-label">Movie Duration</label>
-                                <input class="form-m-duration" name="duration" type="text" id="movie-duration" required />
-                            </div>
-                            <div class="movie-form-row">
-                                <label for="movie-year" class="movie-form-label">Movie Year</label>
-                                <input class="form-m-year" name="year" type="text" id="movie-year" required />
-                            </div>
-                            <div class="movie-form-row">
-                                <label for="movie-rating" class="movie-form-label">Movie Rating</label>
-                                <input class="form-m-rating" name="rating" type="text" id="movie-rating" required />
-                            </div>
-                            <div class="movie-form-row">
-                                <label for="movie-genre" class="movie-form-label">Movie Genre 01</label>
-                                <div class="genre-select">
-                                    <select name="genre1">
-                                        <option value="1">Action</option>
-                                        <option value="2">Comedy</option>
-                                        <option value="3">Drama</option>
-                                        <option value="4">Horror</option>
-                                        <option value="5">Romance</option>
-                                        <option value="6">Sci-Fi</option>
-                                        <option value="7">Adventure</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="movie-form-row">
-                                <label for="movie-genre" class="movie-form-label">Movie Genre 02</label>
-                                <div class="genre-select">
-                                    <select name="genre2" >
-                                        <option value="1">Action</option>
-                                        <option value="2">Comedy</option>
-                                        <option value="3">Drama</option>
-                                        <option value="4">Horror</option>
-                                        <option value="5">Romance</option>
-                                        <option value="6">Sci-Fi</option>
-                                        <option value="7">Adventure</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="movie-form-row">
-                                <label for="movie-genre" class="movie-form-label">Movie Genre 03</label>
-                                <div class="genre-select">
-                                    <select name="genre3" >
-                                        <option value="1">Action</option>
-                                        <option value="2">Comedy</option>
-                                        <option value="3">Drama</option>
-                                        <option value="4">Horror</option>
-                                        <option value="5">Romance</option>
-                                        <option value="6">Sci-Fi</option>
-                                        <option value="7">Adventure</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="movie-form-row">
-                                <label for="movie-genre" class="movie-form-label">Movie Genre 04</label>
-                                <div class="genre-select">
-                                    <select name="genre4" >
-                                        <option value="1">Action</option>
-                                        <option value="2">Comedy</option>
-                                        <option value="3">Drama</option>
-                                        <option value="4">Horror</option>
-                                        <option value="5">Romance</option>
-                                        <option value="6">Sci-Fi</option>
-                                        <option value="7">Adventure</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="movie-form-row">
-                                <label for="movie-status" class="movie-form-label">Show Status</label>
-                                <div class="status-select">
-                                    <select name="status" required>
-                                        <option value="NowShowing">Now Showing</option>
-                                        <option value="Comming Soon">Coming Soon</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="movie-form-row">
-                                <label for="movie-trailer" class="movie-form-label">Movie Trailer</label>
-                                <input class="form-m-trailer" type="text" name="trailer" id="movie-trailer"  required />
-                            </div>
-                            <div class="movie-form-row">
-                                <label for="movie-Banner" class="movie-form-label">Movie Banner</label>
-                                <div class="m-image-select">
-                                    <label class="custom-file-upload">
-                                        <img src="images/icons/Upload.png" class="m-img-3" />
-                                        <input type="file" name="banner" accept=".jpeg, .webp, .png"  />
-                                    </label>
-                                    <div class="div-20">Drag your images/icons here</div>
-                                    <div class="div-21">(Only *.jpeg, *.webp and *.png images/icons will be accepted)</div>
-                                </div>
-                            </div>
-                            <div class="movie-form-row">
-                                <label for="movie-Banner" class="movie-form-label">Movie Poster</label>
-                                <div class="m-image-select">
-                                    <label class="custom-file-upload">
-                                        <img src="images/icons/Upload.png" class="m-img-3" />
-                                        <input type="file" name="poster" accept=".jpeg, .webp, .png"  />
-                                    </label>
-                                    <div class="div-20">Drag your images/icons here</div>
-                                    <div class="div-21">(Only *.jpeg, *.webp and *.png images/icons will be accepted)</div>
-                                </div>
-                            </div>
-                            <div class="movie-form-row">
-                                <label for="movie-Banner" class="movie-form-label" >Movie Carousal</label>
-                                <div class="m-image-select">
-                                    <label class="custom-file-upload">
-                                        <img src="images/icons/Upload.png" class="m-img-3" />
-                                        <input type="file" name="carousal" accept=".jpeg, .webp, .png"  />
-                                    </label>
-                                    <div class="div-20">Drag your images/icons here</div>
-                                    <div class="div-21">(Only *.jpeg, *.webp and *.png images/icons will be accepted)</div>
-                                </div>
-                            </div>
-                        </div>
-
-                </div>
-
-                <!-- Fixed Footer -->
-                <div class="movie-slider-footer">
-                    
-                    <button class="movie-btn-cancel" type="button" onclick="hideEditSlider()">Cancel</button>
-                    <button class="movie-btn-save" type="submit">Save Changes</button>
-                </div>
-            </div>
-             </form>
-        </div>
-
-        
-        
-        
-        
-        
-        <!--View Item Slider-->
-         <div class="movie-slider" id="reviewMovieslider">
-            <div class="movie-slider-container">
-                <div class="movie-slider-header">
-                    <div class="movie-slider-title">View Movie Details</div>
-                    <img class="close-movie-slider" src="images/icons/Cancelslide.png" onclick="hideReviewSlider()" />
-                    <div class="movie-slider-hline">
-                        <hr size="2" color="#F5C51B" />
-                    </div>
-                </div>
-
-                <!-- Scrollable Form Section -->
-                <div class="movie-slider-form">
-                    <form>
-                        <div class="movie-form">
-                            
-                            <div class="movie-form-row" style="margin-top: 20px;">
-                                <label for="movie-name" class="movie-form-label">Movie Name</label>
-                                <div class="view-m-name">Pirates of the Caribbean : Dead Men Tell No Tales</div>
-                            </div>
-                            <div class="movie-form-row" style="margin-top: 20px;" >
-                                <label for="movie-desc" class="movie-form-label" >Movie Description</label>
-                                <div class="view-m-desc">Embark on the final adventure with Captain Jack Sparrow as he faces the vengeful Captain Salazar, who has escaped from the Devil’s Triangle with a deadly ghost crew. With the legendary Trident of Poseidon as the key to survival.</div>
-                            </div>
-                            <div class="movie-form-row">
-                                <label for="movie-duration" class="movie-form-label">Movie Duration</label>
-                                <div class="view-m-duration">1h 30 mints</div>
-                            </div>
-                            <div class="movie-form-row">
-                                <label for="movie-year" class="movie-form-label">Movie Year</label>
-                                <div class="view-m-year">2024</div>
-                            </div>
-                            <div class="movie-form-row">
-                                <label for="movie-rating" class="movie-form-label">Movie Rating</label>
-                                <div class="view-m-rating">PG</div>
-                            </div>
-                            <div class="movie-form-row">
-                                <label for="movie-genre" class="movie-form-label">Movie Genre 01</label>
-                                <div class="view-m-genre">Adevnture</div>
-                            </div>
-                            <div class="movie-form-row">
-                                <label for="movie-genre" class="movie-form-label">Movie Genre 02</label>
-                                <div class="view-m-genre">Comedy</div>
-                            </div>
-                            <div class="movie-form-row">
-                                <label for="movie-genre" class="movie-form-label">Movie Genre 03</label>
-                                <div class="view-m-genre">Thriller</div>
-                            </div>
-                            <div class="movie-form-row">
-                                <label for="movie-genre" class="movie-form-label">Movie Genre 04</label>
-                                <div class="view-m-genre">Horror</div>
-                            </div>
-                            <div class="movie-form-row">
-                                <label for="movie-status" class="movie-form-label">Show Status</label>
-                                <div class="view-m-status">Now Showing</div>
-                            </div>
-                            <div class="movie-form-row">
-                                <label for="movie-trailer" class="movie-form-label">Movie Trailer</label>
-                                <div class="view-m-trailer">https://youtu.be/jiToByGtVuA?si=pkDYcYL4_j_OLd9f</div>
-                            </div>
-                            <div class="movie-form-row">
-                                <label for="movie-Banner" class="movie-form-label">Movie Banner</label>
-                                <img src="images/icons/pic2.png" class="movie-display-image" style="width:300px;height:250px">
-                            </div>
-                            <div class="movie-form-row">
-                                <label for="movie-Banner" class="movie-form-label">Movie Poster</label>
-                                <img src="images/icons/pic1.png" class="movie-display-image">
-                            </div>
-                            <div class="movie-form-row">
-                                <label for="movie-Banner" class="movie-form-label" >Movie Carousal</label>
-                                <img src="images/icons/banner1.jpg" class="movie-display-image">
-                            </div>
+                        <div class="movie-slider-footer">
+                            <button class="movie-btn-cancel" type="button" onclick="hideSlider()">Cancel</button>
+                            <button class="movie-btn-save" type="submit">Add Movie</button>
                         </div>
                     </form>
                 </div>
+            </div>
+        </div>
 
-                <!-- Fixed Footer -->
-                <div class="movie-slider-footer">
-                    
-                    
-                    <button class="movie-btn-save" style="left:20px" type="submit" onclick="hideReviewSlider()">Done</button>
+
+        <!--Edit Item Slider-->
+        <% if (edit && editMovie != null) { %>
+        <div class="movie-slider active" id="editMovieSlider">
+        <% } else { %>
+        <div class="movie-slider" id="editMovieSlider">
+        <% } %>
+            <div class="movie-slider-container">
+                <div class="movie-slider-header">
+                    <div class="movie-slider-title">Edit Movie Details</div>
+                    <img class="close-movie-slider" src="images/Cancelslide.png" onclick="hideEditSlider()" />
+                    <div class="movie-slider-hline">
+                        <hr size="2" color="#F5C51B" />
+                    </div>
+                </div>
+
+                <div class="movie-slider-form">
+                    <form action="ADMoviesServlet?action=update" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="movieId" value="<%=editMovie!=null?editMovie.getMovieId():""%>"/>
+                        <div class="movie-form">
+                            <div class="movie-form-row" style="margin-top: 20px;">
+                                <label class="movie-form-label">Movie Name</label>
+                                <input class="form-m-name" type="text" name="movieName" value="<%=editMovie!=null?editMovie.getName():""%>" required/>
+                            </div>
+                            <div class="movie-form-row">
+                                <label class="movie-form-label">Movie Description</label>
+                                <textarea class="form-m-desc" name="movieDesc" required><%=editMovie!=null?editMovie.getDescription():""%></textarea>
+                            </div>
+                            <div class="movie-form-row">
+                                <label class="movie-form-label">Movie Duration</label>
+                                <input class="form-m-duration" type="text" name="movieDuration" value="<%=editMovie!=null?editMovie.getDuration():""%>" required/>
+                            </div>
+                            <div class="movie-form-row">
+                                <label class="movie-form-label">Movie Year</label>
+                                <input class="form-m-year" type="text" name="movieYear" value="<%=editMovie!=null?editMovie.getYear():""%>" required/>
+                            </div>
+                            <div class="movie-form-row">
+                                <label class="movie-form-label">Movie Rating</label>
+                                <input class="form-m-rating" type="text" name="movieRating" value="<%=editMovie!=null?editMovie.getRating():""%>" required/>
+                            </div>
+                            <%
+                                for (int i = 1; i <= 4; i++) {
+                                    String currentGenre = "";
+                                    if (i <= editMovieGenres.size()) {
+                                        currentGenre = editMovieGenres.get(i-1);
+                                    }
+                            %>
+                            <div class="movie-form-row">
+                                <label class="movie-form-label">Movie Genre 0<%=i%></label>
+                                <div class="genre-select">
+                                    <select name="movieGenre<%=i%>">
+                                        <option value="">--Select--</option>
+                                        <%
+                                            if (allGenres != null) {
+                                                for (Genre g : allGenres) {
+                                                    String sel = g.getName().equals(currentGenre)?"selected":"";
+                                        %>
+                                        <option value="<%=g.getName()%>" <%=sel%>><%=g.getName()%></option>
+                                        <%
+                                                }
+                                            }
+                                        %>
+                                    </select>
+                                </div>
+                            </div>
+                            <%
+                                }
+                            %>
+                            <div class="movie-form-row">
+                                <label class="movie-form-label">Show Status</label>
+                                <div class="status-select">
+                                    <select name="movieStatus">
+                                        <option value="Now Showing" <%= (editMovie!=null && "Now Showing".equals(editMovie.getStatus()))?"selected":""%>>Now Showing</option>
+                                        <option value="Coming Soon" <%= (editMovie!=null && "Coming Soon".equals(editMovie.getStatus()))?"selected":""%>>Coming Soon</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="movie-form-row">
+                                <label class="movie-form-label">Movie Trailer</label>
+                                <input class="form-m-trailer" type="text" name="movieTrailer" value="<%=editMovie!=null?editMovie.getTrailer():""%>" required/>
+                            </div>
+                            <div class="movie-form-row">
+                                <label class="movie-form-label">Movie Banner</label>
+                                <div class="image-select-banner">
+                                    <label class="file-upload-banner">
+                                        <img src="<%=editMovie!=null?editMovie.getBanner():"images/Upload.png"%>" class="img-preview-banner" id="editBannerPreview"/>
+                                        <input type="file" name="movieBanner" accept=".jpeg,.webp,.png" style="display:none;" onchange="previewImage(event,'editBannerPreview')"/>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="movie-form-row">
+                                <label class="movie-form-label">Movie Poster</label>
+                                <div class="image-select-banner">
+                                    <label class="file-upload-banner">
+                                        <img src="<%=editMovie!=null?editMovie.getPoster():"images/Upload.png"%>" class="img-preview-banner" id="editPosterPreview"/>
+                                        <input type="file" name="moviePoster" accept=".jpeg,.webp,.png" style="display:none;" onchange="previewImage(event,'editPosterPreview')"/>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="movie-form-row">
+                                <label class="movie-form-label">Movie Carousal</label>
+                                <div class="image-select-banner">
+                                    <label class="file-upload-banner">
+                                        <img src="<%=editMovie!=null && editMovie.getCarousal()!=null?editMovie.getCarousal():"images/Upload.png"%>" class="img-preview-banner" id="editCarousalPreview"/>
+                                        <input type="file" name="movieCarousal" accept=".jpeg,.webp,.png" style="display:none;" onchange="previewImage(event,'editCarousalPreview')"/>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="movie-slider-footer">
+                            <button class="movie-btn-cancel" type="button" onclick="hideEditSlider()">Cancel</button>
+                            <button class="movie-btn-save" type="submit">Save Changes</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
 
-        
-        
-        
+
+        <!--View Item Slider-->
+        <% if (view && viewMovie != null) { %>
+        <div class="movie-slider active" id="reviewMovieslider">
+        <% } else { %>
+        <div class="movie-slider" id="reviewMovieslider">
+        <% } %>
+            <div class="movie-slider-container">
+                <div class="movie-slider-header">
+                    <div class="movie-slider-title">View Movie Details</div>
+                    <img class="close-movie-slider" src="images/Cancelslide.png" onclick="hideReviewSlider()" />
+                    <div class="movie-slider-hline">
+                        <hr size="2" color="#F5C51B" />
+                    </div>
+                </div>
+
+                <div class="movie-slider-form">
+                    <div class="movie-form">
+                        
+                        <div class="movie-form-row" style="margin-top: 20px;">
+                            <label class="movie-form-label">Movie Name</label>
+                            <div class="view-m-name"><%=viewMovie!=null?viewMovie.getName():""%></div>
+                        </div>
+                        <div class="movie-form-row" style="margin-top: 20px;" >
+                            <label class="movie-form-label">Movie Description</label>
+                            <div class="view-m-desc"><%=viewMovie!=null?viewMovie.getDescription():""%></div>
+                        </div>
+                        <div class="movie-form-row">
+                            <label class="movie-form-label">Movie Duration</label>
+                            <div class="view-m-duration"><%=viewMovie!=null?viewMovie.getDuration():""%></div>
+                        </div>
+                        <div class="movie-form-row">
+                            <label class="movie-form-label">Movie Year</label>
+                            <div class="view-m-year"><%=viewMovie!=null?viewMovie.getYear():""%></div>
+                        </div>
+                        <div class="movie-form-row">
+                            <label class="movie-form-label">Movie Rating</label>
+                            <div class="view-m-rating"><%=viewMovie!=null?viewMovie.getRating():""%></div>
+                        </div>
+                        <%
+                            for (int i = 0; i < 4; i++) {
+                                String g = (i < viewGenres.size())?viewGenres.get(i):"";
+                        %>
+                        <div class="movie-form-row">
+                            <label class="movie-form-label">Movie Genre 0<%=i+1%></label>
+                            <div class="view-m-genre"><%=g%></div>
+                        </div>
+                        <% } %>
+                        <div class="movie-form-row">
+                            <label class="movie-form-label">Show Status</label>
+                            <div class="view-m-status"><%=viewMovie!=null?viewMovie.getStatus():""%></div>
+                        </div>
+                        <div class="movie-form-row">
+                            <label class="movie-form-label">Movie Trailer</label>
+                            <div class="view-m-trailer"><%=viewMovie!=null?viewMovie.getTrailer():""%></div>
+                        </div>
+                        <div class="movie-form-row">
+                            <label class="movie-form-label">Movie Banner</label>
+                            <%
+                                String bannerImg = (viewMovie!=null?viewMovie.getBanner():"");
+                                if(bannerImg!=null && !bannerImg.isEmpty()) {
+                            %>
+                            <img src="<%=bannerImg%>" class="movie-display-image" style="width:300px;height:250px">
+                            <% } %>
+                        </div>
+                        <div class="movie-form-row">
+                            <label class="movie-form-label">Movie Poster</label>
+                            <%
+                                String posterImg = (viewMovie!=null?viewMovie.getPoster():"");
+                                if(posterImg!=null && !posterImg.isEmpty()) {
+                            %>
+                            <img src="<%=posterImg%>" class="movie-display-image">
+                            <% } %>
+                        </div>
+                        <div class="movie-form-row">
+                            <label class="movie-form-label" >Movie Carousal</label>
+                            <%
+                                String carouselImg = (viewMovie!=null && viewMovie.getCarousal()!=null)?viewMovie.getCarousal():"";
+                                if(!carouselImg.isEmpty()){
+                            %>
+                            <img src="<%=carouselImg%>" class="movie-display-image">
+                            <% } else { %>
+                            <div class="view-m-genre">No Carousal</div>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="movie-slider-footer">
+                    <button class="movie-btn-save" style="left:20px" onclick="hideReviewSlider()">Done</button>
+                </div>
+            </div>
+        </div>
+
+
         <script>
             function showSlider() {
                 document.getElementById('addMovieSlider').classList.add('active');
@@ -594,56 +482,29 @@
                 document.getElementById('addMovieSlider').classList.remove('active');
             }
 
-            function hideSlider2() {
-                document.getElementById('addMovieSlider').classList.remove('active');
-                location.reload();
-            }
-
-            function showEditSlider() {
-                document.getElementById('editMovieSlider').classList.add('active');
-            }
-
             function hideEditSlider() {
                 document.getElementById('editMovieSlider').classList.remove('active');
-            }
-
-            function hideEditSlider2() {
-                document.getElementById('editMovieSlider').classList.remove('active');
-                location.reload();
-            }
-
-            function showReviewSlider() {
-                document.getElementById('reviewMovieslider').classList.add('active');
             }
 
             function hideReviewSlider() {
                 document.getElementById('reviewMovieslider').classList.remove('active');
             }
 
-            function editFormID(MovieID) {
-                // Get references to elements
-                const form = document.getElementById('editMovieForm');
-                const editSlider = document.getElementById('editMovieSlider');
-                const MovieIDInput = form.querySelector('[name="MovieID"]');
-
-                // Ensure foodID is set in the hidden input
-                if (MovieIDInput) {
-                    MovieIDInput.value = MovieID;
+            function previewImage(event, imgId) {
+                var output = document.getElementById(imgId);
+                output.src = URL.createObjectURL(event.target.files[0]);
+                output.onload = function() {
+                    URL.revokeObjectURL(output.src); // free memory
                 }
-
-                // Explicitly show the edit slider
-                if (editSlider) {
-                    editSlider.classList.add('active');
-                    console.log('Edit slider should be open now');
-                } else {
-                    console.error('Edit slider element not found');
-                }
-
-                // Prevent default form submission
-                return false;
             }
+
+            <% if (edit) { %>
+            document.getElementById('editMovieSlider').classList.add('active');
+            <% } %>
+
+            <% if (view) { %>
+            document.getElementById('reviewMovieslider').classList.add('active');
+            <% } %>
         </script>
-        
-        
     </body>
 </html>
