@@ -11,7 +11,7 @@ import java.util.Set;
 public class SeatReservationDAO {
     public Set<Integer> getReservedSeatIds(int showtimeId) {
         Set<Integer> reservedSeatIds = new HashSet<>();
-        String query = "SELECT SeatID FROM seatreservation WHERE ShowtimeID = ?";
+        String query = "SELECT SeatID FROM seatreservation WHERE Showtime_ID = ?";
         try (Connection connection = dbcon.connect();
              PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setInt(1, showtimeId);

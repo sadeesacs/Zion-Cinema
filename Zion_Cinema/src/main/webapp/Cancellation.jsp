@@ -40,16 +40,41 @@
     <div class="heading-1">Reservation Cancellation</div>
 
     <div class="cancellation-container">
-        <form>
-            <div class="form-group receipt-grp">
-                <label for="receipt-no">Enter Receipt No:</label>
-                <input type="text" id="receipt-no" name="receipt-no">
-                <button type="button" class="send-otp-btn">Send OTP</button>
-            </div>
+     
+<form action="sendOtp" method="post">
+    <div class="form-group receipt-grp">
+    <label for="receiptNo">Enter Receipt No:</label>
+    <input type="text" name="transactionId" required><br>
+    
+    <p style="color:red;">
+    <%
+        String OTPStatus = (String) session.getAttribute("OTPStatus");
+        if (OTPStatus != null) {
+            out.println(OTPStatus);
+            session.removeAttribute("OTPStatus"); // Clear the message after displaying
+        }
+    %>
+    </p>
 
+    <button type="submit" class="send-otp-btn">Send OTP</button>
+    </div>
+</form>
+
+
+
+        <form action="verifyOtp" method="post">
             <div class="form-group otp-grp">
-                <label for="otp">Enter OTP:</label>
+            <label for="otp">Enter OTP:</label>
                 <input type="text" id="otp" name="otp" >
+            <p style="color:red;">
+    <%
+        String results = (String) session.getAttribute("results");
+        if (results != null) {
+            out.println(results);
+            session.removeAttribute("results"); // Clear the message after displaying
+        }
+    %>
+            </p>
             </div>
 
             <div class="form-group confrim-grp">
@@ -57,8 +82,10 @@
                 <label for="confirm">Confirm Cancellation</label>
             </div>
 
-            <button type="submit" class="cancel-order-btn">Cancel Order</button>
+           <button type="submit" class="cancel-order-btn">Cancel Order</button>
         </form>
+
+        
     </div>
 
     <img src="images/cancel.png" class="cancelimg">
