@@ -11,23 +11,23 @@
         <div class="header-container">
 
             <!--Zion Cinema logo-->
-            <img src="images/logo.png">
+            <img src="images/icons/logo.png">
             <a href="HomePage.html" class="logo-name">Zion Cinema</a>
 
             <!--Navigation Bar-->
             <div class="nav">
-                <a href="HomePage.html">Home</a>
-                <a href="Movie.html">Movies</a>
-                <a href="About.html">About us</a>
-                <a href="Contact.html">Contact</a>
-                <a href="FAQ.html">FAQ</a>
+                <a href="HomePageServlet">Home</a>
+                <a href="MovieListingServlet">Movies</a>
+                <a href="AboutUs.jsp">About us</a>
+                <a href="ContactUs.jsp">Contact</a>
+                <a href="FAQ.jsp">FAQ</a>
             </div>
 
             <!-- Header Buttons -->
-            <a href="Movies.html" class="but-buytickets">
+            <a href="MovieListingServlet" class="but-buytickets">
                 <div>Buy Tickets</div>
             </a>
-            <a href="Login.html" class="but-login">
+            <a href="UserLogin.jsp" class="but-login">
                 <img src="images/Accounticon.png">
                 <div>Account</div>
             </a>
@@ -59,7 +59,7 @@
             </a>
             
             <button class="logout">
-                <img src="images/Logouticon.png"></img>
+                <img src="images/icons/Logouticon.png"></img>
                 <span>Logout</span>
             </button>
         </div>
@@ -68,7 +68,7 @@
         
         <!-- User ADTransaction history listing Container -->
         <div class="Trans-history">
-            <h1>ADTransaction History</h1>
+            <h1>Transaction History</h1>
             <div class="middle-container">
                 <div class="middle-header-container">
                     <span class="header-top" style="margin-left:20px">Receipt No</span>
@@ -445,10 +445,10 @@
                     and comfortable seating. Enjoy the latest blockbusters and timeless classics like never before!
                 </p>
                 <div class="social-icons">
-                    <a href="https://web.facebook.com"><img src="images/fbicon.png"></a>
-                    <a href="https://www.instagram.com/"><img src="images/instaicon.png"></a>
-                    <a href="https://x.com"><img src="images/xicon.png"></a>
-                    <a href="https://www.tiktok.com"><img src="images/tiktokicon.png"></a>
+                    <a href="https://web.facebook.com"><img src="images/icons/fbicon.png"></a>
+                    <a href="https://www.instagram.com/"><img src="images/icons/instaicon.png"></a>
+                    <a href="https://x.com"><img src="images/icons/xicon.png"></a>
+                    <a href="https://www.tiktok.com"><img src="images/icons/tiktokicon.png"></a>
                 </div>
             </div>
 
