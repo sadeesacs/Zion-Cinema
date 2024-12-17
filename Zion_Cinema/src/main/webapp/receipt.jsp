@@ -19,7 +19,7 @@
             conn = dbcon.connect();
 
             // SQL query to get the latest transaction ID for the logged-in user
-            String query = "SELECT id FROM transaction WHERE user_id = ? ORDER BY created_at DESC LIMIT 1";
+            String query = "SELECT Transaction_ID FROM transaction WHERE UserID = ? ORDER BY TransactionDate DESC LIMIT 1";
 
             // Prepare the statement
             pstmt = conn.prepareStatement(query);
@@ -30,7 +30,7 @@
 
             // Process the result
             if (rs.next()) {
-                latestTransactionId = rs.getString("id");
+                latestTransactionId = rs.getString("Transaction_ID");
             }
 
         } catch (Exception e) {
