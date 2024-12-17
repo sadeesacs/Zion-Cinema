@@ -56,13 +56,13 @@
                         <span>Dashboard</span>
                     </li>
                 </a>
-                <a href="AD-Movies.jsp">
+                <a href="ADMoviesServlet">
                     <li class="nav-item">
                         <img src="images/icons/Movieicon.png"></img>
                         <span>Movies</span>
                     </li>
                 </a>
-                <a href="AD-FoodMenu.jsp">
+                <a href="ADFoodMenuServlet">
                     <li class="nav-item">
                         <img src="images/icons/Foodicon.png"></img>
                         <span>Food Menu</span>
@@ -98,7 +98,7 @@
                         <span>Logout</span>
                     </li>
                 </a>
-
+            <button>
         </div>
         
         
