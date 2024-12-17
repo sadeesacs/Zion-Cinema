@@ -58,7 +58,7 @@
                 + "JOIN showtime st ON tm.Showtime_ID = st.ShowtimeID "
                 + "WHERE tm.UserID = ?";
         pstmt = conn.prepareStatement(queryMovie);
-        pstmt.setInt(1, userID); 
+        pstmt.setInt(1, userID);
         rs = pstmt.executeQuery();
 
         if (rs.next()) {
@@ -89,7 +89,7 @@
                 + "FROM user "
                 + "WHERE UserID = ?";
         pstmt = conn.prepareStatement(queryUser);
-        pstmt.setInt(1, userID); 
+        pstmt.setInt(1, userID);
         rs = pstmt.executeQuery();
 
         if (rs.next()) {
@@ -245,6 +245,14 @@
                 </div>
 
                 <form action="ConfirmPurchaseServlet" method="post">
+                    <%
+                        session.setAttribute("movieName", movieName);
+                        session.setAttribute("movieDate", movieDate);
+                        session.setAttribute("movieTime", movieTime);
+                        session.setAttribute("seatInfo", seatInfo);
+                        session.setAttribute("totalAmount", totalAmount);
+                        session.setAttribute("userEmail", userEmail);
+                    %>
                     <button type="submit" class="continue-btn">Continue</button>
                 </form>
 
