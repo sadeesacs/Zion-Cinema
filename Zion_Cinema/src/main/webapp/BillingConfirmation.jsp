@@ -48,17 +48,17 @@
     ResultSet rs = null;
 
     try {
-        // Step 1: Get the connection from Dbcon
+        // connection from Dbcon
         conn = dbcon.connect();
 
-        // Step 2: Query for Movie Details
+        // Movie Details
         String queryMovie = "SELECT m.Movie_Name, st.Date, st.Show_Time "
                 + "FROM temporarymovies tm "
                 + "JOIN movies m ON tm.Movie_ID = m.Movie_ID "
                 + "JOIN showtime st ON tm.Showtime_ID = st.ShowtimeID "
                 + "WHERE tm.UserID = ?";
         pstmt = conn.prepareStatement(queryMovie);
-        pstmt.setInt(1, userID); // Set the user ID
+        pstmt.setInt(1, userID); 
         rs = pstmt.executeQuery();
 
         if (rs.next()) {
@@ -69,7 +69,7 @@
         rs.close();
         pstmt.close();
 
-        // Step 3: Query for Seat Information
+        // Seat Information
         String querySeats = "SELECT GROUP_CONCAT(s.SeatNumber SEPARATOR ', ') AS SeatInfo "
                 + "FROM temporaryseats ts "
                 + "JOIN seat s ON ts.SeatID = s.SeatID "
@@ -84,12 +84,12 @@
         rs.close();
         pstmt.close();
 
-        // Step 4: Query for User Information
+        // User Information
         String queryUser = "SELECT CONCAT(FirstName, ' ', LastName) AS UserName, PhoneNumber, Email "
                 + "FROM user "
                 + "WHERE UserID = ?";
         pstmt = conn.prepareStatement(queryUser);
-        pstmt.setInt(1, userID); // Set the user ID
+        pstmt.setInt(1, userID); 
         rs = pstmt.executeQuery();
 
         if (rs.next()) {

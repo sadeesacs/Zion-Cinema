@@ -58,9 +58,10 @@
                 <div>Cancel Order</div>
             </a>
             
-            <button class="logout">
+            <button class="logout" >
+                <a href="LogoutServlet">
                 <img src="images/icons/Logouticon.png"></img>
-                <span>Logout</span>
+                <span>Logout</span></a>
             </button>
         </div>
         
