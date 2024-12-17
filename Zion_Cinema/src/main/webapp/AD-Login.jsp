@@ -20,7 +20,9 @@
 <body style="background: url('images/others/ADlogin.png') no-repeat center center fixed; background-size: cover;">
     <div class="container">
         <div class="Adlogin-container">
-            <div class="EM-heading">Zion Cinema</div>
+            <div class="EM-heading">
+                <a href="HomePageServlet">Zion Cinema</a>
+            </div>
             <div class="ADlog-head-1" >Admin Login</div>
             <div class="ADlog-head-2">Please enter your details</div>
 

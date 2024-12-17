@@ -46,6 +46,11 @@ html, body {
     position:absolute;
 }
 
+.EM-heading a{
+    text-decoration: none;
+    color:white;
+}
+
 .ADlog-head-1{
     color: white;
     font-size: 18px;
