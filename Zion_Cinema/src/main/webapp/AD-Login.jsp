@@ -17,7 +17,7 @@
         }
     </style>
 </head>
-<body style="background: url('images/adminlogin-background.png') no-repeat center center fixed; background-size: cover;">
+<body style="background: url('images/others/ADlogin.png') no-repeat center center fixed; background-size: cover;">
     <div class="container">
         <div class="Adlogin-container">
             <div class="EM-heading">Zion Cinema</div>

@@ -14,23 +14,23 @@
     <div class="header-container">
 
         <!--Zion Cinema logo-->
-        <img src="images/logo.png">
-        <a href="HomePage.html" class="logo-name">Zion Cinema</a>
+        <img src="images/icons/logo.png">
+        <a href="HomePageServlet" class="logo-name">Zion Cinema</a>
 
         <!--Navigation Bar-->
         <div class="nav">
-            <a href="HomePage.html">Home</a>
-            <span><a href="Movie.html">Movies</a></span>
-            <a href="About.html">About us</a>
-            <a href="Contact.html">Contact</a>
-            <a href="FAQ.html">FAQ</a>
+            <a href="HomePageServlet">Home</a>
+            <span><a href="MovieListingServlet">Movies</a></span>
+            <a href="AboutUs.jsp">About us</a>
+            <a href="ContactUs.jsp">Contact</a>
+            <a href="FAQ.jsp">FAQ</a>
         </div>
 
         <!-- Header Buttons -->
-        <a href="Movies.html" class="but-buytickets">
+        <a href="MovieListingServlet" class="but-buytickets">
             <div>Buy Tickets</div>
         </a>
-        <a href="Login.html" class="but-login">
+        <a href="UserLogin.jsp" class="but-login">
             <div>Login</div>
         </a>
     </div>
@@ -41,7 +41,7 @@
         <div class="login-left">
           <div class="movie-art">
             <!-- Add movie-themed image or illustration here -->
-            <img src="images/image 50.png" alt="Movie Theme" />
+            <img src="images/others/login.png" alt="Movie Theme" />
           </div>
         </div>
         <div class="login-right">
@@ -73,8 +73,8 @@
             Don’t have an account? <a href="UserRegistration.jsp">Sign up</a>
           </p>
           <div class="admin-link">
-            <img src="images/AdminIcon.png" alt="Logo" class="admin-logo">
-            <a href="#">Admin</a>
+            <img src="images/others/adminicon.png" alt="Logo" class="admin-logo">
+            <a href="AD-Login.jsp">Admin</a>
         </div>
         </div>
       </div>

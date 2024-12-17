@@ -11,23 +11,23 @@
     <!-- Header Section -->
     <div class="header-container">
         <!-- Zion Cinema Logo -->
-        <img src="images/logo.png" alt="Zion Cinema Logo">
-        <a href="HomePage.html" class="logo-name">Zion Cinema</a>
+        <img src="images/icons/logo.png" alt="Zion Cinema Logo">
+        <a href="HomePageServlet" class="logo-name">Zion Cinema</a>
 
         <!-- Navigation Bar -->
         <div class="nav">
-            <a href="HomePage.html">Home</a>
-            <span><a href="Movie.html">Movies</a></span>
-            <a href="About.html">About us</a>
-            <a href="Contact.html">Contact</a>
-            <a href="FAQ.html">FAQ</a>
+            <a href="HomePageServlet">Home</a>
+            <a href="MovieListingServlet">Movies</a>
+            <a href="AboutUs.jsp">About us</a>
+            <a href="ContactUS.jsp">Contact</a>
+            <a href="FAQ.jsp">FAQ</a>
         </div>
 
         <!-- Header Buttons -->
-        <a href="Movies.html" class="but-buytickets">
+        <a href="MovieListingServlet" class="but-buytickets">
             <div>Buy Tickets</div>
         </a>
-        <a href="Login.html" class="but-login">
+        <a href="UserLogin.jsp" class="but-login">
             <div>Login</div>
         </a>
     </div>
@@ -37,7 +37,7 @@
     <div class="main-content">
         <!-- Left Side Image -->
         <div class="pic">
-            <img src="images/pic.png" alt="Cinema illustration">
+            <img src="images/others/register.png" alt="Cinema illustration">
         </div>
         <!-- Right Side Registration Form -->
         <div class="registration-form"  >

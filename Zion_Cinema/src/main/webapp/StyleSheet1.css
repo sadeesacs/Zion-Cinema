@@ -223,6 +223,11 @@ body{
     transform: scale(1.1);
 }
 
+.book-now a {
+    text-decoration: none;
+    color:white;
+}
+
 
 
 
@@ -341,6 +346,11 @@ body{
     height: 35px;
 }
 
+.get-tickets-button a{
+    text-decoration: none;
+    color:black;
+}
+
 .view-details-button {
     display: flex;
     align-items: center;
@@ -352,6 +362,10 @@ body{
     height: 35px;
 }
 
+.view-details-button a{
+    text-decoration: none;
+    color:#f4f4f4;
+}
 
 
 
@@ -419,7 +433,7 @@ body{
     position: relative;
     color: white;
     text-align: center;
-    margin-top: 160px;
+    margin-top: 110px;
 }
 
 .section-title {
