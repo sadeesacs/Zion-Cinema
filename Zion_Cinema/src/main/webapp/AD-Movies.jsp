@@ -23,10 +23,21 @@
                     <span>Search here.....</span>
                     <span style="left: 210px;color:white"><i class="bi bi-search"></i></span>
                 </div>
+                <%
+                    // Check if session exists and retrieve the username attribute
+                    String username = (session != null) ? (String) session.getAttribute("username") : null;
 
-                <div class="AD-username">Emma Watson</div>
+                    if (username != null) {
+                %>
+                <div class="AD-username"><%= username %></div>
                 <div class="word-admin">Admin</div>
-
+                <%
+                } else {
+                %>
+                <div class="AD-username">Session expired or not logged in.</div>
+                <%
+                    }
+                %>
                 <div class="user-icon" ><i class="bi bi-person-fill"></i></div>
 
                 <img src="images/icons/notificationicon.png" class="notification-icon">
@@ -80,9 +91,13 @@
                 </li>
             </ul>
             <button class="logout">
-                <img src="images/icons/Logouticon.png"></img>
-                <span>Logout</span>
-            </button>
+                <a href="AD-Login.jsp" style="text-decoration: none;">
+                    <li class="nav-item ">
+                        <img src="images/icons/Logouticon.png"/>
+                        <span>Logout</span>
+                    </li>
+                </a>
+                <button>
         </div>
         
         
