@@ -6,8 +6,14 @@
 <meta charset="UTF-8">
 <title>Review</title>
 <style type="text/css">
+    body{
+        background-color: black;
+    }
+    h1{
+        color:#F5C51B;
+    }
     table { border: 0; }
-    table td { padding: 5px; }
+    table td { padding: 5px;color:white; }
 </style>
 </head>
 <body>
@@ -83,8 +89,8 @@
             <td>${shippingAddress.postalCode}</td>
         </tr>
         <tr>
-            <td colspan="2" align="center">
-                <input type="submit" value="Pay Now" />
+            <td colspan="2" align="center" >
+                <input type="submit" value="Pay Now" style="background-color: #F5C51B;color:white;padding:10px 20px;cursor: pointer;" />
             </td>
         </tr>    
     </table>
