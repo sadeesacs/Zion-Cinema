@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import Db.dbcon;
+import model.EmailUtility;
 
 /*deleting temp tables and recording in transaction and
 food tables when continue btn clicked on BillingConfirmation jsp*/
@@ -34,6 +35,33 @@ public class ConfirmPurchaseServlet extends HttpServlet {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
+        
+        // Retrieve billing and movie details from session or database
+        String movieName = (String) session.getAttribute("movieName");
+        String movieDate = (String) session.getAttribute("movieDate");
+        String movieTime = (String) session.getAttribute("movieTime");
+        String seatInfo = (String) session.getAttribute("seatInfo");
+        double totalAmount = (double) session.getAttribute("totalAmount");
+        String userEmail = (String) session.getAttribute("userEmail");
+
+        // Email credentials
+        String host = "smtp.gmail.com"; // or your SMTP server
+        String port = "587";
+        String user = "pererasenuri665@gmail.com"; // Sender email
+        String pass = "gfsz rzkn yynn cuas";
+
+        try {
+            // Send email
+            EmailUtility.sendBillingConfirmationEmail(host, port, user, pass, userEmail, 
+                movieName, movieDate, movieTime, seatInfo, totalAmount);
+
+            // Redirect to a success page
+           
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.sendRedirect("ErrorPage.jsp");
+        }
+    
 
         try {
             // Get connection
@@ -41,7 +69,7 @@ public class ConfirmPurchaseServlet extends HttpServlet {
             conn.setAutoCommit(false);
 
             // Step 1: Calculate total amount from temporary tables
-            double totalAmount = 0.0;
+             totalAmount = 0.0;
             int showtimeId = 0;
             String getTotalsQuery
                     = "SELECT (SUM(ts.Price) + SUM(tf.Price * tf.Quantity)) * 1.03 AS TotalAmount, ts.Showtime_ID "
@@ -112,7 +140,7 @@ public class ConfirmPurchaseServlet extends HttpServlet {
             // Commit transaction
             conn.commit();
 
-            response.sendRedirect("UserAccount.jsp");
+            response.sendRedirect("receipt.jsp");
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -123,7 +151,7 @@ public class ConfirmPurchaseServlet extends HttpServlet {
                     rollbackEx.printStackTrace();
                 }
             }
-            response.sendRedirect("error.jsp");
+            response.sendRedirect("receipt.jsp");
         } finally {
             try {
                 if (rs != null) {
