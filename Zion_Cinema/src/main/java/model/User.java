@@ -1,41 +1,26 @@
-package DAO;
+package model;
 
 public class User {
+    private int userId;
+    private String email;
+    private String phoneNumber;
     private String firstName;
     private String lastName;
-    private String phoneNumber;
-    private String email;
+    private boolean isGuest;
 
-    // Getters and Setters
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
+    public User(int userId, String email, String phoneNumber, String firstName, String lastName, boolean isGuest) {
+        this.userId = userId;
         this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.isGuest = isGuest;
     }
+
+    public int getUserId() { return userId; }
+    public String getEmail() { return email; }
+    public String getPhoneNumber() { return phoneNumber; }
+    public String getFirstName() { return firstName; }
+    public String getLastName() { return lastName; }
+    public boolean isGuest() { return isGuest; }
 }

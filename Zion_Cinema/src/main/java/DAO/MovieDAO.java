@@ -125,4 +125,17 @@ public class MovieDAO {
         }
         return false;
     }
+    
+    public String getMovieNameById(int movieId) {
+        String sql = "SELECT Movie_Name FROM movies WHERE Movie_ID=?";
+        try (Connection conn = dbcon.connect();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, movieId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getString("Movie_Name");
+            }
+        } catch (SQLException e) { e.printStackTrace(); }
+        return "";
+    }
 }

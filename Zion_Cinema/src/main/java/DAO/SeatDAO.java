@@ -3,9 +3,8 @@ package DAO;
 import Db.dbcon;
 import model.Seat;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,5 +27,18 @@ public class SeatDAO {
         } catch (Exception e) {
         }
         return seats;
+    }
+    
+    public String getSeatNumberById(int seatId) {
+        String sql = "SELECT SeatNumber FROM seat WHERE SeatID=?";
+        try (Connection conn = dbcon.connect();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, seatId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getString("SeatNumber");
+            }
+        } catch (SQLException e) { e.printStackTrace(); }
+        return "";
     }
 }

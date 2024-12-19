@@ -61,4 +61,37 @@ public class ShowtimeDAO {
         }
         return times;
     }
+    
+    public ShowtimeRaw getShowtimeById(int showtimeId) {
+        String sql = "SELECT Movie_ID, Date, Show_Time FROM showtime WHERE ShowtimeID=?";
+        try (Connection conn = dbcon.connect();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, showtimeId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return new ShowtimeRaw(
+                    rs.getInt("Movie_ID"),
+                    rs.getDate("Date"),
+                    rs.getTime("Show_Time")
+                );
+            }
+        } catch (SQLException e) { e.printStackTrace(); }
+        return null;
+    }
+
+    public static class ShowtimeRaw {
+        private int movieId;
+        private java.sql.Date date;
+        private java.sql.Time time;
+
+        public ShowtimeRaw(int movieId, java.sql.Date date, java.sql.Time time) {
+            this.movieId = movieId;
+            this.date = date;
+            this.time = time;
+        }
+
+        public int getMovieId() { return movieId; }
+        public java.sql.Date getDate() { return date; }
+        public java.sql.Time getTime() { return time; }
+    }
 }

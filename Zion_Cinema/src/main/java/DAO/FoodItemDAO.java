@@ -135,4 +135,17 @@ public class FoodItemDAO {
         }
         return false;
     }
+    
+    public String getFoodNameById(int foodId) {
+        String sql = "SELECT Name FROM fooditem WHERE FoodID=?";
+        try (Connection conn = dbcon.connect();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, foodId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getString("Name");
+            }
+        } catch (SQLException e) { e.printStackTrace(); }
+        return "";
+    }
 }
