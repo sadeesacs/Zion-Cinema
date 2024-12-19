@@ -1,7 +1,8 @@
-<%@ page import="model.ADTransaction" %>
-<%@ page import="DAO.ADTransactionDAO" %>
-<%@ page import="java.util.List" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="model.User"%>
+<%@page import="Controller.UserAccountServlet.TransactionDetail"%>
+<%@page import="Controller.UserAccountServlet.FoodDetail"%>
+<%@page import="java.util.List"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -10,95 +11,81 @@
         <title>Reservations</title>
         
         <link rel="stylesheet" href="StyleSheet10.css" />
-
     </head>
     <body>
+        <%
+            // Get dynamic data from request attributes
+            User user = (User) request.getAttribute("user");
+            boolean noTransactions = request.getAttribute("noTransactions") != null;
+            List<TransactionDetail> transactionDetails = (List<TransactionDetail>) request.getAttribute("transactionDetails");
+        %>
         
-        <!-- Header of the Admin ADDashboard -->
+        <!-- Header of the Admin Dashboard -->
         <header>
             <div class="header">
-                <div class="Logo"><img src="images/icons/logo.png" /></div>
-                <div class="zion-cinema"><a href="HomePage.jsp">Zion Cinema</a></div>
-
+                <div class="Logo"><img src="images/logo.png" /></div>
+                <div class="zion-cinema"><a href="HomePage.html">Zion Cinema</a></div>
                 <div class="search-bar">
                     <span>Search here.....</span>
                         <span style="left: 210px;color:white"><i class="bi bi-search"></i></span>
                 </div>
-                <%
-                    // Check if session exists and retrieve the username attribute
-                    String username = (session != null) ? (String) session.getAttribute("username") : null;
-
-                    if (username != null) {
-                %>
-                <div class="AD-username"><%= username %></div>
+                <div class="AD-username">Emma Watson</div>
                 <div class="word-admin">Admin</div>
-                <%
-                } else {
-                %>
-                <div class="AD-username">Session expired or not logged in.</div>
-                <%
-                    }
-                %>
                 <div class="user-icon" ><i class="bi bi-person-fill"></i></div>
-
-                <img src="images/icons/notificationicon.png" class="notification-icon">
-                <img src="images/icons/messagesicon.png" class="message-icon">
+                <img src="images/notificationicon.png" class="notification-icon">
+                <img src="images/messagesicon.png" class="message-icon">
             </div>
         </header>
         
         
-        <!-- Navigational Panel of the Admin ADDashboard -->
+        <!-- Navigational Panel of the Admin Dashboard -->
         <div class="navigation">
             <ul class="nav-menu">
-                <a href="AD-Dashboard.jsp">
+                <a href="AD-Dashbaord.jsp">
                     <li class="nav-item">
-                        <img src="images/icons/Dashboardicon.png"></img>
+                        <img src="images/Dashboardicon.png"></img>
                         <span>Dashboard</span>
                     </li>
                 </a>
-                <a href="ADMoviesServlet">
+                <a href="AD-Movies.jsp">
                     <li class="nav-item">
-                        <img src="images/icons/Movieicon.png"></img>
+                        <img src="images/Movieicon.png"></img>
                         <span>Movies</span>
                     </li>
                 </a>
-                <a href="ADFoodMenuServlet">
+                <a href="AD-FoodMenu.jsp">
                     <li class="nav-item">
-                        <img src="images/icons/Foodicon.png"></img>
+                        <img src="images/Foodicon.png"></img>
                         <span>Food Menu</span>
                     </li>
                 </a>
                 <a href="AD-Transactions.jsp">
                     <li class="nav-item active">
-                        <img src="images/icons/Billicon.png"></img>
+                        <img src="images/Billicon.png"></img>
                         <span>Transactions</span>
                     </li>
                 </a>
                 <a href="AD-CustomerInquiries.jsp">
                     <li class="nav-item ">
-                        <img src="images/icons/Inquiryicon.png"></img>
+                        <img src="images/Inquiryicon.png"></img>
                         <span>Customer Inquiries</span>
                     </li>
                 </a>
                 <a href="AD-Customers.jsp">
                     <li class="nav-item ">
-                        <img src="images/icons/customericon.png"></img>
+                        <img src="images/customericon.png"></img>
                         <span>Customers</span>
                     </li>
                 </a>
                     <li class="nav-item">
-                        <img src="images/icons/Settingicon.png"></img>
+                        <img src="images/Settingicon.png"></img>
                         <span>Settings</span>
                     </li>
             </ul>
             <button class="logout">
-                <a href="AD-Login.jsp" style="text-decoration: none;">
-                    <li class="nav-item ">
-                        <img src="images/icons/Logouticon.png"/>
-                        <span>Logout</span>
-                    </li>
-                </a>
-            <button>
+                <img src="images/Logouticon.png"></img>
+                <span>Logout</span>
+            </button>
         </div>
         
         
@@ -113,68 +100,53 @@
                 <span class="header-top" style="margin-left:900px">Total</span>
             </div>
             <div class="content-container">
+                <%
+                    if (noTransactions) {
+                %>
+                <div class="no-transactions">No transactions found</div>
+                <%
+                    } else if (transactionDetails != null && !transactionDetails.isEmpty()) {
+                        for (TransactionDetail td : transactionDetails) {
+                %>
                 <div class="Transactions">
-
+                    <p class="Trans-id"><%= td.getTransactionId() %></p>
+                    <p class="Trans-movie-name"><%= td.getMovieName() %>e</p>
+                    <p class="Trans-show-time"><%= td.getDate() %> <%= td.getTime() %></p>
+                    <p class="Trans-seats">
                         <%
-                            // Fetching the list of Customer inquiries
-                            List<ADTransaction> ADTransaction = ADTransactionDAO.getAllTransaction();
-                            // Loop to display data
-                            if (!ADTransaction.isEmpty()) {
-                                for (ADTransaction Transaction : ADTransaction) {
+                            for (String seatNum : td.getSeatNumbers()) {
                         %>
-                    <div class="Transactions">
-                        <p class="Trans-id"><%=Transaction.getTransactionID() %></p>
-                        <p class="Trans-movie-name"><%=Transaction.getMovieName() %></p>
-                        <p class="Trans-show-time"><%=Transaction.getDate() %>  <%=Transaction.getTime() %>  </p>
-
+                        <span><%=seatNum%></span>
                         <%
-                            // Handle multiple seats
-                            String[] seats = Transaction.getSeatNumber().split(","); // Assuming seats are comma-separated
+                            }
                         %>
-                        <p class="Trans-seats">
-                            Seats:
-                            <%
-                                for (int i = 0; i < seats.length; i++) {
-                                    out.print(seats[i].trim());
-                                    if (i < seats.length - 1) {
-                                        out.print(", ");
-                                    }
-                                }
-                            %>
-                        </p>
-
-                        <%
-                            // Handle multiple food items
-                            String[] foodItems = Transaction.getFoodName().split(","); // Assuming food items are comma-separated
-                        %>
-                        <div class="Trans-food-order">
-                            Food Orders:
-                            <ul>
-                                <%
-                                    for (String foodItem : foodItems) {
-                                %>
-                                <li><%=foodItem.trim() %></li>
-                                <%
-                                    }
-                                %>
-                            </ul>
-                        </div>
-
-                        <p class="Trans-total"><%=Transaction.getTotalPrice() %></p>
-                    </div>
-                        <%
-                     }
-                    }
-                else {
-                    %>
-                    <p>
-                        <span class="header-top" style="margin-left:500px"> No Transaction found</span>
                     </p>
+                    <div class="Trans-food-order">
                         <%
+                            List<FoodDetail> foods = td.getFoods();
+                            if (foods != null && !foods.isEmpty()) {
+                                for (FoodDetail fd : foods) {
+                        %>
+                        <div class="food-Trow">
+                            <span class="food-Tname"><%=fd.getName()%></span>
+                            <span class="food-Tquantity"><%=fd.getQuantity()%></span>
+                        </div>
+                        <%
+                                }
+                            }
+                        %>
+                    </div>
+                    <p class="Trans-total">LKR <%= td.getTotalAmount() %></p>
+                </div>
+                <%
+                        }
+                    } else {
+                %>
+                <div class="no-transactions">No transactions found</div>
+                <%
                     }
-                    %>
-
-
-        
+                %>
+            </div>
+        </div>
     </body>
 </html>

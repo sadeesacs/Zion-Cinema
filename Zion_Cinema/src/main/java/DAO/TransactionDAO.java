@@ -26,4 +26,22 @@ public class TransactionDAO {
         } catch (SQLException e) { e.printStackTrace(); }
         return list;
     }
+    
+    public List<Transaction> getAllTransactions() {
+    List<Transaction> list = new ArrayList<>();
+    String sql = "SELECT Transaction_ID, UserID, ShowtimeID, TotalAmount FROM transaction ORDER BY Transaction_ID ASC";
+    try (Connection conn = dbcon.connect();
+         PreparedStatement ps = conn.prepareStatement(sql)) {
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            list.add(new Transaction(
+                rs.getInt("Transaction_ID"),
+                rs.getInt("UserID"),
+                rs.getInt("ShowtimeID"),
+                rs.getDouble("TotalAmount")
+            ));
+        }
+    } catch (SQLException e) { e.printStackTrace(); }
+    return list;
+}
 }
