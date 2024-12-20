@@ -23,17 +23,30 @@
         <!-- Header of the Admin Dashboard -->
         <header>
             <div class="header">
-                <div class="Logo"><img src="images/logo.png" /></div>
-                <div class="zion-cinema"><a href="HomePage.html">Zion Cinema</a></div>
+                <div class="Logo"><img src="images/icons/logo.png" /></div>
+                <div class="zion-cinema"><a href="HomePageServlet">Zion Cinema</a></div>
                 <div class="search-bar">
                     <span>Search here.....</span>
-                        <span style="left: 210px;color:white"><i class="bi bi-search"></i></span>
+                    <span style="left: 210px;color:white"><i class="bi bi-search"></i></span>
                 </div>
-                <div class="AD-username">Emma Watson</div>
+                <%
+                    // Check if session exists and retrieve the username attribute
+                    String username = (session != null) ? (String) session.getAttribute("username") : null;
+
+                    if (username != null) {
+                %>
+                <div class="AD-username"><%= username %></div>
                 <div class="word-admin">Admin</div>
+                <%
+                } else {
+                %>
+                <div class="AD-username">Session expired or not logged in.</div>
+                <%
+                    }
+                %>
                 <div class="user-icon" ><i class="bi bi-person-fill"></i></div>
-                <img src="images/notificationicon.png" class="notification-icon">
-                <img src="images/messagesicon.png" class="message-icon">
+                <img src="images/icons/notificationicon.png" class="notification-icon">
+                <img src="images/icons/messagesicon.png" class="message-icon">
             </div>
         </header>
         
@@ -41,50 +54,54 @@
         <!-- Navigational Panel of the Admin Dashboard -->
         <div class="navigation">
             <ul class="nav-menu">
-                <a href="AD-Dashbaord.jsp">
+                <a href="AD-Dashboard.jsp">
                     <li class="nav-item">
-                        <img src="images/Dashboardicon.png"></img>
+                        <img src="images/icons/Dashboardicon.png"></img>
                         <span>Dashboard</span>
                     </li>
                 </a>
-                <a href="AD-Movies.jsp">
+                <a href="ADMoviesServlet">
                     <li class="nav-item">
-                        <img src="images/Movieicon.png"></img>
+                        <img src="images/icons/Movieicon.png"></img>
                         <span>Movies</span>
                     </li>
                 </a>
-                <a href="AD-FoodMenu.jsp">
+                <a href="ADFoodMenuServlet">
                     <li class="nav-item">
-                        <img src="images/Foodicon.png"></img>
+                        <img src="images/icons/Foodicon.png"></img>
                         <span>Food Menu</span>
                     </li>
                 </a>
                 <a href="AD-Transactions.jsp">
                     <li class="nav-item active">
-                        <img src="images/Billicon.png"></img>
+                        <img src="images/icons/Billicon.png"></img>
                         <span>Transactions</span>
                     </li>
                 </a>
                 <a href="AD-CustomerInquiries.jsp">
                     <li class="nav-item ">
-                        <img src="images/Inquiryicon.png"></img>
+                        <img src="images/icons/Inquiryicon.png"></img>
                         <span>Customer Inquiries</span>
                     </li>
                 </a>
                 <a href="AD-Customers.jsp">
                     <li class="nav-item ">
-                        <img src="images/customericon.png"></img>
+                        <img src="images/icons/customericon.png"></img>
                         <span>Customers</span>
                     </li>
                 </a>
                     <li class="nav-item">
-                        <img src="images/Settingicon.png"></img>
+                        <img src="images/icons/Settingicon.png"></img>
                         <span>Settings</span>
                     </li>
             </ul>
             <button class="logout">
-                <img src="images/Logouticon.png"></img>
-                <span>Logout</span>
+                <a href="AD-Login.jsp" style="text-decoration: none;">
+                    <li class="nav-item ">
+                        <img src="images/icons/Logouticon.png"/>
+                        <span>Logout</span>
+                    </li>
+                </a>
             </button>
         </div>
         

@@ -19,7 +19,7 @@
         <header>
             <div class="header">
                 <div class="Logo"><img src="images/icons/logo.png" /></div>
-                <div class="zion-cinema"><a href="HomePage.html">Zion Cinema</a></div>
+                <div class="zion-cinema"><a href="HomePageServlet">Zion Cinema</a></div>
                 <div class="search-bar">
                     <span>Search here.....</span>
                 </div>
@@ -65,7 +65,7 @@
                         <span>Food Menu</span>
                     </li>
                 </a>
-                <a href="AD-Transactions.jsp">
+                <a href="AD_TransactionsServlet">
                     <li class="nav-item">
                         <img src="images/icons/Billicon.png">
                         <span>Transactions</span>
@@ -147,7 +147,7 @@
                             </thead>
                             <tbody>
                                 <%
-                                    for (int i = 0; i < 14; i++) {
+                                    for (int i = 0; i < 30; i++) {
                                         LocalDate current = startDate.plusDays(i);
                                         String dayName = current.getDayOfWeek().getDisplayName(java.time.format.TextStyle.FULL, Locale.ENGLISH);
                                         String dateStrDisplay = current.format(java.time.format.DateTimeFormatter.ofPattern("yyyy/MM/dd"));

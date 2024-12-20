@@ -48,7 +48,7 @@
              <%  Integer userID = (Integer) session.getAttribute("UserID");
                 if (userID != null) {
             %>
-            <a href="UserAccount.jsp" class="but-login">
+            <a href="UserAccountServlet" class="but-login">
                 <div>My Account</div>
             </a>
             <%

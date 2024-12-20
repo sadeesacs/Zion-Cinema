@@ -67,7 +67,7 @@
                         <span>Food Menu</span>
                     </li>
                 </a>
-                <a href="AD-Transactions.jsp">
+                <a href="AD_TransactionsServlet">
                     <li class="nav-item">
                         <img src="images/icons/Billicon.png"></img>
                         <span>Transactions</span>

@@ -140,7 +140,7 @@ public class ConfirmPurchaseServlet extends HttpServlet {
             // Commit transaction
             conn.commit();
 
-            response.sendRedirect("receipt.jsp");
+            response.sendRedirect("HomePageServlet");
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -151,7 +151,7 @@ public class ConfirmPurchaseServlet extends HttpServlet {
                     rollbackEx.printStackTrace();
                 }
             }
-            response.sendRedirect("receipt.jsp");
+            response.sendRedirect("HomePageServlet");
         } finally {
             try {
                 if (rs != null) {

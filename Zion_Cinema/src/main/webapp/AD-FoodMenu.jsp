@@ -15,7 +15,7 @@
         <header>
             <div class="header">
                 <div class="Logo"><img src="images/icons/logo.png" /></div>
-                <div class="zion-cinema"><a href="HomePage.html">Zion Cinema</a></div>
+                <div class="zion-cinema"><a href="HomePageServlet">Zion Cinema</a></div>
 
                 <div class="search-bar">
                     <span>Search here.....</span>
@@ -65,7 +65,7 @@
                         <span>Food Menu</span>
                     </li>
                 </a>
-                <a href="AD-Transactions.jsp">
+                <a href="AD_TransactionsServlet">
                     <li class="nav-item">
                         <img src="images/icons/Billicon.png"></img>
                         <span>Transactions</span>

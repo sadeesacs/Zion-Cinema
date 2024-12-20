@@ -23,7 +23,7 @@
         <!-- Header -->
         <div class="header-container">
             <!--Zion Cinema logo-->
-            <img src="images/logo.png">
+            <img src="images/icons/logo.png">
             <a href="HomePage.html" class="logo-name">Zion Cinema</a>
 
             <!--Navigation Bar-->
@@ -39,17 +39,21 @@
             <a href="MovieListingServlet" class="but-buytickets">
                 <div>Buy Tickets</div>
             </a>
-            <% if (user != null) { %>
-                <a href="UserAccount.jsp" class="but-login">
-                    <img src="images/Accounticon.png">
-                    <div>Account</div>
-                </a>
-            <% } else { %>
-                <a href="UserLogin.jsp" class="but-login">
-                    <img src="images/Accounticon.png">
-                    <div>Account</div>
-                </a>
-            <% } %>
+             <%  Integer userID = (Integer) session.getAttribute("UserID");
+                if (userID != null) {
+            %>
+            <a href="UserAccountServlet" class="but-login">
+                <div>My Account</div>
+            </a>
+            <%
+            } else {
+            %>
+            <a href="UserLogin.jsp" class="but-login">
+                <div>Login</div>
+            </a>
+            <%
+                }
+            %>
         </div>
         <div class="header-line"></div>
         

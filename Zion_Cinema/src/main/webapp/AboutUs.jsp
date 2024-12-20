@@ -27,9 +27,21 @@
             <a href="MovieListingServlet" class="but-buytickets">
                 <div>Buy Tickets</div>
             </a>
+             <%  Integer userID = (Integer) session.getAttribute("UserID");
+                if (userID != null) {
+            %>
+            <a href="UserAccountServlet" class="but-login">
+                <div>My Account</div>
+            </a>
+            <%
+            } else {
+            %>
             <a href="UserLogin.jsp" class="but-login">
                 <div>Login</div>
             </a>
+            <%
+                }
+            %>
         </div>
         <div class="header-line"></div>
 

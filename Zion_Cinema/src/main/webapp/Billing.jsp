@@ -40,56 +40,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Billing</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Billing Details</title>
 
-    <link rel="stylesheet" href="StyleSheet3.css" />
-</head>
+        <link rel="stylesheet" href="StyleSheet3.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<body>
+    </head>
+    <body>
+        <!-- Header -->
+        <div class="header-container">
 
-    <!-- Header -->
-    <div class="header-container">
+            <!--Zion Cinema logo-->
+            <img src="images/icons/logo.png">
+            <a href="HomePageServlet" class="logo-name">Zion Cinema</a>
 
-        <!--Zion Cinema logo-->
-        <img src="images/logo.png">
-        <a href="HomePage.html" class="logo-name">Zion Cinema</a>
+            <!--Navigation Bar-->
+            <div class="nav">
+                <a href="HomePageServlet">Home</a>
+                <span><a href="MovieListingServlet">Movies</a></span>
+                <a href="AboutUs.jsp">About us</a>
+                <a href="ContactUs.jsp">Contact</a>
+                <a href="FAQ.jsp">FAQ</a>
+            </div>
 
-        <!--Navigation Bar-->
-        <div class="nav">
-            <a href="HomePage.html">Home</a>
-            <span><a href="Movie.html">Movies</a></span>
-            <a href="About.html">About us</a>
-            <a href="Contact.html">Contact</a>
-            <a href="FAQ.html">FAQ</a>
+            <!-- Header Buttons -->
+            <a href="MovieListingServlet" class="but-buytickets">
+                <div>Buy Tickets</div>
+            </a>
+             <%  Integer userID = (Integer) session.getAttribute("UserID");
+                if (userID != null) {
+            %>
+            <a href="UserAccountServlet" class="but-login">
+                <div>My Account</div>
+            </a>
+            <%
+            } else {
+            %>
+            <a href="UserLogin.jsp" class="but-login">
+                <div>Login</div>
+            </a>
+            <%
+                }
+            %>
         </div>
-
-        <!-- Header Buttons -->
-        <a href="Movies.html" class="but-buytickets">
-            <div>Buy Tickets</div>
-        </a>
-        <%
-            Integer userID = (Integer) session.getAttribute("UserID");
-            if (userID != null) {
-        %>
-        <a href="UserAccount.jsp" class="but-login">
-            <div>My Account</div>
-        </a>
-        <%
-        } else {
-        %>
-        <a href="UserLogin.jsp" class="but-login">
-            <div>Login</div>
-        </a>
-        <%
-            }
-        %>
-        <a href="Login.html" class="but-login">
-            <div>Login</div>
-        </a>
-    </div>
-    <div class="header-line"></div>
+        <div class="header-line"></div>
 
 
 
