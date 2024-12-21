@@ -75,7 +75,11 @@ body{
     color: #F5C51B;
 }
 
-
+.header-container .nav span{
+    font-size: inherit;
+    border-bottom: 1px solid white;
+    padding:5px 10px;
+}
 
 
 /* Buy Tickets Button */

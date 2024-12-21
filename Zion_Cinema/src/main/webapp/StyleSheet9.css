@@ -247,6 +247,11 @@ body{
     position: absolute;
 }
 
+.logout span a{
+    text-decoration: none;
+    color:white;
+}
+
 .logout:hover {
     transform: scale(1.1); 
     
